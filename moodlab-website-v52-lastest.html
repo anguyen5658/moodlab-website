@@ -319,8 +319,8 @@ footer{grid-template-columns:1fr!important;gap:24px}
 .phone-carousel .phone{flex-shrink:0}
 .phone-carousel .phone:nth-child(1),.phone-carousel .phone:nth-child(3){transform:none;opacity:1}
 #app4-wrap{flex-wrap:nowrap!important;overflow-x:auto;-webkit-overflow-scrolling:touch;justify-content:flex-start!important;padding:10px 16px 24px!important;gap:12px!important;scroll-snap-type:x mandatory}
-.app4-phone{min-width:150px!important;width:150px!important;height:300px!important;border-radius:22px!important;scroll-snap-align:center;transform:none!important;opacity:1!important;transition:width .4s cubic-bezier(.22,1,.36,1),height .4s cubic-bezier(.22,1,.36,1),min-width .4s cubic-bezier(.22,1,.36,1),box-shadow .4s,border-color .4s}
-.app4-phone:hover{min-width:180px!important;width:180px!important;height:360px!important;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 60px rgba(0,232,255,.12)!important;border-color:rgba(0,232,255,.2)!important;z-index:10!important}
+.app4-phone{min-width:150px!important;width:150px!important;height:300px!important;border-radius:22px!important;scroll-snap-align:center;transform:none!important;opacity:1!important;transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .4s,border-color .4s}
+.app4-phone:hover{transform:scale(1.15)!important;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 60px rgba(0,232,255,.12)!important;border-color:rgba(0,232,255,.2)!important;z-index:10!important}
 .slider-nav.prev{left:4px}.slider-nav.next{right:4px}
 [style*="grid-template-columns:repeat(4,1fr);gap:12px"]{grid-template-columns:1fr 1fr!important}
 .hero{min-height:auto!important;padding:100px 0 40px}
@@ -349,8 +349,8 @@ section{overflow-x:hidden}
   [style*="grid-template-columns:1fr 1fr;gap:14px"]{grid-template-columns:1fr 1fr!important}
   [style*="display:flex;border-top:1px solid var(--bd);border-bottom"]>div{width:25%!important}
   #app4-wrap{gap:10px!important;padding:10px 0 30px!important;justify-content:center!important;overflow-x:visible;scroll-snap-type:none}
-  .app4-phone{min-width:180px!important;width:180px!important;height:360px!important;border-radius:24px!important;scroll-snap-align:none;transition:width .4s cubic-bezier(.22,1,.36,1),height .4s cubic-bezier(.22,1,.36,1),min-width .4s cubic-bezier(.22,1,.36,1),box-shadow .4s,border-color .4s}
-  .app4-phone:hover{min-width:220px!important;width:220px!important;height:420px!important;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 60px rgba(0,232,255,.12)!important;border-color:rgba(0,232,255,.2)!important;z-index:10!important}
+  .app4-phone{min-width:180px!important;width:180px!important;height:360px!important;border-radius:24px!important;scroll-snap-align:none;transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .4s,border-color .4s}
+  .app4-phone:hover{transform:scale(1.18)!important;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 60px rgba(0,232,255,.12)!important;border-color:rgba(0,232,255,.2)!important;z-index:10!important}
 }
 
 /* ── md: 900px+ (Tablet/Desktop) ── */
@@ -381,8 +381,8 @@ section{overflow-x:hidden}
   .vid,.vid-hero{min-height:320px}
   .hero{min-height:100vh!important;padding:100px 0 60px}
   .hero-sm{min-height:60vh!important;padding:120px 0 60px}
-  .app4-phone{transition:width .4s cubic-bezier(.22,1,.36,1),height .4s cubic-bezier(.22,1,.36,1),min-width .4s cubic-bezier(.22,1,.36,1),box-shadow .4s,border-color .4s}
-  .app4-phone:hover{min-width:260px!important;width:260px!important;height:500px!important;box-shadow:0 40px 100px rgba(0,0,0,.6),0 0 80px rgba(0,232,255,.15)!important;border-color:rgba(0,232,255,.25)!important;z-index:10!important}
+  .app4-phone{transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .4s,border-color .4s}
+  .app4-phone:hover{transform:scale(1.22)!important;box-shadow:0 40px 100px rgba(0,0,0,.6),0 0 80px rgba(0,232,255,.15)!important;border-color:rgba(0,232,255,.25)!important;z-index:10!important}
   .sc-subnav{gap:clamp(8px,2vw,24px);justify-content:center}
   .sc-subnav-item{padding:8px 12px}
   .sc-subnav-item span:first-child{font-size:20px}
@@ -653,7 +653,7 @@ section{overflow-x:hidden}
       <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:4px;height:40px;border-radius:4px;background:linear-gradient(180deg,transparent,rgba(52,211,153,.6),transparent);animation:pulseDown 3s ease-in-out infinite;pointer-events:none"></div>
       <!-- Shield — center -->
       <div style="position:absolute;top:50%;transform:translateY(-50%);z-index:2">
-        <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,rgba(52,211,153,.15),rgba(0,232,255,.1));border:2px solid rgba(52,211,153,.35);display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px rgba(52,211,153,.2),0 0 80px rgba(52,211,153,.06);animation:shieldPulse 3s ease-in-out infinite"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="rgba(52,211,153,.6)"/><path d="M17 8c-2 0-4 1.5-5 4-1-2.5-3-4-5-4" stroke="rgba(52,211,153,.9)" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M12 12v6" stroke="rgba(52,211,153,.9)" stroke-width="1.5" stroke-linecap="round"/><path d="M12 14c1.5-1 2.5-1 3.5-.5M12 16c-1.5-1-2.5-1-3.5-.5" stroke="rgba(52,211,153,.7)" stroke-width="1" fill="none" stroke-linecap="round"/></svg></div>
+        <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,rgba(52,211,153,.15),rgba(0,232,255,.1));border:2px solid rgba(52,211,153,.35);display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px rgba(52,211,153,.2),0 0 80px rgba(52,211,153,.06);animation:shieldPulse 3s ease-in-out infinite"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22V8" stroke="rgba(52,211,153,.9)" stroke-width="2" stroke-linecap="round"/><path d="M5 12s2-6 7-6" stroke="rgba(52,211,153,.7)" stroke-width="2" stroke-linecap="round"/><path d="M19 12s-2-6-7-6" stroke="rgba(52,211,153,.7)" stroke-width="2" stroke-linecap="round"/><path d="M17 2.5C14 2.5 12 5 12 8c0-3 -2-5.5-5-5.5C10 4 12 7 12 8c0-1 2-4 5-5.5z" fill="rgba(52,211,153,.6)"/><circle cx="12" cy="8" r="2" fill="rgba(52,211,153,.4)" stroke="rgba(52,211,153,.8)" stroke-width="1"/></svg></div>
 
       </div>
       <!-- Connection dots with glow -->
@@ -1104,7 +1104,7 @@ section{overflow-x:hidden}
 
 <!-- Usage Intelligence -->
 <div class="pg" id="p-ui">
-<section class="hero-sm" style="background:var(--bg2)"><div class="w">
+<section class="hero-sm" style="background:var(--bg2);position:relative;overflow:hidden"><video src="Media/Video/Hailuo_Video_a luminous waveform made of fl_489835616211521543.mp4" autoplay loop muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.15"></video><div class="w" style="position:relative;z-index:2">
   <div class="tag rv">Technology · Usage Intelligence</div>
   <h1 class="h2 rv" data-d="1">Usage Intelligence<br><span style="color:var(--pu)">Know Your Customers.</span></h1>
   <p class="p1 rv" data-d="2">Turn device data into business decisions. Track consumption patterns, identify preferences, understand behavior at scale. Including the industry-unique Extract Consumption estimation.</p>
@@ -1126,7 +1126,7 @@ section{overflow-x:hidden}
 
 <!-- Authentication -->
 <div class="pg" id="p-auth">
-<section class="hero-sm" style="background:var(--bg2)"><div class="w">
+<section class="hero-sm" style="background:var(--bg2);position:relative;overflow:hidden"><video src="Media/Video/Hailuo_Video_macro cinematic close-up of an_489836009612001288.mp4" autoplay loop muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.15"></video><div class="w" style="position:relative;z-index:2">
   <div class="tag rv">Technology · Authentication</div>
   <h1 class="h2 rv" data-d="1">Authentication<br><span style="color:var(--gn)">Verify Every Device.</span></h1>
   <p class="p1 rv" data-d="2">BLE-based on-device authentication. Verification built directly into the Bluetooth handshake — no additional chips required. Anti-counterfeit protection on every connection.</p>
@@ -1745,17 +1745,16 @@ function focusApp(n){
   phones.forEach(function(ph,i){
     var cfg=layout[i];
     var ry=cfg[0],sc=cfg[1],op=cfg[2],zi=cfg[3],tx=cfg[4];
-    ph.style.transform='perspective(1200px) rotateY('+ry+'deg) scale('+sc+') translateX('+tx+')';
-    ph.style.opacity=op;
-    ph.style.zIndex=zi;
+    // Use setProperty with important to override CSS !important rules
+    ph.style.setProperty('transform','perspective(1200px) rotateY('+ry+'deg) scale('+sc+') translateX('+tx+')','important');
+    ph.style.setProperty('opacity',op,'important');
+    ph.style.setProperty('z-index',zi,'important');
     if(i===n){
-      ph.style.width='240px';ph.style.height='480px';ph.style.borderRadius='36px';
-      ph.style.borderColor='rgba(255,255,255,.12)';
-      ph.style.boxShadow='0 30px 80px rgba(0,0,0,.5),0 0 50px rgba(0,232,255,.05)';
+      ph.style.setProperty('border-color','rgba(255,255,255,.12)','important');
+      ph.style.setProperty('box-shadow','0 30px 80px rgba(0,0,0,.5),0 0 50px rgba(0,232,255,.05)','important');
     }else{
-      ph.style.width='220px';ph.style.height='440px';ph.style.borderRadius='32px';
-      ph.style.borderColor='rgba(255,255,255,.06)';
-      ph.style.boxShadow='0 20px 60px rgba(0,0,0,.4)';
+      ph.style.setProperty('border-color','rgba(255,255,255,.06)','important');
+      ph.style.setProperty('box-shadow','0 20px 60px rgba(0,0,0,.4)','important');
     }
   });
   // Switch description
@@ -1766,16 +1765,18 @@ function hoverApp(el,enter){
   var idx=parseInt(el.getAttribute('data-idx'));
   if(enter){
     if(idx===appFocus){
-      // Focused phone: scale up noticeably
-      el.style.transform='perspective(1200px) scale(1.15)';
-      el.style.boxShadow='0 40px 100px rgba(0,0,0,.6),0 0 100px rgba(0,232,255,.15)';
-      el.style.borderColor='rgba(0,232,255,.25)';
+      // Focused phone: dramatic scale up
+      el.style.setProperty('transform','perspective(1200px) scale(1.25)','important');
+      el.style.setProperty('box-shadow','0 50px 120px rgba(0,0,0,.7),0 0 120px rgba(0,232,255,.25)','important');
+      el.style.setProperty('border-color','rgba(0,232,255,.4)','important');
+      el.style.setProperty('z-index','20','important');
     }else{
-      // Non-focused: dramatic scale-up toward focused size
-      el.style.transform='perspective(1200px) scale(1.02)';
-      el.style.opacity='0.9';
-      el.style.borderColor='rgba(0,232,255,.15)';
-      el.style.boxShadow='0 30px 80px rgba(0,0,0,.5),0 0 60px rgba(0,232,255,.1)';
+      // Non-focused: noticeable scale-up
+      el.style.setProperty('transform','scale(1.18)','important');
+      el.style.setProperty('opacity','0.95','important');
+      el.style.setProperty('border-color','rgba(0,232,255,.25)','important');
+      el.style.setProperty('box-shadow','0 35px 90px rgba(0,0,0,.5),0 0 70px rgba(0,232,255,.15)','important');
+      el.style.setProperty('z-index','15','important');
     }
   }else{
     focusApp(appFocus); // Reset to current layout
