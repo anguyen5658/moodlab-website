@@ -1,0 +1,2035 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mood Lab — Arena Guideline v2.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #07080F;
+  --bg-surface: #0D0F1A;
+  --bg-card: #12152A;
+  --bg-card-hover: #181C38;
+  --bg-elevated: #1A1E3A;
+  --cyan: #00E5FF;
+  --cyan-dim: rgba(0,229,255,0.15);
+  --cyan-glow: rgba(0,229,255,0.4);
+  --lime: #7FFF00;
+  --lime-dim: rgba(127,255,0,0.12);
+  --lime-glow: rgba(127,255,0,0.3);
+  --gold: #FFD93D;
+  --gold-dim: rgba(255,217,61,0.12);
+  --gold-glow: rgba(255,217,61,0.3);
+  --pink: #FF4D8D;
+  --pink-dim: rgba(255,77,141,0.12);
+  --pink-glow: rgba(255,77,141,0.3);
+  --purple: #A855F7;
+  --purple-dim: rgba(168,85,247,0.12);
+  --orange: #FF8C42;
+  --orange-dim: rgba(255,140,66,0.12);
+  --text-primary: #E8EAF6;
+  --text-secondary: #8890B5;
+  --text-dim: #5A6189;
+  --border: rgba(255,255,255,0.06);
+  --border-accent: rgba(0,229,255,0.2);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: rgba(0,229,255,0.3); border-radius: 3px; }
+
+/* ============ GLOBAL PATTERNS ============ */
+.noise-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.grid-bg {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(0,229,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 1; }
+
+/* ============ HERO ============ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(0,229,255,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border: 1px solid var(--border-accent);
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  background: var(--cyan-dim);
+  margin-bottom: 40px;
+  animation: fadeInDown 0.8s ease;
+}
+
+.hero-title {
+  font-size: clamp(52px, 8vw, 96px);
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1.05;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.8s ease 0.1s both;
+}
+
+.hero-title .accent { color: var(--cyan); }
+
+.hero-subtitle {
+  font-size: clamp(18px, 2.5vw, 24px);
+  color: var(--text-secondary);
+  font-weight: 300;
+  max-width: 700px;
+  margin-bottom: 48px;
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.hero-pillars {
+  display: flex;
+  gap: 24px;
+  animation: fadeInUp 0.8s ease 0.3s both;
+}
+
+.hero-pillar {
+  padding: 16px 32px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  font-family: 'Space Mono', monospace;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  transition: all 0.3s;
+}
+
+.hero-pillar:nth-child(1) { color: var(--cyan); border-color: rgba(0,229,255,0.3); }
+.hero-pillar:nth-child(2) { color: var(--gold); border-color: rgba(255,217,61,0.3); }
+.hero-pillar:nth-child(3) { color: var(--lime); border-color: rgba(127,255,0,0.3); }
+
+.hero-pillar:hover { transform: translateY(-4px); }
+.hero-pillar:nth-child(1):hover { box-shadow: 0 8px 32px rgba(0,229,255,0.15); background: rgba(0,229,255,0.05); }
+.hero-pillar:nth-child(2):hover { box-shadow: 0 8px 32px rgba(255,217,61,0.15); background: rgba(255,217,61,0.05); }
+.hero-pillar:nth-child(3):hover { box-shadow: 0 8px 32px rgba(127,255,0,0.15); background: rgba(127,255,0,0.05); }
+
+.hero-meta {
+  margin-top: 64px;
+  font-size: 13px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  animation: fadeInUp 0.8s ease 0.4s both;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 2s infinite;
+}
+.scroll-hint svg { width: 24px; height: 24px; stroke: var(--text-dim); fill: none; stroke-width: 2; }
+
+/* ============ SECTION STYLES ============ */
+section { padding: 100px 0; position: relative; }
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.section-label.cyan { color: var(--cyan); }
+.section-label.gold { color: var(--gold); }
+.section-label.lime { color: var(--lime); }
+.section-label.pink { color: var(--pink); }
+.section-label.purple { color: var(--purple); }
+.section-label.orange { color: var(--orange); }
+
+.section-title {
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.section-desc {
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin-bottom: 48px;
+  font-weight: 300;
+}
+
+/* ============ DIVIDER ============ */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-accent), transparent);
+  margin: 0;
+}
+
+/* ============ PRINCIPLE CARDS ============ */
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.principle-card {
+  padding: 28px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  transition: all 0.3s;
+}
+
+.principle-card:hover {
+  border-color: var(--border-accent);
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+}
+
+.principle-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+
+.principle-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.principle-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ============ INPUT METHODS ============ */
+.input-methods {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.input-card {
+  padding: 24px 20px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.input-card:hover { transform: translateY(-4px); border-color: var(--cyan); box-shadow: 0 8px 32px rgba(0,229,255,0.1); }
+
+.input-card .icon { font-size: 36px; margin-bottom: 12px; }
+.input-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--cyan); }
+.input-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+
+.input-rule {
+  margin-top: 24px;
+  padding: 20px 28px;
+  border-radius: 12px;
+  border-left: 4px solid var(--gold);
+  background: var(--gold-dim);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--gold);
+}
+
+/* ============ MATCHMAKING ============ */
+.match-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.match-card {
+  padding: 28px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  position: relative;
+  overflow: hidden;
+}
+
+.match-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+}
+.match-card:nth-child(1)::before { background: var(--cyan); }
+.match-card:nth-child(2)::before { background: var(--lime); }
+.match-card:nth-child(3)::before { background: var(--purple); }
+
+.match-card .emoji { font-size: 32px; margin-bottom: 12px; display: block; }
+.match-card h4 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+.match-card p { font-size: 14px; color: var(--text-secondary); }
+
+/* ============ THREE RHYTHMS ============ */
+.rhythms-visual {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.rhythm-block {
+  padding: 40px 32px;
+  text-align: center;
+  position: relative;
+}
+.rhythm-block:not(:last-child) { border-right: 1px solid var(--border); }
+
+.rhythm-block:nth-child(1) { background: linear-gradient(180deg, rgba(0,229,255,0.06) 0%, var(--bg-card) 100%); }
+.rhythm-block:nth-child(2) { background: linear-gradient(180deg, rgba(255,217,61,0.06) 0%, var(--bg-card) 100%); }
+.rhythm-block:nth-child(3) { background: linear-gradient(180deg, rgba(127,255,0,0.06) 0%, var(--bg-card) 100%); }
+
+.rhythm-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.rhythm-block:nth-child(1) .rhythm-label { color: var(--cyan); }
+.rhythm-block:nth-child(2) .rhythm-label { color: var(--gold); }
+.rhythm-block:nth-child(3) .rhythm-label { color: var(--lime); }
+
+.rhythm-time {
+  font-size: 42px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.rhythm-block:nth-child(1) .rhythm-time { color: var(--cyan); }
+.rhythm-block:nth-child(2) .rhythm-time { color: var(--gold); }
+.rhythm-block:nth-child(3) .rhythm-time { color: var(--lime); }
+
+.rhythm-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
+
+/* ============ DAY TIMELINE ============ */
+.day-timeline {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  padding-left: 40px;
+}
+
+.day-timeline::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--cyan), var(--gold), var(--lime), var(--cyan));
+}
+
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 14px 0;
+  position: relative;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -29px; top: 20px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  border: 2px solid;
+}
+
+.timeline-item.play::before { border-color: var(--cyan); background: var(--bg-deep); }
+.timeline-item.show::before { border-color: var(--gold); background: var(--bg-deep); }
+.timeline-item.predict::before { border-color: var(--lime); background: var(--bg-deep); }
+
+.timeline-time {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  min-width: 100px;
+  color: var(--text-dim);
+  padding-top: 2px;
+}
+
+.timeline-content { flex: 1; }
+.timeline-content strong { font-weight: 600; }
+.timeline-content p { font-size: 14px; color: var(--text-secondary); }
+
+.timeline-tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-left: 8px;
+}
+
+.timeline-tag.play { background: var(--cyan-dim); color: var(--cyan); }
+.timeline-tag.show { background: var(--gold-dim); color: var(--gold); }
+.timeline-tag.predict { background: var(--lime-dim); color: var(--lime); }
+
+/* ============ GAME CATEGORY SECTIONS ============ */
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
+  padding: 32px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+.category-header.play { background: linear-gradient(135deg, rgba(0,229,255,0.06), var(--bg-card)); border-color: rgba(0,229,255,0.15); }
+.category-header.show { background: linear-gradient(135deg, rgba(255,217,61,0.06), var(--bg-card)); border-color: rgba(255,217,61,0.15); }
+.category-header.predict { background: linear-gradient(135deg, rgba(127,255,0,0.06), var(--bg-card)); border-color: rgba(127,255,0,0.15); }
+
+.category-number {
+  font-size: 64px;
+  font-weight: 900;
+  line-height: 1;
+  opacity: 0.15;
+  font-family: 'Space Mono', monospace;
+}
+
+.category-header.play .category-number { color: var(--cyan); }
+.category-header.show .category-number { color: var(--gold); }
+.category-header.predict .category-number { color: var(--lime); }
+
+.category-info h2 {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.category-info .tag {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* ============ GAME CARDS ============ */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+.game-card {
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.game-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-accent);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+}
+
+.game-card-header {
+  padding: 24px 24px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.game-card-header h3 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.game-card-header .game-emoji {
+  font-size: 28px;
+}
+
+.game-tagline {
+  padding: 0 24px;
+  font-size: 13px;
+  color: var(--text-dim);
+  font-style: italic;
+  margin-bottom: 16px;
+}
+
+.game-meta {
+  padding: 0 24px 16px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.game-meta-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  background: rgba(255,255,255,0.04);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.game-meta-tag svg { width: 12px; height: 12px; }
+
+.game-details {
+  padding: 16px 24px 24px;
+  border-top: 1px solid var(--border);
+}
+
+.game-detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 6px 0;
+}
+
+.game-detail-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  min-width: 80px;
+  padding-top: 2px;
+}
+
+.game-card.play-card .game-detail-label { color: var(--cyan); }
+.game-card.show-card .game-detail-label { color: var(--gold); }
+.game-card.predict-card .game-detail-label { color: var(--lime); }
+
+.game-detail-value {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ============ FLOW STEPS ============ */
+.flow-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.flow-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.flow-step .step-num {
+  min-width: 22px; height: 22px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.play-card .step-num { background: var(--cyan-dim); color: var(--cyan); }
+.show-card .step-num { background: var(--gold-dim); color: var(--gold); }
+.predict-card .step-num { background: var(--lime-dim); color: var(--lime); }
+
+/* ============ SHOW CROSSOVER CALLOUT ============ */
+.crossover-callout {
+  margin: 32px 0;
+  padding: 28px 32px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,217,61,0.2);
+  background: linear-gradient(135deg, rgba(255,217,61,0.04), rgba(0,229,255,0.04));
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.crossover-callout .icon { font-size: 36px; flex-shrink: 0; }
+.crossover-callout h3 { font-size: 18px; font-weight: 700; color: var(--gold); margin-bottom: 8px; }
+.crossover-callout p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+/* ============ EVENT SECTION ============ */
+.event-hero {
+  padding: 48px;
+  border-radius: 24px;
+  border: 1px solid rgba(255,77,141,0.2);
+  background: linear-gradient(135deg, rgba(255,77,141,0.06), rgba(255,140,66,0.04), var(--bg-card));
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.event-hero h2 {
+  font-size: 40px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.event-hero .wc-flag { font-size: 48px; margin-bottom: 16px; display: block; }
+.event-hero .dates { font-size: 16px; color: var(--text-secondary); margin-bottom: 24px; }
+.event-hero .stats-row { display: flex; justify-content: center; gap: 48px; }
+.event-stat { text-align: center; }
+.event-stat .num { font-size: 36px; font-weight: 900; color: var(--pink); font-family: 'Space Mono', monospace; }
+.event-stat .label { font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
+
+.overlay-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.overlay-card {
+  padding: 28px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.overlay-card h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.overlay-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.overlay-card li {
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding: 4px 0;
+  padding-left: 16px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.overlay-card li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+}
+
+.overlay-card.play-overlay h4 { color: var(--cyan); }
+.overlay-card.play-overlay li::before { color: var(--cyan); }
+.overlay-card.show-overlay h4 { color: var(--gold); }
+.overlay-card.show-overlay li::before { color: var(--gold); }
+.overlay-card.predict-overlay h4 { color: var(--lime); }
+.overlay-card.predict-overlay li::before { color: var(--lime); }
+
+.special-features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.special-feat {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.special-feat .feat-icon { font-size: 24px; flex-shrink: 0; }
+.special-feat h5 { font-size: 14px; font-weight: 700; color: var(--pink); margin-bottom: 4px; }
+.special-feat p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+
+/* ============ REWARDS SECTION ============ */
+.rewards-types {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.reward-card {
+  padding: 24px 20px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  text-align: center;
+}
+
+.reward-card .r-icon { font-size: 36px; margin-bottom: 12px; display: block; }
+.reward-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.reward-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+
+.reward-card:nth-child(1) h4 { color: var(--gold); }
+.reward-card:nth-child(2) h4 { color: var(--cyan); }
+.reward-card:nth-child(3) h4 { color: var(--pink); }
+.reward-card:nth-child(4) h4 { color: var(--purple); }
+
+/* ============ SUMMARY TABLE ============ */
+.summary-table-wrap {
+  overflow-x: auto;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+}
+
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.summary-table thead th {
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border);
+}
+
+.summary-table tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+  vertical-align: top;
+}
+
+.summary-table tbody tr:last-child td { border-bottom: none; }
+.summary-table tbody tr:hover { background: rgba(255,255,255,0.02); }
+
+.summary-table .cat-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.cat-tag.play-tag { background: var(--cyan-dim); color: var(--cyan); }
+.cat-tag.show-tag { background: var(--gold-dim); color: var(--gold); }
+.cat-tag.predict-tag { background: var(--lime-dim); color: var(--lime); }
+
+.game-name-cell { color: var(--text-primary); font-weight: 600; }
+
+/* ============ FOOTER ============ */
+.footer {
+  padding: 60px 0 40px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+.footer-logo { font-size: 20px; font-weight: 800; color: var(--text-primary); margin-bottom: 8px; }
+.footer-tagline { font-size: 14px; color: var(--text-dim); font-style: italic; margin-bottom: 24px; }
+.footer-meta { font-size: 12px; color: var(--text-dim); }
+
+/* ============ OTHER EVENTS ============ */
+.events-other {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.other-event {
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.other-event .ev-emoji { font-size: 24px; margin-bottom: 8px; display: block; }
+.other-event h5 { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+.other-event p { font-size: 12px; color: var(--text-dim); }
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-8px); } 60% { transform: translateX(-50%) translateY(-4px); } }
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px) {
+  .input-methods { grid-template-columns: repeat(2, 1fr); }
+  .match-cards { grid-template-columns: 1fr; }
+  .rhythms-visual { grid-template-columns: 1fr; }
+  .rhythm-block:not(:last-child) { border-right: none; border-bottom: 1px solid var(--border); }
+  .games-grid { grid-template-columns: 1fr; }
+  .overlay-grid { grid-template-columns: 1fr; }
+  .special-features { grid-template-columns: 1fr; }
+  .rewards-types { grid-template-columns: repeat(2, 1fr); }
+  .hero-pillars { flex-direction: column; align-items: center; }
+  .events-other { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="noise-overlay"></div>
+<div class="grid-bg"></div>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-badge">MOOD LAB &mdash; GAME TAB GUIDELINE V1.0</div>
+  <h1 class="hero-title">
+    <span class="accent">Arena</span>
+  </h1>
+  <p class="hero-subtitle">
+    Entertainment platform giữ user quay lại mỗi ngày, mỗi giờ, mỗi phút.<br>
+    3 nhóm tương tác. 18 games. 3 nhịp engagement. Vô hạn sự kiện.
+  </p>
+  <div class="hero-pillars">
+    <div class="hero-pillar">▶ PLAY</div>
+    <div class="hero-pillar">★ SHOW</div>
+    <div class="hero-pillar">◆ PREDICT</div>
+  </div>
+  <div class="hero-meta">Version 2.0 &mdash; February 2026 &mdash; Confidential &mdash; Internal Use Only</div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+</section>
+
+<!-- ==================== OVERVIEW ==================== -->
+<div class="divider"></div>
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label cyan">01 &mdash; OVERVIEW</div>
+      <h2 class="section-title">Arena là gì?</h2>
+      <p class="section-desc">
+        Arena là <strong>Game tab</strong> trong Mood Lab App &mdash; nơi tập trung toàn bộ trải nghiệm giải trí, thi đấu, và dự đoán. Mood Lab App có 4 tabs: <strong>Control | Arena | Live | Me</strong>.
+      </p>
+    </div>
+
+    <div class="reveal">
+      <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 20px;">Nguyên tắc thiết kế</h3>
+      <div class="principles-grid">
+        <div class="principle-card">
+          <div class="principle-icon" style="background: var(--cyan-dim);">🎮</div>
+          <h3>Đơn giản & Vui vẻ</h3>
+          <p>Mỗi game phải hiểu được trong 5 giây. Nếu cần tutorial dài hơn 1 màn hình, game quá phức tạp.</p>
+        </div>
+        <div class="principle-card">
+          <div class="principle-icon" style="background: var(--lime-dim);">📱</div>
+          <h3>Device-Required</h3>
+          <p>Mỗi game phải có ít nhất 1 bước cần device (Puff, Dry Puff, hoặc Button). Đảm bảo doanh thu bán thiết bị.</p>
+        </div>
+        <div class="principle-card">
+          <div class="principle-icon" style="background: var(--gold-dim);">🌍</div>
+          <h3>Generic-First</h3>
+          <p>Arena hấp dẫn quanh năm. Events (World Cup, NBA...) là overlay — thêm hương vị, không phải món chính.</p>
+        </div>
+        <div class="principle-card">
+          <div class="principle-icon" style="background: var(--pink-dim);">👥</div>
+          <h3>Social & Competitive</h3>
+          <p>Leaderboard, mời bạn, khoe chiến tích. Arena không vui khi chơi một mình mãi.</p>
+        </div>
+        <div class="principle-card">
+          <div class="principle-icon" style="background: var(--purple-dim);">🏆</div>
+          <h3>Rewards Everywhere</h3>
+          <p>Mọi hành động đều có phần thưởng — coins, XP, badges, items. Không có fun nếu không có rewards.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== INPUT METHODS ==================== -->
+<div class="divider"></div>
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label cyan">02 &mdash; DEVICE INPUT</div>
+      <h2 class="section-title">Device Input Methods</h2>
+      <p class="section-desc">User tương tác với games thông qua device vật lý. 4 loại input:</p>
+    </div>
+
+    <div class="input-methods reveal">
+      <div class="input-card">
+        <div class="icon">💨</div>
+        <h4>Puff</h4>
+        <p>Hút thật qua device. MIC detect + Heating ON → consume extract.</p>
+      </div>
+      <div class="input-card">
+        <div class="icon">🌀</div>
+        <h4>Dry Puff</h4>
+        <p>Hút/thổi, MIC detect, Heating OFF → không tiêu hao extract. Toggle trong Settings.</p>
+      </div>
+      <div class="input-card">
+        <div class="icon">🔘</div>
+        <h4>Button Press</h4>
+        <p>Bấm nút vật lý trên device. Signal qua BLE. Cho devices có nút bấm.</p>
+      </div>
+      <div class="input-card">
+        <div class="icon">👆</div>
+        <h4>On-screen Tap</h4>
+        <p>Chạm nút trên app. Bổ sung cho game, KHÔNG thay thế device hoàn toàn.</p>
+      </div>
+    </div>
+
+    <div class="input-rule reveal">
+      ⚠️ &nbsp; Mọi game phải có ít nhất 1 bước cần device input (Puff, Dry Puff, hoặc Button). On-screen Tap chỉ là bổ sung.
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MATCHMAKING ==================== -->
+<div class="divider"></div>
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label cyan">03 &mdash; MATCHMAKING</div>
+      <h2 class="section-title">Matchmaking System</h2>
+      <p class="section-desc">Arena hỗ trợ 3 chế độ ghép trận cho mọi game:</p>
+    </div>
+
+    <div class="match-cards reveal">
+      <div class="match-card">
+        <span class="emoji">👫</span>
+        <h4>Invite Friends</h4>
+        <p>Tự mời bạn từ danh sách. Invite qua link hoặc app notification. Cần lobby chờ + push notification.</p>
+      </div>
+      <div class="match-card">
+        <span class="emoji">🎲</span>
+        <h4>Random Match</h4>
+        <p>Hệ thống tự ghép với người chơi ngẫu nhiên đang online. Cần matchmaking server + queue system. Timeout 30s → offer AI Bot.</p>
+      </div>
+      <div class="match-card">
+        <span class="emoji">🤖</span>
+        <h4>AI Bot</h4>
+        <p>Chơi với AI. 3 mức độ khó: Easy / Medium / Hard. AI phải có tính cách (không chơi perfect, có thể sai) để game vẫn vui.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 3 RHYTHMS ==================== -->
+<div class="divider"></div>
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label cyan">04 &mdash; ENGAGEMENT</div>
+      <h2 class="section-title">Ba nhịp Engagement</h2>
+      <p class="section-desc">Mỗi nhóm giữ user ở một khung thời gian khác nhau. Khi 3 nhịp chạy cùng nhau, user không bao giờ hết lý do để mở Arena.</p>
+    </div>
+
+    <div class="rhythms-visual reveal">
+      <div class="rhythm-block">
+        <div class="rhythm-label">▶ PLAY</div>
+        <div class="rhythm-time">Phút</div>
+        <div class="rhythm-desc">Có 2-3 phút rảnh → mở Arena → chơi ngay. Session ngắn, lặp lại nhiều lần trong ngày.</div>
+      </div>
+      <div class="rhythm-block">
+        <div class="rhythm-label">★ SHOW</div>
+        <div class="rhythm-time">Giờ</div>
+        <div class="rhythm-desc">"Tối nay 8PM có show." User schedule thời gian, vào xem/chơi 10-15 phút, trải nghiệm sâu.</div>
+      </div>
+      <div class="rhythm-block">
+        <div class="rhythm-label">◆ PREDICT</div>
+        <div class="rhythm-time">Ngày</div>
+        <div class="rhythm-desc">Sáng đặt dự đoán (1 phút), tối check kết quả, cuối tuần xem leaderboard mùa giải.</div>
+      </div>
+    </div>
+
+    <div class="day-timeline reveal">
+      <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 24px; margin-left: -40px;">Ví dụ: Một ngày của User trong Arena</h3>
+      <div class="timeline-item predict">
+        <div class="timeline-time">07:30 AM</div>
+        <div class="timeline-content"><p>Mở app, đặt prediction cho trận tối nay <span class="timeline-tag predict">PREDICT</span></p></div>
+      </div>
+      <div class="timeline-item play">
+        <div class="timeline-time">12:15 PM</div>
+        <div class="timeline-content"><p>Nghỉ trưa — chơi 3 ván Balloon Pop với đồng nghiệp <span class="timeline-tag play">PLAY</span></p></div>
+      </div>
+      <div class="timeline-item predict">
+        <div class="timeline-time">03:00 PM</div>
+        <div class="timeline-content"><p>Check prediction leaderboard, đoán thêm Daily Picks <span class="timeline-tag predict">PREDICT</span></p></div>
+      </div>
+      <div class="timeline-item show">
+        <div class="timeline-time">08:00 PM</div>
+        <div class="timeline-content"><p>Vào Game Show live — chơi Vibe Check với 500 người <span class="timeline-tag show">SHOW</span></p></div>
+      </div>
+      <div class="timeline-item play">
+        <div class="timeline-time">09:00 PM</div>
+        <div class="timeline-content"><p>Sau show — chơi Final Kick, check prediction kết quả <span class="timeline-tag play">PLAY</span> <span class="timeline-tag predict">PREDICT</span></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PLAY SECTION ==================== -->
+<div class="divider"></div>
+<section>
+  <div class="container">
+    <div class="category-header play reveal">
+      <div class="category-number">01</div>
+      <div class="category-info">
+        <h2>PLAY &mdash; Action Mini-Games</h2>
+        <div class="tag">Nhanh (30s-3 min) &bull; Skill/Luck-based &bull; 1v1 hoặc Multiplayer &bull; Always Available</div>
+      </div>
+    </div>
+
+    <div class="games-grid">
+      <!-- Final Kick -->
+      <div class="game-card play-card reveal">
+        <div class="game-card-header"><h3>Final Kick</h3><span class="game-emoji">⚽</span></div>
+        <div class="game-tagline">Penalty kick 1v1. Chọn hướng sút, chọn hướng cản.</div>
+        <div class="game-meta">
+          <span class="game-meta-tag">👥 2 người</span>
+          <span class="game-meta-tag">⏱ 1-2 min</span>
+          <span class="game-meta-tag">🎯 Skill-based</span>
+        </div>
+        <div class="game-details">
+          <div class="game-detail-row"><div class="game-detail-label">Input</div><div class="game-detail-value">Tap chọn vùng sút/cản + Puff/Button xác nhận. Puff dài = sút mạnh hơn (khó cản hơn nhưng dễ miss)</div></div>
+          <div class="game-detail-row"><div class="game-detail-label">Flow</div>
+            <div class="flow-steps">
+              <div class="flow-step"><span class="step-num">1</span>Ghép trận 2 người</div>
+              <div class="flow-step"><span class="step-num">2</span>P1 Kicker, P2 Goalkeeper — chọn đồng thời</div>
+              <div class="flow-step"><span class="step-num">3</span>GOAL / BLOCKED / SAVED / MISSED</div>
+              <div class="flow-step"><span class="step-num">4</span>Switch roles, 5 lượt mỗi người</div>
+              <div class="flow-step"><span class="step-num">5</span>Hoà → Sudden Death</div>
+            </div>
+          </div>
+          <div class="game-detail-row"><div class="game-detail-label">AI Bot</div><div class="game-detail-value">Easy: random. Medium: đoán đúng 40%. Hard: phân tích pattern user</div></div>
+          <div class="game-detail-row"><div class="game-detail-label">Event</div><div class="game-detail-value">🔥 Cực cao — World Cup Tournament bracket 64 người, themed jerseys</div></div>
+        </div>
+      </div>
+
+      <!-- Hot Potato -->
+      <div class="game-card play-card reveal">
+        <div class="game-card-header"><h3>Hot Potato</h3><span class="game-emoji">💣</span></div>
+        <div class="game-tagline">Bom nhảy random. Puff để pass. Ai bị nổ thì loại.</div>
+        <div class="game-meta">
+          <span class="game-meta-tag">👥 3-8 người</span>
+          <span class="game-meta-tag">⏱ 1-3 min</span>
+          <span class="game-meta-tag">🍀 Luck-based</span>
+        </div>
+        <div class="game-details">
+          <div class="game-detail-row"><div class="game-detail-label">Input</div><div class="game-detail-value">Puff/Button để pass bom. Hành động duy nhất — đơn giản nhất.</div></div>
+          <div class="game-detail-row"><div class="game-detail-label">Flow</div>
+            <div class="flow-steps">
+              <div class="flow-step"><span class="step-num">1</span>3-8 người vào lobby, host chọn thời gian</div>
+              <div class="flow-step"><span class="step-num">2</span>Bom xuất hiện random, timer bí mật đếm ngược</div>
+              <div class="flow-step"><span class="step-num">3</span>Puff/Button pass bom, nhảy sang người tiếp</div>
+              <div class="flow-step"><span class="step-num">4</span>BOOM! Người giữ bom bị loại</div>
+              <div class="flow-step"><span class="step-num">5</span>Timer ngắn hơn mỗi round → tension tăng</div>
+            </div>
+          </div>
+          <div class="game-detail-row"><div class="game-detail-label">AI Bot</div><div class="game-detail-value">Easy: pass chậm (1-2s). Medium: 0.5-1s. Hard: gần như ngay lập tức</div></div>
+        </div>
+      </div>
+
+      <!-- Russian Roulette -->
+      <div class="game-card play-card reveal">
+        <div class="game-card-header"><h3>Russian Roulette</h3><span class="game-emoji">🔫</span></div>
+        <div class="game-tagline">Lần lượt puff. Random ai bị loại. Tension cực cao.</div>
+        <div class="game-meta">
+          <span class="game-meta-tag">👥 2-6 người</span>
+          <span class="game-meta-tag">⏱ 1-2 min</span>
+          <span class="game-meta-tag">🍀 Luck-based</span>
+        </div>
+        <div class="game-details">
+          <div class="game-detail-row"><div class="game-detail-label">Input</div><div class="game-detail-value">Puff/Button để "kéo cò". Kết quả random: safe hoặc eliminated.</div></div>
+          <div class="game-detail-row"><div class="game-detail-label">Flow</div>
+            <div class="flow-steps">
+              <div class="flow-step"><span class="step-num">1</span>Ổ đạn quay — xác suất tăng dần</div>
+              <div class="flow-step"><span class="step-num">2</span>"Who's next?" + đếm ngược 3-2-1</div>
+              <div class="flow-step"><span class="step-num">3</span>SAFE hoặc POW! ELIMINATED</div>
+              <div class="flow-step"><span class="step-num">4</span>Tiếp tục đến khi còn 1 người</div>
+            </div>
+          </div>
+          <div class="game-detail-row"><div class="game-detail-label">AI Bot</div><div class="game-detail-value">Easy: xác suất bị loại cao hơn. Hard: AI "may mắn" hơn user</div></div>
+        </div>
+      </div>
+
+      <!-- Wild West Duel -->
+      <div class="game-card play-card reveal">
+        <div class="game-card-header"><h3>Wild West Duel</h3><span class="game-emoji">🤠</span></div>
+        <div class="game-tagline">Đấu tay đôi cao bồi. Đếm ngược, ai puff nhanh hơn thắng.</div>
+        <div class="game-meta">
+          <span class="game-meta-tag">👥 2 người</span>
+          <span class="game-meta-tag">⏱ 15-30s</span>
+          <span class="game-meta-tag">⚡ Reaction</span>
+        </div>
+        <div class="game-details">
+          <div class="game-detail-row"><div class="game-detail-label">Input</div><div class="game-detail-value">Puff/Button sau khi "SHOOT!" xuất hiện. Nhanh hơn = thắng. Puff trước "SHOOT!" = phạm quy = thua.</div></div>
+          <div class="game-detail-row"><div class="game-detail-label">Flow</div>
+            <div class="flow-steps">
+              <div class="flow-step"><span class="step-num">1</span>"READY..." → random delay 1-3s → "SHOOT!"</div>
+              <div class="flow-step"><span class="step-num">2</span>Ai puff/button nhanh hơn thắng round</div>
+              <div class="flow-step"><span class="step-num">3</span>Chênh lệch &lt;50ms → DRAW</div>
+              <div class="flow-step"><span class="step-num">4</span>Best of 3 rounds</div>
+            </div>
+          </div>
+          <div class="game-detail-row"><div class="game-detail-label">AI Bot</div><div class="game-detail-value">Easy: 800-1200ms. Medium: 400-700ms. Hard: 150-350ms</div></div>
+        </div>
+      </div>
+
+      <!-- Balloon Pop -->
+      <div class="game-card play-card reveal">
+        <div class="game-card-header"><h3>Balloon Pop</h3><span class="game-emoji">🎈</span></div>
+        <div class="game-tagline">Lần lượt puff, bóng phình dần, ai làm nổ thì thua.</div>
+        <div class="game-meta">
+          <span class="game-meta-tag">👥 2-8 người</span>
+          <span class="game-meta-tag">⏱ 1-3 min</span>
+          <span class="game-meta-tag">🎯 Luck + Strategy</span>
+        </div>
+        <div class="game-details">
+          <div class="game-detail-row"><div class="game-detail-label">Input</div><div class="game-detail-value">Puff/Button vào bóng. Puff dài = bóng phình nhiều = rủi ro cao nhưng push ngưỡng nổ cho người sau.</div></div>
+          <div class="game-detail-row"><div class="game-detail-label">Flow</div>
+            <div class="flow-steps">
+              <div class="flow-step"><span class="step-num">1</span>Bóng nhỏ, ngưỡng nổ random (bí mật)</div>
+              <div class="flow-step"><span class="step-num">2</span>Lần lượt puff, bóng phình + đổi màu (xanh → vàng → cam → đỏ)</div>
+              <div class="flow-step"><span class="step-num">3</span>POP! Người đang puff bị loại</div>
+              <div class="flow-step"><span class="step-num">4</span>Người sống sót cuối cùng thắng</div>
+            </div>
+          </div>
+          <div class="game-detail-row"><div class="game-detail-label">AI Bot</div><div class="game-detail-value">Easy: puff ngắn (an toàn). Hard: tính toán push bóng gần ngưỡng rồi dừng</div></div>
+        </div>
+      </div>
+
+      <!-- Puff Pong -->
+      <div class="game-card play-card reveal">
+        <div class="game-card-header"><h3>Puff Pong</h3><span class="game-emoji">🏓</span></div>
+        <div class="game-tagline">Bóng bàn ảo. Puff = đánh bóng. Timing là tất cả.</div>
+        <div class="game-meta">
+          <span class="game-meta-tag">👥 2 người</span>
+          <span class="game-meta-tag">⏱ 1-2 min</span>
+          <span class="game-meta-tag">🎯 Skill-based</span>
+        </div>
+        <div class="game-details">
+          <div class="game-detail-row"><div class="game-detail-label">Input</div><div class="game-detail-value">Puff/Button đánh bóng + Swipe điều hướng (bổ sung). Timing chuẩn = bóng nhanh, khó đỡ.</div></div>
+          <div class="game-detail-row"><div class="game-detail-label">Score</div><div class="game-detail-value">Đến 11 điểm (cách 2) hoặc 2 phút hết thời gian.</div></div>
+        </div>
+      </div>
+
+      <!-- Rhythm Puff -->
+      <div class="game-card play-card reveal">
+        <div class="game-card-header"><h3>Rhythm Puff</h3><span class="game-emoji">🎵</span></div>
+        <div class="game-tagline">Guitar Hero phiên bản puff. Nốt nhạc rơi, puff đúng nhịp.</div>
+        <div class="game-meta">
+          <span class="game-meta-tag">👥 1-4 người</span>
+          <span class="game-meta-tag">⏱ 1-3 min</span>
+          <span class="game-meta-tag">🎶 Rhythm</span>
+        </div>
+        <div class="game-details">
+          <div class="game-detail-row"><div class="game-detail-label">Input</div><div class="game-detail-value">Hit note: Puff/Button đúng lúc. Hold note: giữ puff liên tục. Perfect/Good/Miss scoring.</div></div>
+          <div class="game-detail-row"><div class="game-detail-label">Score</div><div class="game-detail-value">Perfect: 100pt, Good: 50pt. Combo multiplier 2x→3x→4x. Rank S/A/B/C/D.</div></div>
+          <div class="game-detail-row"><div class="game-detail-label">Event</div><div class="game-detail-value">Themed bài nhạc cho events (nhạc World Cup, Giáng sinh...)</div></div>
+        </div>
+      </div>
+
+      <!-- Tug of War -->
+      <div class="game-card play-card reveal">
+        <div class="game-card-header"><h3>Tug of War</h3><span class="game-emoji">💪</span></div>
+        <div class="game-tagline">2 team puff liên tục, bên nào mạnh hơn thắng.</div>
+        <div class="game-meta">
+          <span class="game-meta-tag">👥 2-8 người</span>
+          <span class="game-meta-tag">⏱ 30s-1 min</span>
+          <span class="game-meta-tag">⚡ Team vs Team</span>
+        </div>
+        <div class="game-details">
+          <div class="game-detail-row"><div class="game-detail-label">Input</div><div class="game-detail-value">Puff liên tục hoặc Button spam = lực kéo. Tổng lực team cộng lại.</div></div>
+          <div class="game-detail-row"><div class="game-detail-label">Flow</div>
+            <div class="flow-steps">
+              <div class="flow-step"><span class="step-num">1</span>Chia 2 team, dây thừng ở giữa</div>
+              <div class="flow-step"><span class="step-num">2</span>3-2-1-GO! Cả 2 team puff/button</div>
+              <div class="flow-step"><span class="step-num">3</span>Dây dịch về bên mạnh hơn</div>
+              <div class="flow-step"><span class="step-num">4</span>Vượt ngưỡng hoặc hết 60s → Winner</div>
+            </div>
+          </div>
+          <div class="game-detail-row"><div class="game-detail-label">Event</div><div class="game-detail-value">🔥 Rất cao — Quốc gia vs Quốc gia trong World Cup</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SHOW SECTION ==================== -->
+<div class="divider"></div>
+<section>
+  <div class="container">
+    <div class="category-header show reveal">
+      <div class="category-number">02</div>
+      <div class="category-info">
+        <h2>SHOW &mdash; Game Shows</h2>
+        <div class="tag">Format chương trình &bull; Host + Audience + Contestants &bull; 5-15 min &bull; Kết hợp Live tab</div>
+      </div>
+    </div>
+
+    <div class="crossover-callout reveal">
+      <div class="icon">📡</div>
+      <div>
+        <h3>Game Show + Live Tab: Cầu nối tự nhiên</h3>
+        <p>Khi Show đang live → xuất hiện ở cả Arena và Live tab. User có thể vào từ tab nào cũng được. <strong>Contestant</strong> (đang chơi, cần device) và <strong>Audience</strong> (xem, vote, react, không cần device). Khi không có show live, user chơi solo hoặc với bạn (simplified version).</p>
+      </div>
+    </div>
+
+    <div class="games-grid">
+      <!-- Vibe Check -->
+      <div class="game-card show-card reveal">
+        <div class="game-card-header"><h3>Vibe Check</h3><span class="game-emoji">🧠</span></div>
+        <div class="game-tagline">Trivia game show kinh điển. Host hỏi, contestants trả lời, audience vote.</div>
+        <div class="game-meta">
+          <span class="game-meta-tag">👥 1-10 + Audience</span>
+          <span class="game-meta-tag">⏱ 5-15 min</span>
+          <span class="game-meta-tag">📚 Trivia</span>
+        </div>
+        <div class="game-details">
+          <div class="game-detail-row"><div class="game-detail-label">Flow</div>
+            <div class="flow-steps">
+              <div class="flow-step"><span class="step-num">1</span>Host (AI) giới thiệu show, chọn category</div>
+              <div class="flow-step"><span class="step-num">2</span>Host đọc câu hỏi (TTS), 4 lựa chọn, timer</div>
+              <div class="flow-step"><span class="step-num">3</span>Tap chọn đáp án + Puff/Button "Lock In"</div>
+              <div class="flow-step"><span class="step-num">4</span>Đáp án + reactions (confetti / screen shake)</div>
+              <div class="flow-step"><span class="step-num">5</span>Leaderboard cuối + rewards</div>
+            </div>
+          </div>
+          <div class="game-detail-row"><div class="game-detail-label">Power-ups</div><div class="game-detail-value">50/50 (loại 2 sai) • Peek (xem % audience vote) • Freeze (+10s) • Skip (bỏ qua)</div></div>
+          <div class="game-detail-row"><div class="game-detail-label">Mood</div><div class="game-detail-value">⚡ Energized (+5s) • 🎯 Focused (2x điểm 3 câu đầu) • 😎 Chill (hint 1 câu) • 🍀 Lucky (auto 50/50) • 🧘 Zen (bảo vệ streak) • 🔥 Hyped (+50 coins)</div></div>
+          <div class="game-detail-row"><div class="game-detail-label">Event</div><div class="game-detail-value">🔥 Cực cao — World Cup Trivia, Football Legends, Country Quiz. Influencer host qua Live.</div></div>
+        </div>
+      </div>
+
+      <!-- Spin & Win -->
+      <div class="game-card show-card reveal">
+        <div class="game-card-header"><h3>Spin & Win</h3><span class="game-emoji">🎰</span></div>
+        <div class="game-tagline">Vòng quay may mắn. Puff để spin. Đơn giản, addictive.</div>
+        <div class="game-meta">
+          <span class="game-meta-tag">👥 1 + Audience</span>
+          <span class="game-meta-tag">⏱ 2-5 min</span>
+          <span class="game-meta-tag">🍀 Luck-based</span>
+        </div>
+        <div class="game-details">
+          <div class="game-detail-row"><div class="game-detail-label">Flow</div>
+            <div class="flow-steps">
+              <div class="flow-step"><span class="step-num">1</span>Vòng quay với ô thưởng (coins, XP, items, JACKPOT, challenges)</div>
+              <div class="flow-step"><span class="step-num">2</span>Puff/Button spin vòng quay</div>
+              <div class="flow-step"><span class="step-num">3</span>Trúng mini-challenge → hoàn thành = thưởng gấp đôi</div>
+              <div class="flow-step"><span class="step-num">4</span>Giới hạn lượt free/ngày, thêm lượt bằng coins</div>
+            </div>
+          </div>
+          <div class="game-detail-row"><div class="game-detail-label">Live</div><div class="game-detail-value">Host gọi từng contestant lên spin. Audience predict ô trúng → earn coins.</div></div>
+        </div>
+      </div>
+
+      <!-- Higher or Lower -->
+      <div class="game-card show-card reveal">
+        <div class="game-card-header"><h3>Higher or Lower</h3><span class="game-emoji">📈</span></div>
+        <div class="game-tagline">Đoán số tiếp theo cao hơn hay thấp hơn. Streak dài = thưởng lớn.</div>
+        <div class="game-meta">
+          <span class="game-meta-tag">👥 1 + Audience</span>
+          <span class="game-meta-tag">⏱ 5-10 min</span>
+          <span class="game-meta-tag">📊 Knowledge</span>
+        </div>
+        <div class="game-details">
+          <div class="game-detail-row"><div class="game-detail-label">Flow</div>
+            <div class="flow-steps">
+              <div class="flow-step"><span class="step-num">1</span>Thẻ hiện số liệu ("Ronaldo: 600M followers")</div>
+              <div class="flow-step"><span class="step-num">2</span>Thẻ tiếp: "Messi followers: Higher or Lower?"</div>
+              <div class="flow-step"><span class="step-num">3</span>Chọn + Puff/Button xác nhận</div>
+              <div class="flow-step"><span class="step-num">4</span>Đúng = streak tăng. Sai = game over</div>
+              <div class="flow-step"><span class="step-num">5</span>Mỗi 5 streak: "Cash Out" hoặc tiếp (rủi ro mất hết)</div>
+            </div>
+          </div>
+          <div class="game-detail-row"><div class="game-detail-label">Event</div><div class="game-detail-value">World Cup stats: bàn thắng, kiến assist, tuổi cầu thủ. Daily updated data.</div></div>
+        </div>
+      </div>
+
+      <!-- The Price is Puff -->
+      <div class="game-card show-card reveal">
+        <div class="game-card-header"><h3>The Price is Puff</h3><span class="game-emoji">💰</span></div>
+        <div class="game-tagline">Đoán giá sản phẩm. Gần nhất thắng. The Price is Right phiên bản Mood Lab.</div>
+        <div class="game-meta">
+          <span class="game-meta-tag">👥 2-10 + Audience</span>
+          <span class="game-meta-tag">⏱ 5-10 min</span>
+          <span class="game-meta-tag">🧠 Knowledge</span>
+        </div>
+        <div class="game-details">
+          <div class="game-detail-row"><div class="game-detail-label">Flow</div>
+            <div class="flow-steps">
+              <div class="flow-step"><span class="step-num">1</span>Host giới thiệu sản phẩm (hình + mô tả)</div>
+              <div class="flow-step"><span class="step-num">2</span>Nhập giá dự đoán + Puff/Button xác nhận</div>
+              <div class="flow-step"><span class="step-num">3</span>Giá thật hiện. Gần nhất (không vượt quá) thắng</div>
+              <div class="flow-step"><span class="step-num">4</span>5-10 rounds. Tổng điểm cao nhất thắng</div>
+            </div>
+          </div>
+          <div class="game-detail-row"><div class="game-detail-label">Event</div><div class="game-detail-value">Themed products. Đặc biệt hấp dẫn khi sản phẩm là của partners (quảng bá brand subtle).</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PREDICT SECTION ==================== -->
+<div class="divider"></div>
+<section>
+  <div class="container">
+    <div class="category-header predict reveal">
+      <div class="category-number">03</div>
+      <div class="category-info">
+        <h2>PREDICT &mdash; Prediction &amp; Betting</h2>
+        <div class="tag">Async &bull; In-app currency (KHÔNG phải tiền thật) &bull; Leaderboard dài hạn &bull; "Puff to Lock In"</div>
+      </div>
+    </div>
+
+    <div class="games-grid">
+      <!-- Match Predictor -->
+      <div class="game-card predict-card reveal">
+        <div class="game-card-header"><h3>Match Predictor</h3><span class="game-emoji">🏟️</span></div>
+        <div class="game-tagline">Đoán đội thắng/thua/hoà cho trận đấu thật.</div>
+        <div class="game-meta">
+          <span class="game-meta-tag">⏱ 1-2 min đặt</span>
+          <span class="game-meta-tag">📊 Odds-based</span>
+        </div>
+        <div class="game-details">
+          <div class="game-detail-row"><div class="game-detail-label">Flow</div><div class="game-detail-value">Xem danh sách trận → Chọn Win/Draw/Lose → Đặt coins → Puff/Button "Lock In" → Chờ kết quả → Đúng = coins x odds</div></div>
+          <div class="game-detail-row"><div class="game-detail-label">Event</div><div class="game-detail-value">🔥 Core cho World Cup — 104 trận = 104 cơ hội engagement</div></div>
+        </div>
+      </div>
+
+      <!-- Score Predictor -->
+      <div class="game-card predict-card reveal">
+        <div class="game-card-header"><h3>Score Predictor</h3><span class="game-emoji">🎯</span></div>
+        <div class="game-tagline">Đoán chính xác tỉ số. Khó hơn, thưởng lớn hơn.</div>
+        <div class="game-meta">
+          <span class="game-meta-tag">⏱ 1-2 min đặt</span>
+          <span class="game-meta-tag">💎 High reward</span>
+        </div>
+        <div class="game-details">
+          <div class="game-detail-row"><div class="game-detail-label">Score</div><div class="game-detail-value">Exact score = x10 coins. Đúng kết quả sai tỉ số = x2. Sai hoàn toàn = mất coins.</div></div>
+        </div>
+      </div>
+
+      <!-- MVP Pick -->
+      <div class="game-card predict-card reveal">
+        <div class="game-card-header"><h3>MVP Pick</h3><span class="game-emoji">⭐</span></div>
+        <div class="game-tagline">Chọn cầu thủ xuất sắc nhất trận/giải.</div>
+        <div class="game-meta">
+          <span class="game-meta-tag">⏱ 1 min</span>
+          <span class="game-meta-tag">🏆 Season-long</span>
+        </div>
+        <div class="game-details">
+          <div class="game-detail-row"><div class="game-detail-label">Đặc biệt</div><div class="game-detail-value">"Golden Boot Pick" — đầu giải, chọn vua phá lưới. Đúng = mega reward. Engagement kéo dài cả mùa giải.</div></div>
+        </div>
+      </div>
+
+      <!-- Bracket Challenge -->
+      <div class="game-card predict-card reveal">
+        <div class="game-card-header"><h3>Bracket Challenge</h3><span class="game-emoji">🗓️</span></div>
+        <div class="game-tagline">Dự đoán toàn bộ tournament bracket. Season-long.</div>
+        <div class="game-meta">
+          <span class="game-meta-tag">⏱ 5-10 min setup</span>
+          <span class="game-meta-tag">🏆 Season-long</span>
+        </div>
+        <div class="game-details">
+          <div class="game-detail-row"><div class="game-detail-label">Score</div><div class="game-detail-value">Vòng bảng: 10pt → Vòng 16: 20pt → Tứ kết: 40pt → Bán kết: 80pt → Chung kết: 160pt. "Bracket King/Queen" cho #1.</div></div>
+          <div class="game-detail-row"><div class="game-detail-label">Event</div><div class="game-detail-value">🔥 PERFECT cho World Cup — 104 trận, knockout từ R32, engagement kéo dài 39 ngày</div></div>
+        </div>
+      </div>
+
+      <!-- Game Show Predictor -->
+      <div class="game-card predict-card reveal">
+        <div class="game-card-header"><h3>Game Show Predictor</h3><span class="game-emoji">🎪</span></div>
+        <div class="game-tagline">Đoán ai thắng Game Show đang live. Arena + Live crossover.</div>
+        <div class="game-meta">
+          <span class="game-meta-tag">⏱ 1 min</span>
+          <span class="game-meta-tag">📡 Live</span>
+        </div>
+        <div class="game-details">
+          <div class="game-detail-row"><div class="game-detail-label">Flow</div><div class="game-detail-value">Show đang live → chọn contestant sẽ thắng → odds thay đổi real-time → Show kết thúc → đoán đúng = coins. Giữ audience xem đến cuối.</div></div>
+        </div>
+      </div>
+
+      <!-- Daily Picks -->
+      <div class="game-card predict-card reveal">
+        <div class="game-card-header"><h3>Daily Picks</h3><span class="game-emoji">📅</span></div>
+        <div class="game-tagline">Mỗi ngày 3-5 câu hỏi dự đoán random. Daily habit loop.</div>
+        <div class="game-meta">
+          <span class="game-meta-tag">⏱ 1-2 min</span>
+          <span class="game-meta-tag">📆 Daily</span>
+        </div>
+        <div class="game-details">
+          <div class="game-detail-row"><div class="game-detail-label">Ví dụ</div><div class="game-detail-value">"Nhiệt độ LA ngày mai: trên hay dưới 80°F?" — "Bài hát #1 Billboard tuần này: nam hay nữ?"</div></div>
+          <div class="game-detail-row"><div class="game-detail-label">Mục đích</div><div class="game-detail-value">Tạo habit loop — user mở Arena MỖI NGÀY. Streak đúng nhiều ngày = bonus multiplier.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LIVE × ARENA ==================== -->
+<div class="divider"></div>
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" style="color: #FF6B6B;">05 &mdash; LIVE × ARENA</div>
+      <h2 class="section-title">Live — Arena × Live Tab</h2>
+      <p class="section-desc">Live tab là nơi broadcasting/streaming diễn ra. Trong context Arena, Live là lớp khuếch đại biến mọi game từ "chơi với bạn" thành "biểu diễn trước đám đông."</p>
+    </div>
+
+    <div style="margin-bottom: 40px; padding: 28px 32px; border-radius: 16px; border: 1px solid rgba(255,107,107,0.2); background: linear-gradient(135deg, rgba(255,107,107,0.04), var(--bg-card));" class="reveal">
+      <div style="display: flex; align-items: flex-start; gap: 20px;">
+        <div style="font-size: 36px; flex-shrink: 0;">📡</div>
+        <div>
+          <h3 style="font-size: 18px; font-weight: 700; color: #FF6B6B; margin-bottom: 8px;">Nguyên tắc: Live là Amplifier, không phải Replacement</h3>
+          <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.7;">Mọi game trong Arena đều chơi được mà <strong>không cần Live</strong> — chơi solo, với bạn, hoặc với AI Bot. Live thêm audience, host, reactions, và drama — biến trải nghiệm từ tốt thành tuyệt vời. Tài liệu chi tiết về Live tab (bao gồm các tính năng không liên quan Arena) sẽ được cung cấp riêng.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 24px;" class="reveal">4 cách Live kết nối với Arena</h3>
+
+    <!-- 4 Live connection types -->
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;" class="reveal">
+
+      <!-- 1. Game Show Crossover -->
+      <div style="padding: 28px; border-radius: 16px; border: 1px solid var(--border); background: var(--bg-card); position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), #FF6B6B);"></div>
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+          <span style="font-size: 28px;">🎬</span>
+          <div>
+            <h4 style="font-size: 17px; font-weight: 700; color: var(--gold);">Game Show ↔ Live Crossover</h4>
+            <span style="font-size: 12px; color: var(--text-dim);">SHOW category × Live tab</span>
+          </div>
+        </div>
+        <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+          <p style="margin-bottom: 8px;">Khi Game Show (Vibe Check, Spin & Win...) đang diễn ra, nó <strong>đồng thời là live stream</strong>. Xuất hiện ở cả Arena tab và Live tab.</p>
+          <div style="margin-top: 12px; padding: 12px 16px; border-radius: 8px; background: rgba(255,255,255,0.03); border: 1px solid var(--border);">
+            <div style="font-size: 12px; font-weight: 700; color: var(--gold); letter-spacing: 1px; margin-bottom: 8px;">USER FLOW</div>
+            <p style="margin-bottom: 4px;">• <strong>Từ Arena tab:</strong> Thấy badge "LIVE NOW" → tap = tham gia chơi/xem</p>
+            <p style="margin-bottom: 4px;">• <strong>Từ Live tab:</strong> Thấy Game Show stream → tap = chuyển sang Arena</p>
+            <p>• <strong>2 vai trò:</strong> Contestant (cần device, đang chơi) + Audience (xem, vote, react)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Live Hosted Events -->
+      <div style="padding: 28px; border-radius: 16px; border: 1px solid var(--border); background: var(--bg-card); position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--pink), var(--purple));"></div>
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+          <span style="font-size: 28px;">🎙️</span>
+          <div>
+            <h4 style="font-size: 17px; font-weight: 700; color: var(--pink);">Live Hosted Events</h4>
+            <span style="font-size: 12px; color: var(--text-dim);">Real host / KOL / Influencer streaming</span>
+          </div>
+        </div>
+        <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+          <p style="margin-bottom: 8px;">Trong events đặc biệt (World Cup, brand launches...), <strong>người thật làm host</strong> thay vì AI — stream live qua Live tab, tương tác real-time với audience.</p>
+          <div style="margin-top: 12px; padding: 12px 16px; border-radius: 8px; background: rgba(255,255,255,0.03); border: 1px solid var(--border);">
+            <div style="font-size: 12px; font-weight: 700; color: var(--pink); letter-spacing: 1px; margin-bottom: 8px;">VÍ DỤ</div>
+            <p style="margin-bottom: 4px;">• KOL host Vibe Check World Cup Edition — đọc câu hỏi, bình luận, tạo drama</p>
+            <p style="margin-bottom: 4px;">• Brand partner livestream sản phẩm mới + The Price is Puff</p>
+            <p>• Community event với guest host nổi tiếng</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Tournament Live Streaming -->
+      <div style="padding: 28px; border-radius: 16px; border: 1px solid var(--border); background: var(--bg-card); position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--cyan), var(--lime));"></div>
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+          <span style="font-size: 28px;">🏆</span>
+          <div>
+            <h4 style="font-size: 17px; font-weight: 700; color: var(--cyan);">Tournament Live Streaming</h4>
+            <span style="font-size: 12px; color: var(--text-dim);">Xem người khác thi đấu</span>
+          </div>
+        </div>
+        <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+          <p style="margin-bottom: 8px;">Trận chung kết Final Kick Tournament không chỉ dành cho 2 người đang chơi — <strong>cả cộng đồng có thể xem live</strong>. Biến mini-game thành spectator sport.</p>
+          <div style="margin-top: 12px; padding: 12px 16px; border-radius: 8px; background: rgba(255,255,255,0.03); border: 1px solid var(--border);">
+            <div style="font-size: 12px; font-weight: 700; color: var(--cyan); letter-spacing: 1px; margin-bottom: 8px;">MECHANICS</div>
+            <p style="margin-bottom: 4px;">• Spectator mode: audience xem real-time gameplay</p>
+            <p style="margin-bottom: 4px;">• Live reactions + chat during match</p>
+            <p style="margin-bottom: 4px;">• Kết hợp Prediction: audience đặt cược ai thắng (Game Show Predictor)</p>
+            <p>• Replay highlights cho trận hay</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Watch Parties -->
+      <div style="padding: 28px; border-radius: 16px; border: 1px solid var(--border); background: var(--bg-card); position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--lime), var(--gold));"></div>
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+          <span style="font-size: 28px;">📺</span>
+          <div>
+            <h4 style="font-size: 17px; font-weight: 700; color: var(--lime);">Watch Parties</h4>
+            <span style="font-size: 12px; color: var(--text-dim);">Xem thể thao thật + predict cùng nhau</span>
+          </div>
+        </div>
+        <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+          <p style="margin-bottom: 8px;">Cùng xem trận World Cup thật với bạn bè trong app — <strong>không stream trận đấu</strong> (copyright) mà tạo không gian social để react, predict, và chơi mini-games trong lúc xem.</p>
+          <div style="margin-top: 12px; padding: 12px 16px; border-radius: 8px; background: rgba(255,255,255,0.03); border: 1px solid var(--border);">
+            <div style="font-size: 12px; font-weight: 700; color: var(--lime); letter-spacing: 1px; margin-bottom: 8px;">TRẢI NGHIỆM</div>
+            <p style="margin-bottom: 4px;">• Live score + match events tự động cập nhật</p>
+            <p style="margin-bottom: 4px;">• Real-time predictions trong trận (next goal, penalty...)</p>
+            <p style="margin-bottom: 4px;">• Group chat + reactions với bạn bè</p>
+            <p>• Mini-games giữa hiệp (Final Kick, trivia nhanh)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Connection diagram -->
+    <div style="margin-top: 40px;" class="reveal">
+      <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 20px;">Tóm tắt: Khi nào Arena gặp Live?</h3>
+      <div style="overflow-x: auto; border-radius: 16px; border: 1px solid var(--border);">
+        <table class="summary-table">
+          <thead>
+            <tr>
+              <th>Tình huống</th>
+              <th>Arena cung cấp</th>
+              <th>Live cung cấp</th>
+              <th>Kết quả</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="game-name-cell">Game Show đang diễn ra</td>
+              <td>Game mechanics, scoring, power-ups</td>
+              <td>Broadcasting, audience view, chat, reactions</td>
+              <td style="color: var(--gold);">Interactive live entertainment</td>
+            </tr>
+            <tr>
+              <td class="game-name-cell">KOL host event đặc biệt</td>
+              <td>Game Show format, prizes</td>
+              <td>Video stream, host camera, real-time interaction</td>
+              <td style="color: var(--pink);">Celebrity-driven engagement</td>
+            </tr>
+            <tr>
+              <td class="game-name-cell">Tournament chung kết</td>
+              <td>Gameplay giữa 2 contestants</td>
+              <td>Spectator stream, audience chat, replay</td>
+              <td style="color: var(--cyan);">Spectator sport experience</td>
+            </tr>
+            <tr>
+              <td class="game-name-cell">Trận World Cup thật</td>
+              <td>Predictions, mini-games giữa hiệp</td>
+              <td>Watch room, live score, group chat</td>
+              <td style="color: var(--lime);">Social viewing + gamification</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="margin-top: 24px; padding: 20px 28px; border-radius: 12px; border-left: 4px solid #FF6B6B; background: rgba(255,107,107,0.06); font-size: 14px; color: var(--text-secondary);" class="reveal">
+      <strong style="color: #FF6B6B;">Tài liệu riêng:</strong> Live tab có nhiều tính năng không liên quan Arena (brand livestream, product launches, community hangout, user-generated content...). Tất cả sẽ được define chi tiết trong <strong>Live Tab Guideline</strong> riêng.
+    </div>
+  </div>
+</section>
+
+<!-- ==================== EVENT SYSTEM ==================== -->
+<div class="divider"></div>
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label pink">06 &mdash; EVENT SYSTEM</div>
+      <h2 class="section-title">World Cup 2026</h2>
+      <p class="section-desc">Case study: Cách event overlay lên toàn bộ Arena mà không thay đổi cấu trúc Play/Show/Predict.</p>
+    </div>
+
+    <div class="event-hero reveal">
+      <span class="wc-flag">⚽🏆🌎</span>
+      <h2>FIFA World Cup 2026</h2>
+      <div class="dates">11 tháng 6 — 19 tháng 7, 2026 &nbsp;|&nbsp; USA (11 cities) · Mexico (3) · Canada (2) = 16 thành phố</div>
+      <div class="stats-row">
+        <div class="event-stat"><div class="num">48</div><div class="label">Đội tuyển</div></div>
+        <div class="event-stat"><div class="num">12</div><div class="label">Bảng đấu</div></div>
+        <div class="event-stat"><div class="num">104</div><div class="label">Trận đấu</div></div>
+        <div class="event-stat"><div class="num">39</div><div class="label">Ngày</div></div>
+      </div>
+      <div style="margin-top: 20px; font-size: 13px; color: var(--text-dim); line-height: 1.6;">
+        12 bảng × 4 đội &nbsp;→&nbsp; Top 2 + 8 đội 3rd tốt nhất &nbsp;→&nbsp; Round of 32 &nbsp;→&nbsp; R16 &nbsp;→&nbsp; QF &nbsp;→&nbsp; SF &nbsp;→&nbsp; Final<br>
+        Khai mạc: Mexico City (Estadio Azteca) &nbsp;|&nbsp; Chung kết: MetLife Stadium, New Jersey
+      </div>
+    </div>
+
+    <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px;" class="reveal">World Cup overlay lên 3 nhóm</h3>
+
+    <div class="overlay-grid reveal">
+      <div class="overlay-card play-overlay">
+        <h4>▶ PLAY overlay</h4>
+        <ul>
+          <li><strong>Final Kick Tournament:</strong> Bracket 64 người, themed jerseys, chung kết cùng ngày WC thật</li>
+          <li><strong>Tug of War:</strong> Quốc gia vs Quốc gia</li>
+          <li><strong>Themed skins:</strong> Bóng WC cho Balloon Pop, bom football cho Hot Potato</li>
+        </ul>
+      </div>
+      <div class="overlay-card show-overlay">
+        <h4>★ SHOW overlay</h4>
+        <ul>
+          <li><strong>Vibe Check WC Edition:</strong> Football History, World Cup Records, Country Flags, Player Stats</li>
+          <li><strong>Daily live shows:</strong> Trước mỗi trận lớn</li>
+          <li><strong>Special hosted:</strong> Influencer/KOL host thật qua Live</li>
+        </ul>
+      </div>
+      <div class="overlay-card predict-overlay">
+        <h4>◆ PREDICT overlay</h4>
+        <ul>
+          <li><strong>Match Predictor:</strong> 2-4 trận/ngày × 104 trận</li>
+          <li><strong>Bracket Challenge:</strong> Dự đoán toàn giải</li>
+          <li><strong>Golden Boot Pick:</strong> Vua phá lưới cả mùa</li>
+          <li><strong>Daily Picks:</strong> Câu hỏi WC mỗi ngày</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="font-size: 20px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;" class="reveal">Special Features</h3>
+
+    <div class="special-features reveal">
+      <div class="special-feat">
+        <div class="feat-icon">🏟️</div>
+        <div><h5>World Cup Zone</h5><p>Banner đặc biệt ở đầu Arena. Gom tất cả WC content vào một entry point.</p></div>
+      </div>
+      <div class="special-feat">
+        <div class="feat-icon">🌍</div>
+        <div><h5>Country Leaderboard</h5><p>Ranking theo quốc gia — tổng điểm tất cả user cùng nước. Tinh thần dân tộc.</p></div>
+      </div>
+      <div class="special-feat">
+        <div class="feat-icon">🎫</div>
+        <div><h5>World Cup Pass</h5><p>Reward path đặc biệt (giống Battle Pass) — hoàn thành challenges để unlock rewards exclusive.</p></div>
+      </div>
+      <div class="special-feat">
+        <div class="feat-icon">⏱️</div>
+        <div><h5>Countdown + Live Score</h5><p>Đếm ngược đến trận tiếp theo và tỉ số live ngay trong Arena.</p></div>
+      </div>
+    </div>
+
+    <h3 style="font-size: 20px; font-weight: 700; margin-top: 48px; margin-bottom: 20px;" class="reveal">Các event khác (cùng framework)</h3>
+
+    <div class="events-other reveal">
+      <div class="other-event"><span class="ev-emoji">🏀</span><h5>NBA Playoffs</h5><p>Tháng 4-6 &bull; Match + MVP Pick</p></div>
+      <div class="other-event"><span class="ev-emoji">⚽</span><h5>Champions League</h5><p>Tháng 2-6 &bull; Match + Bracket</p></div>
+      <div class="other-event"><span class="ev-emoji">🏈</span><h5>Super Bowl</h5><p>1 ngày + build-up &bull; Special Shows</p></div>
+      <div class="other-event"><span class="ev-emoji">🎄</span><h5>Christmas / Tết</h5><p>2-3 tuần &bull; Holiday games + prizes</p></div>
+      <div class="other-event"><span class="ev-emoji">🌿</span><h5>420 Day</h5><p>Community challenges &bull; Mega prizes</p></div>
+      <div class="other-event"><span class="ev-emoji">🤝</span><h5>Brand Partner</h5><p>Tuỳ partner &bull; Customized games</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== REWARDS HOOK ==================== -->
+<div class="divider"></div>
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label purple">07 &mdash; REWARDS</div>
+      <h2 class="section-title">Rewards Hook</h2>
+      <p class="section-desc">Mọi hành động trong Arena đều có rewards. Chi tiết đầy đủ sẽ ở tài liệu Loyalty System riêng.</p>
+    </div>
+
+    <div class="rewards-types reveal">
+      <div class="reward-card">
+        <span class="r-icon">🪙</span>
+        <h4>Coins</h4>
+        <p>Currency chính. Cược, mua lượt spin, mua power-ups. Earn từ mọi hoạt động.</p>
+      </div>
+      <div class="reward-card">
+        <span class="r-icon">✨</span>
+        <h4>XP</h4>
+        <p>Experience points. Tăng Level = unlock features mới. Earn từ chơi game, tham gia show.</p>
+      </div>
+      <div class="reward-card">
+        <span class="r-icon">🏅</span>
+        <h4>Badges</h4>
+        <p>Huy hiệu thành tích trên profile. 100 games, 10-win streak, Bracket King...</p>
+      </div>
+      <div class="reward-card">
+        <span class="r-icon">💎</span>
+        <h4>Items</h4>
+        <p>Vật phẩm ảo: skins, avatars, effects, power-ups. Từ Spin & Win và events.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 32px; padding: 24px 28px; border-radius: 12px; border-left: 4px solid var(--purple); background: var(--purple-dim); font-size: 14px; color: var(--text-secondary);" class="reveal">
+      <strong style="color: var(--purple);">Liên quan tài liệu khác:</strong> Loyalty System bao gồm Levels &amp; Tiers (Bronze → Diamond → Legend), Daily Login, Battle Pass, Shop, Referral. Arena là một trong những nguồn chính để user earn rewards. <strong>Tài liệu Loyalty System sẽ được cung cấp riêng.</strong>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== NEW: SOCIAL & ENGAGEMENT FEATURES ==================== -->
+<div class="divider"></div>
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label cyan" style="background: linear-gradient(135deg, var(--cyan-dim), rgba(127,255,0,0.08)); border-color: var(--cyan);">08 &mdash; SOCIAL (MỚI v2.0)</div>
+      <h2 class="section-title">Social &amp; Engagement Features</h2>
+      <p class="section-desc">3 tính năng mới tăng engagement, retention, và community building. Arena không vui khi chơi một mình mãi.</p>
+    </div>
+
+    <!-- INPUT METHOD SELECTOR -->
+    <div class="reveal" style="margin-bottom: 40px;">
+      <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 16px; color: var(--gold);">🎮 Device Input Method Selector</h3>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 20px;">
+        Button ở header cho user lựa chọn cách tương tác với device. Áp dụng xuyên suốt Arena games + Live shows.
+      </p>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px;">
+        <div style="padding: 20px; border-radius: 16px; background: var(--bg-card); border: 1px solid var(--cyan); text-align: center;">
+          <div style="font-size: 32px; margin-bottom: 8px;">🤖</div>
+          <h4 style="color: var(--cyan); font-size: 16px; margin-bottom: 6px;">Auto</h4>
+          <p style="font-size: 11px; color: var(--text-dim); line-height: 1.4;">App tự chọn tối ưu theo game &amp; device. Default cho user mới.</p>
+        </div>
+        <div style="padding: 20px; border-radius: 16px; background: var(--bg-card); border: 1px solid var(--gold); text-align: center;">
+          <div style="font-size: 32px; margin-bottom: 8px;">📌</div>
+          <h4 style="color: var(--gold); font-size: 16px; margin-bottom: 6px;">Fixed</h4>
+          <p style="font-size: 11px; color: var(--text-dim); line-height: 1.4;">Lock 1 primary input: Puff 💨 / Dry Puff 🌀 / Button 🔘. Fallback nếu game không support.</p>
+        </div>
+        <div style="padding: 20px; border-radius: 16px; background: var(--bg-card); border: 1px solid var(--lime); text-align: center;">
+          <div style="font-size: 32px; margin-bottom: 8px;">❓</div>
+          <h4 style="color: var(--lime); font-size: 16px; margin-bottom: 6px;">Ask Every Game</h4>
+          <p style="font-size: 11px; color: var(--text-dim); line-height: 1.4;">Hỏi trước mỗi game. Cho user thích control nhưng không muốn khóa cứng.</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <div style="padding: 8px 16px; border-radius: 8px; background: rgba(255,140,66,0.1); border: 1px solid rgba(255,140,66,0.3); font-size: 12px; color: var(--orange);">💨 Puff: MIC + Heating ON</div>
+        <div style="padding: 8px 16px; border-radius: 8px; background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.3); font-size: 12px; color: #60A5FA;">🌀 Dry Puff: MIC ON, Heating OFF</div>
+        <div style="padding: 8px 16px; border-radius: 8px; background: var(--purple-dim); border: 1px solid rgba(168,85,247,0.3); font-size: 12px; color: var(--purple);">🔘 Button: BLE signal</div>
+        <div style="padding: 8px 16px; border-radius: 8px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); font-size: 12px; color: var(--text-dim);">👆 On-Screen Tap: Toggle riêng (bổ sung)</div>
+      </div>
+      <div style="margin-top: 16px; padding: 14px 20px; border-radius: 10px; border-left: 4px solid var(--cyan); background: var(--cyan-dim); font-size: 13px; color: var(--text-secondary);">
+        <strong style="color: var(--cyan);">Scope:</strong> Persist xuyên suốt session. Header button luôn hiển thị. Bottom sheet panel. In-game HUD. Mỗi game define supported inputs.
+      </div>
+    </div>
+
+    <!-- LIVE CHAT -->
+    <div class="reveal" style="margin-bottom: 40px;">
+      <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 16px; color: var(--pink);">💬 Live Chat</h3>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 20px;">
+        Chat real-time, shared giữa Arena Home và Live Watch Party. Cùng một dòng chat, ai cũng thấy.
+      </p>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px;">
+        <div style="padding: 16px; border-radius: 12px; background: var(--bg-card); border: 1px solid var(--border);">
+          <div style="font-size: 20px; margin-bottom: 6px;">💬</div>
+          <h4 style="font-size: 14px; color: var(--text-primary); margin-bottom: 4px;">Messages Stream</h4>
+          <p style="font-size: 11px; color: var(--text-dim);">Max 20 tin. Auto-scroll. Your messages highlight cyan border.</p>
+        </div>
+        <div style="padding: 16px; border-radius: 12px; background: var(--bg-card); border: 1px solid var(--border);">
+          <div style="font-size: 20px; margin-bottom: 6px;">🤖</div>
+          <h4 style="font-size: 14px; color: var(--text-primary); margin-bottom: 4px;">Bot Messages</h4>
+          <p style="font-size: 11px; color: var(--text-dim);">Mỗi 4-7s. 7+ bots. 10+ templates. Random colors. Tạo cảm giác sôi nổi.</p>
+        </div>
+        <div style="padding: 16px; border-radius: 12px; background: var(--bg-card); border: 1px solid var(--border);">
+          <div style="font-size: 20px; margin-bottom: 6px;">😂</div>
+          <h4 style="font-size: 14px; color: var(--text-primary); margin-bottom: 4px;">Emoji Reactions</h4>
+          <p style="font-size: 11px; color: var(--text-dim);">8 emoji quick-send: 🔥 😂 🤯 👏 💀 ❤️ ⚽ 🏆. Tap = gửi ngay.</p>
+        </div>
+        <div style="padding: 16px; border-radius: 12px; background: var(--bg-card); border: 1px solid var(--border);">
+          <div style="font-size: 20px; margin-bottom: 6px;">↕️</div>
+          <h4 style="font-size: 14px; color: var(--text-primary); margin-bottom: 4px;">Expand/Collapse</h4>
+          <p style="font-size: 11px; color: var(--text-dim);">Collapse 120px → Expand 240px. Text input + Enter key. Online count.</p>
+        </div>
+      </div>
+      <div style="padding: 14px 20px; border-radius: 10px; border-left: 4px solid var(--pink); background: var(--pink-dim); font-size: 13px; color: var(--text-secondary);">
+        <strong style="color: var(--pink);">Shared State:</strong> Chat ở Arena Home ↔ Live Watch Party dùng chung. Bot messages chạy background. Vị trí: sau Friends Activity, trước Browse All.
+      </div>
+    </div>
+
+    <!-- LEADERBOARD -->
+    <div class="reveal" style="margin-bottom: 40px;">
+      <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 16px; color: var(--gold);">🏅 Leaderboard</h3>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 20px;">
+        Bảng xếp hạng inline trên Arena Home. 3 tabs, 7 người, toggle nhanh.
+      </p>
+      <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+        <div style="flex: 1; padding: 16px; border-radius: 14px; background: var(--bg-card); border: 2px solid var(--gold); text-align: center;">
+          <div style="font-size: 24px; margin-bottom: 6px;">🌍</div>
+          <h4 style="color: var(--gold); font-size: 14px;">Global</h4>
+          <p style="font-size: 10px; color: var(--text-dim); margin-top: 4px;">Toàn bộ user Arena</p>
+        </div>
+        <div style="flex: 1; padding: 16px; border-radius: 14px; background: var(--bg-card); border: 1px solid var(--border); text-align: center;">
+          <div style="font-size: 24px; margin-bottom: 6px;">👥</div>
+          <h4 style="color: var(--text-secondary); font-size: 14px;">Friends</h4>
+          <p style="font-size: 10px; color: var(--text-dim); margin-top: 4px;">Chỉ bạn bè</p>
+        </div>
+        <div style="flex: 1; padding: 16px; border-radius: 14px; background: var(--bg-card); border: 1px solid var(--border); text-align: center;">
+          <div style="font-size: 24px; margin-bottom: 6px;">📅</div>
+          <h4 style="color: var(--text-secondary); font-size: 14px;">Weekly</h4>
+          <p style="font-size: 10px; color: var(--text-dim); margin-top: 4px;">Reset mỗi tuần. Quà top 10.</p>
+        </div>
+      </div>
+      <!-- Mini leaderboard preview -->
+      <div style="border-radius: 14px; overflow: hidden; border: 1px solid var(--border); background: var(--bg-card);">
+        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-bottom: 1px solid var(--border);">
+          <span style="font-size: 16px;">🥇</span><span style="font-size: 18px;">👑</span>
+          <div style="flex: 1;"><div style="font-size: 13px; font-weight: 700;">ChillMaster42</div><div style="font-size: 10px; color: var(--text-dim);">🔥 23 streak</div></div>
+          <span style="font-family: 'Space Mono'; font-size: 13px; font-weight: 700; color: var(--gold);">2,847K</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-bottom: 1px solid var(--border);">
+          <span style="font-size: 16px;">🥈</span><span style="font-size: 18px;">😎</span>
+          <div style="flex: 1;"><div style="font-size: 13px; font-weight: 700;">VibeKing</div><div style="font-size: 10px; color: var(--text-dim);">🔥 18 streak</div></div>
+          <span style="font-family: 'Space Mono'; font-size: 13px; font-weight: 700; color: var(--text-secondary);">2,654K</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: rgba(0,229,255,0.06); border-left: 3px solid var(--cyan);">
+          <span style="font-size: 16px;">🥉</span><span style="font-size: 18px;">🌟</span>
+          <div style="flex: 1;"><div style="font-size: 13px; font-weight: 700; color: var(--cyan);">Steve (You)</div><div style="font-size: 10px; color: var(--text-dim);">🔥 7 streak</div></div>
+          <span style="font-family: 'Space Mono'; font-size: 13px; font-weight: 700; color: var(--cyan);">420K</span>
+        </div>
+      </div>
+      <div style="margin-top: 16px; padding: 14px 20px; border-radius: 10px; border-left: 4px solid var(--gold); background: var(--gold-dim); font-size: 13px; color: var(--text-secondary);">
+        <strong style="color: var(--gold);">Vị trí:</strong> Sau Game Shows, trước World Cup Zone. Hiển thị 7 người. User luôn thấy mình. Tabs toggle inline.
+      </div>
+    </div>
+
+    <!-- LIVE TOURNAMENTS -->
+    <div class="reveal" style="margin-bottom: 20px;">
+      <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 16px; color: #FF4444;">🏆 Live Tournaments</h3>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 20px;">
+        Tournament cards tạo urgency và FOMO. Spots đang hết! Progress bar filling real-time.
+      </p>
+      <!-- Tournament card previews -->
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="padding: 16px 20px; border-radius: 14px; background: linear-gradient(135deg, rgba(255,68,68,0.06), var(--bg-card)); border: 1px solid rgba(255,68,68,0.25); position: relative;">
+          <div style="position: absolute; top: 10px; right: 12px; padding: 3px 10px; border-radius: 4px; background: rgba(255,68,68,0.2); font-size: 10px; font-weight: 800; color: #FF4444; letter-spacing: 0.5px;">⚡ 3 SPOTS!</div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 15px; font-weight: 700;">Flash Frenzy ⚡</span>
+            <span style="font-size: 13px; font-weight: 700; color: var(--gold);">🪙 5,000</span>
+          </div>
+          <div style="height: 6px; border-radius: 3px; background: var(--bg-deep); overflow: hidden; margin-bottom: 8px;">
+            <div style="height: 100%; width: 94%; border-radius: 3px; background: linear-gradient(90deg, #FF4444, var(--orange));"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-dim);">
+            <span>47/50 players · ⏱ 2:30</span>
+            <span style="padding: 3px 12px; border-radius: 6px; background: rgba(255,217,61,0.15); border: 1px solid rgba(255,217,61,0.3); color: var(--gold); font-weight: 700;">⚡ Join</span>
+          </div>
+        </div>
+        <div style="padding: 16px 20px; border-radius: 14px; background: var(--bg-card); border: 1px solid var(--border);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 15px; font-weight: 700;">Brain Battle 🧠</span>
+            <span style="font-size: 13px; font-weight: 700; color: var(--gold);">🪙 25,000</span>
+          </div>
+          <div style="height: 6px; border-radius: 3px; background: var(--bg-deep); overflow: hidden; margin-bottom: 8px;">
+            <div style="height: 100%; width: 72%; border-radius: 3px; background: linear-gradient(90deg, var(--cyan), #34D399);"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-dim);">
+            <span>72/100 players · ⏱ 15:00</span>
+            <span style="padding: 3px 12px; border-radius: 6px; background: rgba(255,217,61,0.15); border: 1px solid rgba(255,217,61,0.3); color: var(--gold); font-weight: 700;">⚡ Join</span>
+          </div>
+        </div>
+        <div style="padding: 16px 20px; border-radius: 14px; background: linear-gradient(135deg, rgba(255,68,68,0.06), var(--bg-card)); border: 1px solid rgba(255,68,68,0.25); position: relative;">
+          <div style="position: absolute; top: 10px; right: 12px; padding: 3px 10px; border-radius: 4px; background: rgba(255,68,68,0.2); font-size: 10px; font-weight: 800; color: #FF4444; letter-spacing: 0.5px;">⚡ 2 SPOTS!</div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 15px; font-weight: 700;">Mega Championship 🏆</span>
+            <span style="font-size: 13px; font-weight: 700; color: var(--gold);">🪙 100,000</span>
+          </div>
+          <div style="height: 6px; border-radius: 3px; background: var(--bg-deep); overflow: hidden; margin-bottom: 8px;">
+            <div style="height: 100%; width: 99%; border-radius: 3px; background: linear-gradient(90deg, #FF4444, var(--orange));"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-dim);">
+            <span>198/200 players · ⏱ 1:00:00</span>
+            <span style="padding: 3px 12px; border-radius: 6px; background: rgba(255,217,61,0.15); border: 1px solid rgba(255,217,61,0.3); color: var(--gold); font-weight: 700;">⚡ Join</span>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 16px; padding: 14px 20px; border-radius: 10px; border-left: 4px solid #FF4444; background: rgba(255,68,68,0.06); font-size: 13px; color: var(--text-secondary);">
+        <strong style="color: #FF4444;">Dynamic:</strong> Spots tăng mỗi 5s. Progress bar animated. Urgency tag khi &lt;10 spots. Vị trí: sau Quick Play, trước Today's Predictions.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SUMMARY TABLE ==================== -->
+<div class="divider"></div>
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label orange">09 &mdash; TỔNG HỢP</div>
+      <h2 class="section-title">Bảng Tổng Hợp</h2>
+      <p class="section-desc">Toàn bộ Arena trong một cái nhìn — 3 nhóm, 18 games, 4 tính năng mới v2.0.</p>
+    </div>
+
+    <div class="summary-table-wrap reveal">
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th>Nhóm</th>
+            <th>Game</th>
+            <th>Số người</th>
+            <th>Thời gian</th>
+            <th>Input chính</th>
+            <th>Device?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="cat-tag play-tag">PLAY</span></td><td class="game-name-cell">Final Kick</td><td>2</td><td>1-2 min</td><td>Tap + Puff</td><td>CÓ</td></tr>
+          <tr><td></td><td class="game-name-cell">Hot Potato</td><td>3-8</td><td>1-3 min</td><td>Puff/Button</td><td>CÓ</td></tr>
+          <tr><td></td><td class="game-name-cell">Russian Roulette</td><td>2-6</td><td>1-2 min</td><td>Puff/Button</td><td>CÓ</td></tr>
+          <tr><td></td><td class="game-name-cell">Wild West Duel</td><td>2</td><td>15-30s</td><td>Puff/Button</td><td>CÓ</td></tr>
+          <tr><td></td><td class="game-name-cell">Balloon Pop</td><td>2-8</td><td>1-3 min</td><td>Puff/Button</td><td>CÓ</td></tr>
+          <tr><td></td><td class="game-name-cell">Puff Pong</td><td>2</td><td>1-2 min</td><td>Puff + Swipe</td><td>CÓ</td></tr>
+          <tr><td></td><td class="game-name-cell">Rhythm Puff</td><td>1-4</td><td>1-3 min</td><td>Puff/Button</td><td>CÓ</td></tr>
+          <tr><td></td><td class="game-name-cell">Tug of War</td><td>2-8</td><td>30s-1 min</td><td>Puff spam</td><td>CÓ</td></tr>
+          <tr><td><span class="cat-tag show-tag">SHOW</span></td><td class="game-name-cell">Vibe Check</td><td>1-100+</td><td>5-15 min</td><td>Tap + Puff</td><td>CÓ (Contestant)</td></tr>
+          <tr><td></td><td class="game-name-cell">Spin & Win</td><td>1-50+</td><td>2-5 min</td><td>Puff/Button</td><td>CÓ</td></tr>
+          <tr><td></td><td class="game-name-cell">Higher or Lower</td><td>1-100+</td><td>5-10 min</td><td>Tap + Puff</td><td>CÓ</td></tr>
+          <tr><td></td><td class="game-name-cell">The Price is Puff</td><td>2-50+</td><td>5-10 min</td><td>Tap + Puff</td><td>CÓ</td></tr>
+          <tr><td><span class="cat-tag predict-tag">PREDICT</span></td><td class="game-name-cell">Match Predictor</td><td>∞</td><td>1-2 min</td><td>Tap + Puff</td><td>CÓ (Lock In)</td></tr>
+          <tr><td></td><td class="game-name-cell">Score Predictor</td><td>∞</td><td>1-2 min</td><td>Tap + Puff</td><td>CÓ (Lock In)</td></tr>
+          <tr><td></td><td class="game-name-cell">MVP Pick</td><td>∞</td><td>1 min</td><td>Tap + Puff</td><td>CÓ (Lock In)</td></tr>
+          <tr><td></td><td class="game-name-cell">Bracket Challenge</td><td>∞</td><td>5-10 min</td><td>Tap + Puff</td><td>CÓ (Lock In)</td></tr>
+          <tr><td></td><td class="game-name-cell">Game Show Predictor</td><td>∞</td><td>1 min</td><td>Tap + Puff</td><td>CÓ (Lock In)</td></tr>
+          <tr><td></td><td class="game-name-cell">Daily Picks</td><td>∞</td><td>1-2 min</td><td>Tap + Puff</td><td>CÓ (Lock In)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- WHAT'S NEW v2.0 -->
+    <div class="reveal" style="margin-top: 48px;">
+      <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 20px; text-align: center;">
+        <span style="padding: 6px 20px; border-radius: 8px; background: linear-gradient(135deg, var(--cyan-dim), var(--lime-dim)); border: 1px solid var(--cyan); letter-spacing: 1px;">✨ MỚI TRONG VERSION 2.0</span>
+      </h3>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;">
+        <div style="padding: 20px; border-radius: 16px; background: var(--bg-card); border: 1px solid var(--gold); border-top: 3px solid var(--gold);">
+          <div style="font-size: 28px; margin-bottom: 8px;">🎮</div>
+          <h4 style="font-size: 15px; font-weight: 700; color: var(--gold); margin-bottom: 6px;">Input Method Selector</h4>
+          <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.5;">Auto / Fixed / Ask Every Game. Header button + bottom sheet. Persist xuyên suốt Arena + Live. On-Screen Tap toggle riêng.</p>
+          <div style="margin-top: 8px; font-size: 10px; color: var(--text-dim);">Loại: UI/UX · Vị trí: Header</div>
+        </div>
+        <div style="padding: 20px; border-radius: 16px; background: var(--bg-card); border: 1px solid var(--pink); border-top: 3px solid var(--pink);">
+          <div style="font-size: 28px; margin-bottom: 8px;">💬</div>
+          <h4 style="font-size: 15px; font-weight: 700; color: var(--pink); margin-bottom: 6px;">Live Chat</h4>
+          <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.5;">Shared giữa Arena Home + Live Watch Party. Bot messages mỗi 4-7s. Emoji reactions (8). Expand/collapse. Text input.</p>
+          <div style="margin-top: 8px; font-size: 10px; color: var(--text-dim);">Loại: Social · Vị trí: Arena Home + Live</div>
+        </div>
+        <div style="padding: 20px; border-radius: 16px; background: var(--bg-card); border: 1px solid var(--gold); border-top: 3px solid var(--gold);">
+          <div style="font-size: 28px; margin-bottom: 8px;">🏅</div>
+          <h4 style="font-size: 15px; font-weight: 700; color: var(--gold); margin-bottom: 6px;">Leaderboard</h4>
+          <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.5;">Global / Friends / Weekly tabs. 7 người inline. Your row highlight cyan. Streak + score hiển thị. Toggle nhanh.</p>
+          <div style="margin-top: 8px; font-size: 10px; color: var(--text-dim);">Loại: Social · Vị trí: Arena Home</div>
+        </div>
+        <div style="padding: 20px; border-radius: 16px; background: var(--bg-card); border: 1px solid #FF4444; border-top: 3px solid #FF4444;">
+          <div style="font-size: 28px; margin-bottom: 8px;">🏆</div>
+          <h4 style="font-size: 15px; font-weight: 700; color: #FF4444; margin-bottom: 6px;">Live Tournaments</h4>
+          <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.5;">Progress bar filling real-time. Urgency tags khi &lt;10 spots. Hot badge. 3 tournaments cùng lúc. Join trừ coins.</p>
+          <div style="margin-top: 8px; font-size: 10px; color: var(--text-dim);">Loại: Engagement · Vị trí: Arena Home</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLOSING STATEMENT -->
+    <div class="reveal" style="margin-top: 48px; padding: 32px; border-radius: 20px; background: linear-gradient(135deg, var(--bg-card), var(--bg-elevated)); border: 1px solid var(--cyan); text-align: center;">
+      <div style="font-size: 14px; font-weight: 700; letter-spacing: 3px; color: var(--cyan); margin-bottom: 12px;">MOOD LAB ARENA v2.0</div>
+      <div style="font-size: 22px; font-weight: 800; color: var(--text-primary); margin-bottom: 8px;">"Play — Show — Predict"</div>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; max-width: 600px; margin: 0 auto;">
+        Arena không chỉ là nơi chơi game — mà là entertainment platform giữ user quay lại mỗi ngày, mọi giờ, mọi phút.<br>
+        <strong style="color: var(--lime);">3 nhóm tương tác · 18 games · 3 nhịp engagement · 4 tính năng mới · Vô hạn sự kiện.</strong>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<div class="divider"></div>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-logo">MOOD LAB</div>
+    <div class="footer-tagline">"Play — Show — Predict"</div>
+    <div class="footer-meta">Mood Lab LLC &nbsp;|&nbsp; www.moodlab.ai &nbsp;|&nbsp; Version 2.0 &nbsp;|&nbsp; February 2026 &nbsp;|&nbsp; Confidential</div>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mood Lab — Live Tab Guideline v2.0</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+  --bg: #06060e;
+  --bg2: #0c0c1a;
+  --surface: #12122a;
+  --surface2: #1a1a3a;
+  --border: rgba(255,255,255,0.06);
+  --text: #f0f0ff;
+  --text2: #a0a0c0;
+  --text3: #606080;
+  --pink: #ec4899;
+  --cyan: #06b6d4;
+  --purple: #8b5cf6;
+  --gold: #f59e0b;
+  --green: #22c55e;
+  --red: #ef4444;
+  --orange: #f97316;
+  --blue: #3b82f6;
+  --lime: #84cc16;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; line-height: 1.6; overflow-x: hidden; }
+
+/* Noise Texture */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.03;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 1; }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center; padding: 80px 32px; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -40%; left: -20%; width: 140%; height: 180%;
+  background: radial-gradient(ellipse at 30% 40%, rgba(236,72,153,0.12) 0%, transparent 50%),
+              radial-gradient(ellipse at 70% 60%, rgba(6,182,212,0.08) 0%, transparent 50%),
+              radial-gradient(ellipse at 50% 80%, rgba(139,92,246,0.06) 0%, transparent 50%);
+  animation: heroPulse 8s ease-in-out infinite alternate;
+}
+@keyframes heroPulse { 0% { opacity: 0.8; transform: scale(1); } 100% { opacity: 1; transform: scale(1.05); } }
+
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; border-radius: 100px; background: rgba(236,72,153,0.1); border: 1px solid rgba(236,72,153,0.25); font-size: 13px; font-weight: 600; color: var(--pink); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 32px; position: relative; z-index: 1; }
+.hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--pink); animation: pulse 1.5s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+.hero h1 { font-size: clamp(48px,7vw,96px); font-weight: 900; line-height: 1; letter-spacing: -2px; position: relative; z-index: 1; }
+.hero h1 .pink { background: linear-gradient(135deg, var(--pink), #f472b6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero h1 .cyan { background: linear-gradient(135deg, var(--cyan), #67e8f9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+.hero-sub { font-size: 20px; color: var(--text2); max-width: 640px; margin: 24px auto 0; position: relative; z-index: 1; font-weight: 300; }
+.hero-tags { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 40px; position: relative; z-index: 1; }
+.hero-tag { padding: 10px 20px; border-radius: 12px; font-size: 14px; font-weight: 600; border: 1px solid var(--border); backdrop-filter: blur(8px); }
+
+.hero-meta { position: relative; z-index: 1; margin-top: 48px; font-size: 12px; color: var(--text3); letter-spacing: 2px; text-transform: uppercase; }
+
+/* ===== SECTIONS ===== */
+.divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(236,72,153,0.3), transparent); margin: 0; }
+
+section { padding: 80px 0; }
+.section-label { font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
+.section-label.pink { color: var(--pink); }
+.section-label.cyan { color: var(--cyan); }
+.section-label.purple { color: var(--purple); }
+.section-label.gold { color: var(--gold); }
+.section-label.green { color: var(--green); }
+.section-label.red { color: var(--red); }
+.section-label.orange { color: var(--orange); }
+.section-label.blue { color: var(--blue); }
+
+.section-title { font-size: clamp(28px,4vw,44px); font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; }
+.section-desc { font-size: 16px; color: var(--text2); max-width: 720px; margin-bottom: 40px; }
+
+/* ===== REVEAL ANIMATION ===== */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== CARDS ===== */
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px;
+  transition: transform 0.2s, border-color 0.2s; position: relative; overflow: hidden;
+}
+.card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.12); }
+.card .icon { font-size: 28px; margin-bottom: 12px; }
+.card h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.card p { font-size: 13px; color: var(--text2); line-height: 1.5; }
+.card .tag { display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; margin-top: 10px; }
+
+/* Accent borders */
+.card.accent-pink { border-left: 3px solid var(--pink); }
+.card.accent-cyan { border-left: 3px solid var(--cyan); }
+.card.accent-purple { border-left: 3px solid var(--purple); }
+.card.accent-gold { border-left: 3px solid var(--gold); }
+.card.accent-green { border-left: 3px solid var(--green); }
+.card.accent-red { border-left: 3px solid var(--red); }
+
+/* ===== TABLES ===== */
+.info-table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 12px; overflow: hidden; margin: 20px 0; }
+.info-table th { background: var(--surface2); padding: 12px 16px; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text2); text-align: left; border-bottom: 1px solid var(--border); }
+.info-table td { padding: 12px 16px; font-size: 14px; color: var(--text2); border-bottom: 1px solid var(--border); vertical-align: top; }
+.info-table tr:last-child td { border-bottom: none; }
+.info-table .highlight { color: var(--text); font-weight: 600; }
+.info-table .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; }
+
+/* ===== CALLOUTS ===== */
+.callout {
+  border-radius: 14px; padding: 20px 24px; margin: 24px 0; position: relative;
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.callout .callout-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+.callout h5 { font-size: 14px; font-weight: 800; margin-bottom: 4px; }
+.callout p { font-size: 13px; line-height: 1.6; }
+.callout.pink { background: rgba(236,72,153,0.06); border: 1px solid rgba(236,72,153,0.15); }
+.callout.pink h5 { color: var(--pink); }
+.callout.cyan { background: rgba(6,182,212,0.06); border: 1px solid rgba(6,182,212,0.15); }
+.callout.cyan h5 { color: var(--cyan); }
+.callout.purple { background: rgba(139,92,246,0.06); border: 1px solid rgba(139,92,246,0.15); }
+.callout.purple h5 { color: var(--purple); }
+.callout.red { background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.15); }
+.callout.red h5 { color: var(--red); }
+.callout.green { background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.15); }
+.callout.green h5 { color: var(--green); }
+.callout.gold { background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.15); }
+.callout.gold h5 { color: var(--gold); }
+
+/* ===== FLOW DIAGRAMS ===== */
+.flow { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 20px 0; }
+.flow-step { padding: 10px 18px; border-radius: 10px; background: var(--surface); border: 1px solid var(--border); font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.flow-arrow { color: var(--text3); font-size: 18px; }
+
+/* ===== HERO SLIDER PREVIEW ===== */
+.slider-preview { display: flex; gap: 12px; overflow-x: auto; padding: 8px 0 20px; scrollbar-width: none; }
+.slider-preview::-webkit-scrollbar { display: none; }
+.slide-card {
+  min-width: 200px; height: 120px; border-radius: 14px; padding: 16px; position: relative;
+  display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; flex-shrink: 0;
+}
+.slide-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); }
+.slide-card .slide-label { position: relative; z-index: 1; font-size: 11px; font-weight: 800; color: #fff; letter-spacing: 0.5px; }
+.slide-card .slide-type { position: absolute; top: 8px; right: 8px; padding: 2px 8px; border-radius: 4px; font-size: 9px; font-weight: 800; z-index: 1; }
+
+/* ===== INPUT METHODS ===== */
+.input-methods { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 24px 0; }
+.input-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px 20px;
+  text-align: center; position: relative;
+}
+.input-card .icon { font-size: 36px; margin-bottom: 12px; }
+.input-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.input-card p { font-size: 12px; color: var(--text2); }
+.input-card .supplement { position: absolute; top: 8px; right: 8px; padding: 2px 8px; border-radius: 4px; font-size: 9px; font-weight: 700; background: rgba(245,158,11,0.15); color: var(--gold); }
+
+/* ===== BEHAVIOR MODES ===== */
+.behavior-modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
+.behavior-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; }
+.behavior-card .icon { font-size: 32px; margin-bottom: 10px; }
+.behavior-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.behavior-card p { font-size: 12px; color: var(--text2); }
+
+/* ===== CROSS-TAB DIAGRAM ===== */
+.cross-tab { display: flex; align-items: center; justify-content: center; gap: 24px; margin: 40px 0; flex-wrap: wrap; }
+.tab-box {
+  width: 200px; padding: 24px; border-radius: 16px; text-align: center; position: relative;
+}
+.tab-box h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+.tab-box p { font-size: 12px; color: var(--text2); }
+.tab-box.live { background: rgba(236,72,153,0.08); border: 2px solid rgba(236,72,153,0.3); }
+.tab-box.live h3 { color: var(--pink); }
+.tab-box.arena { background: rgba(6,182,212,0.08); border: 2px solid rgba(6,182,212,0.3); }
+.tab-box.arena h3 { color: var(--cyan); }
+.cross-arrows { display: flex; flex-direction: column; gap: 4px; text-align: center; }
+.cross-arrows span { font-size: 24px; }
+.cross-arrows small { font-size: 10px; color: var(--text3); font-weight: 600; letter-spacing: 1px; }
+
+/* ===== SUMMARY TABLE ===== */
+.summary-table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 12px; overflow: hidden; }
+.summary-table th { background: linear-gradient(135deg, var(--surface2), var(--surface)); padding: 14px 16px; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--pink); text-align: left; }
+.summary-table td { padding: 12px 16px; font-size: 13px; border-bottom: 1px solid var(--border); }
+.summary-table tr:last-child td { border-bottom: none; }
+.summary-table tr:nth-child(even) td { background: rgba(255,255,255,0.01); }
+
+.pill { display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+.pill.yes { background: rgba(239,68,68,0.1); color: var(--red); }
+.pill.no { background: rgba(34,197,94,0.1); color: var(--green); }
+.pill.free { background: rgba(34,197,94,0.1); color: var(--green); }
+.pill.paid { background: rgba(239,68,68,0.1); color: var(--red); }
+.pill.mixed { background: rgba(245,158,11,0.1); color: var(--gold); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .container { padding: 0 20px; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .input-methods { grid-template-columns: repeat(2, 1fr); }
+  .behavior-modes { grid-template-columns: 1fr; }
+  .cross-tab { flex-direction: column; }
+  .info-table { font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-badge"><span class="dot"></span> GUIDELINE v2.0 — FEBRUARY 2026</div>
+  <h1><span class="pink">MOOD LAB</span><br><span class="cyan">LIVE TAB</span></h1>
+  <p class="hero-sub">Guideline đầy đủ cho Development Team. 10 sections, bao gồm Arena × Live crossover và Device Input Method.</p>
+  <div class="hero-tags">
+    <div class="hero-tag" style="background:rgba(236,72,153,0.08); border-color:rgba(236,72,153,0.2); color:var(--pink);">📺 Live Streaming</div>
+    <div class="hero-tag" style="background:rgba(6,182,212,0.08); border-color:rgba(6,182,212,0.2); color:var(--cyan);">🎮 Arena × Live</div>
+    <div class="hero-tag" style="background:rgba(139,92,246,0.08); border-color:rgba(139,92,246,0.2); color:var(--purple);">📱 Device Input</div>
+    <div class="hero-tag" style="background:rgba(245,158,11,0.08); border-color:rgba(245,158,11,0.2); color:var(--gold);">⚽ World Cup 2026</div>
+    <div class="hero-tag" style="background:rgba(34,197,94,0.08); border-color:rgba(34,197,94,0.2); color:var(--green);">🎤 KOL/KOC</div>
+  </div>
+  <div class="hero-meta">Confidential — Internal Use Only</div>
+</section>
+
+<!-- ==================== 01: OVERVIEW ==================== -->
+<div class="divider"></div>
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label pink">01 — TỔNG QUAN</div>
+      <h2 class="section-title">Live Tab trong Mood Lab App</h2>
+      <p class="section-desc">Mood Lab App có 4 tabs: <strong>Control | Arena | Live | Me</strong>. Live Tab là nơi user xem, tương tác, và tạo live streams xoay quanh vaping culture.</p>
+    </div>
+
+    <div class="grid-3 reveal">
+      <div class="card accent-pink">
+        <div class="icon">🎯</div>
+        <h4>Target Users</h4>
+        <p>Cannabis/vape community (21+). Viewers muốn chill, connect, vibe cùng nhau real-time.</p>
+      </div>
+      <div class="card accent-cyan">
+        <div class="icon">💰</div>
+        <h4>Revenue Model</h4>
+        <p>Hosting fees (brands/creators), Mood Coins tips, Premium features, KOL commissions.</p>
+      </div>
+      <div class="card accent-purple">
+        <div class="icon">🎤</div>
+        <h4>KOL/KOC Xuyên Suốt</h4>
+        <p>Mọi feature được thiết kế để KOL/KOC tham gia: badges, analytics, dashboard, referrals.</p>
+      </div>
+    </div>
+
+    <div class="callout gold reveal" style="margin-top:32px;">
+      <div class="callout-icon">⚡</div>
+      <div><h5>10 Nhóm Features trong v2.0</h5><p>Explore & Discover → Watch Experience → Social Layer → Host Suite → WC Specials → KOL/KOC Program → <strong>Arena × Live (MỚI)</strong> → <strong>Device Input (MỚI)</strong> → Bảng Tổng Hợp</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 02: EXPLORE & HERO SLIDER ==================== -->
+<div class="divider"></div>
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label cyan">02 — EXPLORE & DISCOVER</div>
+      <h2 class="section-title">Hero Slider + Arena Strip</h2>
+      <p class="section-desc">Hero Banner tĩnh → Hero Slider động. Auto-rotate 5s, 6 slide types, dot indicator + progress bar. Thêm Arena × Live Strip mới.</p>
+    </div>
+
+    <h3 style="font-size:18px; font-weight:700; margin-bottom:16px; color:var(--pink);" class="reveal">2.1 Hero Slider — 6 Slide Types</h3>
+    <div class="slider-preview reveal">
+      <div class="slide-card" style="background:linear-gradient(135deg,#92400e,#f59e0b);">
+        <div class="slide-type" style="background:rgba(255,255,255,0.2);color:#fff;">⚽ MATCH</div>
+        <div class="slide-label">Brazil vs Argentina — WC Watch Party</div>
+      </div>
+      <div class="slide-card" style="background:linear-gradient(135deg,#86198f,#ec4899);">
+        <div class="slide-type" style="background:rgba(255,255,255,0.2);color:#fff;">🔥 KOL</div>
+        <div class="slide-label">SnoopCloud420 — Exclusive Session</div>
+      </div>
+      <div class="slide-card" style="background:linear-gradient(135deg,#0e7490,#06b6d4);">
+        <div class="slide-type" style="background:rgba(255,255,255,0.2);color:#fff;">🎉 EVENT</div>
+        <div class="slide-label">WC Opening Ceremony Countdown</div>
+      </div>
+      <div class="slide-card" style="background:linear-gradient(135deg,#166534,#22c55e);">
+        <div class="slide-type" style="background:rgba(255,255,255,0.2);color:#fff;">📦 BRAND</div>
+        <div class="slide-label">Stack × Mood Lab Launch</div>
+      </div>
+      <div class="slide-card" style="background:linear-gradient(135deg,#1e3a5f,#06b6d4);">
+        <div class="slide-type" style="background:rgba(6,182,212,0.3);color:var(--cyan);">🎮 ARENA</div>
+        <div class="slide-label">Vibe Check Trivia — Game Show LIVE</div>
+      </div>
+      <div class="slide-card" style="background:linear-gradient(135deg,#713f12,#f59e0b);">
+        <div class="slide-type" style="background:rgba(245,158,11,0.3);color:var(--gold);">🏆 ARENA</div>
+        <div class="slide-label">Final Kick Championship — FINALS</div>
+      </div>
+    </div>
+
+    <div class="callout cyan reveal">
+      <div class="callout-icon">🎮</div>
+      <div><h5>Arena Slides (Game Show + Tournament)</h5><p>2 trong 6 slides là nội dung Arena cross-tab. Khi user tap → deep link sang Arena tab. Chỉ hiện khi game show đang live hoặc tournament ở vòng finals. Cần API endpoint từ Arena service.</p></div>
+    </div>
+
+    <h3 style="font-size:18px; font-weight:700; margin:32px 0 16px; color:var(--cyan);" class="reveal">2.4 Arena × Live Highlights Strip</h3>
+    <table class="info-table reveal">
+      <tr><th>Arena Activity</th><th>Status Badge</th><th>Tap Action</th></tr>
+      <tr><td class="highlight">Vibe Check</td><td><span class="badge" style="background:rgba(239,68,68,0.15);color:var(--red);">🔴 LIVE NOW</span></td><td>Jump Arena tab → Game Show đang phát sóng</td></tr>
+      <tr><td class="highlight">Final Kick</td><td><span class="badge" style="background:rgba(245,158,11,0.15);color:var(--gold);">🏆 FINALS</span></td><td>Spectate mode trong Arena</td></tr>
+      <tr><td class="highlight">Spin & Win</td><td><span class="badge" style="background:rgba(249,115,22,0.15);color:var(--orange);">⏰ IN 30 MIN</span></td><td>Set Reminder → push notification</td></tr>
+      <tr><td class="highlight">WC Predictor</td><td><span class="badge" style="background:rgba(34,197,94,0.15);color:var(--green);">✅ OPEN</span></td><td>Arena tab → Match Predictor</td></tr>
+      <tr><td class="highlight">Daily Picks</td><td><span class="badge" style="background:rgba(139,92,246,0.15);color:var(--purple);">3️⃣ LEFT</span></td><td>Arena tab → Daily Picks section</td></tr>
+    </table>
+
+    <h3 style="font-size:18px; font-weight:700; margin:32px 0 16px; color:var(--text2);" class="reveal">Explore Screen Layout Order</h3>
+    <div class="flow reveal">
+      <div class="flow-step">🎠 Hero Slider</div><span class="flow-arrow">→</span>
+      <div class="flow-step">📺 Live Now Feed</div><span class="flow-arrow">→</span>
+      <div class="flow-step">⭐ Creator Spotlight</div><span class="flow-arrow">→</span>
+      <div class="flow-step" style="border-color:rgba(6,182,212,0.3);color:var(--cyan);">🎮 Arena Strip</div><span class="flow-arrow">→</span>
+      <div class="flow-step">🏷️ Categories (6)</div><span class="flow-arrow">→</span>
+      <div class="flow-step">📅 Upcoming</div><span class="flow-arrow">→</span>
+      <div class="flow-step">🤖 AI Rec</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 03: WATCH EXPERIENCE ==================== -->
+<div class="divider"></div>
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label purple">03 — WATCH EXPERIENCE</div>
+      <h2 class="section-title">Immersive Stream Viewing</h2>
+      <p class="section-desc">Camera Mode + Avatar Mode. Host info, chat overlay, puff bubbles, reactions. Host Profile Card với follow button.</p>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div class="card accent-pink">
+        <div class="icon">📷</div>
+        <h4>Camera Mode</h4>
+        <p>Video stream full-screen (kiểu TikTok). Chat overlay semi-transparent. Host info góc trên. Viewer controls phía dưới.</p>
+      </div>
+      <div class="card accent-purple">
+        <div class="icon">🎭</div>
+        <h4>Avatar Mode</h4>
+        <p>Avatar 3D thay thế camera. Audio-reactive (miệng cử động theo voice). Background themes tùy chọn.</p>
+      </div>
+    </div>
+
+    <div class="grid-3 reveal" style="margin-top:20px;">
+      <div class="card">
+        <div class="icon">👤</div>
+        <h4>Host Profile Card</h4>
+        <p>Tap avatar → expandable card: tên, bio, badge tier, follower count, recent streams. Follow button nổi bật.</p>
+      </div>
+      <div class="card">
+        <div class="icon">⚡</div>
+        <h4>Raid / Shoutout</h4>
+        <p>Host chuyển viewers sang creator khác khi end stream. Raid animation + notification cho creator nhận.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🏷️</div>
+        <h4>Creator Badges</h4>
+        <p>3 tiers: <span style="color:var(--green)">Creator</span> (KOC) → <span style="color:var(--gold)">Partner</span> (KOL) → <span style="color:var(--pink)">Official</span> (Brand/ML).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 04: SOCIAL LAYER ==================== -->
+<div class="divider"></div>
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label gold">04 — SOCIAL LAYER</div>
+      <h2 class="section-title">Puff Sync + Puff Wave + Challenges</h2>
+      <p class="section-desc">Core differentiator của Mood Lab Live. Mọi tương tác đều cần device — đây là nguyên tắc kinh doanh.</p>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div class="card accent-cyan">
+        <div class="icon">💨</div>
+        <h4>Puff Presence System</h4>
+        <p><strong>Individual Bubble:</strong> Mỗi puff hiện bubble nổi lên trên stream. Collab Puff: KOL/KOC bubble lớn hơn 1.3x + gold border.</p>
+        <div class="tag" style="background:rgba(239,68,68,0.1); color:var(--red);">DEVICE BẮT BUỘC</div>
+      </div>
+      <div class="card accent-pink">
+        <div class="icon">🌊</div>
+        <h4>Puff Wave — Killer Feature</h4>
+        <p>≥10 users puff trong 30s → Puff Wave! Visual wave animation toàn màn hình. Badge "Puff Wave Rider" cho participants. BUILD LUÔN cho WC.</p>
+        <div class="tag" style="background:rgba(236,72,153,0.1); color:var(--pink);">KILLER FEATURE</div>
+      </div>
+    </div>
+
+    <div class="grid-3 reveal" style="margin-top:20px;">
+      <div class="card">
+        <div class="icon">🏁</div>
+        <h4>Creator Challenges</h4>
+        <p>Puff Race, Sync Puff, Custom Challenges. Host tạo → viewers tham gia → leaderboard live.</p>
+      </div>
+      <div class="card">
+        <div class="icon">😂</div>
+        <h4>Reactions</h4>
+        <p>Quick emoji: OMG, LOL, RIP, LIT, GG. Tipping reactions nổi bật hơn. Mood Reactions = roadmap.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🗳️</div>
+        <h4>Predictions & Polls</h4>
+        <p>Host tạo câu hỏi → viewers vote real-time. Đúng = Mood Coins + Bonus XP. WC Prediction leaderboard riêng.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 05: HOST SUITE ==================== -->
+<div class="divider"></div>
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label orange">05 — HOST SUITE & CREATOR TOOLS</div>
+      <h2 class="section-title">Powerful nhưng Dễ Dùng</h2>
+      <p class="section-desc">Stream Setup, Host Controls (mute/kick/pin/slow mode), Co-Host (max 4), In-Stream Games, Creator Dashboard, Creator Tiers.</p>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div class="card accent-gold">
+        <div class="icon">🎬</div>
+        <h4>Stream Setup</h4>
+        <p>Format (Camera/Avatar), Room Info, Category (6 loại incl. Arena), Privacy (Public/Followers/Invite), Schedule, Co-Host Invite.</p>
+      </div>
+      <div class="card accent-red">
+        <div class="icon">🎯</div>
+        <h4>Host Controls (Live)</h4>
+        <p>Viewer Mgmt, Chat Mod, Co-Host Mgmt, Prediction Launch, <strong>Game Launch</strong>, Format Switch, <strong>Halftime Game Launch (ARENA badge)</strong>.</p>
+      </div>
+    </div>
+
+    <div class="callout red reveal" style="margin-top:20px;">
+      <div class="callout-icon">⏱️</div>
+      <div><h5>HALFTIME MINI-GAME (Arena × Live)</h5><p>WC Watch Party halftime (15 phút) → Host launch Arena mini-games giữ viewer. Tab "Halftime" xuất hiện bên cạnh Prediction/Challenge. Timer: "Halftime ends in XX:XX". Games: Final Kick (1-2min), WC Trivia (2-3min), Spin & Win (1min).</p></div>
+    </div>
+
+    <h3 style="font-size:18px; font-weight:700; margin:32px 0 16px; color:var(--gold);" class="reveal">Creator Tiers</h3>
+    <table class="info-table reveal">
+      <tr><th>Tier</th><th>Yêu cầu</th><th>Benefits</th></tr>
+      <tr><td><span style="color:#cd7f32;font-weight:700;">🥉 Bronze</span></td><td>Mới verify</td><td>Creator badge, basic analytics, standard hosting</td></tr>
+      <tr><td><span style="color:#c0c0c0;font-weight:700;">🥈 Silver</span></td><td>50+ followers, 10+ streams</td><td>Priority placement, custom room themes</td></tr>
+      <tr><td><span style="color:var(--gold);font-weight:700;">🥇 Gold</span></td><td>500+ followers, 50+ streams</td><td>Giảm hosting fee, higher co-host slots (4), exclusive emotes</td></tr>
+      <tr><td><span style="color:var(--cyan);font-weight:700;">💎 Platinum</span></td><td>5000+ followers, top 1%</td><td>Free hosting, dedicated support, ML co-promotion, revenue share ưu đãi</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 06: WC SPECIALS ==================== -->
+<div class="divider"></div>
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label green">06 — WORLD CUP 2026</div>
+      <h2 class="section-title">⚽ Watch Parties + Predictions</h2>
+      <p class="section-desc">WC launch window: 11 Jun – 19 Jul 2026. Watch Parties, Match Predictions, WC Creator Program, Themed Rooms. Lưu ý bản quyền FIFA.</p>
+    </div>
+
+    <div class="grid-4 reveal">
+      <div class="card accent-green"><div class="icon">📺</div><h4>Watch Party</h4><p>ML host chính + mở cho brands/KOL. Không stream trận đấu (bản quyền).</p></div>
+      <div class="card accent-gold"><div class="icon">🔮</div><h4>Match Predictions</h4><p>Dự đoán tỉ số, MVP, sự kiện. Mood Coins + XP rewards.</p></div>
+      <div class="card accent-cyan"><div class="icon">🎤</div><h4>WC Creator Program</h4><p>Recruit KOL/KOC host Watch Parties. Subsidy chưa chốt.</p></div>
+      <div class="card accent-pink"><div class="icon">🏟️</div><h4>Themed Rooms</h4><p>Visual themes theo đội tuyển, special emotes, WC leaderboard riêng.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 07: KOL/KOC ==================== -->
+<div class="divider"></div>
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label orange">07 — KOL/KOC PARTNERSHIP</div>
+      <h2 class="section-title">🎤 Chiến lược Creator</h2>
+      <p class="section-desc">KOL/KOC là yếu tố sống còn. Họ mang audience, tạo content, validate platform. Recruitment funnel → Onboarding → Referral System.</p>
+    </div>
+
+    <table class="info-table reveal">
+      <tr><th>Loại</th><th>Quy mô</th><th>Vai trò</th></tr>
+      <tr><td class="highlight">KOL</td><td>50K+ followers ở platforms khác</td><td>Mang lượng lớn viewers, social proof, thu hút brands. Cannabis reviewers, lifestyle influencers.</td></tr>
+      <tr><td class="highlight">KOC</td><td>1K–50K followers</td><td>Volume content, authentic hơn KOL. Community figures, niche reviewers.</td></tr>
+      <tr><td class="highlight">Brand Creator</td><td>Đại diện brands/dispensaries</td><td>Events, product launches, activations. Trả phí hosting cao nhất.</td></tr>
+    </table>
+
+    <div class="callout green reveal" style="margin-top:24px;">
+      <div class="callout-icon">🔄</div>
+      <div><h5>Referral System — Growth Engine</h5><p>Creator invite viewers → viewers invite friends → creator nhận Mood Coins. Mỗi creator có unique referral link/code. Bonus tiers: 10/50/100 referrals.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 08: ARENA × LIVE ==================== -->
+<div class="divider"></div>
+<section style="background:linear-gradient(180deg, var(--bg) 0%, rgba(6,182,212,0.03) 50%, var(--bg) 100%);">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label cyan">08 — ARENA × LIVE CROSS-CONTENT</div>
+      <h2 class="section-title">🎮 Live là Amplifier, không phải Replacement</h2>
+      <p class="section-desc">Arena và Live là 2 tabs riêng biệt. Tuy nhiên, 5 điểm giao thoa tạo traffic cross-tab tự nhiên mà không ép users.</p>
+    </div>
+
+    <div class="callout purple reveal">
+      <div class="callout-icon">⚡</div>
+      <div><h5>NGUYÊN TẮC CORE</h5><p>Mọi game Arena đều chơi được standalone. Live chỉ thêm khán giả + host + drama. Cross-content luôn có tag "CROSS-TAB" hoặc badge "ARENA". Deep link handlers giữa 2 tabs phải smooth, không reload.</p></div>
+    </div>
+
+    <div class="cross-tab reveal">
+      <div class="tab-box live">
+        <div style="font-size:32px;margin-bottom:8px;">📺</div>
+        <h3>LIVE TAB</h3>
+        <p>Streams, Chat, Puff Sync, Watch Parties, Host Suite</p>
+      </div>
+      <div class="cross-arrows">
+        <span>⇄</span>
+        <small>5 ĐIỂM</small>
+        <small>GIAO THOA</small>
+      </div>
+      <div class="tab-box arena">
+        <div style="font-size:32px;margin-bottom:8px;">🎮</div>
+        <h3>ARENA TAB</h3>
+        <p>18 Games, Tournaments, Predictions, Leaderboards</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:18px; font-weight:700; margin:32px 0 16px;" class="reveal">5 Điểm Giao Thoa Chi Tiết</h3>
+    <div class="grid-2 reveal">
+      <div class="card accent-cyan">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+          <span style="font-size:24px;">1️⃣</span>
+          <h4 style="margin:0;">Hero Slides (Game Show + Tournament)</h4>
+        </div>
+        <p>2/6 slides trong Hero Slider là Arena content. Game Show LIVE + Tournament Finals. Tap → deep link sang Arena tab.</p>
+        <div class="tag" style="background:rgba(6,182,212,0.1);color:var(--cyan);">EXPLORE → HERO SLIDER</div>
+      </div>
+      <div class="card accent-cyan">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+          <span style="font-size:24px;">2️⃣</span>
+          <h4 style="margin:0;">Arena Highlights Strip</h4>
+        </div>
+        <p>Horizontal scroll 5 Arena activities dưới Creator Spotlight. Real-time status badges (LIVE NOW / FINALS / IN 30 MIN).</p>
+        <div class="tag" style="background:rgba(6,182,212,0.1);color:var(--cyan);">EXPLORE → DƯỚI SPOTLIGHT</div>
+      </div>
+      <div class="card accent-cyan">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+          <span style="font-size:24px;">3️⃣</span>
+          <h4 style="margin:0;">Arena Stream trong Live Feed</h4>
+        </div>
+        <p>Tournament Finals xuất hiện trong Live Now Feed với badge "ARENA" + cyan border. Category tự động set "Arena".</p>
+        <div class="tag" style="background:rgba(6,182,212,0.1);color:var(--cyan);">EXPLORE → LIVE NOW FEED</div>
+      </div>
+      <div class="card accent-cyan">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+          <span style="font-size:24px;">4️⃣</span>
+          <h4 style="margin:0;">Halftime Mini-Game Tab</h4>
+        </div>
+        <p>Tab "Halftime" trong Watch screen. Final Kick, WC Trivia, Spin & Win. Chơi ngay trong stream, timer countdown.</p>
+        <div class="tag" style="background:rgba(6,182,212,0.1);color:var(--cyan);">WATCH → TAB HALFTIME</div>
+      </div>
+      <div class="card accent-cyan" style="grid-column: 1 / -1;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+          <span style="font-size:24px;">5️⃣</span>
+          <h4 style="margin:0;">Host Controls: Launch Halftime Game</h4>
+        </div>
+        <p>Button trong Host Panel có badge "ARENA". Host trigger → viewers thấy Halftime tab popup. Games kết thúc trước hiệp 2. Cần API: Arena service → available mini-games + time limits.</p>
+        <div class="tag" style="background:rgba(6,182,212,0.1);color:var(--cyan);">WATCH → HOST PANEL</div>
+      </div>
+    </div>
+
+    <div class="callout red reveal" style="margin-top:24px;">
+      <div class="callout-icon">⚠️</div>
+      <div><h5>LƯU Ý CHO DEV</h5><p>Cần API endpoints từ Arena service: active game shows, tournament status, available mini-games, time limits. WebSocket hoặc polling cho real-time status updates. Deep link handler giữa tabs phải smooth (không full reload, animation transition).</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 09: DEVICE INPUT METHOD ==================== -->
+<div class="divider"></div>
+<section style="background:linear-gradient(180deg, var(--bg) 0%, rgba(139,92,246,0.03) 50%, var(--bg) 100%);">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label purple">09 — DEVICE INPUT METHOD</div>
+      <h2 class="section-title">📱 Chọn Kiểu Tương Tác Device</h2>
+      <p class="section-desc">User chọn input method + behavior mode. Setting này là GLOBAL — áp dụng xuyên suốt cả Live và Arena. Persist qua sessions.</p>
+    </div>
+
+    <h3 style="font-size:18px; font-weight:700; margin-bottom:16px; color:var(--purple);" class="reveal">9.1 — 4 Loại Input</h3>
+    <div class="input-methods reveal">
+      <div class="input-card" style="border-color:rgba(236,72,153,0.3);">
+        <div class="icon">💨</div>
+        <h4 style="color:var(--pink);">Puff</h4>
+        <p>MIC detect airflow + Heating ON → <strong>tiêu hao extract</strong>. Default cho trải nghiệm đầy đủ.</p>
+      </div>
+      <div class="input-card" style="border-color:rgba(6,182,212,0.3);">
+        <div class="icon">🌀</div>
+        <h4 style="color:var(--cyan);">Dry Puff</h4>
+        <p>MIC detect + Heating OFF → <strong>KHÔNG tiêu hao extract</strong>. Toggle trong Settings.</p>
+      </div>
+      <div class="input-card" style="border-color:rgba(139,92,246,0.3);">
+        <div class="icon">🔘</div>
+        <h4 style="color:var(--purple);">Button Press</h4>
+        <p>Nút vật lý trên device. Signal qua BLE. Press / hold / release.</p>
+      </div>
+      <div class="input-card" style="border-color:rgba(245,158,11,0.3);">
+        <div class="supplement">BỔ SUNG</div>
+        <div class="icon">👆</div>
+        <h4 style="color:var(--gold);">On-screen Tap</h4>
+        <p>Chạm trên app. CHỈ BỔ SUNG — không thay thế device hoàn toàn.</p>
+      </div>
+    </div>
+
+    <div class="callout red reveal">
+      <div class="callout-icon">⚠️</div>
+      <div><h5>NGUYÊN TẮC INPUT — KINH DOANH</h5><p>Mọi game và mọi tương tác (Puff Sync, Puff Wave, Challenges, Halftime Games) đều phải có ít nhất 1 bước cần device input (Puff, Dry Puff, hoặc Button). On-screen Tap chỉ là bổ sung, KHÔNG đủ để chơi mà không có device. <strong>Device drives revenue.</strong></p></div>
+    </div>
+
+    <h3 style="font-size:18px; font-weight:700; margin:32px 0 16px; color:var(--purple);" class="reveal">9.2 — Device Input Selector (UI)</h3>
+    <div class="grid-2 reveal">
+      <div class="card accent-purple">
+        <h4>📍 Vị trí Header Button</h4>
+        <p>Góc trên bên phải, cạnh Notification + Search icons. Hiện ở cả Explore và Watch screen. Icon thay đổi theo input đang chọn (💨/🌀/🔘). Green dot indicator khi device connected.</p>
+      </div>
+      <div class="card accent-purple">
+        <h4>📋 Popup Panel (3 phần)</h4>
+        <p><strong>1. Input Method:</strong> 3 options với accent color riêng.<br><strong>2. Behavior:</strong> Auto / Fixed / Ask Each Session.<br><strong>3. Device Status:</strong> Tên device, battery %, BLE, Connect/Reconnect.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:18px; font-weight:700; margin:32px 0 16px; color:var(--purple);" class="reveal">9.3 — Behavior Modes</h3>
+    <div class="behavior-modes reveal">
+      <div class="behavior-card" style="border-color:rgba(34,197,94,0.3);">
+        <div class="icon">⚡</div>
+        <h4 style="color:var(--green);">Auto</h4>
+        <p>System tự chọn input phù hợp theo context. Arena game → Puff. Chill session → Dry Puff.</p>
+      </div>
+      <div class="behavior-card" style="border-color:rgba(59,130,246,0.3);">
+        <div class="icon">📌</div>
+        <h4 style="color:var(--blue);">Fixed</h4>
+        <p>Luôn dùng method đã chọn. Không hỏi lại. Consistent experience.</p>
+      </div>
+      <div class="behavior-card" style="border-color:rgba(245,158,11,0.3);">
+        <div class="icon">❓</div>
+        <h4 style="color:var(--gold);">Ask Each Session</h4>
+        <p>Hỏi user mỗi lần bắt đầu live/game mới. Linh hoạt nhất.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:18px; font-weight:700; margin:32px 0 16px; color:var(--purple);" class="reveal">9.4 — Input Áp Dụng Xuyên Suốt</h3>
+    <table class="info-table reveal">
+      <tr><th>Context</th><th>Ảnh hưởng</th><th>Ví dụ</th></tr>
+      <tr><td class="highlight">Live — Puff Sync</td><td>Bubble icon + animation thay đổi</td><td>Dry Puff: bubble không có smoke. Button: pulse effect.</td></tr>
+      <tr><td class="highlight">Live — Puff Wave</td><td>Cùng mechanic, khác visual</td><td>Puff = smoke wave. Dry Puff = air wave. Button = tap wave.</td></tr>
+      <tr><td class="highlight">Live — PUFF Button</td><td>Label + icon + color thay đổi</td><td>Puff: 💨 pink. Dry Puff: 🌀 cyan. Button: 🔘 purple.</td></tr>
+      <tr><td class="highlight">Arena Games</td><td>Input Map riêng per game</td><td>Xem Arena Guideline Section 1.3 cho mapping chi tiết.</td></tr>
+      <tr><td class="highlight">Halftime Games</td><td>Kế thừa input từ Live session</td><td>User đang Dry Puff → Halftime game dùng Dry Puff.</td></tr>
+    </table>
+
+    <div class="callout red reveal" style="margin-top:24px;">
+      <div class="callout-icon">💾</div>
+      <div><h5>LƯU Ý CHO DEV — PERSIST STATE</h5><p>Device Input là global state. Persist qua sessions (AsyncStorage / UserDefaults). Load last selected input + behavior khi mở app. Khi device disconnect mid-session → fallback On-screen Tap + warning popup. Khi reconnect → restore previous input method tự động.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 10: SUMMARY TABLE ==================== -->
+<div class="divider"></div>
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label pink">10 — BẢNG TỔNG HỢP</div>
+      <h2 class="section-title">Feature Matrix</h2>
+    </div>
+
+    <table class="summary-table reveal">
+      <tr><th>Nhóm</th><th>Core Features</th><th>Device?</th><th>Paid?</th></tr>
+      <tr><td class="highlight">Explore</td><td>Hero Slider, Feed, Creator Spotlight, Arena Strip, Categories, AI Rec</td><td><span class="pill no">Không</span></td><td><span class="pill free">Free</span></td></tr>
+      <tr><td class="highlight">Creator Badge</td><td>3-tier: Creator (KOC) / Partner (KOL) / Official (Brand)</td><td><span class="pill no">Không</span></td><td><span class="pill free">Free</span></td></tr>
+      <tr><td class="highlight">Watch</td><td>Camera/Avatar, Chat, Follow, Raid/Shoutout</td><td><span class="pill no">Không</span></td><td><span class="pill free">Free</span></td></tr>
+      <tr><td class="highlight">Puff Sync</td><td>Individual Bubble, Puff Wave, Collab Puff</td><td><span class="pill yes">CÓ</span></td><td><span class="pill free">Free</span></td></tr>
+      <tr><td class="highlight">Challenges</td><td>Puff Race, Sync Puff, Custom Challenges</td><td><span class="pill yes">CÓ</span></td><td><span class="pill free">Free</span></td></tr>
+      <tr><td class="highlight">Predictions</td><td>Polls, WC Predictions, Leaderboard</td><td><span class="pill no">Không</span></td><td><span class="pill free">Free</span></td></tr>
+      <tr><td class="highlight">Gift / Tip</td><td>Mood Coins tip cho host</td><td><span class="pill no">Không</span></td><td><span class="pill mixed">Coins</span></td></tr>
+      <tr><td class="highlight">Host Suite</td><td>Setup, Controls, Co-host, Games, Halftime</td><td><span class="pill no">Không</span></td><td><span class="pill paid">PAID</span></td></tr>
+      <tr><td class="highlight">Creator Tools</td><td>Dashboard, Revenue, Tiers, Referral</td><td><span class="pill no">Không</span></td><td><span class="pill paid">PAID</span></td></tr>
+      <tr><td class="highlight">WC Specials</td><td>Watch Party, WC Creator Program, Themed Rooms</td><td><span class="pill mixed">Tùy</span></td><td><span class="pill mixed">Mixed</span></td></tr>
+      <tr><td class="highlight" style="color:var(--cyan);">Arena × Live</td><td>Hero Slides, Arena Strip, Halftime, Spectator Mode</td><td><span class="pill mixed">Tùy</span></td><td><span class="pill free">Free</span></td></tr>
+      <tr><td class="highlight" style="color:var(--purple);">Device Input</td><td>Input Selector, 3 Methods, 3 Behaviors, Global State</td><td><span class="pill yes">CÓ</span></td><td><span class="pill free">Free</span></td></tr>
+    </table>
+
+    <h3 style="font-size:18px; font-weight:700; margin:40px 0 16px; color:var(--pink);" class="reveal">Key Decisions Đã Chốt</h3>
+    <div class="grid-2 reveal">
+      <table class="info-table">
+        <tr><th>Quyết định</th><th>Kết quả</th></tr>
+        <tr><td class="highlight">Live stream format</td><td>Cả Camera và Avatar — switch giữa stream</td></tr>
+        <tr><td class="highlight">Puff Sync</td><td>Chỉ device connected. KHÔNG virtual puff.</td></tr>
+        <tr><td class="highlight">Voice</td><td>Chỉ Host + Co-host. Viewers = text only.</td></tr>
+        <tr><td class="highlight">Co-host max</td><td>4 total (1 Host + 3 Co-hosts)</td></tr>
+        <tr><td class="highlight">Gift/Tip</td><td>Mood Coins (preset amounts)</td></tr>
+        <tr><td class="highlight">Puff Wave</td><td>BUILD LUÔN — Killer feature cho WC</td></tr>
+        <tr><td class="highlight">Reactions</td><td>Emoji trước, Mood Reactions = roadmap</td></tr>
+        <tr><td class="highlight">In-Stream Games</td><td>Có — host launch trực tiếp</td></tr>
+        <tr><td class="highlight">Creator Badge</td><td>3 tiers: Creator / Partner / Official</td></tr>
+        <tr><td class="highlight">Creator Tiers</td><td>Bronze → Silver → Gold → Platinum</td></tr>
+        <tr><td class="highlight">Referral System</td><td>Creator invite → Mood Coins bonus</td></tr>
+      </table>
+      <table class="info-table">
+        <tr><th>Quyết định</th><th>Kết quả</th></tr>
+        <tr><td class="highlight" style="color:var(--cyan);">Hero → Slider</td><td>6 slide types, auto-rotate 5s, incl. Arena</td></tr>
+        <tr><td class="highlight" style="color:var(--cyan);">Arena × Live</td><td>5 điểm giao thoa. Deep link handlers.</td></tr>
+        <tr><td class="highlight" style="color:var(--cyan);">Halftime Games</td><td>Final Kick, WC Trivia, Spin & Win</td></tr>
+        <tr><td class="highlight" style="color:var(--purple);">Device Input Selector</td><td>Header button, 3 methods, 3 behaviors</td></tr>
+        <tr><td class="highlight" style="color:var(--purple);">Input scope</td><td>Global — Live + Arena. Persist sessions.</td></tr>
+        <tr><td class="highlight">Score Integration</td><td>KHÔNG auto feed (bản quyền). Research.</td></tr>
+        <tr><td class="highlight">AI Recommendation</td><td>Có — từ đầu launch</td></tr>
+        <tr><td class="highlight">WC Watch Parties</td><td>ML host + brands + KOL/KOC</td></tr>
+        <tr><td class="highlight">WC Leaderboard</td><td>Riêng, tách Creators vs Viewers</td></tr>
+        <tr><td class="highlight" style="color:var(--text3);">Hosting fee model</td><td>Chưa chốt — define sau</td></tr>
+        <tr><td class="highlight" style="color:var(--text3);">Hosting fee subsidy</td><td>Chưa chốt — define sau</td></tr>
+      </table>
+    </div>
+
+    <div style="text-align:center; margin-top:60px; padding:40px 0; border-top:1px solid var(--border);" class="reveal">
+      <p style="font-size:14px; color:var(--text3); letter-spacing:2px;">MOOD LAB — LIVE TAB GUIDELINE v2.0 — FEBRUARY 2026</p>
+      <p style="font-size:12px; color:var(--text3); margin-top:8px;">Confidential — Internal Use Only</p>
+    </div>
+  </div>
+</section>
+
+<script>
+// Reveal on scroll
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

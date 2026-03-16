@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mood Lab — Device Control Guideline</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg:#0a0e1a;--bg2:#0f1629;--bg3:#141c33;--card:#161e35;
+  --border:#1e2a4a;--border2:#2a3a5e;
+  --text:#e2e8f0;--text2:#94a3b8;--text3:#64748b;
+  --cyan:#06d6a0;--cyan2:#0ff5c0;--cyan-bg:rgba(6,214,160,.08);
+  --purple:#a78bfa;--purple2:#c4b5fd;--purple-bg:rgba(167,139,250,.08);
+  --orange:#fb923c;--orange2:#fdba74;--orange-bg:rgba(251,146,60,.08);
+  --green:#34d399;--green2:#6ee7b7;--green-bg:rgba(52,211,153,.08);
+  --pink:#f472b6;--pink2:#f9a8d4;--pink-bg:rgba(244,114,182,.08);
+  --blue:#60a5fa;--blue2:#93c5fd;--blue-bg:rgba(96,165,250,.08);
+  --gold:#fbbf24;--gold2:#fde68a;--gold-bg:rgba(251,191,36,.08);
+  --red:#f87171;
+}
+
+body{
+  font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);
+  line-height:1.6;overflow-x:hidden;
+}
+
+.noise{
+  position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;
+  opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.container{max-width:1100px;margin:0 auto;padding:0 32px}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;padding:120px 0 80px;text-align:center;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);
+  width:900px;height:900px;border-radius:50%;
+  background:radial-gradient(circle,rgba(6,214,160,.12) 0%,rgba(167,139,250,.06) 40%,transparent 70%);
+  pointer-events:none;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 20px;border-radius:100px;
+  background:var(--cyan-bg);border:1px solid rgba(6,214,160,.2);
+  font-size:13px;font-weight:600;color:var(--cyan);letter-spacing:1.5px;
+  text-transform:uppercase;margin-bottom:32px;
+}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+.hero h1{
+  font-size:72px;font-weight:900;letter-spacing:-3px;line-height:1;
+  margin-bottom:16px;
+}
+.hero h1 .mood{color:var(--cyan)}
+.hero h1 .lab{color:var(--text)}
+.hero h2{
+  font-size:28px;font-weight:300;color:var(--text2);letter-spacing:2px;
+  margin-bottom:40px;
+}
+.hero-sub{
+  font-size:16px;color:var(--text3);max-width:600px;margin:0 auto 48px;line-height:1.7;
+}
+.hero-tabs{
+  display:flex;gap:4px;justify-content:center;padding:4px;
+  background:var(--bg2);border-radius:12px;border:1px solid var(--border);
+  width:fit-content;margin:0 auto;
+}
+.hero-tab{
+  padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;
+  color:var(--text3);transition:.3s;
+}
+.hero-tab.active{
+  background:linear-gradient(135deg,rgba(6,214,160,.15),rgba(6,214,160,.05));
+  color:var(--cyan);border:1px solid rgba(6,214,160,.3);
+}
+
+/* ===== PRINCIPLES ===== */
+.principles{padding:80px 0 60px}
+.principles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.principle-card{
+  padding:32px;border-radius:16px;border:1px solid var(--border);
+  background:var(--card);position:relative;overflow:hidden;
+  transition:transform .3s,border-color .3s;
+}
+.principle-card:hover{transform:translateY(-4px);border-color:var(--border2)}
+.principle-card .icon{
+  font-size:36px;margin-bottom:20px;display:block;
+}
+.principle-card h3{font-size:20px;font-weight:700;margin-bottom:8px;letter-spacing:-.3px}
+.principle-card p{font-size:14px;color:var(--text2);line-height:1.7}
+.principle-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  border-radius:16px 16px 0 0;
+}
+.principle-card:nth-child(1)::after{background:var(--cyan)}
+.principle-card:nth-child(2)::after{background:var(--purple)}
+.principle-card:nth-child(3)::after{background:var(--blue)}
+.principle-card:nth-child(1) h3{color:var(--cyan)}
+.principle-card:nth-child(2) h3{color:var(--purple)}
+.principle-card:nth-child(3) h3{color:var(--blue)}
+
+/* ===== SECTION HEADERS ===== */
+.section{padding:60px 0}
+.section-header{display:flex;align-items:center;gap:16px;margin-bottom:40px}
+.section-num{
+  font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;
+  padding:6px 14px;border-radius:8px;letter-spacing:1px;
+}
+.section-title{font-size:32px;font-weight:800;letter-spacing:-1px}
+.section-line{flex:1;height:1px;background:var(--border)}
+
+/* ===== BT CONNECT ===== */
+.bt-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.bt-flow{
+  padding:28px;border-radius:14px;background:var(--card);border:1px solid var(--border);
+}
+.bt-flow h4{font-size:17px;font-weight:700;margin-bottom:20px;color:var(--blue)}
+.bt-steps{display:flex;flex-direction:column;gap:12px}
+.bt-step{
+  display:flex;align-items:center;gap:12px;padding:12px 16px;
+  border-radius:10px;background:var(--bg2);font-size:14px;
+}
+.bt-step .num{
+  width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;
+  background:var(--blue-bg);color:var(--blue);border:1px solid rgba(96,165,250,.2);flex-shrink:0;
+}
+.bt-features{display:grid;gap:12px}
+.bt-feat{
+  display:flex;gap:12px;padding:16px;border-radius:10px;
+  background:var(--bg2);border-left:3px solid var(--blue);
+}
+.bt-feat .label{font-size:12px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.bt-feat .val{font-size:14px;color:var(--text2)}
+
+/* ===== HEAT CONTROL ===== */
+.heat-duo{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.heat-card{
+  padding:32px;border-radius:16px;border:1px solid var(--border);
+  background:var(--card);position:relative;
+}
+.heat-card h4{font-size:20px;font-weight:700;margin-bottom:6px}
+.heat-card .sub{font-size:13px;color:var(--text3);margin-bottom:20px}
+.heat-levels{display:flex;gap:8px;margin-bottom:20px}
+.heat-lv{
+  flex:1;padding:12px 0;border-radius:8px;text-align:center;
+  font-size:13px;font-weight:600;
+}
+.heat-lv.off{background:rgba(100,116,139,.15);color:var(--text3)}
+.heat-lv.chill{background:rgba(96,165,250,.15);color:var(--blue)}
+.heat-lv.med{background:rgba(52,211,153,.15);color:var(--green)}
+.heat-lv.intense{background:rgba(251,146,60,.15);color:var(--orange)}
+
+.ai-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 14px;border-radius:100px;font-size:12px;font-weight:700;
+  letter-spacing:.5px;
+}
+.ai-yes{background:rgba(167,139,250,.12);color:var(--purple);border:1px solid rgba(167,139,250,.25)}
+.ai-no{background:rgba(248,113,113,.1);color:var(--red);border:1px solid rgba(248,113,113,.2)}
+
+.precision-graph{
+  margin-top:16px;padding:20px;border-radius:12px;
+  background:var(--bg);border:1px solid var(--border);
+  position:relative;height:120px;overflow:hidden;
+}
+.precision-graph .axis-x{
+  position:absolute;bottom:10px;left:20px;right:20px;
+  font-size:10px;color:var(--text3);display:flex;justify-content:space-between;
+}
+.precision-graph .axis-y{
+  position:absolute;top:10px;left:8px;bottom:30px;
+  font-size:10px;color:var(--text3);display:flex;flex-direction:column;justify-content:space-between;
+}
+.precision-graph svg{position:absolute;top:10px;left:30px;right:10px;bottom:30px}
+
+/* ===== PRO MODES ===== */
+.promodes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.promode{
+  padding:24px 20px;border-radius:14px;text-align:center;
+  border:1px solid var(--border);background:var(--card);
+  transition:transform .3s,border-color .3s;
+}
+.promode:hover{transform:translateY(-4px)}
+.promode .emoji{font-size:32px;margin-bottom:12px;display:block}
+.promode h4{font-size:16px;font-weight:700;margin-bottom:4px}
+.promode .desc{font-size:12px;color:var(--text3);margin-bottom:12px;line-height:1.5}
+.promode .tag{
+  display:inline-block;padding:4px 12px;border-radius:100px;
+  font-size:11px;font-weight:600;letter-spacing:.5px;
+}
+
+/* ===== ENTOURAGE ===== */
+.entourage-cards{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.ent-card{
+  padding:28px;border-radius:14px;border:1px solid var(--border);
+  background:var(--card);
+}
+.ent-card h4{font-size:18px;font-weight:700;margin-bottom:4px}
+.ent-card .sub{font-size:13px;color:var(--text3);margin-bottom:16px}
+.ratio-bar{
+  display:flex;border-radius:8px;overflow:hidden;height:36px;margin-bottom:16px;
+}
+.ratio-bar div{display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.ent-note{font-size:13px;color:var(--text2);line-height:1.6}
+
+/* ===== MOOD MODES ===== */
+.mood-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.mood-pill{
+  padding:16px 8px;border-radius:12px;text-align:center;
+  border:1px solid var(--border);background:var(--card);
+  transition:transform .3s;
+}
+.mood-pill:hover{transform:translateY(-3px)}
+.mood-pill .emoji{font-size:24px;display:block;margin-bottom:8px}
+.mood-pill .name{font-size:12px;font-weight:700;margin-bottom:4px}
+.mood-pill .detail{font-size:9px;color:var(--text3);line-height:1.4}
+
+.mood-note{
+  margin-top:24px;padding:20px 24px;border-radius:12px;
+  background:var(--purple-bg);border:1px solid rgba(167,139,250,.15);
+}
+.mood-note p{font-size:14px;color:var(--purple2);line-height:1.7}
+.mood-note strong{color:var(--purple)}
+
+/* ===== PRO TOOLS ===== */
+.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tool-card{
+  padding:24px;border-radius:14px;border:1px solid var(--border);
+  background:var(--card);position:relative;overflow:hidden;
+}
+.tool-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+}
+.tool-card h4{font-size:15px;font-weight:700;margin-bottom:8px}
+.tool-card p{font-size:12px;color:var(--text2);line-height:1.6}
+.tool-card .emoji{font-size:28px;display:block;margin-bottom:12px}
+.tool-tag{
+  margin-top:12px;display:inline-block;padding:3px 10px;border-radius:100px;
+  font-size:10px;font-weight:600;letter-spacing:.5px;
+}
+
+/* ===== USAGE TRACKING ===== */
+.tracking-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.track-card{
+  padding:24px 20px;border-radius:14px;text-align:center;
+  border:1px solid var(--border);background:var(--card);
+}
+.track-card .icon{font-size:36px;display:block;margin-bottom:12px}
+.track-card h4{font-size:15px;font-weight:700;margin-bottom:4px}
+.track-card .desc{font-size:12px;color:var(--text3);margin-bottom:12px}
+.track-card .display{
+  font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;
+  margin-bottom:8px;
+}
+.track-card .req{
+  font-size:11px;padding:4px 12px;border-radius:100px;
+  display:inline-block;font-weight:600;
+}
+.req-device{background:rgba(52,211,153,.12);color:var(--green);border:1px solid rgba(52,211,153,.2)}
+.req-bt{background:rgba(96,165,250,.12);color:var(--blue);border:1px solid rgba(96,165,250,.2)}
+
+/* ===== ME TAB ===== */
+.me-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.me-card{
+  padding:28px;border-radius:14px;
+  border:1px solid var(--border);background:var(--card);
+  opacity:.75;position:relative;
+}
+.me-card::after{
+  content:'ME TAB';position:absolute;top:16px;right:16px;
+  font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--text3);
+  padding:4px 10px;border-radius:6px;background:var(--bg2);border:1px solid var(--border);
+}
+.me-card h4{font-size:18px;font-weight:700;margin-bottom:8px}
+.me-card p{font-size:13px;color:var(--text3);line-height:1.7}
+
+/* ===== SUMMARY TABLE ===== */
+.summary{padding:60px 0 40px}
+.summary-table{
+  width:100%;border-collapse:separate;border-spacing:0;
+  border-radius:16px;overflow:hidden;border:1px solid var(--border);
+}
+.summary-table th{
+  padding:14px 16px;font-size:12px;font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;text-align:left;
+  background:var(--bg3);color:var(--text3);border-bottom:2px solid var(--border);
+}
+.summary-table td{
+  padding:14px 16px;font-size:13px;border-bottom:1px solid var(--border);
+  background:var(--card);
+}
+.summary-table tr:last-child td{border-bottom:none}
+.summary-table .feat{font-weight:700}
+.summary-table .yes{color:var(--green);font-weight:600}
+.summary-table .no{color:var(--text3)}
+.summary-table .partial{color:var(--gold);font-weight:500}
+
+/* ===== AI ENGINE STRIP ===== */
+.ai-strip{
+  margin:48px 0;padding:28px 32px;border-radius:16px;
+  background:linear-gradient(135deg,rgba(167,139,250,.08),rgba(6,214,160,.05));
+  border:1px solid rgba(167,139,250,.15);
+  display:flex;align-items:center;gap:24px;
+}
+.ai-strip .icon{font-size:40px;flex-shrink:0}
+.ai-strip h3{font-size:18px;font-weight:700;color:var(--purple);margin-bottom:4px}
+.ai-strip p{font-size:14px;color:var(--text2);line-height:1.6}
+
+/* ===== FOOTER ===== */
+.footer{
+  padding:60px 0 40px;text-align:center;
+  border-top:1px solid var(--border);margin-top:40px;
+}
+.footer-logo{font-size:36px;font-weight:900;letter-spacing:-2px;margin-bottom:8px}
+.footer-logo .m{color:var(--cyan)}
+.footer p{font-size:13px;color:var(--text3)}
+
+/* ===== DATA PIPELINE ===== */
+.pipeline{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px;
+}
+.pipe-item{
+  padding:5px 12px;border-radius:6px;font-size:11px;font-weight:600;
+  background:rgba(167,139,250,.08);color:var(--purple2);
+  border:1px solid rgba(167,139,250,.12);
+}
+
+/* ===== DIVIDER ===== */
+.divider{
+  width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);
+  margin:20px 0;
+}
+
+/* ===== GLOW ACCENTS ===== */
+.glow-cyan{box-shadow:0 0 40px rgba(6,214,160,.08)}
+.glow-purple{box-shadow:0 0 40px rgba(167,139,250,.08)}
+.glow-orange{box-shadow:0 0 40px rgba(251,146,60,.08)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .hero h1{font-size:48px}
+  .principles-grid,.heat-duo,.bt-grid,.entourage-cards,.me-grid{grid-template-columns:1fr}
+  .promodes-grid{grid-template-columns:repeat(2,1fr)}
+  .mood-grid{grid-template-columns:repeat(4,1fr)}
+  .tools-grid{grid-template-columns:repeat(2,1fr)}
+  .tracking-grid{grid-template-columns:repeat(2,1fr)}
+  .fc-cols{flex-direction:column}
+  .fc-col{border-left:none!important;border-top:2px solid var(--border);padding-top:24px}
+  .fc-col:first-child{border-top:none;padding-top:0}
+}
+
+/* ===== FLOWCHART ===== */
+.fc-wrap{
+  padding:48px 0 20px;
+}
+.fc-root{
+  position:relative;
+  padding:32px;border-radius:20px;
+  background:linear-gradient(135deg,var(--bg2),var(--bg3));
+  border:1px solid var(--border2);
+  overflow:hidden;
+}
+.fc-root::before{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(6,214,160,.04),transparent 60%);
+  pointer-events:none;
+}
+
+/* Root node */
+.fc-node-root{
+  text-align:center;margin-bottom:32px;position:relative;z-index:2;
+}
+.fc-node-root .badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 32px;border-radius:16px;
+  background:linear-gradient(135deg,rgba(6,214,160,.12),rgba(6,214,160,.04));
+  border:2px solid rgba(6,214,160,.3);
+  box-shadow:0 0 40px rgba(6,214,160,.08);
+}
+.fc-node-root .badge span{font-size:22px;font-weight:900;letter-spacing:-.5px;color:var(--cyan)}
+.fc-node-root .badge em{font-style:normal;font-size:13px;color:var(--text2);font-weight:500;margin-left:4px}
+
+/* Connector from root */
+.fc-connector-down{
+  width:2px;height:24px;
+  background:linear-gradient(to bottom,var(--cyan),var(--border));
+  margin:0 auto 0;position:relative;z-index:2;
+}
+.fc-connector-dot{
+  width:8px;height:8px;border-radius:50%;background:var(--cyan);
+  margin:-1px auto 0;position:relative;z-index:2;
+  box-shadow:0 0 10px rgba(6,214,160,.4);
+}
+
+/* 3 branch bar */
+.fc-branch-bar{
+  display:flex;align-items:stretch;position:relative;z-index:2;
+  margin-top:0;
+  border-top:2px solid var(--border2);
+  border-left:2px solid var(--border2);
+  border-right:2px solid var(--border2);
+  border-radius:12px 12px 0 0;
+  overflow:hidden;
+}
+.fc-branch{
+  flex:1;text-align:center;padding:16px 12px 14px;
+  position:relative;cursor:default;
+  transition:background .3s;
+}
+.fc-branch:not(:last-child){border-right:1px solid var(--border)}
+.fc-branch:hover{background:rgba(255,255,255,.02)}
+.fc-branch .num{
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
+  letter-spacing:1px;opacity:.6;margin-bottom:4px;
+}
+.fc-branch h4{font-size:15px;font-weight:800;letter-spacing:-.2px;margin-bottom:2px}
+.fc-branch .sub{font-size:11px;color:var(--text3);line-height:1.4}
+
+/* Columns under branches */
+.fc-cols{
+  display:flex;position:relative;z-index:2;
+  border:1px solid var(--border);border-top:none;
+  border-radius:0 0 12px 12px;
+  background:var(--card);
+}
+.fc-col{
+  flex:1;padding:20px 16px;
+  border-left:1px solid var(--border);
+}
+.fc-col:first-child{border-left:none}
+
+/* Child nodes */
+.fc-child{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 12px;border-radius:10px;
+  margin-bottom:6px;
+  transition:all .3s;
+  background:var(--bg2);
+  border:1px solid var(--border);
+}
+.fc-child:last-child{margin-bottom:0}
+.fc-child:hover{
+  border-color:var(--border2);
+  transform:translateX(3px);
+}
+.fc-child .dot{
+  width:8px;height:8px;border-radius:50%;flex-shrink:0;
+}
+.fc-child .name{font-size:12px;font-weight:700;letter-spacing:.2px}
+.fc-child .meta{font-size:10px;color:var(--text3);margin-top:1px}
+
+/* Smart Control sub-groups */
+.fc-subgroup{
+  margin-bottom:14px;
+}
+.fc-subgroup:last-child{margin-bottom:0}
+.fc-subgroup-label{
+  font-size:10px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;margin-bottom:6px;padding-left:4px;
+}
+
+/* AI badge inline */
+.fc-ai{
+  display:inline-flex;align-items:center;gap:3px;
+  font-size:9px;font-weight:700;letter-spacing:.3px;
+  color:var(--purple);opacity:.8;
+  margin-left:4px;
+}
+
+/* Legend */
+.fc-legend{
+  display:flex;gap:20px;justify-content:center;
+  margin-top:20px;padding:14px 0;
+  border-top:1px solid var(--border);
+  position:relative;z-index:2;
+}
+.fc-legend-item{
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;color:var(--text3);font-weight:500;
+}
+.fc-legend-item .dot{width:8px;height:8px;border-radius:50%}
+
+</style>
+</head>
+<body>
+
+<div class="noise"></div>
+
+<!-- =============== HERO =============== -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge"><span class="dot"></span> Device Control Guideline v1.0</div>
+    <h1><span class="mood">MOOD</span> <span class="lab">LAB</span></h1>
+    <h2>SMART CONTROL SYSTEM</h2>
+    <p class="hero-sub">
+      Hệ thống điều khiển thông minh toàn diện — từ On-Device Control đến AI-powered optimization.<br>
+      Powered by <strong style="color:var(--purple)">Mood Logic AI Engine</strong>
+    </p>
+    <div class="hero-tabs">
+      <div class="hero-tab active">Control</div>
+      <div class="hero-tab">Game</div>
+      <div class="hero-tab">Live</div>
+      <div class="hero-tab">Me</div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== CORE PRINCIPLES =============== -->
+<section class="principles">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num" style="background:var(--cyan-bg);color:var(--cyan)">01</span>
+      <span class="section-title">Overview</span>
+      <span class="section-line"></span>
+    </div>
+
+    <div class="principles-grid">
+      <div class="principle-card glow-cyan">
+        <span class="icon">⚡</span>
+        <h3>On-Device First</h3>
+        <p>App là mở rộng, không phải bắt buộc. Hầu hết preset values đã được optimized bởi Mood Lab và Brand Partner từ giai đoạn Device Production. User không cần app để sử dụng device.</p>
+      </div>
+      <div class="principle-card glow-purple">
+        <span class="icon">🔄</span>
+        <h3>Visual Sync</h3>
+        <p>Những gì user thấy trên device vật lý (màn hình, đèn LED, light indicators) phải khớp chính xác với hiển thị trên App. Một ngôn ngữ hiển thị thống nhất.</p>
+      </div>
+      <div class="principle-card">
+        <span class="icon">🧠</span>
+        <h3>AI Engine DNA</h3>
+        <p>Từ "Smart" không thuộc về một tầng cụ thể — nó là DNA của toàn bộ hệ thống. "Chill" của Mood Lab hoàn toàn khác "Low" của bất kỳ device nào khác.</p>
+      </div>
+    </div>
+
+    <div class="ai-strip">
+      <span class="icon">🔮</span>
+      <div>
+        <h3>Mood Logic AI Engine — 7 Data Pipelines</h3>
+        <p>Tất cả chế độ đều chạy qua AI Engine. Không phải fixed settings — đây là intelligent, adaptive control. Hiện tại chưa có công ty nào khác trong industry làm được.</p>
+        <div class="pipeline">
+          <span class="pipe-item">Extract Type</span>
+          <span class="pipe-item">Product Profile</span>
+          <span class="pipe-item">User Behavior</span>
+          <span class="pipe-item">Device Condition</span>
+          <span class="pipe-item">Session History</span>
+          <span class="pipe-item">Environment</span>
+          <span class="pipe-item">Feedback Loop</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== SMART CONTROL STRUCTURE FLOWCHART =============== -->
+<section class="section" style="padding-top:20px">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num" style="background:rgba(226,232,240,.06);color:var(--text2)">MAP</span>
+      <span class="section-title">Cấu trúc Smart Control</span>
+      <span class="section-line"></span>
+    </div>
+
+    <div class="fc-wrap">
+      <div class="fc-root">
+        <!-- Root: Control Tab -->
+        <div class="fc-node-root">
+          <div class="badge">
+            <span>🎛 Control Tab</span>
+            <em>— Toàn bộ trải nghiệm điều khiển</em>
+          </div>
+        </div>
+        <div class="fc-connector-down"></div>
+        <div class="fc-connector-dot"></div>
+
+        <!-- 3 Main Branches -->
+        <div class="fc-branch-bar">
+          <div class="fc-branch">
+            <div class="num" style="color:var(--blue)">SEC 02</div>
+            <h4 style="color:var(--blue)">🔗 Bluetooth Connect</h4>
+            <div class="sub">Kết nối device ↔ app</div>
+          </div>
+          <div class="fc-branch" style="flex:2.4">
+            <div class="num" style="color:var(--cyan)">SEC 03–07</div>
+            <h4 style="color:var(--cyan)">🧠 Smart Control</h4>
+            <div class="sub">5 nhóm chế độ — Powered by AI Engine</div>
+          </div>
+          <div class="fc-branch">
+            <div class="num" style="color:var(--gold)">SEC 08</div>
+            <h4 style="color:var(--gold)">📊 Usage Tracking</h4>
+            <div class="sub">Theo dõi dữ liệu sử dụng</div>
+          </div>
+        </div>
+
+        <!-- Expanded columns -->
+        <div class="fc-cols">
+
+          <!-- Col 1: Bluetooth -->
+          <div class="fc-col" style="flex:1">
+            <div class="fc-child">
+              <div class="dot" style="background:var(--blue)"></div>
+              <div>
+                <div class="name" style="color:var(--blue)">BLE Pairing</div>
+                <div class="meta">Scan → Connect → Sync</div>
+              </div>
+            </div>
+            <div class="fc-child">
+              <div class="dot" style="background:var(--green)"></div>
+              <div>
+                <div class="name" style="color:var(--green)">Auto-reconnect</div>
+                <div class="meta">Tự động khi cả hai bật</div>
+              </div>
+            </div>
+            <div class="fc-child">
+              <div class="dot" style="background:var(--text3)"></div>
+              <div>
+                <div class="name">Multi-device</div>
+                <div class="meta">1 device/lần via account</div>
+              </div>
+            </div>
+            <div class="fc-child">
+              <div class="dot" style="background:var(--cyan)"></div>
+              <div>
+                <div class="name" style="color:var(--cyan)">Visual Sync</div>
+                <div class="meta">Device ↔ App khớp 100%</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Col 2: Smart Control (5 groups) -->
+          <div class="fc-col" style="flex:2.4">
+
+            <!-- Group 1: Heat Control -->
+            <div class="fc-subgroup">
+              <div class="fc-subgroup-label" style="color:var(--cyan)">① Heat Control</div>
+              <div style="display:flex;gap:6px">
+                <div class="fc-child" style="flex:1">
+                  <div class="dot" style="background:var(--cyan)"></div>
+                  <div>
+                    <div class="name">Quick Heat <span class="fc-ai">🧠 AI</span></div>
+                    <div class="meta">OFF → Chill → Med → Intense</div>
+                  </div>
+                </div>
+                <div class="fc-child" style="flex:1">
+                  <div class="dot" style="background:var(--orange)"></div>
+                  <div>
+                    <div class="name" style="color:var(--orange)">Precision Heat</div>
+                    <div class="meta">X-Y voltage graph · App-only</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Group 2: Pro Modes -->
+            <div class="fc-subgroup">
+              <div class="fc-subgroup-label" style="color:var(--orange)">② Pro Modes <span class="fc-ai">🧠 AI</span></div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap">
+                <div class="fc-child" style="flex:1;min-width:100px">
+                  <div class="dot" style="background:var(--red)"></div>
+                  <div><div class="name" style="color:var(--red)">🔥 Beast</div></div>
+                </div>
+                <div class="fc-child" style="flex:1;min-width:100px">
+                  <div class="dot" style="background:var(--green)"></div>
+                  <div><div class="name" style="color:var(--green)">🌿 Eco</div></div>
+                </div>
+                <div class="fc-child" style="flex:1;min-width:100px">
+                  <div class="dot" style="background:var(--blue)"></div>
+                  <div><div class="name" style="color:var(--blue)">⚖️ Balance</div></div>
+                </div>
+                <div class="fc-child" style="flex:1;min-width:100px">
+                  <div class="dot" style="background:var(--purple)"></div>
+                  <div><div class="name" style="color:var(--purple)">🔬 Micro</div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Group 3: Entourage -->
+            <div class="fc-subgroup">
+              <div class="fc-subgroup-label" style="color:var(--green)">③ Entourage Mode <span class="fc-ai">🧠 AI</span></div>
+              <div style="display:flex;gap:6px">
+                <div class="fc-child" style="flex:1">
+                  <div class="dot" style="background:var(--green)"></div>
+                  <div>
+                    <div class="name">CBD + THC</div>
+                    <div class="meta">User lock tỷ lệ blend</div>
+                  </div>
+                </div>
+                <div class="fc-child" style="flex:1">
+                  <div class="dot" style="background:var(--gold)"></div>
+                  <div>
+                    <div class="name">True Hybrid</div>
+                    <div class="meta">Sativa : Indica ratio</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Group 4: Mood Modes -->
+            <div class="fc-subgroup">
+              <div class="fc-subgroup-label" style="color:var(--purple)">④ Mood Modes <span class="fc-ai" style="color:var(--purple)">🧠 AI HEAVIEST</span></div>
+              <div style="display:flex;gap:5px;flex-wrap:wrap">
+                <div class="fc-child" style="flex:0 0 auto;padding:6px 12px">
+                  <div class="dot" style="background:var(--blue);width:6px;height:6px"></div>
+                  <div class="name" style="font-size:11px">😌 Relax</div>
+                </div>
+                <div class="fc-child" style="flex:0 0 auto;padding:6px 12px">
+                  <div class="dot" style="background:var(--gold);width:6px;height:6px"></div>
+                  <div class="name" style="font-size:11px">🎯 Focus</div>
+                </div>
+                <div class="fc-child" style="flex:0 0 auto;padding:6px 12px">
+                  <div class="dot" style="background:var(--green);width:6px;height:6px"></div>
+                  <div class="name" style="font-size:11px">⚡ Energy</div>
+                </div>
+                <div class="fc-child" style="flex:0 0 auto;padding:6px 12px">
+                  <div class="dot" style="background:var(--purple);width:6px;height:6px"></div>
+                  <div class="name" style="font-size:11px">🌙 Sleep</div>
+                </div>
+                <div class="fc-child" style="flex:0 0 auto;padding:6px 12px">
+                  <div class="dot" style="background:var(--pink);width:6px;height:6px"></div>
+                  <div class="name" style="font-size:11px">🎉 Social</div>
+                </div>
+                <div class="fc-child" style="flex:0 0 auto;padding:6px 12px">
+                  <div class="dot" style="background:var(--orange);width:6px;height:6px"></div>
+                  <div class="name" style="font-size:11px">🎨 Creative</div>
+                </div>
+                <div class="fc-child" style="flex:0 0 auto;padding:6px 12px">
+                  <div class="dot" style="background:var(--cyan);width:6px;height:6px"></div>
+                  <div class="name" style="font-size:11px">💚 Recovery</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Group 5: Pro Tools -->
+            <div class="fc-subgroup">
+              <div class="fc-subgroup-label" style="color:var(--pink)">⑤ Pro Tools <span class="fc-ai">🧠 AI</span></div>
+              <div style="display:flex;gap:5px;flex-wrap:wrap">
+                <div class="fc-child" style="flex:1;min-width:130px">
+                  <div class="dot" style="background:var(--gold);width:6px;height:6px"></div>
+                  <div>
+                    <div class="name" style="font-size:11px">🔥 Smart Pre-Heat</div>
+                  </div>
+                </div>
+                <div class="fc-child" style="flex:1;min-width:130px">
+                  <div class="dot" style="background:var(--orange);width:6px;height:6px"></div>
+                  <div>
+                    <div class="name" style="font-size:11px">💧 Last Drop</div>
+                  </div>
+                </div>
+                <div class="fc-child" style="flex:1;min-width:130px">
+                  <div class="dot" style="background:var(--pink);width:6px;height:6px"></div>
+                  <div>
+                    <div class="name" style="font-size:11px">🎨 Flavor Fusion</div>
+                  </div>
+                </div>
+                <div class="fc-child" style="flex:1;min-width:130px">
+                  <div class="dot" style="background:var(--purple);width:6px;height:6px"></div>
+                  <div>
+                    <div class="name" style="font-size:11px">🧪 Extract Fusion</div>
+                  </div>
+                </div>
+                <div class="fc-child" style="flex:1;min-width:130px">
+                  <div class="dot" style="background:var(--blue);width:6px;height:6px"></div>
+                  <div>
+                    <div class="name" style="font-size:11px">✈️ Jet-Lag</div>
+                  </div>
+                </div>
+                <div class="fc-child" style="flex:1;min-width:130px">
+                  <div class="dot" style="background:var(--green);width:6px;height:6px"></div>
+                  <div>
+                    <div class="name" style="font-size:11px">🛡️ Damage Prevention</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Col 3: Usage Tracking -->
+          <div class="fc-col" style="flex:1">
+            <div class="fc-child">
+              <div class="dot" style="background:var(--cyan)"></div>
+              <div>
+                <div class="name" style="color:var(--cyan)">💨 Puff Count</div>
+                <div class="meta">On-device · 000-999</div>
+              </div>
+            </div>
+            <div class="fc-child">
+              <div class="dot" style="background:var(--orange)"></div>
+              <div>
+                <div class="name" style="color:var(--orange)">🔥 Blinker</div>
+                <div class="meta">On-device · 5s cutoff</div>
+              </div>
+            </div>
+            <div class="fc-child" style="border-color:rgba(52,211,153,.25);background:rgba(52,211,153,.04)">
+              <div class="dot" style="background:var(--green);box-shadow:0 0 6px rgba(52,211,153,.4)"></div>
+              <div>
+                <div class="name" style="color:var(--green)">💧 Extract mg <span class="fc-ai">🧠</span></div>
+                <div class="meta">BT required · Unique feature</div>
+              </div>
+            </div>
+            <div class="fc-child">
+              <div class="dot" style="background:var(--purple)"></div>
+              <div>
+                <div class="name" style="color:var(--purple)">📊 Mode Use</div>
+                <div class="meta">App analytics only</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Legend -->
+        <div class="fc-legend">
+          <div class="fc-legend-item">
+            <div class="dot" style="background:var(--purple);box-shadow:0 0 6px rgba(167,139,250,.4)"></div>
+            <span>🧠 = AI Engine tham gia</span>
+          </div>
+          <div class="fc-legend-item">
+            <div class="dot" style="background:var(--blue)"></div>
+            <span>Cần BT Connect</span>
+          </div>
+          <div class="fc-legend-item">
+            <div class="dot" style="background:var(--cyan)"></div>
+            <span>Hoạt động On-Device</span>
+          </div>
+          <div class="fc-legend-item">
+            <div class="dot" style="background:var(--text3)"></div>
+            <span>App-only feature</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Smart flow explanation -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:16px">
+      <div style="padding:20px;border-radius:14px;background:var(--card);border:1px solid var(--border);text-align:center">
+        <div style="font-size:28px;margin-bottom:8px">🔧</div>
+        <div style="font-size:14px;font-weight:700;color:var(--cyan);margin-bottom:4px">Simple → Smart</div>
+        <div style="font-size:12px;color:var(--text3);line-height:1.5">Quick Heat: user chọn intent, AI optimize mọi thứ phía sau</div>
+      </div>
+      <div style="padding:20px;border-radius:14px;background:var(--card);border:1px solid var(--border);text-align:center">
+        <div style="font-size:28px;margin-bottom:8px">🧠</div>
+        <div style="font-size:14px;font-weight:700;color:var(--purple);margin-bottom:4px">Complex → Smarter</div>
+        <div style="font-size:12px;color:var(--text3);line-height:1.5">Mood Modes: user chỉ chọn cảm giác, AI xử lý toàn bộ hệ thống</div>
+      </div>
+      <div style="padding:20px;border-radius:14px;background:var(--card);border:1px solid var(--border);text-align:center">
+        <div style="font-size:28px;margin-bottom:8px">⚡</div>
+        <div style="font-size:14px;font-weight:700;color:var(--orange);margin-bottom:4px">Expert → Raw</div>
+        <div style="font-size:12px;color:var(--text3);line-height:1.5">Precision Heat: no AI — expert users ARE the intelligence</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =============== BLUETOOTH CONNECT =============== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num" style="background:var(--blue-bg);color:var(--blue)">02</span>
+      <span class="section-title">Bluetooth Connect</span>
+      <span class="section-line"></span>
+    </div>
+
+    <div class="bt-grid">
+      <div class="bt-flow">
+        <h4>Connection Flow</h4>
+        <div class="bt-steps">
+          <div class="bt-step"><span class="num">1</span> User mở app → Scan devices</div>
+          <div class="bt-step"><span class="num">2</span> Chọn device → Pair via BLE</div>
+          <div class="bt-step"><span class="num">3</span> Connected — Full control unlocked</div>
+          <div class="bt-step"><span class="num">4</span> Auto-reconnect khi cả hai bật</div>
+        </div>
+      </div>
+      <div class="bt-flow">
+        <h4>Key Specifications</h4>
+        <div class="bt-features">
+          <div class="bt-feat">
+            <div><div class="label">Protocol</div><div class="val">Bluetooth Low Energy (BLE)</div></div>
+          </div>
+          <div class="bt-feat">
+            <div><div class="label">Multi-device</div><div class="val">1 device / lần. Switch qua personal account.</div></div>
+          </div>
+          <div class="bt-feat">
+            <div><div class="label">Auto-reconnect</div><div class="val" style="color:var(--green);font-weight:600">CÓ — tự động, không cần thao tác</div></div>
+          </div>
+          <div class="bt-feat">
+            <div><div class="label">Mất kết nối</div><div class="val">Device TIẾP TỤC hoạt động bình thường</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== HEAT CONTROL =============== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num" style="background:var(--cyan-bg);color:var(--cyan)">03</span>
+      <span class="section-title">Heat Control</span>
+      <span class="section-line"></span>
+    </div>
+
+    <div class="heat-duo">
+      <div class="heat-card glow-cyan">
+        <h4 style="color:var(--cyan)">Quick Heat Control</h4>
+        <div class="sub">Trên device + App — Per-tank control</div>
+        <div class="heat-levels">
+          <div class="heat-lv off">OFF</div>
+          <div class="heat-lv chill">Chill</div>
+          <div class="heat-lv med">Medium</div>
+          <div class="heat-lv intense">Intense</div>
+        </div>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:16px">
+          Cycle logic: OFF → Chill → Medium → Intense → OFF<br>
+          User chọn intent, AI optimize actual voltage dựa trên extract type, battery, session history, environmental conditions.
+        </p>
+        <span class="ai-badge ai-yes">🧠 AI PARTICIPATES</span>
+      </div>
+
+      <div class="heat-card">
+        <h4 style="color:var(--orange)">Precision Heat Control</h4>
+        <div class="sub">App-exclusive — Technology Showcase</div>
+        <div class="precision-graph">
+          <svg width="100%" height="100%" viewBox="0 0 200 60">
+            <polyline points="0,50 30,50 50,20 80,35 120,10 150,30 180,45 200,40"
+              fill="none" stroke="#fb923c" stroke-width="2" stroke-linecap="round"/>
+            <polyline points="0,55 40,55 60,30 100,40 140,15 170,35 200,50"
+              fill="none" stroke="#60a5fa" stroke-width="1.5" stroke-dasharray="4 3" stroke-linecap="round" opacity=".5"/>
+          </svg>
+          <div class="axis-x"><span>0s</span><span>5s</span><span>10s</span><span>15s</span></div>
+          <div class="axis-y"><span>3.7V</span><span>2.0V</span></div>
+        </div>
+        <p style="font-size:13px;color:var(--text2);margin:16px 0">
+          X-Y Graph: X = time, Y = voltage. Per-tank/per-zone curves.<br>
+          Device delivers exact user-specified voltage. Full manual control.
+        </p>
+        <span class="ai-badge ai-no">⚠ AI DOES NOT INTERVENE</span>
+      </div>
+    </div>
+
+    <div class="ai-strip" style="margin-top:24px;background:linear-gradient(135deg,rgba(6,214,160,.06),rgba(251,146,60,.04))">
+      <span class="icon">💡</span>
+      <div>
+        <h3 style="color:var(--cyan)">Paradox quan trọng</h3>
+        <p>Simple tier (Quick) = <strong style="color:var(--cyan)">smartest</strong> (AI optimizes mọi thứ). Complex tier (Precision) = <strong style="color:var(--orange)">"dumbest"</strong> (chỉ tuân lệnh). Precision users ARE the AI — họ biết chính xác mình muốn gì.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== PRO MODES =============== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num" style="background:var(--orange-bg);color:var(--orange)">04</span>
+      <span class="section-title">Pro Modes</span>
+      <span class="section-line"></span>
+    </div>
+    <p style="font-size:15px;color:var(--text2);margin-bottom:24px">One-tap thay đổi toàn bộ cách device hoạt động. Áp dụng lên tất cả active tanks đồng thời.</p>
+
+    <div class="promodes-grid">
+      <div class="promode" style="border-color:rgba(248,113,113,.2)">
+        <span class="emoji">🔥</span>
+        <h4 style="color:var(--red)">Beast</h4>
+        <div class="desc">All tanks → Intense<br>Maximum output, AI compensates khi battery drops</div>
+        <span class="tag" style="background:rgba(248,113,113,.12);color:var(--red)">MAX POWER</span>
+      </div>
+      <div class="promode" style="border-color:rgba(52,211,153,.2)">
+        <span class="emoji">🌿</span>
+        <h4 style="color:var(--green)">Eco</h4>
+        <div class="desc">All tanks → Chill<br>Minimum output, kéo dài battery + cartridge</div>
+        <span class="tag" style="background:rgba(52,211,153,.12);color:var(--green)">SAVE MODE</span>
+      </div>
+      <div class="promode" style="border-color:rgba(96,165,250,.2)">
+        <span class="emoji">⚖️</span>
+        <h4 style="color:var(--blue)">Balance</h4>
+        <div class="desc">All tanks → Medium<br>Ổn định, all-purpose mode</div>
+        <span class="tag" style="background:rgba(96,165,250,.12);color:var(--blue)">BALANCED</span>
+      </div>
+      <div class="promode" style="border-color:rgba(167,139,250,.2)">
+        <span class="emoji">🔬</span>
+        <h4 style="color:var(--purple)">Microdose</h4>
+        <div class="desc">Ultra-low output<br>Primary tank Chill, others may OFF</div>
+        <span class="tag" style="background:rgba(167,139,250,.12);color:var(--purple)">MICRO</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== ENTOURAGE MODE =============== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num" style="background:var(--green-bg);color:var(--green)">05</span>
+      <span class="section-title">Entourage Mode</span>
+      <span class="section-line"></span>
+    </div>
+    <p style="font-size:15px;color:var(--text2);margin-bottom:24px">
+      Named after "Entourage Effect" — sự kết hợp synergistic tạo hiệu quả lớn hơn tổng các thành phần. User tùy biến tỷ lệ pha trộn. Yêu cầu ≥ 2 tanks.
+    </p>
+
+    <div class="entourage-cards">
+      <div class="ent-card">
+        <h4 style="color:var(--green)">CBD + THC</h4>
+        <div class="sub">User lock tỷ lệ CBD:THC mong muốn</div>
+        <div class="ratio-bar">
+          <div style="width:70%;background:rgba(251,146,60,.25);color:var(--orange)">70% THC</div>
+          <div style="width:30%;background:rgba(52,211,153,.25);color:var(--green)">30% CBD</div>
+        </div>
+        <div class="ent-note">AI optimize heat curves per extract type để đảm bảo accurate ratio conversion từ cartridge sang vapor.</div>
+      </div>
+      <div class="ent-card">
+        <h4 style="color:var(--cyan)">True Hybrid</h4>
+        <div class="sub">User lock tỷ lệ Sativa:Indica</div>
+        <div class="ratio-bar">
+          <div style="width:60%;background:rgba(251,191,36,.25);color:var(--gold)">60% Sativa</div>
+          <div style="width:40%;background:rgba(167,139,250,.25);color:var(--purple)">40% Indica</div>
+        </div>
+        <div class="ent-note">Firmware adjusts heat/timing per tank để đạt tỷ lệ hybrid chính xác trong mỗi lần inhale.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== MOOD MODES =============== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num" style="background:var(--purple-bg);color:var(--purple)">06</span>
+      <span class="section-title">Mood Modes</span>
+      <span class="section-line"></span>
+    </div>
+    <p style="font-size:15px;color:var(--text2);margin-bottom:24px">
+      SMARTEST layer — user chỉ chọn cảm giác, AI xử lý toàn bộ. Không nghĩ về device, heat, hay tanks.
+    </p>
+
+    <div class="mood-grid">
+      <div class="mood-pill" style="border-color:rgba(96,165,250,.2)">
+        <span class="emoji">😌</span>
+        <div class="name" style="color:var(--blue)">Relax</div>
+        <div class="detail">CBD priority<br>Low heat<br>Slow delivery</div>
+      </div>
+      <div class="mood-pill" style="border-color:rgba(251,191,36,.2)">
+        <span class="emoji">🎯</span>
+        <div class="name" style="color:var(--gold)">Focus</div>
+        <div class="detail">Sativa priority<br>Med heat<br>Steady delivery</div>
+      </div>
+      <div class="mood-pill" style="border-color:rgba(52,211,153,.2)">
+        <span class="emoji">⚡</span>
+        <div class="name" style="color:var(--green)">Energy</div>
+        <div class="detail">Sativa priority<br>Higher heat<br>Fast delivery</div>
+      </div>
+      <div class="mood-pill" style="border-color:rgba(167,139,250,.2)">
+        <span class="emoji">🌙</span>
+        <div class="name" style="color:var(--purple)">Sleep</div>
+        <div class="detail">Indica priority<br>Low heat<br>Tapering delivery</div>
+      </div>
+      <div class="mood-pill" style="border-color:rgba(244,114,182,.2)">
+        <span class="emoji">🎉</span>
+        <div class="name" style="color:var(--pink)">Social</div>
+        <div class="detail">Balanced blend<br>Med intensity<br>Prolonged</div>
+      </div>
+      <div class="mood-pill" style="border-color:rgba(251,146,60,.2)">
+        <span class="emoji">🎨</span>
+        <div class="name" style="color:var(--orange)">Creative</div>
+        <div class="detail">Sativa-dom<br>Varied pattern<br>Stimulation</div>
+      </div>
+      <div class="mood-pill" style="border-color:rgba(6,214,160,.2)">
+        <span class="emoji">💚</span>
+        <div class="name" style="color:var(--cyan)">Recovery</div>
+        <div class="detail">CBD-heavy<br>Gentle delivery<br>Anti-inflam</div>
+      </div>
+    </div>
+
+    <div class="mood-note">
+      <p><strong>Hardest to copy.</strong> Mood Modes phụ thuộc hoàn toàn vào AI Engine + data pipeline. Càng nhiều data = càng chính xác. Không thể sao chép bằng hardware — đây là competitive moat thực sự.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =============== PRO TOOLS =============== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num" style="background:var(--pink-bg);color:var(--pink)">07</span>
+      <span class="section-title">Pro Tools</span>
+      <span class="section-line"></span>
+    </div>
+    <p style="font-size:15px;color:var(--text2);margin-bottom:24px">Utility functions tối ưu hoá session sử dụng — tất cả powered by AI Engine.</p>
+
+    <div class="tools-grid">
+      <div class="tool-card" style="border-color:rgba(251,191,36,.15)">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold)"></div>
+        <span class="emoji">🔥</span>
+        <h4 style="color:var(--gold)">Smart Pre-Heating</h4>
+        <p>AI dự đoán khi nào cần preheat và phương pháp tối ưu dựa trên extract type, ambient temp, user habits.</p>
+        <span class="tool-tag" style="background:var(--gold-bg);color:var(--gold)">AI OPTIMIZED</span>
+      </div>
+      <div class="tool-card" style="border-color:rgba(251,146,60,.15)">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--orange)"></div>
+        <span class="emoji">💧</span>
+        <h4 style="color:var(--orange)">Last Drop</h4>
+        <p>Heating curve đặc biệt extract tối đa phần còn lại mà không đốt cháy. Tiết kiệm extract đắt tiền.</p>
+        <span class="tool-tag" style="background:var(--orange-bg);color:var(--orange)">SMART CURVE</span>
+      </div>
+      <div class="tool-card" style="border-color:rgba(244,114,182,.15)">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--pink)"></div>
+        <span class="emoji">🎨</span>
+        <h4 style="color:var(--pink)">Flavor Fusion</h4>
+        <p>Kiểm soát cách hương vị pha trộn giữa tanks. Focus: trải nghiệm Flavor + Extract, Flavor + Terpene.</p>
+        <span class="tool-tag" style="background:var(--pink-bg);color:var(--pink)">TASTE FOCUS</span>
+      </div>
+      <div class="tool-card" style="border-color:rgba(167,139,250,.15)">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--purple)"></div>
+        <span class="emoji">🧪</span>
+        <h4 style="color:var(--purple)">Extract Fusion</h4>
+        <p>Kết hợp tất cả active tanks thành unified inhale. Focus: effect (extract + extract combinations).</p>
+        <span class="tool-tag" style="background:var(--purple-bg);color:var(--purple)">EFFECT FOCUS</span>
+      </div>
+      <div class="tool-card" style="border-color:rgba(96,165,250,.15)">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--blue)"></div>
+        <span class="emoji">✈️</span>
+        <h4 style="color:var(--blue)">Jet-Lag</h4>
+        <p>Guided session phục hồi jet-lag. User input timezone, flight time, fatigue → AI tạo recovery session.</p>
+        <span class="tool-tag" style="background:var(--blue-bg);color:var(--blue)">GUIDED SESSION</span>
+      </div>
+      <div class="tool-card" style="border-color:rgba(52,211,153,.15)">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--green)"></div>
+        <span class="emoji">🛡️</span>
+        <h4 style="color:var(--green)">Cartridge Damage Prevention</h4>
+        <p>Giới hạn nhiệt tối đa bảo vệ cartridge. ON mặc định từ production. User có thể toggle OFF (với warning).</p>
+        <span class="tool-tag" style="background:var(--green-bg);color:var(--green)">SAFETY · AI ADAPTED</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== USAGE TRACKING =============== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num" style="background:var(--gold-bg);color:var(--gold)">08</span>
+      <span class="section-title">Usage Tracking</span>
+      <span class="section-line"></span>
+    </div>
+
+    <div class="tracking-grid">
+      <div class="track-card">
+        <span class="icon">💨</span>
+        <div class="display" style="color:var(--cyan)">088</div>
+        <h4>Puff Count</h4>
+        <div class="desc">Tổng số lần hít<br>3 digits (000-999)</div>
+        <span class="req req-device">ON-DEVICE</span>
+      </div>
+      <div class="track-card">
+        <span class="icon">🔥</span>
+        <div class="display" style="color:var(--orange)">003</div>
+        <h4>Blinker</h4>
+        <div class="desc">Hits chạm 5s auto-cutoff<br>3 digits (000-999)</div>
+        <span class="req req-device">ON-DEVICE</span>
+      </div>
+      <div class="track-card" style="border-color:rgba(52,211,153,.2)">
+        <span class="icon">💧</span>
+        <div class="display" style="color:var(--green)">12.5<span style="font-size:14px;opacity:.6">mg</span></div>
+        <h4>Extract Consumption</h4>
+        <div class="desc">mg last puff<br>THC / CBD tracking</div>
+        <span class="req req-bt">NEEDS BT</span>
+      </div>
+      <div class="track-card">
+        <span class="icon">📊</span>
+        <div class="display" style="color:var(--purple);font-size:20px">Analytics</div>
+        <h4>Mode Use</h4>
+        <div class="desc">Modes đã dùng<br>Tần suất + duration</div>
+        <span class="req req-bt">NEEDS BT + APP</span>
+      </div>
+    </div>
+
+    <div class="ai-strip" style="margin-top:24px;background:linear-gradient(135deg,rgba(52,211,153,.06),rgba(251,191,36,.04));border-color:rgba(52,211,153,.15)">
+      <span class="icon">⭐</span>
+      <div>
+        <h3 style="color:var(--green)">Extract Consumption — Unique Feature</h3>
+        <p>Không có device nào khác cho user biết họ đã tiêu thụ bao nhiêu mg THC/CBD mỗi puff. AI Engine tính toán dựa trên heat level, puff duration, extract type, và resistance. Giá trị lớn cho health-conscious users, wellness market, và medical cannabis.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== ME TAB FEATURES =============== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num" style="background:rgba(148,163,184,.1);color:var(--text3)">09</span>
+      <span class="section-title" style="color:var(--text3)">Liên quan: Me Tab</span>
+      <span class="section-line"></span>
+    </div>
+    <p style="font-size:15px;color:var(--text3);margin-bottom:24px">Device management & security — set một lần, dùng lâu dài. Chi tiết trong tài liệu riêng.</p>
+
+    <div class="me-grid">
+      <div class="me-card">
+        <h4 style="color:var(--pink)">🔒 Child Lock</h4>
+        <p>Khoá device hoàn toàn qua app + mật khẩu. Khi locked: mọi thao tác bị vô hiệu hoá. Bảo vệ khỏi trẻ em và sử dụng trái phép. Password lưu trên user account.</p>
+      </div>
+      <div class="me-card">
+        <h4 style="color:var(--green)">✅ Authentication</h4>
+        <p>Xác thực sản phẩm chính hãng qua 2 phương thức: Bluetooth Connect (verify ngầm khi pair) và QR Code Scan (Prefix QR trên packaging / thẻ đi kèm). Chống counterfeit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== SUMMARY TABLE =============== -->
+<section class="summary">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num" style="background:rgba(226,232,240,.08);color:var(--text2)">10</span>
+      <span class="section-title">Bảng Tổng Hợp</span>
+      <span class="section-line"></span>
+    </div>
+
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th style="width:16%">Nhóm</th>
+          <th style="width:26%">Modes / Features</th>
+          <th style="width:16%">Bản chất</th>
+          <th style="width:14%">AI Engine</th>
+          <th style="width:14%">Cần App?</th>
+          <th style="width:14%">Multi-tank?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="feat" style="color:var(--blue)">BT Connect</td>
+          <td>BLE pairing, auto-reconnect</td>
+          <td>Kết nối</td>
+          <td class="no">KHÔNG</td>
+          <td class="yes">CÓ</td>
+          <td>N/A</td>
+        </tr>
+        <tr>
+          <td class="feat" style="color:var(--cyan)">Heat Control</td>
+          <td>Quick: 4 levels · Precision: X-Y Graph</td>
+          <td>Manual Heat</td>
+          <td><span class="yes">Quick: CÓ</span><br><span class="no">Precision: KHÔNG</span></td>
+          <td><span class="no">Quick: Không</span><br><span class="yes">Precision: CÓ</span></td>
+          <td>Per-tank</td>
+        </tr>
+        <tr>
+          <td class="feat" style="color:var(--orange)">Pro Modes</td>
+          <td>Beast · Eco · Balance · Microdose</td>
+          <td>One-tap behavior</td>
+          <td class="yes">CÓ</td>
+          <td class="no">Không</td>
+          <td>All tanks</td>
+        </tr>
+        <tr>
+          <td class="feat" style="color:var(--green)">Entourage</td>
+          <td>CBD+THC · True Hybrid</td>
+          <td>User blend ratios</td>
+          <td class="yes">CÓ</td>
+          <td class="partial">Có thể</td>
+          <td>2+ tanks</td>
+        </tr>
+        <tr>
+          <td class="feat" style="color:var(--purple)">Mood Modes</td>
+          <td>Relax · Focus · Energy · Sleep · Social · Creative · Recovery</td>
+          <td>Cảm xúc → config</td>
+          <td class="yes" style="color:var(--purple);font-weight:700">CÓ (nặng nhất)</td>
+          <td class="partial">Có thể</td>
+          <td>All tanks</td>
+        </tr>
+        <tr>
+          <td class="feat" style="color:var(--pink)">Pro Tools</td>
+          <td>Pre-Heat · Last Drop · Fusion · Jet-Lag · Damage Prevention</td>
+          <td>Utility & Optimize</td>
+          <td class="yes">CÓ</td>
+          <td class="partial">Khác nhau</td>
+          <td>Khác nhau</td>
+        </tr>
+        <tr>
+          <td class="feat" style="color:var(--gold)">Usage Tracking</td>
+          <td>Puff · Blinker · Extract mg · Mode Use</td>
+          <td>Theo dõi sử dụng</td>
+          <td class="partial">CÓ (Extract)</td>
+          <td class="partial">Một số cần BT</td>
+          <td>Per-tank</td>
+        </tr>
+        <tr style="opacity:.5">
+          <td class="feat" style="color:var(--text3)">Me Tab</td>
+          <td>Child Lock · Authentication</td>
+          <td>Device security</td>
+          <td class="no">KHÔNG</td>
+          <td class="yes">CÓ</td>
+          <td>N/A</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- =============== FOOTER =============== -->
+<section class="footer">
+  <div class="container">
+    <div class="footer-logo"><span class="m">MOOD</span> LAB</div>
+    <p>Smart Control — Device Control Guideline v1.0 · February 2026</p>
+    <p style="margin-top:4px">Confidential — Internal Use Only</p>
+    <p style="margin-top:20px;font-size:12px;color:var(--text3);opacity:.5">Powered by Mood Logic AI Engine</p>
+  </div>
+</section>
+
+</body>
+</html>
