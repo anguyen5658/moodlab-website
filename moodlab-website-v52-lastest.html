@@ -324,8 +324,7 @@ footer{grid-template-columns:1fr!important;gap:24px}
 .phone-carousel .phone{flex-shrink:0}
 .phone-carousel .phone:nth-child(1),.phone-carousel .phone:nth-child(3){transform:none;opacity:1}
 #app4-wrap{flex-wrap:nowrap!important;overflow-x:auto;-webkit-overflow-scrolling:touch;justify-content:flex-start!important;padding:10px 16px 24px!important;gap:12px!important;scroll-snap-type:x mandatory}
-.app4-phone{min-width:150px!important;width:150px!important;height:300px!important;border-radius:22px!important;scroll-snap-align:center;transform:none!important;opacity:1!important;transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .4s,border-color .4s}
-.app4-phone:hover{transform:scale(1.15)!important;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 60px rgba(0,232,255,.12)!important;border-color:rgba(0,232,255,.2)!important;z-index:10!important}
+.app4-phone{min-width:150px!important;width:150px!important;height:300px!important;border-radius:22px!important;scroll-snap-align:center;transform:none!important;opacity:1!important;transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .4s,border-color .4s;cursor:pointer}
 .slider-nav.prev{left:4px}.slider-nav.next{right:4px}
 [style*="grid-template-columns:repeat(4,1fr);gap:12px"]{grid-template-columns:1fr 1fr!important}
 .hero{min-height:auto!important;padding:100px 0 40px}
@@ -354,8 +353,7 @@ section{overflow-x:hidden}
   [style*="grid-template-columns:1fr 1fr;gap:14px"]{grid-template-columns:1fr 1fr!important}
   [style*="display:flex;border-top:1px solid var(--bd);border-bottom"]>div{width:25%!important}
   #app4-wrap{gap:10px!important;padding:10px 0 30px!important;justify-content:center!important;overflow-x:visible;scroll-snap-type:none}
-  .app4-phone{min-width:180px!important;width:180px!important;height:360px!important;border-radius:24px!important;scroll-snap-align:none;transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .4s,border-color .4s}
-  .app4-phone:hover{transform:scale(1.18)!important;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 60px rgba(0,232,255,.12)!important;border-color:rgba(0,232,255,.2)!important;z-index:10!important}
+  .app4-phone{min-width:180px!important;width:180px!important;height:360px!important;border-radius:24px!important;scroll-snap-align:none;transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .4s,border-color .4s;cursor:pointer}
 }
 
 /* ── md: 900px+ (Tablet/Desktop) ── */
@@ -386,8 +384,7 @@ section{overflow-x:hidden}
   .vid,.vid-hero{min-height:320px}
   .hero{min-height:100vh!important;padding:100px 0 60px}
   .hero-sm{min-height:60vh!important;padding:120px 0 60px}
-  .app4-phone{transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .4s,border-color .4s}
-  .app4-phone:hover{transform:scale(1.22)!important;box-shadow:0 40px 100px rgba(0,0,0,.6),0 0 80px rgba(0,232,255,.15)!important;border-color:rgba(0,232,255,.25)!important;z-index:10!important}
+  .app4-phone{transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .4s,border-color .4s;cursor:pointer}
   .sc-subnav{gap:clamp(8px,2vw,24px);justify-content:center}
   .sc-subnav-item{padding:8px 12px}
   .sc-subnav-item span:first-child{font-size:20px}
@@ -702,7 +699,13 @@ section{overflow-x:hidden}
   </div>
 
   <!-- Closing statement -->
-  <div class="rv" data-d="3" style="text-align:center;margin-top:40px;padding:20px 0">
+  <div class="rv" data-d="3" style="text-align:center;margin-top:48px;padding:28px 32px;border-radius:20px;background:linear-gradient(135deg,rgba(52,211,153,.04),rgba(0,232,255,.02));border:1px solid rgba(52,211,153,.08)">
+    <div style="display:flex;justify-content:center;gap:clamp(24px,5vw,64px);margin-bottom:20px;flex-wrap:wrap">
+      <div><div style="font-size:clamp(24px,3vw,32px);font-weight:800;color:var(--gn)">6+</div><div style="font-size:11px;color:var(--tx3);font-weight:400;letter-spacing:.5px">Safety Features</div></div>
+      <div><div style="font-size:clamp(24px,3vw,32px);font-weight:800;color:var(--gn)">mg/ml</div><div style="font-size:11px;color:var(--tx3);font-weight:400;letter-spacing:.5px">Precision Tracking</div></div>
+      <div><div style="font-size:clamp(24px,3vw,32px);font-weight:800;color:var(--gn)">24/7</div><div style="font-size:11px;color:var(--tx3);font-weight:400;letter-spacing:.5px">Smart Monitoring</div></div>
+      <div><div style="font-size:clamp(24px,3vw,32px);font-weight:800;color:var(--gn)">100%</div><div style="font-size:11px;color:var(--tx3);font-weight:400;letter-spacing:.5px">Software-Based</div></div>
+    </div>
     <p style="font-size:15px;color:var(--tx2);font-weight:300;max-width:640px;margin:0 auto;line-height:1.6">Technology that makes devices <strong style="color:var(--gn)">less harmful</strong>, gives users <strong style="color:var(--gn)">more control</strong>, and positions your brand as <strong style="color:var(--gn)">the responsible choice</strong>.</p>
   </div>
 </div>
@@ -714,8 +717,8 @@ section{overflow-x:hidden}
   <div class="tag c rv">Built-In Entertainment</div>
   <h2 class="h3 rv" data-d="1" style="text-align:center;margin-bottom:32px">Games. Streams. Rewards. <span class="se">All unlocked.</span></h2>
   <div class="rv" data-d="2" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
-    <div class="img-card" onmouseenter="var v=this.querySelector('video');v.style.opacity='1';v.play()" onmouseleave="var v=this.querySelector('video');v.pause();v.currentTime=0;v.style.opacity='.7'" onclick="go('arena')" style="background:linear-gradient(135deg,#0c2a3e,#0a1628);height:360px;border:1px solid rgba(0,232,255,.08)"><video src="Media/Video/Hailuo_Video_Dark futuristic arena animatio_489851347695288327.mp4" loop muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7;transition:opacity .6s"></video><div class="img-card-content"><h3>Arena</h3><p>18 games · Leaderboards · Mood Coins · Battle Pass · Daily Challenges</p></div></div>
-    <div class="img-card" onmouseenter="var v=this.querySelector('video');v.style.opacity='1';v.play()" onmouseleave="var v=this.querySelector('video');v.pause();v.currentTime=0;v.style.opacity='.7'" onclick="go('live')" style="background:linear-gradient(135deg,#2d1b69,#1a0a2e);height:360px;border:1px solid rgba(168,85,247,.08)"><video src="Media/Video/Hailuo_Video_Futuristic cinematic animation_489851513915605000.mp4" loop muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7;transition:opacity .6s"></video><div class="img-card-content"><h3>Live</h3><p>Device-verified streaming · Puff Presence · Puff Wave · Creator tools</p></div></div>
+    <div class="img-card" onmouseenter="var v=this.querySelector('video');v.style.opacity='1';v.play()" onmouseleave="var v=this.querySelector('video');v.pause();v.currentTime=0;v.style.opacity='.7'" onclick="go('arena')" style="background:#0a0a14;height:360px"><video src="Media/Video/Hailuo_Video_Dark futuristic arena animatio_489851347695288327.mp4" loop muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7;transition:opacity .6s"></video><div class="img-card-content"><h3>Arena</h3><p>18 games · Leaderboards · Mood Coins · Battle Pass · Daily Challenges</p></div></div>
+    <div class="img-card" onmouseenter="var v=this.querySelector('video');v.style.opacity='1';v.play()" onmouseleave="var v=this.querySelector('video');v.pause();v.currentTime=0;v.style.opacity='.7'" onclick="go('live')" style="background:#0a0a14;height:360px"><video src="Media/Video/Hailuo_Video_Futuristic cinematic animation_489851513915605000.mp4" loop muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7;transition:opacity .6s"></video><div class="img-card-content"><h3>Live</h3><p>Device-verified streaming · Puff Presence · Puff Wave · Creator tools</p></div></div>
   </div>
 
 </div>
@@ -728,9 +731,9 @@ section{overflow-x:hidden}
   <div class="tag c rv">Partnership</div>
   <h2 class="h3 rv" data-d="1" style="text-align:center;margin-bottom:32px">Every business is different. <span class="se">So is our approach.</span></h2>
   <div class="rv" data-d="2" style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
-    <div class="img-card" onmouseenter="var v=this.querySelector('video');v.style.opacity='1';v.play()" onmouseleave="var v=this.querySelector('video');v.pause();v.currentTime=0;v.style.opacity='.7'" onclick="go('brand')" style="background:#0f172a;height:320px"><video src="Media/Video/Hailuo_Video_Premium cinematic animation of_489863909728051206.mp4" loop muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7;transition:opacity .6s"></video><div class="img-card-content"><h3>For Brands</h3><p>Your device. Your brand. Our intelligence inside.</p></div></div>
-    <div class="img-card" onmouseenter="var v=this.querySelector('video');v.style.opacity='1';v.play()" onmouseleave="var v=this.querySelector('video');v.pause();v.currentTime=0;v.style.opacity='.7'" onclick="go('factory')" style="background:#0f172a;height:320px"><video src="Media/Video/Hailuo_Video_Cinematic macro animation of a_489864044289703938.mp4" loop muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7;transition:opacity .6s"></video><div class="img-card-content"><h3>For Factory</h3><p>Complete firmware + hardware integration. Production-ready.</p></div></div>
-    <div class="img-card" onmouseenter="var v=this.querySelector('video');v.style.opacity='1';v.play()" onmouseleave="var v=this.querySelector('video');v.pause();v.currentTime=0;v.style.opacity='.7'" onclick="go('venue')" style="background:#0f172a;height:320px"><video src="Media/Video/Hailuo_Video_Top-down cinematic animation o_489864156093087745.mp4" loop muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7;transition:opacity .6s"></video><div class="img-card-content"><h3>For Venues</h3><p>Turn your space into a smart entertainment venue.</p></div></div>
+    <div class="img-card" onmouseenter="var v=this.querySelector('video');v.style.opacity='1';v.play()" onmouseleave="var v=this.querySelector('video');v.pause();v.currentTime=0;v.style.opacity='.7'" onclick="go('brand')" style="background:#0a0a14;height:320px"><video src="Media/Video/Hailuo_Video_Cinematic macro animation of a_489864044289703938.mp4" loop muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7;transition:opacity .6s"></video><div class="img-card-content"><h3>For Brands</h3><p>Your device. Your brand. Our intelligence inside.</p></div></div>
+    <div class="img-card" onmouseenter="var v=this.querySelector('video');v.style.opacity='1';v.play()" onmouseleave="var v=this.querySelector('video');v.pause();v.currentTime=0;v.style.opacity='.7'" onclick="go('factory')" style="background:#0a0a14;height:320px"><video src="Media/Video/Hailuo_Video_Premium cinematic animation of_489863909728051206.mp4" loop muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7;transition:opacity .6s"></video><div class="img-card-content"><h3>For Factory</h3><p>Complete firmware + hardware integration. Production-ready.</p></div></div>
+    <div class="img-card" onmouseenter="var v=this.querySelector('video');v.style.opacity='1';v.play()" onmouseleave="var v=this.querySelector('video');v.pause();v.currentTime=0;v.style.opacity='.7'" onclick="go('venue')" style="background:#0a0a14;height:320px"><video src="Media/Video/Hailuo_Video_Top-down cinematic animation o_489864156093087745.mp4" loop muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7;transition:opacity .6s"></video><div class="img-card-content"><h3>For Venues</h3><p>Turn your space into a smart entertainment venue.</p></div></div>
   </div>
 </div>
 </section>
