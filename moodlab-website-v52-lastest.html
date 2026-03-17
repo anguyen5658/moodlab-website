@@ -764,30 +764,70 @@ section{overflow-x:hidden}
      ═══════════════════════════════════════════════════════════ -->
 <div class="pg" id="p-sc">
 
-<!-- Hero -->
-<section class="hero" style="min-height:80vh;padding-bottom:0;overflow:hidden;position:relative">
+<!-- Hero — Split Layout: Text Left + 5 Group Navigator Right -->
+<section class="hero" style="min-height:90vh;padding-bottom:0;overflow:hidden;position:relative">
   <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none">
-    <div style="position:absolute;top:-10%;right:-5%;width:60%;height:120%;background:radial-gradient(ellipse 80% 80% at 60% 40%,rgba(0,232,255,.1),rgba(168,85,247,.05),transparent 70%);animation:meshDrift 20s ease-in-out infinite"></div>
-    <div style="position:absolute;bottom:-20%;left:-10%;width:50%;height:80%;background:radial-gradient(ellipse at 30% 70%,rgba(168,85,247,.06),transparent 60%);filter:blur(80px)"></div>
+    <div style="position:absolute;top:0;right:0;width:60%;height:100%;background:radial-gradient(ellipse 80% 80% at 70% 40%,rgba(0,232,255,.1),rgba(168,85,247,.06),transparent 70%);animation:meshDrift 20s ease-in-out infinite"></div>
+    <div style="position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(0deg,var(--bg),transparent)"></div>
   </div>
   <div class="hero-mesh" style="opacity:.5"></div>
   <div class="hero-grid" style="opacity:.3"></div>
-  <div class="w" style="position:relative;z-index:2;text-align:center;max-width:860px">
-    <div class="tag c rv">Technology · Smart Control</div>
-    <h1 class="rv" data-d="1" style="font-size:clamp(40px,6vw,72px);font-weight:900;line-height:.92;letter-spacing:-.05em;margin-bottom:24px">You Choose the Feeling.<br><span class="se" style="color:var(--cy);text-shadow:0 0 60px rgba(0,232,255,.3),0 0 120px rgba(0,232,255,.1)">AI Handles the Rest.</span></h1>
-    <p class="p1 rv" data-d="2" style="text-align:center;margin:0 auto 44px;max-width:600px">31+ features across 5 intelligent groups. Every mode powered by Mood Logic™ AI that learns, adapts, and optimizes in real-time. This isn't a settings menu — it's a control system.</p>
-    <!-- 5 Icons → AI Core visual -->
-    <div class="rv" data-d="3" style="display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:20px;background:rgba(255,255,255,.02);border:1px solid var(--bd);backdrop-filter:blur(10px)">
-      <div style="display:flex;gap:8px">
-        <div style="width:40px;height:40px;border-radius:10px;background:rgba(0,232,255,.06);border:1px solid rgba(0,232,255,.1);display:flex;align-items:center;justify-content:center;font-size:18px">🔥</div>
-        <div style="width:40px;height:40px;border-radius:10px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.1);display:flex;align-items:center;justify-content:center;font-size:18px">⚡</div>
-        <div style="width:40px;height:40px;border-radius:10px;background:rgba(236,72,153,.06);border:1px solid rgba(236,72,153,.1);display:flex;align-items:center;justify-content:center;font-size:18px">🧬</div>
-        <div style="width:40px;height:40px;border-radius:10px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.1);display:flex;align-items:center;justify-content:center;font-size:18px">🎭</div>
-        <div style="width:40px;height:40px;border-radius:10px;background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.1);display:flex;align-items:center;justify-content:center;font-size:18px">🛠️</div>
+  <div class="w" style="position:relative;z-index:2;display:grid;grid-template-columns:1fr 380px;align-items:center;gap:clamp(30px,5vw,80px)">
+    <!-- Left: Text -->
+    <div>
+      <div class="tag rv" style="margin-bottom:16px">Technology · Smart Control</div>
+      <h1 class="rv" data-d="1" style="font-size:clamp(40px,6vw,76px);font-weight:900;line-height:.92;letter-spacing:-.05em;margin-bottom:24px">AI That <span style="color:var(--cy);text-shadow:0 0 40px rgba(0,232,255,.4),0 0 80px rgba(0,232,255,.15)">Thinks</span><br>Before You <span class="grd">Act.</span></h1>
+      <p class="p1 rv" data-d="2" style="margin-bottom:32px;max-width:480px">31+ features across 5 intelligent groups. Mood Logic™ AI learns, adapts, and optimizes every session in real-time. This isn't settings — it's an AI control system.</p>
+      <div class="rv" data-d="3" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px">
+        <a class="btn bp" onclick="document.getElementById('sc-heat').scrollIntoView({behavior:'smooth'})" style="padding:14px 32px">Explore Controls →</a>
+        <a class="btn bs" onclick="go('contact')" style="padding:14px 32px">Partner With Us</a>
       </div>
-      <div style="display:flex;align-items:center;margin:0 6px"><div style="width:32px;height:1px;background:linear-gradient(90deg,transparent,var(--cy))"></div><span style="color:var(--cy);font-size:10px;margin-left:-2px">▸</span></div>
-      <div style="padding:10px 18px;border-radius:12px;background:linear-gradient(135deg,rgba(0,232,255,.1),rgba(168,85,247,.08));border:1px solid rgba(0,232,255,.15)">
-        <div style="font-size:11px;font-weight:800;color:var(--cy)">🧠 Mood Logic™</div>
+      <!-- Stat strip -->
+      <div class="rv" data-d="3" style="display:flex;gap:24px;padding-top:20px;border-top:1px solid var(--bd)">
+        <div><div style="font-size:28px;font-weight:900;color:var(--cy)">31+</div><div style="font-family:var(--fm);font-size:8px;color:var(--tx3);letter-spacing:2px;margin-top:2px">FEATURES</div></div>
+        <div><div style="font-size:28px;font-weight:900;color:var(--pu)">5</div><div style="font-family:var(--fm);font-size:8px;color:var(--tx3);letter-spacing:2px;margin-top:2px">CONTROL GROUPS</div></div>
+        <div><div style="font-size:28px;font-weight:900;color:var(--pk)">7</div><div style="font-family:var(--fm);font-size:8px;color:var(--tx3);letter-spacing:2px;margin-top:2px">AI PIPELINES</div></div>
+      </div>
+    </div>
+    <!-- Right: 5 Group Navigator — Vertical stack -->
+    <div class="rv" data-d="2" style="position:relative">
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:320px;height:320px;background:radial-gradient(circle,rgba(0,232,255,.08),rgba(168,85,247,.04),transparent 70%);filter:blur(60px);pointer-events:none"></div>
+      <div style="display:flex;flex-direction:column;gap:10px;position:relative">
+        <!-- Heat Control -->
+        <div onclick="document.getElementById('sc-heat').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;display:flex;align-items:center;gap:16px;padding:18px 22px;border-radius:16px;background:rgba(0,232,255,.04);border:1px solid rgba(0,232,255,.1);backdrop-filter:blur(10px);transition:all .4s" onmouseover="this.style.background='rgba(0,232,255,.1)';this.style.transform='translateX(-6px) scale(1.02)';this.style.borderColor='rgba(0,232,255,.25)'" onmouseout="this.style.background='rgba(0,232,255,.04)';this.style.transform='none';this.style.borderColor='rgba(0,232,255,.1)'">
+          <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(0,232,255,.15),rgba(0,232,255,.05));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🔥</div>
+          <div style="flex:1"><div style="font-size:14px;font-weight:800;margin-bottom:2px">Heat Control</div><div style="font-size:10px;color:var(--tx3);line-height:1.3">Quick Heat + Precision Curves</div></div>
+          <div style="font-family:var(--fm);font-size:9px;color:var(--cy);letter-spacing:1px;padding:4px 10px;border-radius:8px;background:rgba(0,232,255,.08)">01</div>
+        </div>
+        <!-- Pro Modes -->
+        <div onclick="document.getElementById('sc-pro').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;display:flex;align-items:center;gap:16px;padding:18px 22px;border-radius:16px;background:rgba(168,85,247,.04);border:1px solid rgba(168,85,247,.1);backdrop-filter:blur(10px);transition:all .4s" onmouseover="this.style.background='rgba(168,85,247,.1)';this.style.transform='translateX(-6px) scale(1.02)';this.style.borderColor='rgba(168,85,247,.25)'" onmouseout="this.style.background='rgba(168,85,247,.04)';this.style.transform='none';this.style.borderColor='rgba(168,85,247,.1)'">
+          <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(168,85,247,.15),rgba(168,85,247,.05));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">⚡</div>
+          <div style="flex:1"><div style="font-size:14px;font-weight:800;margin-bottom:2px">Pro Modes</div><div style="font-size:10px;color:var(--tx3);line-height:1.3">Beast · Eco · Balance · Microdose</div></div>
+          <div style="font-family:var(--fm);font-size:9px;color:var(--pu);letter-spacing:1px;padding:4px 10px;border-radius:8px;background:rgba(168,85,247,.08)">02</div>
+        </div>
+        <!-- Blend Modes -->
+        <div onclick="document.getElementById('sc-ent').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;display:flex;align-items:center;gap:16px;padding:18px 22px;border-radius:16px;background:rgba(236,72,153,.04);border:1px solid rgba(236,72,153,.1);backdrop-filter:blur(10px);transition:all .4s" onmouseover="this.style.background='rgba(236,72,153,.1)';this.style.transform='translateX(-6px) scale(1.02)';this.style.borderColor='rgba(236,72,153,.25)'" onmouseout="this.style.background='rgba(236,72,153,.04)';this.style.transform='none';this.style.borderColor='rgba(236,72,153,.1)'">
+          <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(236,72,153,.15),rgba(236,72,153,.05));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🧬</div>
+          <div style="flex:1"><div style="font-size:14px;font-weight:800;margin-bottom:2px">Blend Modes</div><div style="font-size:10px;color:var(--tx3);line-height:1.3">Custom ratios · AI-optimized delivery</div></div>
+          <div style="font-family:var(--fm);font-size:9px;color:var(--pk);letter-spacing:1px;padding:4px 10px;border-radius:8px;background:rgba(236,72,153,.08)">03</div>
+        </div>
+        <!-- Mood Modes -->
+        <div onclick="document.getElementById('sc-mood').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;display:flex;align-items:center;gap:16px;padding:18px 22px;border-radius:16px;background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.1);backdrop-filter:blur(10px);transition:all .4s" onmouseover="this.style.background='rgba(245,158,11,.1)';this.style.transform='translateX(-6px) scale(1.02)';this.style.borderColor='rgba(245,158,11,.25)'" onmouseout="this.style.background='rgba(245,158,11,.04)';this.style.transform='none';this.style.borderColor='rgba(245,158,11,.1)'">
+          <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(245,158,11,.05));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🎭</div>
+          <div style="flex:1"><div style="font-size:14px;font-weight:800;margin-bottom:2px">Mood Modes</div><div style="font-size:10px;color:var(--tx3);line-height:1.3">7 emotion presets · Adaptive AI</div></div>
+          <div style="font-family:var(--fm);font-size:9px;color:var(--am);letter-spacing:1px;padding:4px 10px;border-radius:8px;background:rgba(245,158,11,.08)">04</div>
+        </div>
+        <!-- Pro Tools -->
+        <div onclick="document.getElementById('sc-tools').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;display:flex;align-items:center;gap:16px;padding:18px 22px;border-radius:16px;background:rgba(52,211,153,.04);border:1px solid rgba(52,211,153,.1);backdrop-filter:blur(10px);transition:all .4s" onmouseover="this.style.background='rgba(52,211,153,.1)';this.style.transform='translateX(-6px) scale(1.02)';this.style.borderColor='rgba(52,211,153,.25)'" onmouseout="this.style.background='rgba(52,211,153,.04)';this.style.transform='none';this.style.borderColor='rgba(52,211,153,.1)'">
+          <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(52,211,153,.15),rgba(52,211,153,.05));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🛠️</div>
+          <div style="flex:1"><div style="font-size:14px;font-weight:800;margin-bottom:2px">Pro Tools</div><div style="font-size:10px;color:var(--tx3);line-height:1.3">Pre-Heat · Last Drop · Fusion · More</div></div>
+          <div style="font-family:var(--fm);font-size:9px;color:var(--gn);letter-spacing:1px;padding:4px 10px;border-radius:8px;background:rgba(52,211,153,.08)">05</div>
+        </div>
+        <!-- AI Core badge -->
+        <div style="margin-top:6px;text-align:center;padding:14px;border-radius:14px;background:linear-gradient(135deg,rgba(0,232,255,.06),rgba(168,85,247,.04));border:1px solid rgba(0,232,255,.1)">
+          <div style="font-family:var(--fm);font-size:9px;letter-spacing:3px;color:var(--tx3);margin-bottom:4px">POWERED BY</div>
+          <div style="font-size:16px;font-weight:900;color:var(--cy)">🧠 Mood Logic™ AI</div>
+        </div>
       </div>
     </div>
   </div>
@@ -803,7 +843,7 @@ section{overflow-x:hidden}
       <div style="font-size:16px;margin-bottom:3px">⚡</div><div style="font-size:10px;font-weight:700;color:var(--tx2)">Pro Modes</div>
     </a>
     <a onclick="document.getElementById('sc-ent').scrollIntoView({behavior:'smooth',block:'start'})" class="sc-tab" style="flex:1;padding:14px 8px;text-align:center;cursor:pointer;transition:.3s;border-right:1px solid var(--bd);border-bottom:2px solid transparent" onmouseover="this.style.background='rgba(236,72,153,.04)';this.style.borderBottomColor='var(--pk)'" onmouseout="this.style.background='transparent';this.style.borderBottomColor='transparent'">
-      <div style="font-size:16px;margin-bottom:3px">🧬</div><div style="font-size:10px;font-weight:700;color:var(--tx2)">Entourage</div>
+      <div style="font-size:16px;margin-bottom:3px">🧬</div><div style="font-size:10px;font-weight:700;color:var(--tx2)">Blend Modes</div>
     </a>
     <a onclick="document.getElementById('sc-mood').scrollIntoView({behavior:'smooth',block:'start'})" class="sc-tab" style="flex:1;padding:14px 8px;text-align:center;cursor:pointer;transition:.3s;border-right:1px solid var(--bd);border-bottom:2px solid transparent" onmouseover="this.style.background='rgba(245,158,11,.04)';this.style.borderBottomColor='var(--am)'" onmouseout="this.style.background='transparent';this.style.borderBottomColor='transparent'">
       <div style="font-size:16px;margin-bottom:3px">🎭</div><div style="font-size:10px;font-weight:700;color:var(--tx2)">Mood Modes</div>
@@ -822,108 +862,239 @@ section{overflow-x:hidden}
   <h2 class="h2 rv" data-d="1" style="max-width:600px">The Foundation of <span class="se">Every Device.</span></h2>
   <p class="rv" data-d="2" style="font-size:15px;color:var(--tx2);max-width:540px;font-weight:300;margin-bottom:48px;line-height:1.65">Two levels of heat control. Quick Heat for everyone — AI optimizes behind the scenes. Precision Heat for power users — full manual, per-second voltage curves.</p>
 
-  <!-- Quick Heat -->
-  <div class="rv" data-d="2" style="margin-bottom:56px">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
-      <h3 style="font-size:20px;font-weight:800">🔥 Quick Heat Control</h3>
+  <!-- Quick Heat — Side-by-side: Info Left + Interactive Phone Right -->
+  <div class="rv" data-d="2" style="margin-bottom:64px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px">
+      <h3 style="font-size:22px;font-weight:800">🔥 Quick Heat Control</h3>
       <span style="font-family:var(--fm);font-size:8px;color:var(--cy);letter-spacing:2px;background:rgba(0,232,255,.08);padding:4px 10px;border-radius:100px;border:1px solid rgba(0,232,255,.1)">ON-DEVICE FIRST</span>
     </div>
-    <p style="font-size:13px;color:var(--tx2);margin-bottom:24px;max-width:480px;line-height:1.6">Choose your intensity. AI does the rest. Works immediately — no app, no Bluetooth, no setup required.</p>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
-      <div class="gc rv" style="text-align:center;padding:28px 16px;border-color:rgba(120,120,130,.08);position:relative;overflow:hidden">
-        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#555"></div>
-        <div style="width:44px;height:44px;border-radius:50%;background:rgba(120,120,130,.1);margin:0 auto 12px;display:flex;align-items:center;justify-content:center"><div style="width:14px;height:14px;border-radius:50%;background:#555"></div></div>
-        <div style="font-size:16px;font-weight:900;color:var(--tx3);letter-spacing:1px">OFF</div>
-        <div style="font-size:10px;color:var(--tx3);margin-top:6px;line-height:1.4">Tank disabled.<br>Multi-tank essential.</div>
+    <div style="display:grid;grid-template-columns:1fr 320px;gap:40px;align-items:start">
+      <!-- Left: Description + Features -->
+      <div>
+        <p style="font-size:14px;color:var(--tx2);margin-bottom:28px;line-height:1.65">Choose your intensity. AI does the rest. Works immediately — no app, no Bluetooth, no setup required. Each level is an <em>intention</em>, not a fixed setting.</p>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px">
+          <div style="display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:14px;background:rgba(120,120,130,.04);border:1px solid rgba(120,120,130,.06);cursor:pointer;transition:all .3s" onclick="scSetHeat(0)" id="qh-btn-0">
+            <div style="width:36px;height:36px;border-radius:50%;background:rgba(120,120,130,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0"><div style="width:10px;height:10px;border-radius:50%;background:#555"></div></div>
+            <div><div style="font-size:13px;font-weight:800;color:var(--tx3)">OFF</div><div style="font-size:10px;color:var(--tx3);line-height:1.3">Tank disabled. Multi-tank essential.</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:14px;background:rgba(96,165,250,.04);border:1px solid rgba(96,165,250,.08);cursor:pointer;transition:all .3s" onclick="scSetHeat(1)" id="qh-btn-1">
+            <div style="width:36px;height:36px;border-radius:50%;background:rgba(96,165,250,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 16px rgba(96,165,250,.1)"><div style="width:10px;height:10px;border-radius:50%;background:#60a5fa;box-shadow:0 0 8px rgba(96,165,250,.4)"></div></div>
+            <div><div style="font-size:13px;font-weight:800;color:#60a5fa">CHILL</div><div style="font-size:10px;color:var(--tx2);line-height:1.3">Subtle flavor. AI-optimized per session.</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:14px;background:rgba(52,211,153,.04);border:1px solid rgba(52,211,153,.08);cursor:pointer;transition:all .3s" onclick="scSetHeat(2)" id="qh-btn-2">
+            <div style="width:36px;height:36px;border-radius:50%;background:rgba(52,211,153,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 16px rgba(52,211,153,.1)"><div style="width:10px;height:10px;border-radius:50%;background:var(--gn);box-shadow:0 0 8px rgba(52,211,153,.4)"></div></div>
+            <div><div style="font-size:13px;font-weight:800;color:var(--gn)">MEDIUM</div><div style="font-size:10px;color:var(--tx2);line-height:1.3">Balanced output. Daily driver.</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:14px;background:rgba(251,146,60,.04);border:1px solid rgba(251,146,60,.08);cursor:pointer;transition:all .3s" onclick="scSetHeat(3)" id="qh-btn-3">
+            <div style="width:36px;height:36px;border-radius:50%;background:rgba(251,146,60,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 16px rgba(251,146,60,.1)"><div style="width:10px;height:10px;border-radius:50%;background:#fb923c;box-shadow:0 0 8px rgba(251,146,60,.4)"></div></div>
+            <div><div style="font-size:13px;font-weight:800;color:#fb923c">INTENSE</div><div style="font-size:10px;color:var(--tx2);line-height:1.3">Maximum power. Full effect.</div></div>
+          </div>
+        </div>
+        <!-- AI callout -->
+        <div style="padding:16px 18px;border-radius:14px;background:linear-gradient(135deg,rgba(0,232,255,.04),rgba(168,85,247,.02));border:1px solid rgba(0,232,255,.08);display:flex;align-items:start;gap:12px">
+          <div style="font-size:16px;flex-shrink:0;margin-top:1px">🧠</div>
+          <div><div style="font-size:11px;font-weight:800;color:var(--cy);margin-bottom:2px">AI-Powered — Even at the Simplest Level</div><div style="font-size:11px;color:var(--tx2);line-height:1.55">"Chill" on a Mood Lab device is fundamentally different from "Low" on any other device. AI analyzes extract type, battery state, and session history.</div></div>
+        </div>
       </div>
-      <div class="gc rv" data-d="1" style="text-align:center;padding:28px 16px;border-color:rgba(96,165,250,.1);position:relative;overflow:hidden">
-        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#3b82f6,#60a5fa)"></div>
-        <div style="width:44px;height:44px;border-radius:50%;background:rgba(96,165,250,.1);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(96,165,250,.15)"><div style="width:14px;height:14px;border-radius:50%;background:#60a5fa;box-shadow:0 0 12px rgba(96,165,250,.4)"></div></div>
-        <div style="font-size:16px;font-weight:900;color:#60a5fa;letter-spacing:1px">CHILL</div>
-        <div style="font-size:10px;color:var(--tx2);margin-top:6px;line-height:1.4">Subtle flavor.<br>AI-optimized per session.</div>
+      <!-- Right: Interactive Phone Mockup -->
+      <div style="position:relative">
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:280px;height:280px;background:radial-gradient(circle,rgba(0,232,255,.08),transparent 70%);filter:blur(50px);pointer-events:none"></div>
+        <div id="qh-phone" style="position:relative;width:280px;height:540px;margin:0 auto;border-radius:40px;background:linear-gradient(180deg,#0c0c14,#080810);border:2px solid rgba(255,255,255,.08);box-shadow:0 20px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03),inset 0 1px 0 rgba(255,255,255,.05);overflow:hidden">
+          <!-- Notch -->
+          <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:28px;background:#000;border-radius:0 0 20px 20px;z-index:5"></div>
+          <!-- Status bar -->
+          <div style="padding:36px 20px 0;display:flex;justify-content:space-between;align-items:center">
+            <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,.5)">9:41</div>
+            <div style="display:flex;gap:4px;align-items:center"><div style="width:14px;height:8px;border-radius:2px;border:1px solid rgba(255,255,255,.3)"><div style="width:70%;height:100%;background:rgba(255,255,255,.4);border-radius:1px"></div></div></div>
+          </div>
+          <!-- App Header -->
+          <div style="padding:16px 20px 12px;text-align:center">
+            <div style="font-size:9px;font-weight:700;color:var(--cy);letter-spacing:3px;margin-bottom:4px">QUICK HEAT</div>
+            <div id="qh-level-text" style="font-size:22px;font-weight:900;color:#fff;transition:all .4s">MEDIUM</div>
+          </div>
+          <!-- Animated Heat Ring -->
+          <div style="display:flex;justify-content:center;padding:8px 0 16px">
+            <div id="qh-ring" style="width:160px;height:160px;border-radius:50%;position:relative;transition:all .5s">
+              <svg viewBox="0 0 160 160" style="position:absolute;inset:0;transform:rotate(-90deg)">
+                <circle cx="80" cy="80" r="70" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="8"/>
+                <circle id="qh-arc" cx="80" cy="80" r="70" fill="none" stroke="var(--gn)" stroke-width="8" stroke-linecap="round" stroke-dasharray="330" stroke-dashoffset="110" style="transition:all .6s ease;filter:drop-shadow(0 0 8px rgba(52,211,153,.4))"/>
+              </svg>
+              <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+                <div id="qh-temp" style="font-size:36px;font-weight:900;color:var(--gn);transition:color .4s">185°</div>
+                <div style="font-size:8px;font-weight:600;color:var(--tx3);letter-spacing:2px;margin-top:2px">AI OPTIMIZED</div>
+              </div>
+            </div>
+          </div>
+          <!-- Heat Level Buttons in Phone -->
+          <div style="padding:0 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+            <div onclick="scSetHeat(0)" style="cursor:pointer;text-align:center;padding:10px 4px;border-radius:12px;background:rgba(120,120,130,.06);border:1px solid rgba(120,120,130,.06);transition:all .3s" id="qh-pb-0">
+              <div style="width:8px;height:8px;border-radius:50%;background:#555;margin:0 auto 5px"></div>
+              <div style="font-size:8px;font-weight:800;color:var(--tx3)">OFF</div>
+            </div>
+            <div onclick="scSetHeat(1)" style="cursor:pointer;text-align:center;padding:10px 4px;border-radius:12px;background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.08);transition:all .3s" id="qh-pb-1">
+              <div style="width:8px;height:8px;border-radius:50%;background:#60a5fa;margin:0 auto 5px"></div>
+              <div style="font-size:8px;font-weight:800;color:#60a5fa">CHILL</div>
+            </div>
+            <div onclick="scSetHeat(2)" style="cursor:pointer;text-align:center;padding:10px 4px;border-radius:12px;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.2);transition:all .3s" id="qh-pb-2">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--gn);margin:0 auto 5px;box-shadow:0 0 6px rgba(52,211,153,.5)"></div>
+              <div style="font-size:8px;font-weight:800;color:var(--gn)">MED</div>
+            </div>
+            <div onclick="scSetHeat(3)" style="cursor:pointer;text-align:center;padding:10px 4px;border-radius:12px;background:rgba(251,146,60,.06);border:1px solid rgba(251,146,60,.08);transition:all .3s" id="qh-pb-3">
+              <div style="width:8px;height:8px;border-radius:50%;background:#fb923c;margin:0 auto 5px"></div>
+              <div style="font-size:8px;font-weight:800;color:#fb923c">MAX</div>
+            </div>
+          </div>
+          <!-- Tank Status -->
+          <div style="padding:14px 20px 0">
+            <div style="font-size:8px;font-weight:700;color:var(--tx3);letter-spacing:2px;margin-bottom:8px">ACTIVE TANKS</div>
+            <div style="display:flex;gap:6px">
+              <div style="flex:1;padding:8px;border-radius:10px;background:rgba(0,232,255,.05);border:1px solid rgba(0,232,255,.08);text-align:center"><div style="font-size:8px;font-weight:700;color:var(--cy)">TANK 1</div><div style="font-size:7px;color:var(--tx3);margin-top:2px">THC · 82%</div></div>
+              <div style="flex:1;padding:8px;border-radius:10px;background:rgba(168,85,247,.05);border:1px solid rgba(168,85,247,.08);text-align:center"><div style="font-size:8px;font-weight:700;color:var(--pu)">TANK 2</div><div style="font-size:7px;color:var(--tx3);margin-top:2px">CBD · 65%</div></div>
+              <div style="flex:1;padding:8px;border-radius:10px;background:rgba(236,72,153,.05);border:1px solid rgba(236,72,153,.08);text-align:center"><div style="font-size:8px;font-weight:700;color:var(--pk)">TANK 3</div><div style="font-size:7px;color:var(--tx3);margin-top:2px">Flavor · 91%</div></div>
+            </div>
+          </div>
+          <!-- Home indicator -->
+          <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:100px;height:4px;border-radius:2px;background:rgba(255,255,255,.15)"></div>
+        </div>
+        <div style="text-align:center;margin-top:16px;font-family:var(--fm);font-size:9px;color:var(--tx3);letter-spacing:2px">TAP ANY LEVEL TO SEE IT LIVE ↑</div>
       </div>
-      <div class="gc rv" data-d="2" style="text-align:center;padding:28px 16px;border-color:rgba(52,211,153,.1);position:relative;overflow:hidden">
-        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#10b981,#34d399)"></div>
-        <div style="width:44px;height:44px;border-radius:50%;background:rgba(52,211,153,.1);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(52,211,153,.15)"><div style="width:14px;height:14px;border-radius:50%;background:var(--gn);box-shadow:0 0 12px rgba(52,211,153,.4)"></div></div>
-        <div style="font-size:16px;font-weight:900;color:var(--gn);letter-spacing:1px">MEDIUM</div>
-        <div style="font-size:10px;color:var(--tx2);margin-top:6px;line-height:1.4">Balanced output.<br>Daily driver.</div>
-      </div>
-      <div class="gc rv" data-d="3" style="text-align:center;padding:28px 16px;border-color:rgba(251,146,60,.1);position:relative;overflow:hidden">
-        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#f97316,#fb923c)"></div>
-        <div style="width:44px;height:44px;border-radius:50%;background:rgba(251,146,60,.1);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(251,146,60,.15)"><div style="width:14px;height:14px;border-radius:50%;background:#fb923c;box-shadow:0 0 12px rgba(251,146,60,.4)"></div></div>
-        <div style="font-size:16px;font-weight:900;color:#fb923c;letter-spacing:1px">INTENSE</div>
-        <div style="font-size:10px;color:var(--tx2);margin-top:6px;line-height:1.4">Maximum power.<br>Full effect.</div>
-      </div>
-    </div>
-    <!-- AI callout -->
-    <div class="rv" data-d="3" style="margin-top:20px;padding:18px 22px;border-radius:16px;background:linear-gradient(135deg,rgba(0,232,255,.04),rgba(168,85,247,.02));border:1px solid rgba(0,232,255,.08);display:flex;align-items:start;gap:14px">
-      <div style="width:36px;height:36px;border-radius:10px;background:rgba(0,232,255,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">🧠</div>
-      <div><div style="font-size:12px;font-weight:800;color:var(--cy);margin-bottom:3px">AI-Powered — Even at the Simplest Level</div><div style="font-size:12px;color:var(--tx2);line-height:1.6">Every level is an intention, not a fixed setting. AI analyzes extract type, battery state, session history, and environment to deliver the optimal output. "Chill" on a Mood Lab device is fundamentally different from "Low" on any other device.</div></div>
     </div>
   </div>
 
-  <!-- Precision Heat -->
-  <div class="rv">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
-      <h3 style="font-size:20px;font-weight:800">📐 Precision Heat Control</h3>
+  <!-- Precision Heat — Full Width with Interactive Curve Editor -->
+  <div class="rv" style="margin-top:16px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px">
+      <h3 style="font-size:22px;font-weight:800">📐 Precision Heat Control</h3>
       <span style="font-family:var(--fm);font-size:8px;color:var(--pu);letter-spacing:2px;background:rgba(168,85,247,.08);padding:4px 10px;border-radius:100px;border:1px solid rgba(168,85,247,.1)">APP-EXCLUSIVE</span>
     </div>
-    <p style="font-size:13px;color:var(--tx2);margin-bottom:24px;max-width:540px;line-height:1.6">Draw custom voltage curves per second. Per-tank. Multiple curves running simultaneously. Full manual — AI steps aside completely. <strong style="color:var(--tx)">No other device on the market can do this.</strong></p>
-    <div style="border-radius:20px;padding:clamp(28px,4vw,48px);background:linear-gradient(135deg,rgba(168,85,247,.05),rgba(0,232,255,.03));border:1px solid rgba(168,85,247,.12);position:relative;overflow:hidden">
-      <div style="position:absolute;top:10%;right:5%;width:200px;height:200px;background:radial-gradient(circle,rgba(168,85,247,.08),transparent 70%);filter:blur(60px);pointer-events:none"></div>
-      <!-- 3 Curve graphs -->
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:24px;position:relative;z-index:2">
-        <div>
-          <div style="font-family:var(--fm);font-size:8px;color:var(--cy);letter-spacing:1.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:var(--cy);display:inline-block;box-shadow:0 0 8px rgba(0,232,255,.5)"></span>TANK 1 · THC</div>
-          <div style="background:rgba(0,0,0,.3);border-radius:12px;padding:16px;border:1px solid rgba(0,232,255,.06)">
-            <svg viewBox="0 0 300 80" style="width:100%;height:80px;display:block">
-              <defs><linearGradient id="cg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(0,232,255,.15)"/><stop offset="100%" stop-color="transparent"/></linearGradient></defs>
-              <line x1="0" y1="79" x2="300" y2="79" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
-              <line x1="0" y1="53" x2="300" y2="53" stroke="rgba(255,255,255,.02)" stroke-width="1" stroke-dasharray="3"/>
-              <line x1="0" y1="26" x2="300" y2="26" stroke="rgba(255,255,255,.02)" stroke-width="1" stroke-dasharray="3"/>
-              <path d="M0,70 C30,68 50,30 80,22 S130,55 170,18 S230,42 300,32" fill="url(#cg1)" stroke="none" opacity=".3"/>
-              <path d="M0,70 C30,68 50,30 80,22 S130,55 170,18 S230,42 300,32" fill="none" stroke="var(--cy)" stroke-width="2.5" stroke-linecap="round"/>
-              <circle cx="80" cy="22" r="3" fill="var(--cy)" style="filter:drop-shadow(0 0 4px rgba(0,232,255,.6))"/>
-              <circle cx="170" cy="18" r="3" fill="var(--cy)" style="filter:drop-shadow(0 0 4px rgba(0,232,255,.6))"/>
-            </svg>
+    <p style="font-size:14px;color:var(--tx2);margin-bottom:28px;max-width:540px;line-height:1.65">Draw custom voltage curves per second. Per-tank. Multiple curves running simultaneously. Full manual — AI steps aside completely. <strong style="color:var(--tx)">No other device on the market can do this.</strong></p>
+
+    <div style="display:grid;grid-template-columns:1fr 320px;gap:40px;align-items:start">
+      <!-- Left: Interactive Curve Editor (simulated app screen) -->
+      <div style="border-radius:24px;padding:clamp(24px,3vw,40px);background:linear-gradient(180deg,#0c0c18,#08080e);border:1px solid rgba(168,85,247,.15);position:relative;overflow:hidden">
+        <div style="position:absolute;top:10%;right:5%;width:200px;height:200px;background:radial-gradient(circle,rgba(168,85,247,.06),transparent 70%);filter:blur(60px);pointer-events:none"></div>
+        <!-- App screen header -->
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;position:relative;z-index:2">
+          <div><div style="font-size:9px;font-weight:700;color:var(--pu);letter-spacing:3px">PRECISION EDITOR</div><div style="font-size:18px;font-weight:900;margin-top:4px">Custom Curve</div></div>
+          <div style="display:flex;gap:6px">
+            <div style="padding:6px 12px;border-radius:8px;background:rgba(168,85,247,.12);border:1px solid rgba(168,85,247,.15);font-size:9px;font-weight:700;color:var(--pu);cursor:pointer" onclick="scRandomizeCurve()">Randomize</div>
+            <div style="padding:6px 12px;border-radius:8px;background:rgba(0,232,255,.08);border:1px solid rgba(0,232,255,.1);font-size:9px;font-weight:700;color:var(--cy)">Save</div>
           </div>
         </div>
-        <div>
-          <div style="font-family:var(--fm);font-size:8px;color:var(--pu);letter-spacing:1.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:var(--pu);display:inline-block;box-shadow:0 0 8px rgba(168,85,247,.5)"></span>TANK 2 · CBD</div>
-          <div style="background:rgba(0,0,0,.3);border-radius:12px;padding:16px;border:1px solid rgba(168,85,247,.06)">
-            <svg viewBox="0 0 300 80" style="width:100%;height:80px;display:block">
-              <defs><linearGradient id="cg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(168,85,247,.15)"/><stop offset="100%" stop-color="transparent"/></linearGradient></defs>
-              <line x1="0" y1="79" x2="300" y2="79" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
-              <line x1="0" y1="53" x2="300" y2="53" stroke="rgba(255,255,255,.02)" stroke-width="1" stroke-dasharray="3"/>
-              <line x1="0" y1="26" x2="300" y2="26" stroke="rgba(255,255,255,.02)" stroke-width="1" stroke-dasharray="3"/>
-              <path d="M0,60 C50,52 80,20 120,28 S190,12 235,22 S275,38 300,28" fill="url(#cg2)" stroke="none" opacity=".3"/>
-              <path d="M0,60 C50,52 80,20 120,28 S190,12 235,22 S275,38 300,28" fill="none" stroke="var(--pu)" stroke-width="2.5" stroke-linecap="round"/>
-              <circle cx="120" cy="28" r="3" fill="var(--pu)" style="filter:drop-shadow(0 0 4px rgba(168,85,247,.6))"/>
-              <circle cx="235" cy="22" r="3" fill="var(--pu)" style="filter:drop-shadow(0 0 4px rgba(168,85,247,.6))"/>
+        <!-- Interactive SVG Curve -->
+        <div style="position:relative;z-index:2">
+          <div style="display:flex;gap:16px;margin-bottom:12px">
+            <div style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:var(--cy);box-shadow:0 0 6px rgba(0,232,255,.5)"></span><span style="font-family:var(--fm);font-size:8px;color:var(--cy);letter-spacing:1px">TANK 1</span></div>
+            <div style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:var(--pu);box-shadow:0 0 6px rgba(168,85,247,.5)"></span><span style="font-family:var(--fm);font-size:8px;color:var(--pu);letter-spacing:1px">TANK 2</span></div>
+            <div style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:var(--pk);box-shadow:0 0 6px rgba(236,72,153,.5)"></span><span style="font-family:var(--fm);font-size:8px;color:var(--pk);letter-spacing:1px">TANK 3</span></div>
+          </div>
+          <div id="sc-curve-editor" style="background:rgba(0,0,0,.4);border-radius:16px;padding:20px;border:1px solid rgba(255,255,255,.04);cursor:crosshair;position:relative" onclick="scRandomizeCurve()">
+            <!-- Y-axis labels -->
+            <div style="position:absolute;left:6px;top:20px;font-family:var(--fm);font-size:7px;color:var(--tx3)">4.2V</div>
+            <div style="position:absolute;left:6px;top:50%;transform:translateY(-50%);font-family:var(--fm);font-size:7px;color:var(--tx3)">3.0V</div>
+            <div style="position:absolute;left:6px;bottom:20px;font-family:var(--fm);font-size:7px;color:var(--tx3)">1.8V</div>
+            <svg id="sc-curve-svg" viewBox="0 0 500 180" style="width:100%;height:180px;display:block">
+              <!-- Grid -->
+              <line x1="30" y1="170" x2="490" y2="170" stroke="rgba(255,255,255,.05)" stroke-width="1"/>
+              <line x1="30" y1="130" x2="490" y2="130" stroke="rgba(255,255,255,.03)" stroke-width="1" stroke-dasharray="4"/>
+              <line x1="30" y1="90" x2="490" y2="90" stroke="rgba(255,255,255,.03)" stroke-width="1" stroke-dasharray="4"/>
+              <line x1="30" y1="50" x2="490" y2="50" stroke="rgba(255,255,255,.03)" stroke-width="1" stroke-dasharray="4"/>
+              <line x1="30" y1="10" x2="490" y2="10" stroke="rgba(255,255,255,.03)" stroke-width="1" stroke-dasharray="4"/>
+              <!-- Time markers -->
+              <text x="30" y="185" fill="rgba(255,255,255,.2)" font-size="8" font-family="var(--fm)">0s</text>
+              <text x="140" y="185" fill="rgba(255,255,255,.2)" font-size="8" font-family="var(--fm)">3s</text>
+              <text x="260" y="185" fill="rgba(255,255,255,.2)" font-size="8" font-family="var(--fm)">6s</text>
+              <text x="370" y="185" fill="rgba(255,255,255,.2)" font-size="8" font-family="var(--fm)">9s</text>
+              <text x="470" y="185" fill="rgba(255,255,255,.2)" font-size="8" font-family="var(--fm)">12s</text>
+              <!-- Tank 1 curve (cyan) -->
+              <defs>
+                <linearGradient id="pcg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(0,232,255,.12)"/><stop offset="100%" stop-color="transparent"/></linearGradient>
+                <linearGradient id="pcg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(168,85,247,.1)"/><stop offset="100%" stop-color="transparent"/></linearGradient>
+                <linearGradient id="pcg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(236,72,153,.08)"/><stop offset="100%" stop-color="transparent"/></linearGradient>
+              </defs>
+              <path id="sc-c1-fill" d="M30,150 C80,140 130,50 200,40 S320,100 380,30 S440,60 490,50 L490,170 L30,170Z" fill="url(#pcg1)" opacity=".5"/>
+              <path id="sc-c1" d="M30,150 C80,140 130,50 200,40 S320,100 380,30 S440,60 490,50" fill="none" stroke="var(--cy)" stroke-width="2.5" stroke-linecap="round" style="transition:d .8s ease"/>
+              <circle id="sc-c1-p1" cx="200" cy="40" r="5" fill="var(--cy)" style="filter:drop-shadow(0 0 6px rgba(0,232,255,.6));cursor:grab;transition:all .8s ease"/>
+              <circle id="sc-c1-p2" cx="380" cy="30" r="5" fill="var(--cy)" style="filter:drop-shadow(0 0 6px rgba(0,232,255,.6));cursor:grab;transition:all .8s ease"/>
+              <!-- Tank 2 curve (purple) -->
+              <path id="sc-c2-fill" d="M30,130 C100,110 160,40 240,55 S360,20 420,45 S470,55 490,40 L490,170 L30,170Z" fill="url(#pcg2)" opacity=".4"/>
+              <path id="sc-c2" d="M30,130 C100,110 160,40 240,55 S360,20 420,45 S470,55 490,40" fill="none" stroke="var(--pu)" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 3" style="transition:d .8s ease"/>
+              <!-- Tank 3 curve (pink) -->
+              <path id="sc-c3-fill" d="M30,120 C70,100 130,130 200,80 S300,50 370,90 S440,40 490,60 L490,170 L30,170Z" fill="url(#pcg3)" opacity=".3"/>
+              <path id="sc-c3" d="M30,120 C70,100 130,130 200,80 S300,50 370,90 S440,40 490,60" fill="none" stroke="var(--pk)" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 3" style="transition:d .8s ease"/>
+              <!-- Playhead -->
+              <line id="sc-playhead" x1="30" y1="5" x2="30" y2="175" stroke="rgba(255,255,255,.15)" stroke-width="1"/>
             </svg>
+            <div style="text-align:center;margin-top:10px;font-family:var(--fm);font-size:8px;color:var(--tx3);letter-spacing:2px">CLICK TO RANDOMIZE CURVES · DRAG POINTS IN REAL APP</div>
           </div>
         </div>
-        <div>
-          <div style="font-family:var(--fm);font-size:8px;color:var(--pk);letter-spacing:1.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:var(--pk);display:inline-block;box-shadow:0 0 8px rgba(236,72,153,.5)"></span>TANK 3 · FLAVOR</div>
-          <div style="background:rgba(0,0,0,.3);border-radius:12px;padding:16px;border:1px solid rgba(236,72,153,.06)">
-            <svg viewBox="0 0 300 80" style="width:100%;height:80px;display:block">
-              <defs><linearGradient id="cg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(236,72,153,.15)"/><stop offset="100%" stop-color="transparent"/></linearGradient></defs>
-              <line x1="0" y1="79" x2="300" y2="79" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
-              <line x1="0" y1="53" x2="300" y2="53" stroke="rgba(255,255,255,.02)" stroke-width="1" stroke-dasharray="3"/>
-              <line x1="0" y1="26" x2="300" y2="26" stroke="rgba(255,255,255,.02)" stroke-width="1" stroke-dasharray="3"/>
-              <path d="M0,50 C40,42 65,62 100,38 S155,18 195,42 S255,28 300,22" fill="url(#cg3)" stroke="none" opacity=".3"/>
-              <path d="M0,50 C40,42 65,62 100,38 S155,18 195,42 S255,28 300,22" fill="none" stroke="var(--pk)" stroke-width="2.5" stroke-linecap="round"/>
-              <circle cx="100" cy="38" r="3" fill="var(--pk)" style="filter:drop-shadow(0 0 4px rgba(236,72,153,.6))"/>
-              <circle cx="195" cy="42" r="3" fill="var(--pk)" style="filter:drop-shadow(0 0 4px rgba(236,72,153,.6))"/>
-            </svg>
-          </div>
+        <!-- Tags -->
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:16px;position:relative;z-index:2">
+          <span style="font-family:var(--fm);font-size:9px;color:var(--cy);padding:5px 12px;border-radius:100px;background:rgba(0,232,255,.06);border:1px solid rgba(0,232,255,.08)">Per-Second Control</span>
+          <span style="font-family:var(--fm);font-size:9px;color:var(--pu);padding:5px 12px;border-radius:100px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.08)">Multi-Tank Simultaneous</span>
+          <span style="font-family:var(--fm);font-size:9px;color:var(--am);padding:5px 12px;border-radius:100px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.08)">🏆 Technology Showcase #1</span>
         </div>
       </div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:2">
-        <span style="font-family:var(--fm);font-size:9px;color:var(--cy);padding:5px 12px;border-radius:100px;background:rgba(0,232,255,.06);border:1px solid rgba(0,232,255,.08)">Per-Second Control</span>
-        <span style="font-family:var(--fm);font-size:9px;color:var(--pu);padding:5px 12px;border-radius:100px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.08)">Multi-Tank Simultaneous</span>
-        <span style="font-family:var(--fm);font-size:9px;color:var(--pk);padding:5px 12px;border-radius:100px;background:rgba(236,72,153,.06);border:1px solid rgba(236,72,153,.08)">Visual Sync — Device & App</span>
-        <span style="font-family:var(--fm);font-size:9px;color:var(--am);padding:5px 12px;border-radius:100px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.08)">🏆 Technology Showcase #1</span>
+      <!-- Right: Phone showing curve result -->
+      <div style="position:relative">
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:260px;height:260px;background:radial-gradient(circle,rgba(168,85,247,.08),transparent 70%);filter:blur(50px);pointer-events:none"></div>
+        <div style="position:relative;width:280px;height:540px;margin:0 auto;border-radius:40px;background:linear-gradient(180deg,#0c0c14,#080810);border:2px solid rgba(255,255,255,.08);box-shadow:0 20px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03),inset 0 1px 0 rgba(255,255,255,.05);overflow:hidden">
+          <!-- Notch -->
+          <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:28px;background:#000;border-radius:0 0 20px 20px;z-index:5"></div>
+          <!-- Status bar -->
+          <div style="padding:36px 20px 0;display:flex;justify-content:space-between;align-items:center">
+            <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,.5)">9:41</div>
+            <div style="display:flex;gap:4px;align-items:center"><div style="width:14px;height:8px;border-radius:2px;border:1px solid rgba(255,255,255,.3)"><div style="width:70%;height:100%;background:rgba(255,255,255,.4);border-radius:1px"></div></div></div>
+          </div>
+          <!-- Precision Mode Header -->
+          <div style="padding:14px 20px 10px">
+            <div style="font-size:9px;font-weight:700;color:var(--pu);letter-spacing:3px;margin-bottom:4px">PRECISION MODE</div>
+            <div style="font-size:18px;font-weight:900">Custom Curve Active</div>
+          </div>
+          <!-- Mini curve preview -->
+          <div style="padding:0 16px">
+            <div style="background:rgba(0,0,0,.4);border-radius:14px;padding:14px;border:1px solid rgba(168,85,247,.1)">
+              <svg viewBox="0 0 240 100" style="width:100%;height:100px;display:block">
+                <line x1="0" y1="95" x2="240" y2="95" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+                <line x1="0" y1="65" x2="240" y2="65" stroke="rgba(255,255,255,.02)" stroke-width="1" stroke-dasharray="2"/>
+                <line x1="0" y1="35" x2="240" y2="35" stroke="rgba(255,255,255,.02)" stroke-width="1" stroke-dasharray="2"/>
+                <path d="M0,80 C30,75 60,25 100,20 S160,55 200,15 L200,95 L0,95Z" fill="rgba(0,232,255,.08)"/>
+                <path d="M0,80 C30,75 60,25 100,20 S160,55 200,15" fill="none" stroke="var(--cy)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M0,70 C50,60 80,20 130,30 S180,10 220,25" fill="none" stroke="var(--pu)" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 2"/>
+                <path d="M0,60 C40,50 70,70 120,45 S170,30 220,40" fill="none" stroke="var(--pk)" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 2"/>
+                <!-- Animated playhead -->
+                <line x1="60" y1="0" x2="60" y2="95" stroke="rgba(255,255,255,.2)" stroke-width="1"><animate attributeName="x1" values="0;240;0" dur="6s" repeatCount="indefinite"/><animate attributeName="x2" values="0;240;0" dur="6s" repeatCount="indefinite"/></line>
+              </svg>
+            </div>
+          </div>
+          <!-- Tank readings -->
+          <div style="padding:14px 16px">
+            <div style="display:flex;gap:6px">
+              <div style="flex:1;padding:10px 6px;border-radius:12px;background:rgba(0,232,255,.05);border:1px solid rgba(0,232,255,.08);text-align:center">
+                <div style="font-size:18px;font-weight:900;color:var(--cy)">3.8V</div>
+                <div style="font-size:7px;font-weight:600;color:var(--tx3);margin-top:2px;letter-spacing:1px">TANK 1</div>
+              </div>
+              <div style="flex:1;padding:10px 6px;border-radius:12px;background:rgba(168,85,247,.05);border:1px solid rgba(168,85,247,.08);text-align:center">
+                <div style="font-size:18px;font-weight:900;color:var(--pu)">3.2V</div>
+                <div style="font-size:7px;font-weight:600;color:var(--tx3);margin-top:2px;letter-spacing:1px">TANK 2</div>
+              </div>
+              <div style="flex:1;padding:10px 6px;border-radius:12px;background:rgba(236,72,153,.05);border:1px solid rgba(236,72,153,.08);text-align:center">
+                <div style="font-size:18px;font-weight:900;color:var(--pk)">2.9V</div>
+                <div style="font-size:7px;font-weight:600;color:var(--tx3);margin-top:2px;letter-spacing:1px">TANK 3</div>
+              </div>
+            </div>
+          </div>
+          <!-- Session info -->
+          <div style="padding:0 16px">
+            <div style="padding:12px;border-radius:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.03)">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:9px;color:var(--tx3)">Duration</span><span style="font-size:9px;font-weight:700">12.0s</span></div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:9px;color:var(--tx3)">Control Points</span><span style="font-size:9px;font-weight:700">8 per tank</span></div>
+              <div style="display:flex;justify-content:space-between"><span style="font-size:9px;color:var(--tx3)">AI Override</span><span style="font-size:9px;font-weight:700;color:var(--pk)">DISABLED</span></div>
+            </div>
+          </div>
+          <!-- Home indicator -->
+          <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:100px;height:4px;border-radius:2px;background:rgba(255,255,255,.15)"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -938,48 +1109,88 @@ section{overflow-x:hidden}
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div style="width:36px;height:3px;border-radius:2px;background:var(--pu)"></div><span class="rv" style="font-family:var(--fm);font-size:10px;color:var(--pu);letter-spacing:4px">02 · PRO MODES</span></div>
   <h2 class="h2 rv" data-d="1" style="max-width:500px">One Tap. <span class="se">Everything Changes.</span></h2>
   <p class="rv" data-d="2" style="font-size:15px;color:var(--tx2);max-width:520px;font-weight:300;margin-bottom:40px;line-height:1.65">Each Pro Mode transforms entire device behavior instantly. AI still optimizes in the background — Beast Mode at 30% battery delivers differently than at 100%.</p>
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
-    <div class="gc rv" style="padding:28px 20px;border-color:rgba(251,146,60,.08);position:relative;overflow:hidden">
-      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#f97316,rgba(251,146,60,.2))"></div>
-      <div style="font-size:32px;margin-bottom:12px">🚀</div>
-      <h4 style="font-size:16px;font-weight:800;color:#fb923c;margin-bottom:4px">Beast</h4>
-      <div style="font-family:var(--fm);font-size:8px;color:var(--tx3);letter-spacing:1.5px;margin-bottom:10px">ALL TANKS → INTENSE</div>
-      <p style="font-size:11px;color:var(--tx2);line-height:1.55">Maximum power and effect. AI compensates as battery drops to maintain consistency throughout.</p>
-      <div style="font-size:9px;color:var(--tx3);margin-top:12px;padding-top:10px;border-top:1px solid var(--bd)">⚡ Experienced users · Full intensity</div>
+
+  <div style="display:grid;grid-template-columns:1fr 280px;gap:40px;align-items:start">
+    <!-- Left: Mode Cards -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div class="gc rv" style="padding:24px 18px;border-color:rgba(251,146,60,.08);position:relative;overflow:hidden;cursor:pointer;transition:all .4s" onclick="scSetPro(0)" id="pm-card-0" onmouseover="this.style.borderColor='rgba(251,146,60,.25)';this.style.background='rgba(251,146,60,.04)'" onmouseout="this.style.borderColor='rgba(251,146,60,.08)';this.style.background='transparent'">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#f97316,rgba(251,146,60,.2))"></div>
+        <div style="font-size:28px;margin-bottom:10px">🚀</div>
+        <h4 style="font-size:15px;font-weight:800;color:#fb923c;margin-bottom:3px">Beast</h4>
+        <div style="font-family:var(--fm);font-size:8px;color:var(--tx3);letter-spacing:1.5px;margin-bottom:8px">ALL TANKS → INTENSE</div>
+        <p style="font-size:11px;color:var(--tx2);line-height:1.5">Maximum power. AI compensates as battery drops to maintain consistency.</p>
+      </div>
+      <div class="gc rv" data-d="1" style="padding:24px 18px;border-color:rgba(52,211,153,.08);position:relative;overflow:hidden;cursor:pointer;transition:all .4s" onclick="scSetPro(1)" id="pm-card-1" onmouseover="this.style.borderColor='rgba(52,211,153,.25)';this.style.background='rgba(52,211,153,.04)'" onmouseout="this.style.borderColor='rgba(52,211,153,.08)';this.style.background='transparent'">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gn),rgba(52,211,153,.2))"></div>
+        <div style="font-size:28px;margin-bottom:10px">🌿</div>
+        <h4 style="font-size:15px;font-weight:800;color:var(--gn);margin-bottom:3px">Eco</h4>
+        <div style="font-family:var(--fm);font-size:8px;color:var(--tx3);letter-spacing:1.5px;margin-bottom:8px">ALL TANKS → CHILL</div>
+        <p style="font-size:11px;color:var(--tx2);line-height:1.5">Minimum output, maximum longevity. AI delivers lowest effective amount.</p>
+      </div>
+      <div class="gc rv" data-d="2" style="padding:24px 18px;border-color:rgba(96,165,250,.08);position:relative;overflow:hidden;cursor:pointer;transition:all .4s" onclick="scSetPro(2)" id="pm-card-2" onmouseover="this.style.borderColor='rgba(96,165,250,.25)';this.style.background='rgba(96,165,250,.04)'" onmouseout="this.style.borderColor='rgba(96,165,250,.08)';this.style.background='transparent'">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#60a5fa,rgba(96,165,250,.2))"></div>
+        <div style="font-size:28px;margin-bottom:10px">⚖️</div>
+        <h4 style="font-size:15px;font-weight:800;color:#60a5fa;margin-bottom:3px">Balance</h4>
+        <div style="font-family:var(--fm);font-size:8px;color:var(--tx3);letter-spacing:1.5px;margin-bottom:8px">ALL TANKS → MEDIUM</div>
+        <p style="font-size:11px;color:var(--tx2);line-height:1.5">Stable output. AI maintains equilibrium between flavor and effect.</p>
+      </div>
+      <div class="gc rv" data-d="3" style="padding:24px 18px;border-color:rgba(168,85,247,.08);position:relative;overflow:hidden;cursor:pointer;transition:all .4s" onclick="scSetPro(3)" id="pm-card-3" onmouseover="this.style.borderColor='rgba(168,85,247,.25)';this.style.background='rgba(168,85,247,.04)'" onmouseout="this.style.borderColor='rgba(168,85,247,.08)';this.style.background='transparent'">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--pu),rgba(168,85,247,.2))"></div>
+        <div style="font-size:28px;margin-bottom:10px">✨</div>
+        <h4 style="font-size:15px;font-weight:800;color:var(--pu);margin-bottom:3px">Microdose</h4>
+        <div style="font-family:var(--fm);font-size:8px;color:var(--tx3);letter-spacing:1.5px;margin-bottom:8px">MINIMAL ACTIVATION</div>
+        <p style="font-size:11px;color:var(--tx2);line-height:1.5">Ultra-low output. Subtle effect without overwhelm. Wellness-focused.</p>
+      </div>
     </div>
-    <div class="gc rv" data-d="1" style="padding:28px 20px;border-color:rgba(52,211,153,.08);position:relative;overflow:hidden">
-      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gn),rgba(52,211,153,.2))"></div>
-      <div style="font-size:32px;margin-bottom:12px">🌿</div>
-      <h4 style="font-size:16px;font-weight:800;color:var(--gn);margin-bottom:4px">Eco</h4>
-      <div style="font-family:var(--fm);font-size:8px;color:var(--tx3);letter-spacing:1.5px;margin-bottom:10px">ALL TANKS → CHILL</div>
-      <p style="font-size:11px;color:var(--tx2);line-height:1.55">Minimum output, maximum longevity. AI optimizes for the lowest effective delivery possible.</p>
-      <div style="font-size:9px;color:var(--tx3);margin-top:12px;padding-top:10px;border-top:1px solid var(--bd)">🔋 Battery saver · Extend cartridge life</div>
-    </div>
-    <div class="gc rv" data-d="2" style="padding:28px 20px;border-color:rgba(96,165,250,.08);position:relative;overflow:hidden">
-      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#60a5fa,rgba(96,165,250,.2))"></div>
-      <div style="font-size:32px;margin-bottom:12px">⚖️</div>
-      <h4 style="font-size:16px;font-weight:800;color:#60a5fa;margin-bottom:4px">Balance</h4>
-      <div style="font-family:var(--fm);font-size:8px;color:var(--tx3);letter-spacing:1.5px;margin-bottom:10px">ALL TANKS → MEDIUM</div>
-      <p style="font-size:11px;color:var(--tx2);line-height:1.55">Stable, consistent output. AI maintains equilibrium between flavor and effect throughout the session.</p>
-      <div style="font-size:9px;color:var(--tx3);margin-top:12px;padding-top:10px;border-top:1px solid var(--bd)">✨ Daily driver · All-purpose</div>
-    </div>
-    <div class="gc rv" data-d="3" style="padding:28px 20px;border-color:rgba(168,85,247,.08);position:relative;overflow:hidden">
-      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--pu),rgba(168,85,247,.2))"></div>
-      <div style="font-size:32px;margin-bottom:12px">✨</div>
-      <h4 style="font-size:16px;font-weight:800;color:var(--pu);margin-bottom:4px">Microdose</h4>
-      <div style="font-family:var(--fm);font-size:8px;color:var(--tx3);letter-spacing:1.5px;margin-bottom:10px">MINIMAL ACTIVATION</div>
-      <p style="font-size:11px;color:var(--tx2);line-height:1.55">Ultra-low output. Subtle effect without overwhelm. AI delivers the minimum effective amount precisely.</p>
-      <div style="font-size:9px;color:var(--tx3);margin-top:12px;padding-top:10px;border-top:1px solid var(--bd)">🧘 Wellness · Functional · Micro-enhancement</div>
+    <!-- Right: Phone showing active Pro Mode -->
+    <div class="rv" data-d="2" style="position:relative">
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:260px;height:260px;background:radial-gradient(circle,rgba(168,85,247,.06),transparent 70%);filter:blur(50px);pointer-events:none"></div>
+      <div id="pm-phone" style="position:relative;width:280px;height:480px;margin:0 auto;border-radius:40px;background:linear-gradient(180deg,#0c0c14,#080810);border:2px solid rgba(255,255,255,.08);box-shadow:0 20px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.05);overflow:hidden">
+        <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:28px;background:#000;border-radius:0 0 20px 20px;z-index:5"></div>
+        <div style="padding:36px 20px 0;display:flex;justify-content:space-between;align-items:center"><div style="font-size:10px;font-weight:600;color:rgba(255,255,255,.5)">9:41</div><div style="width:14px;height:8px;border-radius:2px;border:1px solid rgba(255,255,255,.3)"><div style="width:70%;height:100%;background:rgba(255,255,255,.4);border-radius:1px"></div></div></div>
+        <div style="padding:14px 20px 8px;text-align:center">
+          <div style="font-size:9px;font-weight:700;color:var(--pu);letter-spacing:3px">PRO MODE</div>
+          <div id="pm-name" style="font-size:24px;font-weight:900;margin-top:4px;transition:all .4s">🚀 Beast</div>
+        </div>
+        <!-- Mode visual -->
+        <div style="display:flex;justify-content:center;padding:12px 0">
+          <div id="pm-ring" style="width:140px;height:140px;border-radius:50%;position:relative;transition:all .5s">
+            <svg viewBox="0 0 140 140" style="position:absolute;inset:0;transform:rotate(-90deg)">
+              <circle cx="70" cy="70" r="60" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="10"/>
+              <circle id="pm-arc" cx="70" cy="70" r="60" fill="none" stroke="#fb923c" stroke-width="10" stroke-linecap="round" stroke-dasharray="377" stroke-dashoffset="0" style="transition:all .6s;filter:drop-shadow(0 0 10px rgba(251,146,60,.4))"/>
+            </svg>
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+              <div id="pm-icon" style="font-size:36px;transition:all .4s">🚀</div>
+              <div id="pm-label" style="font-size:10px;font-weight:800;color:#fb923c;margin-top:4px;letter-spacing:2px;transition:color .4s">BEAST</div>
+            </div>
+          </div>
+        </div>
+        <!-- Tank bars -->
+        <div style="padding:0 20px">
+          <div style="font-size:8px;font-weight:700;color:var(--tx3);letter-spacing:2px;margin-bottom:8px">ALL TANKS</div>
+          <div id="pm-bars" style="display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:40px;font-size:8px;font-weight:700;color:var(--cy)">TANK 1</div><div style="flex:1;height:6px;border-radius:3px;background:rgba(255,255,255,.04);overflow:hidden"><div id="pm-bar1" style="width:100%;height:100%;background:var(--cy);border-radius:3px;transition:width .6s"></div></div></div>
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:40px;font-size:8px;font-weight:700;color:var(--pu)">TANK 2</div><div style="flex:1;height:6px;border-radius:3px;background:rgba(255,255,255,.04);overflow:hidden"><div id="pm-bar2" style="width:100%;height:100%;background:var(--pu);border-radius:3px;transition:width .6s"></div></div></div>
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:40px;font-size:8px;font-weight:700;color:var(--pk)">TANK 3</div><div style="flex:1;height:6px;border-radius:3px;background:rgba(255,255,255,.04);overflow:hidden"><div id="pm-bar3" style="width:100%;height:100%;background:var(--pk);border-radius:3px;transition:width .6s"></div></div></div>
+          </div>
+        </div>
+        <!-- Mode description -->
+        <div style="padding:12px 20px 0">
+          <div id="pm-desc" style="padding:10px 14px;border-radius:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.03);font-size:10px;color:var(--tx2);line-height:1.5;transition:all .4s">Maximum power. AI compensates as battery drops to maintain consistency.</div>
+        </div>
+        <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:100px;height:4px;border-radius:2px;background:rgba(255,255,255,.15)"></div>
+      </div>
+      <div style="text-align:center;margin-top:14px;font-family:var(--fm);font-size:9px;color:var(--tx3);letter-spacing:2px">TAP ANY MODE TO PREVIEW ↑</div>
     </div>
   </div>
 </div>
 </section>
 
-<!-- ═══ SECTION 3: ENTOURAGE MODE ═══ -->
+<!-- ═══ SECTION 3: BLEND MODES ═══ -->
 <section id="sc-ent" style="padding:clamp(60px,8vw,100px) 0;scroll-margin-top:130px;position:relative;overflow:hidden">
 <div style="position:absolute;top:20%;right:0;width:300px;height:400px;background:radial-gradient(ellipse,rgba(236,72,153,.05),transparent 70%);filter:blur(80px);pointer-events:none"></div>
 <div class="w" style="position:relative;z-index:2">
-  <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div style="width:36px;height:3px;border-radius:2px;background:var(--pk)"></div><span class="rv" style="font-family:var(--fm);font-size:10px;color:var(--pk);letter-spacing:4px">03 · ENTOURAGE MODE</span></div>
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div style="width:36px;height:3px;border-radius:2px;background:var(--pk)"></div><span class="rv" style="font-family:var(--fm);font-size:10px;color:var(--pk);letter-spacing:4px">03 · BLEND MODES</span></div>
   <h2 class="h2 rv" data-d="1" style="max-width:600px">Custom Blending. <span class="se">Precision Ratios.</span></h2>
   <p class="rv" data-d="2" style="font-size:15px;color:var(--tx2);max-width:560px;font-weight:300;margin-bottom:40px;line-height:1.65">Users customize extract blend ratios. AI optimizes heat curves per extract type to deliver the exact ratio intended. No other device allows this.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
@@ -1023,18 +1234,67 @@ section{overflow-x:hidden}
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div style="width:36px;height:3px;border-radius:2px;background:var(--am)"></div><span class="rv" style="font-family:var(--fm);font-size:10px;color:var(--am);letter-spacing:4px">04 · MOOD MODES</span></div>
   <h2 class="h2 rv" data-d="1" style="max-width:600px">Pick a Feeling. <span class="se">AI Translates It.</span></h2>
   <p class="rv" data-d="2" style="font-size:15px;color:var(--tx2);max-width:560px;font-weight:300;margin-bottom:40px;line-height:1.65">The most intelligent layer. Users don't think about settings — they choose how they want to feel. 7 data pipelines translate emotion into precise technical configuration.</p>
-  <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-bottom:28px">
-    <div class="gc rv" style="text-align:center;padding:20px 8px;border-color:rgba(96,165,250,.08)"><div style="font-size:26px;margin-bottom:8px">😌</div><div style="font-size:12px;font-weight:800">Relax</div><div style="font-size:8px;color:var(--tx3);margin-top:4px;line-height:1.3">CBD priority<br>Slow delivery</div></div>
-    <div class="gc rv" data-d="1" style="text-align:center;padding:20px 8px;border-color:rgba(245,158,11,.08)"><div style="font-size:26px;margin-bottom:8px">🎯</div><div style="font-size:12px;font-weight:800">Focus</div><div style="font-size:8px;color:var(--tx3);margin-top:4px;line-height:1.3">Sativa priority<br>Steady output</div></div>
-    <div class="gc rv" data-d="2" style="text-align:center;padding:20px 8px;border-color:rgba(251,146,60,.08)"><div style="font-size:26px;margin-bottom:8px">⚡</div><div style="font-size:12px;font-weight:800">Energy</div><div style="font-size:8px;color:var(--tx3);margin-top:4px;line-height:1.3">Sativa priority<br>Higher heat</div></div>
-    <div class="gc rv" data-d="3" style="text-align:center;padding:20px 8px;border-color:rgba(168,85,247,.08)"><div style="font-size:26px;margin-bottom:8px">🌙</div><div style="font-size:12px;font-weight:800">Sleep</div><div style="font-size:8px;color:var(--tx3);margin-top:4px;line-height:1.3">Indica priority<br>Tapering</div></div>
-    <div class="gc rv" data-d="4" style="text-align:center;padding:20px 8px;border-color:rgba(236,72,153,.08)"><div style="font-size:26px;margin-bottom:8px">🎉</div><div style="font-size:12px;font-weight:800">Social</div><div style="font-size:8px;color:var(--tx3);margin-top:4px;line-height:1.3">Balanced<br>Consistent</div></div>
-    <div class="gc rv" data-d="5" style="text-align:center;padding:20px 8px;border-color:rgba(0,232,255,.08)"><div style="font-size:26px;margin-bottom:8px">🎨</div><div style="font-size:12px;font-weight:800">Creative</div><div style="font-size:8px;color:var(--tx3);margin-top:4px;line-height:1.3">Sativa-dom<br>Varied pattern</div></div>
-    <div class="gc rv" data-d="6" style="text-align:center;padding:20px 8px;border-color:rgba(52,211,153,.08)"><div style="font-size:26px;margin-bottom:8px">💚</div><div style="font-size:12px;font-weight:800">Recovery</div><div style="font-size:8px;color:var(--tx3);margin-top:4px;line-height:1.3">CBD-heavy<br>Gentle delivery</div></div>
-  </div>
-  <div class="rv" data-d="2" style="padding:18px 22px;border-radius:16px;background:linear-gradient(135deg,rgba(245,158,11,.04),rgba(168,85,247,.02));border:1px solid rgba(245,158,11,.08);display:flex;align-items:start;gap:14px">
-    <div style="width:36px;height:36px;border-radius:10px;background:rgba(245,158,11,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">🧠</div>
-    <div><div style="font-size:12px;font-weight:800;color:var(--am);margin-bottom:3px">The Hardest Layer to Copy</div><div style="font-size:12px;color:var(--tx2);line-height:1.6">Mood Modes depend entirely on AI and data — not hardware. More sessions = more precise optimization. Adaptive learning builds a personal profile over time. This is where Mood Lab translates emotion into configuration.</div></div>
+
+  <div style="display:grid;grid-template-columns:1fr 280px;gap:40px;align-items:start">
+    <!-- Left: Mood Grid + AI callout -->
+    <div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px">
+        <div class="gc rv" style="text-align:center;padding:18px 8px;border-color:rgba(96,165,250,.08);cursor:pointer;transition:all .3s" onclick="scSetMood(0)" onmouseover="this.style.borderColor='rgba(96,165,250,.25)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(96,165,250,.08)';this.style.transform='none'"><div style="font-size:24px;margin-bottom:6px">😌</div><div style="font-size:11px;font-weight:800">Relax</div><div style="font-size:8px;color:var(--tx3);margin-top:3px;line-height:1.3">CBD priority</div></div>
+        <div class="gc rv" data-d="1" style="text-align:center;padding:18px 8px;border-color:rgba(245,158,11,.08);cursor:pointer;transition:all .3s" onclick="scSetMood(1)" onmouseover="this.style.borderColor='rgba(245,158,11,.25)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(245,158,11,.08)';this.style.transform='none'"><div style="font-size:24px;margin-bottom:6px">🎯</div><div style="font-size:11px;font-weight:800">Focus</div><div style="font-size:8px;color:var(--tx3);margin-top:3px;line-height:1.3">Steady output</div></div>
+        <div class="gc rv" data-d="2" style="text-align:center;padding:18px 8px;border-color:rgba(251,146,60,.08);cursor:pointer;transition:all .3s" onclick="scSetMood(2)" onmouseover="this.style.borderColor='rgba(251,146,60,.25)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(251,146,60,.08)';this.style.transform='none'"><div style="font-size:24px;margin-bottom:6px">⚡</div><div style="font-size:11px;font-weight:800">Energy</div><div style="font-size:8px;color:var(--tx3);margin-top:3px;line-height:1.3">Higher heat</div></div>
+        <div class="gc rv" data-d="3" style="text-align:center;padding:18px 8px;border-color:rgba(168,85,247,.08);cursor:pointer;transition:all .3s" onclick="scSetMood(3)" onmouseover="this.style.borderColor='rgba(168,85,247,.25)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(168,85,247,.08)';this.style.transform='none'"><div style="font-size:24px;margin-bottom:6px">🌙</div><div style="font-size:11px;font-weight:800">Sleep</div><div style="font-size:8px;color:var(--tx3);margin-top:3px;line-height:1.3">Tapering</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px">
+        <div class="gc rv" data-d="4" style="text-align:center;padding:18px 8px;border-color:rgba(236,72,153,.08);cursor:pointer;transition:all .3s" onclick="scSetMood(4)" onmouseover="this.style.borderColor='rgba(236,72,153,.25)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(236,72,153,.08)';this.style.transform='none'"><div style="font-size:24px;margin-bottom:6px">🎉</div><div style="font-size:11px;font-weight:800">Social</div><div style="font-size:8px;color:var(--tx3);margin-top:3px;line-height:1.3">Balanced · Consistent</div></div>
+        <div class="gc rv" data-d="5" style="text-align:center;padding:18px 8px;border-color:rgba(0,232,255,.08);cursor:pointer;transition:all .3s" onclick="scSetMood(5)" onmouseover="this.style.borderColor='rgba(0,232,255,.25)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(0,232,255,.08)';this.style.transform='none'"><div style="font-size:24px;margin-bottom:6px">🎨</div><div style="font-size:11px;font-weight:800">Creative</div><div style="font-size:8px;color:var(--tx3);margin-top:3px;line-height:1.3">Varied pattern</div></div>
+        <div class="gc rv" data-d="6" style="text-align:center;padding:18px 8px;border-color:rgba(52,211,153,.08);cursor:pointer;transition:all .3s" onclick="scSetMood(6)" onmouseover="this.style.borderColor='rgba(52,211,153,.25)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(52,211,153,.08)';this.style.transform='none'"><div style="font-size:24px;margin-bottom:6px">💚</div><div style="font-size:11px;font-weight:800">Recovery</div><div style="font-size:8px;color:var(--tx3);margin-top:3px;line-height:1.3">CBD-heavy · Gentle</div></div>
+      </div>
+      <!-- AI callout -->
+      <div class="rv" data-d="2" style="padding:18px 22px;border-radius:16px;background:linear-gradient(135deg,rgba(245,158,11,.04),rgba(168,85,247,.02));border:1px solid rgba(245,158,11,.08);display:flex;align-items:start;gap:14px">
+        <div style="font-size:16px;flex-shrink:0;margin-top:1px">🧠</div>
+        <div><div style="font-size:12px;font-weight:800;color:var(--am);margin-bottom:3px">The Hardest Layer to Copy</div><div style="font-size:11px;color:var(--tx2);line-height:1.55">Mood Modes depend entirely on AI and data — not hardware. More sessions = more precise. Adaptive learning builds a personal profile over time.</div></div>
+      </div>
+    </div>
+    <!-- Right: Phone showing Mood selection -->
+    <div class="rv" data-d="2" style="position:relative">
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:260px;height:260px;background:radial-gradient(circle,rgba(245,158,11,.06),transparent 70%);filter:blur(50px);pointer-events:none"></div>
+      <div id="mood-phone" style="position:relative;width:280px;height:520px;margin:0 auto;border-radius:40px;background:linear-gradient(180deg,#0c0c14,#080810);border:2px solid rgba(255,255,255,.08);box-shadow:0 20px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.05);overflow:hidden">
+        <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:28px;background:#000;border-radius:0 0 20px 20px;z-index:5"></div>
+        <div style="padding:36px 20px 0;display:flex;justify-content:space-between;align-items:center"><div style="font-size:10px;font-weight:600;color:rgba(255,255,255,.5)">9:41</div><div style="width:14px;height:8px;border-radius:2px;border:1px solid rgba(255,255,255,.3)"><div style="width:70%;height:100%;background:rgba(255,255,255,.4);border-radius:1px"></div></div></div>
+        <div style="padding:14px 20px 6px;text-align:center">
+          <div style="font-size:9px;font-weight:700;color:var(--am);letter-spacing:3px">MOOD MODE</div>
+          <div style="font-size:11px;color:var(--tx3);margin-top:4px">How do you want to feel?</div>
+        </div>
+        <!-- Active Mood Display -->
+        <div style="display:flex;justify-content:center;padding:10px 0">
+          <div style="width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,.12),rgba(245,158,11,.02));border:2px solid rgba(245,158,11,.2);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:all .5s" id="mood-ring">
+            <div id="mood-emoji" style="font-size:40px;transition:all .4s">🎯</div>
+            <div id="mood-label" style="font-size:12px;font-weight:900;color:var(--am);margin-top:4px;transition:color .4s">Focus</div>
+          </div>
+        </div>
+        <!-- Mood grid in phone -->
+        <div style="padding:6px 16px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px">
+          <div onclick="scSetMood(0)" style="cursor:pointer;text-align:center;padding:8px 2px;border-radius:10px;background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.06);transition:all .3s" id="mood-pb-0"><div style="font-size:16px">😌</div><div style="font-size:7px;font-weight:700;color:var(--tx3);margin-top:2px">Relax</div></div>
+          <div onclick="scSetMood(1)" style="cursor:pointer;text-align:center;padding:8px 2px;border-radius:10px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.15);transition:all .3s" id="mood-pb-1"><div style="font-size:16px">🎯</div><div style="font-size:7px;font-weight:700;color:var(--am);margin-top:2px">Focus</div></div>
+          <div onclick="scSetMood(2)" style="cursor:pointer;text-align:center;padding:8px 2px;border-radius:10px;background:rgba(251,146,60,.06);border:1px solid rgba(251,146,60,.06);transition:all .3s" id="mood-pb-2"><div style="font-size:16px">⚡</div><div style="font-size:7px;font-weight:700;color:var(--tx3);margin-top:2px">Energy</div></div>
+          <div onclick="scSetMood(3)" style="cursor:pointer;text-align:center;padding:8px 2px;border-radius:10px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.06);transition:all .3s" id="mood-pb-3"><div style="font-size:16px">🌙</div><div style="font-size:7px;font-weight:700;color:var(--tx3);margin-top:2px">Sleep</div></div>
+        </div>
+        <div style="padding:4px 16px;display:grid;grid-template-columns:repeat(3,1fr);gap:4px">
+          <div onclick="scSetMood(4)" style="cursor:pointer;text-align:center;padding:8px 2px;border-radius:10px;background:rgba(236,72,153,.06);border:1px solid rgba(236,72,153,.06);transition:all .3s" id="mood-pb-4"><div style="font-size:16px">🎉</div><div style="font-size:7px;font-weight:700;color:var(--tx3);margin-top:2px">Social</div></div>
+          <div onclick="scSetMood(5)" style="cursor:pointer;text-align:center;padding:8px 2px;border-radius:10px;background:rgba(0,232,255,.06);border:1px solid rgba(0,232,255,.06);transition:all .3s" id="mood-pb-5"><div style="font-size:16px">🎨</div><div style="font-size:7px;font-weight:700;color:var(--tx3);margin-top:2px">Creative</div></div>
+          <div onclick="scSetMood(6)" style="cursor:pointer;text-align:center;padding:8px 2px;border-radius:10px;background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.06);transition:all .3s" id="mood-pb-6"><div style="font-size:16px">💚</div><div style="font-size:7px;font-weight:700;color:var(--tx3);margin-top:2px">Recovery</div></div>
+        </div>
+        <!-- AI optimization strip -->
+        <div style="padding:10px 16px 0">
+          <div id="mood-ai-strip" style="padding:10px 12px;border-radius:10px;background:linear-gradient(135deg,rgba(245,158,11,.06),rgba(245,158,11,.02));border:1px solid rgba(245,158,11,.08);transition:all .4s">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px"><span style="font-size:10px">🧠</span><span style="font-size:8px;font-weight:700;color:var(--am);letter-spacing:1px">AI OPTIMIZING</span></div>
+            <div id="mood-ai-text" style="font-size:8px;color:var(--tx3);line-height:1.4;transition:all .4s">Sativa priority · Steady output · Medium heat · Consistent delivery pattern</div>
+          </div>
+        </div>
+        <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:100px;height:4px;border-radius:2px;background:rgba(255,255,255,.15)"></div>
+      </div>
+      <div style="text-align:center;margin-top:14px;font-family:var(--fm);font-size:9px;color:var(--tx3);letter-spacing:2px">TAP ANY MOOD TO PREVIEW ↑</div>
+    </div>
   </div>
 </div>
 </section>
@@ -1798,6 +2058,109 @@ setTimeout(function(){focusApp(0)},200);
 var pst=document.createElement('style');
 pst.textContent='@keyframes pu{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(1.6)}}';
 document.head.appendChild(pst);
+
+// ═══ SMART CONTROL — INTERACTIVE QUICK HEAT ═══
+var qhData=[
+  {label:'OFF',temp:'---',color:'#555',arc:440,bgBtn:'rgba(120,120,130,.06)',bgBtnBd:'rgba(120,120,130,.06)'},
+  {label:'CHILL',temp:'165°',color:'#60a5fa',arc:330,bgBtn:'rgba(96,165,250,.12)',bgBtnBd:'rgba(96,165,250,.2)'},
+  {label:'MEDIUM',temp:'185°',color:'#34d399',arc:220,bgBtn:'rgba(52,211,153,.12)',bgBtnBd:'rgba(52,211,153,.2)'},
+  {label:'INTENSE',temp:'220°',color:'#fb923c',arc:110,bgBtn:'rgba(251,146,60,.12)',bgBtnBd:'rgba(251,146,60,.2)'}
+];
+var qhCurrent=2;
+function scSetHeat(n){
+  qhCurrent=n;
+  var d=qhData[n];
+  var txt=document.getElementById('qh-level-text');if(txt){txt.textContent=d.label;txt.style.color=n===0?'var(--tx3)':d.color}
+  var temp=document.getElementById('qh-temp');if(temp){temp.textContent=d.temp;temp.style.color=d.color}
+  var arc=document.getElementById('qh-arc');if(arc){arc.setAttribute('stroke-dashoffset',d.arc);arc.setAttribute('stroke',d.color);arc.style.filter='drop-shadow(0 0 '+(n===0?'0':'8')+'px '+d.color+')'}
+  // Update phone buttons
+  for(var i=0;i<4;i++){
+    var pb=document.getElementById('qh-pb-'+i);
+    if(pb){pb.style.background=i===n?qhData[i].bgBtn:qhData[i].bgBtn.replace(/\.\d+\)/,'.04)');pb.style.borderColor=i===n?qhData[i].bgBtnBd:'rgba(255,255,255,.04)';pb.style.transform=i===n?'scale(1.08)':'scale(1)'}
+    // Update left-side buttons highlight
+    var lb=document.getElementById('qh-btn-'+i);
+    if(lb){lb.style.transform=i===n?'scale(1.02) translateX(4px)':'none';lb.style.boxShadow=i===n?'0 0 20px '+d.color.replace(')',',0.15)'):'none'}
+  }
+}
+
+// ═══ SMART CONTROL — MOOD MODES PHONE ═══
+var moodData=[
+  {emoji:'😌',label:'Relax',color:'#60a5fa',ringBg:'rgba(96,165,250,.12)',ringBd:'rgba(96,165,250,.2)',ai:'CBD priority · Slow delivery · Lower heat · Calming pattern'},
+  {emoji:'🎯',label:'Focus',color:'#f59e0b',ringBg:'rgba(245,158,11,.12)',ringBd:'rgba(245,158,11,.2)',ai:'Sativa priority · Steady output · Medium heat · Consistent delivery'},
+  {emoji:'⚡',label:'Energy',color:'#fb923c',ringBg:'rgba(251,146,60,.12)',ringBd:'rgba(251,146,60,.2)',ai:'Sativa priority · Higher heat · Burst delivery · Active pattern'},
+  {emoji:'🌙',label:'Sleep',color:'#a855f7',ringBg:'rgba(168,85,247,.12)',ringBd:'rgba(168,85,247,.2)',ai:'Indica priority · Tapering heat · CBD boost · Gradual wind-down'},
+  {emoji:'🎉',label:'Social',color:'#ec4899',ringBg:'rgba(236,72,153,.12)',ringBd:'rgba(236,72,153,.2)',ai:'Balanced blend · Consistent output · Medium heat · Social-optimized'},
+  {emoji:'🎨',label:'Creative',color:'#00e8ff',ringBg:'rgba(0,232,255,.12)',ringBd:'rgba(0,232,255,.2)',ai:'Sativa-dominant · Varied pattern · Medium-high · Wave delivery'},
+  {emoji:'💚',label:'Recovery',color:'#34d399',ringBg:'rgba(52,211,153,.12)',ringBd:'rgba(52,211,153,.2)',ai:'CBD-heavy · Gentle delivery · Low heat · Therapeutic curve'}
+];
+function scSetMood(n){
+  var d=moodData[n];
+  var el;
+  el=document.getElementById('mood-emoji');if(el)el.textContent=d.emoji;
+  el=document.getElementById('mood-label');if(el){el.textContent=d.label;el.style.color=d.color}
+  el=document.getElementById('mood-ring');if(el){el.style.background='radial-gradient(circle,'+d.ringBg+','+d.ringBg.replace('.12','.02')+')';el.style.borderColor=d.ringBd}
+  el=document.getElementById('mood-ai-text');if(el)el.textContent=d.ai;
+  el=document.getElementById('mood-ai-strip');if(el){el.style.background='linear-gradient(135deg,'+d.ringBg.replace('.12','.06')+','+d.ringBg.replace('.12','.02')+')';el.style.borderColor=d.ringBd.replace('.2','.08')}
+  // Highlight phone buttons
+  for(var i=0;i<7;i++){
+    var pb=document.getElementById('mood-pb-'+i);
+    if(pb){
+      var md=moodData[i];
+      pb.style.background=i===n?md.ringBg:md.ringBg.replace('.12','.06');
+      pb.style.borderColor=i===n?md.ringBd:md.ringBd.replace('.2','.06');
+      pb.querySelector('div:last-child').style.color=i===n?md.color:'var(--tx3)';
+    }
+  }
+}
+
+// ═══ SMART CONTROL — PRO MODES PHONE ═══
+var pmData=[
+  {name:'🚀 Beast',icon:'🚀',label:'BEAST',color:'#fb923c',arc:0,bars:[100,100,100],desc:'Maximum power. AI compensates as battery drops to maintain consistency.'},
+  {name:'🌿 Eco',icon:'🌿',label:'ECO',color:'#34d399',arc:283,bars:[30,30,30],desc:'Minimum output, maximum longevity. AI delivers lowest effective amount.'},
+  {name:'⚖️ Balance',icon:'⚖️',label:'BALANCE',color:'#60a5fa',arc:188,bars:[65,65,65],desc:'Stable output. AI maintains equilibrium between flavor and effect.'},
+  {name:'✨ Microdose',icon:'✨',label:'MICRO',color:'#a855f7',arc:340,bars:[15,15,15],desc:'Ultra-low output. Subtle effect. Wellness-focused micro-enhancement.'}
+];
+function scSetPro(n){
+  var d=pmData[n];
+  var el;
+  el=document.getElementById('pm-name');if(el){el.textContent=d.name;el.style.color=d.color}
+  el=document.getElementById('pm-icon');if(el)el.textContent=d.icon;
+  el=document.getElementById('pm-label');if(el){el.textContent=d.label;el.style.color=d.color}
+  el=document.getElementById('pm-arc');if(el){el.setAttribute('stroke-dashoffset',d.arc);el.setAttribute('stroke',d.color);el.style.filter='drop-shadow(0 0 10px '+d.color+')'}
+  el=document.getElementById('pm-bar1');if(el)el.style.width=d.bars[0]+'%';
+  el=document.getElementById('pm-bar2');if(el)el.style.width=d.bars[1]+'%';
+  el=document.getElementById('pm-bar3');if(el)el.style.width=d.bars[2]+'%';
+  el=document.getElementById('pm-desc');if(el)el.textContent=d.desc;
+  // Highlight active card
+  for(var i=0;i<4;i++){var c=document.getElementById('pm-card-'+i);if(c)c.style.boxShadow=i===n?'0 0 30px '+pmData[i].color.replace(')',',0.12)').replace('rgb','rgba'):'none'}
+}
+
+// ═══ SMART CONTROL — PRECISION CURVE RANDOMIZER ═══
+function scRandomizeCurve(){
+  function rp(min,max){return Math.floor(Math.random()*(max-min)+min)}
+  // Tank 1
+  var c1y=[rp(120,160),rp(20,60),rp(30,80),rp(15,50),rp(30,70)];
+  var c1='M30,'+c1y[0]+' C80,'+(c1y[0]-10)+' 130,'+c1y[1]+' 200,'+c1y[2]+' S320,'+(c1y[3]+40)+' 380,'+c1y[3]+' S440,'+c1y[4]+' 490,'+(c1y[4]-10);
+  var c1f=c1+' L490,170 L30,170Z';
+  // Tank 2
+  var c2y=[rp(100,150),rp(25,70),rp(30,70),rp(20,55),rp(30,60)];
+  var c2='M30,'+c2y[0]+' C100,'+(c2y[0]-20)+' 160,'+c2y[1]+' 240,'+c2y[2]+' S360,'+c2y[3]+' 420,'+(c2y[3]+15)+' S470,'+c2y[4]+' 490,'+(c2y[4]-10);
+  var c2f=c2+' L490,170 L30,170Z';
+  // Tank 3
+  var c3y=[rp(90,140),rp(40,80),rp(50,100),rp(30,70),rp(40,80)];
+  var c3='M30,'+c3y[0]+' C70,'+(c3y[0]-20)+' 130,'+c3y[1]+' 200,'+c3y[2]+' S300,'+c3y[3]+' 370,'+(c3y[3]+30)+' S440,'+c3y[4]+' 490,'+(c3y[4]-20);
+  var c3f=c3+' L490,170 L30,170Z';
+  // Apply with smooth transitions
+  var el;
+  el=document.getElementById('sc-c1');if(el)el.setAttribute('d',c1);
+  el=document.getElementById('sc-c1-fill');if(el)el.setAttribute('d',c1f);
+  el=document.getElementById('sc-c1-p1');if(el){el.setAttribute('cx',200);el.setAttribute('cy',c1y[2])}
+  el=document.getElementById('sc-c1-p2');if(el){el.setAttribute('cx',380);el.setAttribute('cy',c1y[3])}
+  el=document.getElementById('sc-c2');if(el)el.setAttribute('d',c2);
+  el=document.getElementById('sc-c2-fill');if(el)el.setAttribute('d',c2f);
+  el=document.getElementById('sc-c3');if(el)el.setAttribute('d',c3);
+  el=document.getElementById('sc-c3-fill');if(el)el.setAttribute('d',c3f);
+}
 </script>
 </body>
 </html>
