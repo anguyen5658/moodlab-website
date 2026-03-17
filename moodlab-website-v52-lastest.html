@@ -542,7 +542,7 @@ section{overflow-x:hidden}
   <!-- 4-Phone 3D Layout -->
   <div class="rv" data-d="2" id="app4-wrap" style="display:flex;align-items:center;justify-content:center;gap:16px;perspective:1200px;padding:20px 0 40px;cursor:pointer">
     <!-- Phone 0: Control -->
-    <div class="app4-phone" data-idx="0" onclick="focusApp(0)" onmouseenter="hoverApp(this,true)" onmouseleave="hoverApp(this,false)" style="width:220px;height:440px;border-radius:32px;background:#0d0d18;border:2.5px solid rgba(255,255,255,.08);overflow:hidden;position:relative;transition:all .6s cubic-bezier(.22,1,.36,1);transform:perspective(1200px) rotateY(12deg) scale(.82);opacity:.55;flex-shrink:0;box-shadow:0 20px 60px rgba(0,0,0,.4)">
+    <div class="app4-phone" data-idx="0" onclick="focusApp(0)" style="width:220px;height:440px;border-radius:32px;background:#0d0d18;border:2.5px solid rgba(255,255,255,.08);overflow:hidden;position:relative;transition:all .6s cubic-bezier(.22,1,.36,1);transform:perspective(1200px) rotateY(12deg) scale(.82);opacity:.55;flex-shrink:0;box-shadow:0 20px 60px rgba(0,0,0,.4)">
       <div style="position:absolute;top:6px;left:50%;transform:translateX(-50%);width:72px;height:18px;background:#000;border-radius:12px;z-index:10"></div>
       <div style="position:absolute;inset:3px;border-radius:29px;background:linear-gradient(180deg,#0a1628,#050510);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;overflow:hidden">
         <div style="position:absolute;top:34px;left:12px;right:12px;height:20px;border-radius:6px;background:rgba(0,232,255,.03)"></div>
@@ -552,7 +552,7 @@ section{overflow-x:hidden}
       </div>
     </div>
     <!-- Phone 1: Arena (front) -->
-    <div class="app4-phone" data-idx="1" onclick="focusApp(1)" onmouseenter="hoverApp(this,true)" onmouseleave="hoverApp(this,false)" style="width:240px;height:480px;border-radius:36px;background:#0d0d18;border:2.5px solid rgba(255,255,255,.1);overflow:hidden;position:relative;transition:all .6s cubic-bezier(.22,1,.36,1);transform:scale(1);z-index:3;flex-shrink:0;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 50px rgba(0,232,255,.04)">
+    <div class="app4-phone" data-idx="1" onclick="focusApp(1)" style="width:240px;height:480px;border-radius:36px;background:#0d0d18;border:2.5px solid rgba(255,255,255,.1);overflow:hidden;position:relative;transition:all .6s cubic-bezier(.22,1,.36,1);transform:scale(1);z-index:3;flex-shrink:0;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 50px rgba(0,232,255,.04)">
       <div style="position:absolute;top:7px;left:50%;transform:translateX(-50%);width:82px;height:22px;background:#000;border-radius:14px;z-index:10"></div>
       <div style="position:absolute;inset:3px;border-radius:33px;background:linear-gradient(180deg,#12100a,#050510);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;overflow:hidden">
         <div style="position:absolute;top:40px;left:14px;right:14px;display:grid;grid-template-columns:1fr 1fr;gap:5px"><div style="height:44px;border-radius:8px;background:linear-gradient(135deg,rgba(245,158,11,.06),transparent);border:1px solid rgba(245,158,11,.04)"></div><div style="height:44px;border-radius:8px;background:linear-gradient(135deg,rgba(245,158,11,.04),transparent);border:1px solid rgba(245,158,11,.03)"></div><div style="height:44px;border-radius:8px;background:linear-gradient(135deg,rgba(245,158,11,.04),transparent);border:1px solid rgba(245,158,11,.03)"></div><div style="height:44px;border-radius:8px;background:linear-gradient(135deg,rgba(245,158,11,.06),transparent);border:1px solid rgba(245,158,11,.04)"></div></div>
@@ -561,7 +561,7 @@ section{overflow-x:hidden}
       </div>
     </div>
     <!-- Phone 2: Live -->
-    <div class="app4-phone" data-idx="2" onclick="focusApp(2)" onmouseenter="hoverApp(this,true)" onmouseleave="hoverApp(this,false)" style="width:220px;height:440px;border-radius:32px;background:#0d0d18;border:2.5px solid rgba(255,255,255,.08);overflow:hidden;position:relative;transition:all .6s cubic-bezier(.22,1,.36,1);transform:perspective(1200px) rotateY(-8deg) scale(.85);opacity:.6;flex-shrink:0;box-shadow:0 20px 60px rgba(0,0,0,.4)">
+    <div class="app4-phone" data-idx="2" onclick="focusApp(2)" style="width:220px;height:440px;border-radius:32px;background:#0d0d18;border:2.5px solid rgba(255,255,255,.08);overflow:hidden;position:relative;transition:all .6s cubic-bezier(.22,1,.36,1);transform:perspective(1200px) rotateY(-8deg) scale(.85);opacity:.6;flex-shrink:0;box-shadow:0 20px 60px rgba(0,0,0,.4)">
       <div style="position:absolute;top:6px;left:50%;transform:translateX(-50%);width:72px;height:18px;background:#000;border-radius:12px;z-index:10"></div>
       <div style="position:absolute;inset:3px;border-radius:29px;background:linear-gradient(180deg,#140a18,#050510);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;overflow:hidden">
         <div style="position:absolute;top:38px;left:12px;right:12px;height:70px;border-radius:8px;background:linear-gradient(135deg,rgba(236,72,153,.04),transparent);border:1px solid rgba(236,72,153,.03)"></div>
@@ -570,7 +570,7 @@ section{overflow-x:hidden}
       </div>
     </div>
     <!-- Phone 3: Me -->
-    <div class="app4-phone" data-idx="3" onclick="focusApp(3)" onmouseenter="hoverApp(this,true)" onmouseleave="hoverApp(this,false)" style="width:220px;height:440px;border-radius:32px;background:#0d0d18;border:2.5px solid rgba(255,255,255,.06);overflow:hidden;position:relative;transition:all .6s cubic-bezier(.22,1,.36,1);transform:perspective(1200px) rotateY(-14deg) scale(.78);opacity:.45;flex-shrink:0;box-shadow:0 20px 60px rgba(0,0,0,.4)">
+    <div class="app4-phone" data-idx="3" onclick="focusApp(3)" style="width:220px;height:440px;border-radius:32px;background:#0d0d18;border:2.5px solid rgba(255,255,255,.06);overflow:hidden;position:relative;transition:all .6s cubic-bezier(.22,1,.36,1);transform:perspective(1200px) rotateY(-14deg) scale(.78);opacity:.45;flex-shrink:0;box-shadow:0 20px 60px rgba(0,0,0,.4)">
       <div style="position:absolute;top:6px;left:50%;transform:translateX(-50%);width:72px;height:18px;background:#000;border-radius:12px;z-index:10"></div>
       <div style="position:absolute;inset:3px;border-radius:29px;background:linear-gradient(180deg,#081410,#050510);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;overflow:hidden">
         <div style="position:absolute;top:38px;left:50%;transform:translateX(-50%);width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,rgba(52,211,153,.06),transparent);border:1px solid rgba(52,211,153,.04)"></div>
@@ -2227,27 +2227,7 @@ function focusApp(n){
   document.querySelectorAll('.app-desc').forEach(function(d,i){d.style.display=i===n?'block':'none'});
 }
 
-function hoverApp(el,enter){
-  var idx=parseInt(el.getAttribute('data-idx'));
-  if(enter){
-    if(idx===appFocus){
-      // Focused phone: dramatic scale up
-      el.style.setProperty('transform','perspective(1200px) scale(1.25)','important');
-      el.style.setProperty('box-shadow','0 50px 120px rgba(0,0,0,.7),0 0 120px rgba(0,232,255,.25)','important');
-      el.style.setProperty('border-color','rgba(0,232,255,.4)','important');
-      el.style.setProperty('z-index','20','important');
-    }else{
-      // Non-focused: noticeable scale-up
-      el.style.setProperty('transform','scale(1.18)','important');
-      el.style.setProperty('opacity','0.95','important');
-      el.style.setProperty('border-color','rgba(0,232,255,.25)','important');
-      el.style.setProperty('box-shadow','0 35px 90px rgba(0,0,0,.5),0 0 70px rgba(0,232,255,.15)','important');
-      el.style.setProperty('z-index','15','important');
-    }
-  }else{
-    focusApp(appFocus); // Reset to current layout
-  }
-}
+// hoverApp removed — click/tap only
 
 // ═══ MOBILE NAV ═══
 function toggleMob(){
