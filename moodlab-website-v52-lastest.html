@@ -164,6 +164,28 @@ function brandSlide(n){
     });
   });
 })();
+
+// Before/After slider drag
+function rbdDrag(e){
+  e.preventDefault();
+  var slider=document.getElementById('rbdSlider');
+  var handle=document.getElementById('rbdHandle');
+  var afterImg=slider.querySelector('.rbd-after');
+  function move(ev){
+    var rect=slider.getBoundingClientRect();
+    var x=((ev.touches?ev.touches[0].clientX:ev.clientX)-rect.left)/rect.width;
+    x=Math.max(0.05,Math.min(0.95,x));
+    var pct=(x*100)+'%';
+    handle.style.left=pct;
+    afterImg.style.clipPath='inset(0 0 0 '+pct+')';
+  }
+  function up(){document.removeEventListener('mousemove',move);document.removeEventListener('mouseup',up);document.removeEventListener('touchmove',move);document.removeEventListener('touchend',up)}
+  document.addEventListener('mousemove',move);
+  document.addEventListener('mouseup',up);
+  document.addEventListener('touchmove',move,{passive:false});
+  document.addEventListener('touchend',up);
+}
+
 </script>
 <script>
 tailwind.config = {
@@ -573,6 +595,16 @@ footer{padding:clamp(40px,5vw,72px) clamp(24px,5vw,64px);border-top:1px solid va
 @keyframes pulseDown{0%{top:-5%;opacity:0}30%{opacity:1}70%{opacity:1}100%{top:95%;opacity:0}}
 @keyframes dotPulse{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
 .rbd-card:hover{transform:translateX(4px);border-color:rgba(255,255,255,.12)!important}
+.rbd-slider{position:relative;width:100%;max-width:960px;margin:0 auto;aspect-ratio:21/9;border-radius:20px;overflow:hidden;cursor:col-resize;border:1px solid var(--bd2);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.rbd-slider img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none}
+.rbd-slider .rbd-after{clip-path:inset(0 0 0 50%)}
+.rbd-slider .rbd-handle{position:absolute;top:0;bottom:0;left:50%;width:4px;background:linear-gradient(180deg,var(--gn),var(--cy));transform:translateX(-50%);z-index:5;box-shadow:0 0 20px rgba(52,211,153,.3),0 0 40px rgba(52,211,153,.1);transition:box-shadow .3s}
+.rbd-slider .rbd-handle::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(2,2,5,.8);backdrop-filter:blur(10px);border:2px solid rgba(52,211,153,.4);box-shadow:0 0 24px rgba(52,211,153,.2)}
+.rbd-slider .rbd-handle::after{content:'\2194';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:18px;color:var(--gn);z-index:1;font-weight:900}
+.rbd-slider:hover .rbd-handle{box-shadow:0 0 30px rgba(52,211,153,.5),0 0 60px rgba(52,211,153,.15)}
+.rbd-slider .rbd-label{position:absolute;bottom:16px;padding:6px 16px;border-radius:8px;font-size:11px;font-weight:700;letter-spacing:1px;font-family:var(--fm);z-index:4;backdrop-filter:blur(10px)}
+.rbd-slider .rbd-label-before{left:16px;background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.2);color:#f87171}
+.rbd-slider .rbd-label-after{right:16px;background:rgba(52,211,153,.15);border:1px solid rgba(52,211,153,.2);color:var(--gn)}
 .rbd-bad:hover{border-color:rgba(248,113,113,.15)!important;box-shadow:0 4px 24px rgba(248,113,113,.06)}
 .rbd-good:hover{border-color:rgba(52,211,153,.18)!important;box-shadow:0 4px 24px rgba(52,211,153,.08)}
 .rbd-good:hover>div:nth-child(2){opacity:1!important}
@@ -958,6 +990,26 @@ section{overflow-x:hidden}
       </div>
     </div>
   </div>
+
+
+  <!-- Before / After Image Slider -->
+  <div class="rv" data-d="2" style="margin-top:48px;text-align:center">
+    <div style="font-family:var(--fm);font-size:10px;color:var(--gn);letter-spacing:2px;margin-bottom:12px">DRAG TO COMPARE</div>
+    <h3 style="font-size:clamp(18px,2.5vw,24px);font-weight:800;margin-bottom:24px">The <span style="color:#f87171">Industry Standard</span> vs <span style="color:var(--gn)">With Mood Lab</span></h3>
+    <div class="rbd-slider" id="rbdSlider" onmousedown="rbdDrag(event)" ontouchstart="rbdDrag(event)">
+      <!-- Before image (placeholder - user will replace) -->
+      <img class="rbd-before" src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200&q=80" alt="Before: Industry Standard - generic, no intelligence">
+      <!-- After image (placeholder - user will replace) -->
+      <img class="rbd-after" src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1200&q=80" alt="After: With Mood Lab - smart, controlled, safe">
+      <!-- Draggable handle -->
+      <div class="rbd-handle" id="rbdHandle"></div>
+      <!-- Labels -->
+      <div class="rbd-label rbd-label-before">BEFORE</div>
+      <div class="rbd-label rbd-label-after">WITH MOOD LAB</div>
+    </div>
+    <p style="font-size:11px;color:var(--tx3);margin-top:12px">← Drag the handle to compare →</p>
+  </div>
+
 
   <!-- Closing statement -->
   <div class="rv" data-d="3" style="text-align:center;margin-top:48px;padding:28px 32px;border-radius:20px;background:linear-gradient(135deg,rgba(52,211,153,.04),rgba(0,232,255,.02));border:1px solid rgba(52,211,153,.08)">
