@@ -743,8 +743,13 @@ section{overflow-x:hidden}
   .rbd-slider .rbd-handle::before{width:28px!important;height:28px!important}
   .rbd-slider .rbd-handle::after{font-size:11px!important}
   [style*="grid-template-columns:repeat(3,1fr);gap:1px"]{grid-template-columns:repeat(3,1fr)!important}
-  #rbd-zone-0,#rbd-zone-1,#rbd-zone-2{padding:10px 8px!important}
-  .rbd-before-msg span,.rbd-after-msg span{font-size:9px!important}
+  /* RbD zones — stay horizontal on mobile */
+  [style*="grid-template-columns:repeat(3,1fr);gap:0;margin-top:20px"]{grid-template-columns:repeat(3,1fr)!important}
+  #rbd-zone-0,#rbd-zone-1,#rbd-zone-2{padding:10px 6px!important}
+  .rbd-before-msg span:last-child,.rbd-after-msg span:last-child{font-size:9px!important}
+  .rbd-before-msg span:first-child{font-size:9px!important}
+  .rbd-after-msg span:first-child{font-size:11px!important}
+  .rbd-pair{margin-bottom:4px!important}
   .rbd-problem div:first-child,.rbd-solution div{font-size:9px!important}
   .rbd-problem div:last-child{font-size:8px!important}
   #rbd-zone-0 span,#rbd-zone-1 span,#rbd-zone-2 span{font-size:8px!important}
@@ -1049,34 +1054,34 @@ section{overflow-x:hidden}
     <!-- Zone 0: Dosage + Damage -->
     <div id="rbd-zone-0" style="padding:14px 12px;border-right:1px solid rgba(255,255,255,.03);transition:all .4s">
       <div class="rbd-pair" style="margin-bottom:8px">
-        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">No dosage tracking</span></div>
-        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:11px">🎯</span><span style="font-size:10px;font-weight:700;color:var(--gn);transition:all .4s">Precision Dosage</span></div>
+        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:11px;color:#f87171">✗</span><span style="font-size:12px;color:var(--tx3);transition:all .4s">No dosage tracking</span></div>
+        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:14px">🎯</span><span style="font-size:12px;font-weight:700;color:var(--gn);transition:all .4s">Precision Dosage</span></div>
       </div>
       <div class="rbd-pair">
-        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">No damage prevention</span></div>
-        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:11px">🛡️</span><span style="font-size:10px;font-weight:700;color:var(--am);transition:all .4s">Damage Prevention</span></div>
+        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:11px;color:#f87171">✗</span><span style="font-size:12px;color:var(--tx3);transition:all .4s">No damage prevention</span></div>
+        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:14px">🛡️</span><span style="font-size:12px;font-weight:700;color:var(--am);transition:all .4s">Damage Prevention</span></div>
       </div>
     </div>
     <!-- Zone 1: Sessions + Alerts -->
     <div id="rbd-zone-1" style="padding:14px 12px;border-right:1px solid rgba(255,255,255,.03);transition:all .4s">
       <div class="rbd-pair" style="margin-bottom:8px">
-        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">No session limits</span></div>
-        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:11px">⏱️</span><span style="font-size:10px;font-weight:700;color:var(--pu);transition:all .4s">Session Limits</span></div>
+        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:11px;color:#f87171">✗</span><span style="font-size:12px;color:var(--tx3);transition:all .4s">No session limits</span></div>
+        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:14px">⏱️</span><span style="font-size:12px;font-weight:700;color:var(--pu);transition:all .4s">Session Limits</span></div>
       </div>
       <div class="rbd-pair">
-        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">No safety alerts</span></div>
-        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:11px">📊</span><span style="font-size:10px;font-weight:700;color:var(--pk);transition:all .4s">Smart Alerts</span></div>
+        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:11px;color:#f87171">✗</span><span style="font-size:12px;color:var(--tx3);transition:all .4s">No safety alerts</span></div>
+        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:14px">📊</span><span style="font-size:12px;font-weight:700;color:var(--pk);transition:all .4s">Smart Alerts</span></div>
       </div>
     </div>
     <!-- Zone 2: Lock + Compliance -->
     <div id="rbd-zone-2" style="padding:14px 12px;transition:all .4s">
       <div class="rbd-pair" style="margin-bottom:8px">
-        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">No access control</span></div>
-        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:11px">🔒</span><span style="font-size:10px;font-weight:700;color:var(--cy);transition:all .4s">Device & Child Lock</span></div>
+        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:11px;color:#f87171">✗</span><span style="font-size:12px;color:var(--tx3);transition:all .4s">No access control</span></div>
+        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:14px">🔒</span><span style="font-size:12px;font-weight:700;color:var(--cy);transition:all .4s">Device & Child Lock</span></div>
       </div>
       <div class="rbd-pair">
-        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">Not compliant</span></div>
-        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:11px">✅</span><span style="font-size:10px;font-weight:700;color:var(--gn);transition:all .4s">Compliance-Ready</span></div>
+        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:11px;color:#f87171">✗</span><span style="font-size:12px;color:var(--tx3);transition:all .4s">Not compliant</span></div>
+        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:14px">✅</span><span style="font-size:12px;font-weight:700;color:var(--gn);transition:all .4s">Compliance-Ready</span></div>
       </div>
     </div>
   </div>
