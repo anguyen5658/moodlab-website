@@ -777,66 +777,29 @@ section{overflow-x:hidden}
   <video src="Media/Video/Smart Control.mp4" autoplay loop muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.25"></video>
   <div class="hero-mesh" style="opacity:.5"></div>
   <div class="hero-grid" style="opacity:.3"></div>
-  <div class="w" style="position:relative;z-index:2;display:grid;grid-template-columns:1fr 380px;align-items:center;gap:clamp(30px,5vw,80px)">
-    <!-- Left: Text -->
-    <div>
-      <div class="tag rv" style="margin-bottom:16px">Technology · Smart Control</div>
-      <h1 class="rv" data-d="1" style="font-size:clamp(40px,6vw,76px);font-weight:900;line-height:.92;letter-spacing:-.05em;margin-bottom:24px">AI That <span style="color:var(--cy);text-shadow:0 0 40px rgba(0,232,255,.4),0 0 80px rgba(0,232,255,.15)">Thinks</span><br>Before You <span class="grd">Act.</span></h1>
-      <p class="p1 rv" data-d="2" style="margin-bottom:32px;max-width:480px">31+ features across 5 intelligent groups. Mood Logic™ AI learns, adapts, and optimizes every session in real-time. This isn't settings — it's an AI control system.</p>
-      <div class="rv" data-d="3" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px">
-        <a class="btn bp" onclick="document.getElementById('sc-heat').scrollIntoView({behavior:'smooth'})" style="padding:14px 32px">Explore Controls →</a>
-        <a class="btn bs" onclick="go('contact')" style="padding:14px 32px">Partner With Us</a>
-      </div>
-      <!-- Stat strip -->
-      <div class="rv" data-d="3" style="display:flex;gap:24px;padding-top:20px;border-top:1px solid var(--bd)">
-        <div><div style="font-size:28px;font-weight:900;color:var(--cy)">31+</div><div style="font-family:var(--fm);font-size:8px;color:var(--tx3);letter-spacing:2px;margin-top:2px">FEATURES</div></div>
-        <div><div style="font-size:28px;font-weight:900;color:var(--pu)">5</div><div style="font-family:var(--fm);font-size:8px;color:var(--tx3);letter-spacing:2px;margin-top:2px">CONTROL GROUPS</div></div>
-        <div><div style="font-size:28px;font-weight:900;color:var(--pk)">7</div><div style="font-family:var(--fm);font-size:8px;color:var(--tx3);letter-spacing:2px;margin-top:2px">AI PIPELINES</div></div>
-      </div>
+  <div class="w" style="position:relative;z-index:2;max-width:800px">
+    <div class="tag rv" style="margin-bottom:16px">Technology · Smart Control</div>
+    <h1 class="rv" data-d="1" style="font-size:clamp(40px,6vw,76px);font-weight:900;line-height:.92;letter-spacing:-.05em;margin-bottom:24px">AI That <span style="color:var(--cy);text-shadow:0 0 40px rgba(0,232,255,.4),0 0 80px rgba(0,232,255,.15)">Thinks</span><br>Before You <span class="grd">Act.</span></h1>
+    <p class="p1 rv" data-d="2" style="margin-bottom:32px;max-width:560px">31+ features across 5 intelligent groups. Mood Logic™ AI learns, adapts, and optimizes every session in real-time. This isn't settings — it's an AI control system.</p>
+    <div class="rv" data-d="3" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px">
+      <a class="btn bp" onclick="document.getElementById('sc-heat').scrollIntoView({behavior:'smooth'})" style="padding:14px 32px">Explore Controls →</a>
+      <a class="btn bs" onclick="go('contact')" style="padding:14px 32px">Partner With Us</a>
     </div>
-    <!-- Right: 5 Group Navigator — Vertical stack -->
-    <div class="rv" data-d="2" style="position:relative">
-      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:320px;height:320px;background:radial-gradient(circle,rgba(0,232,255,.08),rgba(168,85,247,.04),transparent 70%);filter:blur(60px);pointer-events:none"></div>
-      <div style="display:flex;flex-direction:column;gap:10px;position:relative">
-        <!-- Heat Control -->
-        <div onclick="document.getElementById('sc-heat').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;display:flex;align-items:center;gap:16px;padding:18px 22px;border-radius:16px;background:rgba(0,232,255,.04);border:1px solid rgba(0,232,255,.1);backdrop-filter:blur(10px);transition:all .4s" onmouseover="this.style.background='rgba(0,232,255,.1)';this.style.transform='translateX(-6px) scale(1.02)';this.style.borderColor='rgba(0,232,255,.25)'" onmouseout="this.style.background='rgba(0,232,255,.04)';this.style.transform='none';this.style.borderColor='rgba(0,232,255,.1)'">
-          <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(0,232,255,.15),rgba(0,232,255,.05));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🔥</div>
-          <div style="flex:1"><div style="font-size:14px;font-weight:800;margin-bottom:2px">Heat Control</div><div style="font-size:10px;color:var(--tx3);line-height:1.3">Quick Heat + Precision Curves</div></div>
-          <div style="font-family:var(--fm);font-size:9px;color:var(--cy);letter-spacing:1px;padding:4px 10px;border-radius:8px;background:rgba(0,232,255,.08)">01</div>
-        </div>
-        <!-- Pro Modes -->
-        <div onclick="document.getElementById('sc-pro').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;display:flex;align-items:center;gap:16px;padding:18px 22px;border-radius:16px;background:rgba(168,85,247,.04);border:1px solid rgba(168,85,247,.1);backdrop-filter:blur(10px);transition:all .4s" onmouseover="this.style.background='rgba(168,85,247,.1)';this.style.transform='translateX(-6px) scale(1.02)';this.style.borderColor='rgba(168,85,247,.25)'" onmouseout="this.style.background='rgba(168,85,247,.04)';this.style.transform='none';this.style.borderColor='rgba(168,85,247,.1)'">
-          <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(168,85,247,.15),rgba(168,85,247,.05));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">⚡</div>
-          <div style="flex:1"><div style="font-size:14px;font-weight:800;margin-bottom:2px">Pro Modes</div><div style="font-size:10px;color:var(--tx3);line-height:1.3">Beast · Eco · Balance · Microdose</div></div>
-          <div style="font-family:var(--fm);font-size:9px;color:var(--pu);letter-spacing:1px;padding:4px 10px;border-radius:8px;background:rgba(168,85,247,.08)">02</div>
-        </div>
-        <!-- Blend Modes -->
-        <div onclick="document.getElementById('sc-ent').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;display:flex;align-items:center;gap:16px;padding:18px 22px;border-radius:16px;background:rgba(236,72,153,.04);border:1px solid rgba(236,72,153,.1);backdrop-filter:blur(10px);transition:all .4s" onmouseover="this.style.background='rgba(236,72,153,.1)';this.style.transform='translateX(-6px) scale(1.02)';this.style.borderColor='rgba(236,72,153,.25)'" onmouseout="this.style.background='rgba(236,72,153,.04)';this.style.transform='none';this.style.borderColor='rgba(236,72,153,.1)'">
-          <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(236,72,153,.15),rgba(236,72,153,.05));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🧬</div>
-          <div style="flex:1"><div style="font-size:14px;font-weight:800;margin-bottom:2px">Blend Modes</div><div style="font-size:10px;color:var(--tx3);line-height:1.3">Custom ratios · AI-optimized delivery</div></div>
-          <div style="font-family:var(--fm);font-size:9px;color:var(--pk);letter-spacing:1px;padding:4px 10px;border-radius:8px;background:rgba(236,72,153,.08)">03</div>
-        </div>
-        <!-- Mood Modes -->
-        <div onclick="document.getElementById('sc-mood').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;display:flex;align-items:center;gap:16px;padding:18px 22px;border-radius:16px;background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.1);backdrop-filter:blur(10px);transition:all .4s" onmouseover="this.style.background='rgba(245,158,11,.1)';this.style.transform='translateX(-6px) scale(1.02)';this.style.borderColor='rgba(245,158,11,.25)'" onmouseout="this.style.background='rgba(245,158,11,.04)';this.style.transform='none';this.style.borderColor='rgba(245,158,11,.1)'">
-          <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(245,158,11,.05));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🎭</div>
-          <div style="flex:1"><div style="font-size:14px;font-weight:800;margin-bottom:2px">Mood Modes</div><div style="font-size:10px;color:var(--tx3);line-height:1.3">7 emotion presets · Adaptive AI</div></div>
-          <div style="font-family:var(--fm);font-size:9px;color:var(--am);letter-spacing:1px;padding:4px 10px;border-radius:8px;background:rgba(245,158,11,.08)">04</div>
-        </div>
-        <!-- Pro Tools -->
-        <div onclick="document.getElementById('sc-tools').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;display:flex;align-items:center;gap:16px;padding:18px 22px;border-radius:16px;background:rgba(52,211,153,.04);border:1px solid rgba(52,211,153,.1);backdrop-filter:blur(10px);transition:all .4s" onmouseover="this.style.background='rgba(52,211,153,.1)';this.style.transform='translateX(-6px) scale(1.02)';this.style.borderColor='rgba(52,211,153,.25)'" onmouseout="this.style.background='rgba(52,211,153,.04)';this.style.transform='none';this.style.borderColor='rgba(52,211,153,.1)'">
-          <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(52,211,153,.15),rgba(52,211,153,.05));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🛠️</div>
-          <div style="flex:1"><div style="font-size:14px;font-weight:800;margin-bottom:2px">Pro Tools</div><div style="font-size:10px;color:var(--tx3);line-height:1.3">Pre-Heat · Last Drop · Fusion · More</div></div>
-          <div style="font-family:var(--fm);font-size:9px;color:var(--gn);letter-spacing:1px;padding:4px 10px;border-radius:8px;background:rgba(52,211,153,.08)">05</div>
-        </div>
-        <!-- AI Core badge -->
-        <div style="margin-top:6px;text-align:center;padding:14px;border-radius:14px;background:linear-gradient(135deg,rgba(0,232,255,.06),rgba(168,85,247,.04));border:1px solid rgba(0,232,255,.1)">
-          <div style="font-family:var(--fm);font-size:9px;letter-spacing:3px;color:var(--tx3);margin-bottom:4px">POWERED BY</div>
-          <div style="font-size:16px;font-weight:900;color:var(--cy)">🧠 Mood Logic™ AI</div>
-        </div>
-      </div>
+    <!-- Stat strip -->
+    <div class="rv" data-d="3" style="display:flex;gap:24px;padding-top:20px;border-top:1px solid var(--bd)">
+      <div><div style="font-size:28px;font-weight:900;color:var(--cy)">31+</div><div style="font-family:var(--fm);font-size:8px;color:var(--tx3);letter-spacing:2px;margin-top:2px">FEATURES</div></div>
+      <div><div style="font-size:28px;font-weight:900;color:var(--pu)">5</div><div style="font-family:var(--fm);font-size:8px;color:var(--tx3);letter-spacing:2px;margin-top:2px">CONTROL GROUPS</div></div>
+      <div><div style="font-size:28px;font-weight:900;color:var(--pk)">7</div><div style="font-family:var(--fm);font-size:8px;color:var(--tx3);letter-spacing:2px;margin-top:2px">AI PIPELINES</div></div>
     </div>
   </div>
 </section>
+
+<!-- Powered by Mood Logic strip -->
+<div style="background:linear-gradient(90deg,rgba(0,232,255,.04),rgba(168,85,247,.06),rgba(236,72,153,.04));border-bottom:1px solid var(--bd);padding:10px 0;text-align:center">
+  <span style="font-family:var(--fm);font-size:10px;letter-spacing:3px;color:var(--tx3)">POWERED BY</span>
+  <span style="font-size:14px;font-weight:800;color:var(--cy);margin-left:8px">🧠 Mood Logic™ AI</span>
+  <span style="font-family:var(--fm);font-size:10px;color:var(--tx3);margin-left:12px;letter-spacing:1px">· 31+ Features · 5 Groups · 7 AI Pipelines</span>
+</div>
 
 <!-- Sticky Sub-Nav for 5 Groups -->
 <div id="sc-subnav" style="position:sticky;top:68px;z-index:100;background:rgba(2,2,5,.95);backdrop-filter:blur(20px) saturate(160%);border-bottom:1px solid var(--bd);transition:box-shadow .3s">
@@ -1646,7 +1609,6 @@ section{overflow-x:hidden}
      ═══════════════════════════════════════════════════════════ -->
 <div class="pg" id="p-arena">
 <section class="hero-sm" style="background:var(--bg2);position:relative;overflow:hidden"><video src="Media/Video/Arena.mp4" autoplay loop muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.25"></video><div style="position:absolute;top:20%;left:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,.06),transparent 70%);filter:blur(80px)"></div><div class="w" style="position:relative;z-index:2">
-  <div class="cs rv"><span class="cs-ic">🎮</span><div><strong>Arena — Coming Soon</strong><br><span>18 games · 3 categories · Device-required gameplay · Leaderboards & Rewards</span></div></div>
   <h1 class="h2 rv" data-d="1">Your Device is a<br><span style="color:var(--am);font-family:var(--fs);font-style:italic">Game Controller.</span></h1>
   <p class="p1 rv" data-d="2">Every game requires physical device interaction. This isn't mobile gaming — it's device-native entertainment.</p>
 </div></section>
@@ -1707,7 +1669,6 @@ section{overflow-x:hidden}
      ═══════════════════════════════════════════════════════════ -->
 <div class="pg" id="p-live">
 <section class="hero-sm" style="background:var(--bg2);overflow:hidden;position:relative"><video src="Media/Video/Live.mp4" autoplay loop muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.25"></video><div style="position:absolute;top:20%;right:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,.06),transparent 70%);filter:blur(100px)"></div><div class="w" style="position:relative;z-index:2">
-  <div class="cs rv"><span class="cs-ic">📺</span><div><strong>Live — Coming Soon</strong><br><span>Device-verified streaming · Creator platform · Interactive entertainment</span></div></div>
   <h1 class="h2 rv" data-d="1">The Streaming Experience<br><span class="se">Powered by</span> <span style="color:var(--pu)">Your Device.</span></h1>
   <p class="p1 rv" data-d="2">A dedicated entertainment platform where every interaction is device-verified. Creators share sessions, audiences participate in real-time.</p>
 </div></section>
