@@ -165,27 +165,6 @@ function brandSlide(n){
   });
 })();
 
-// Before/After slider drag
-function rbdDrag(e){
-  e.preventDefault();
-  var slider=document.getElementById('rbdSlider');
-  var handle=document.getElementById('rbdHandle');
-  var afterImg=slider.querySelector('.rbd-after');
-  function move(ev){
-    var rect=slider.getBoundingClientRect();
-    var x=((ev.touches?ev.touches[0].clientX:ev.clientX)-rect.left)/rect.width;
-    x=Math.max(0.05,Math.min(0.95,x));
-    var pct=(x*100)+'%';
-    handle.style.left=pct;
-    afterImg.style.clipPath='inset(0 0 0 '+pct+')';
-  }
-  function up(){document.removeEventListener('mousemove',move);document.removeEventListener('mouseup',up);document.removeEventListener('touchmove',move);document.removeEventListener('touchend',up)}
-  document.addEventListener('mousemove',move);
-  document.addEventListener('mouseup',up);
-  document.addEventListener('touchmove',move,{passive:false});
-  document.addEventListener('touchend',up);
-}
-
 </script>
 <script>
 tailwind.config = {
@@ -686,6 +665,67 @@ footer{grid-template-columns:1fr!important;gap:24px}
 section{overflow-x:hidden}
 
 /* ── sm: 600px+ ── */
+
+/* ── Mobile-first: <600px (iPhone) ── */
+@media(max-width:599px){
+  /* Force all multi-column grids to single column */
+  [style*="grid-template-columns:repeat(2,1fr)"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:repeat(5,1fr)"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:1fr 300px"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:1fr 280px"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:1fr 260px"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:300px 1fr"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:1fr auto 1fr auto 1fr auto 1fr"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:1fr auto 1fr auto 1fr"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:1fr 50px 1fr"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:1fr 72px 1fr"]{grid-template-columns:1fr!important}
+  /* VS compare stack */
+  .vs-m{display:none!important}
+  /* Phone sizing */
+  .phone{width:200px!important;height:400px!important;margin:0 auto!important}
+  .phone-carousel{flex-direction:column!important;gap:16px!important;perspective:none!important}
+  .phone-carousel .phone{transform:none!important;opacity:1!important}
+  .phone-carousel .phone:nth-child(1),.phone-carousel .phone:nth-child(3){transform:none!important;opacity:.7!important}
+  /* Hero text */
+  .hero-sm .w{text-align:center!important}
+  .hero-sm h1{font-size:clamp(28px,7vw,36px)!important}
+  .hero-sm p{font-size:14px!important}
+  .h2{font-size:clamp(24px,6vw,32px)!important}
+  .h3{font-size:clamp(20px,5vw,26px)!important}
+  /* Section nav scroll */
+  [style*="position:sticky"][style*="top:68px"]{top:56px!important}
+  [style*="position:sticky"] .w{gap:0!important}
+  [style*="position:sticky"] a{padding:10px 6px!important;font-size:9px!important}
+  [style*="position:sticky"] a div:first-child{font-size:14px!important;margin-bottom:1px!important}
+  [style*="position:sticky"] a div:last-child{font-size:8px!important}
+  /* Slider */
+  .rbd-slider{aspect-ratio:16/9!important}
+  /* Footer */
+  footer{padding:40px 20px!important}
+  .fcols{grid-template-columns:1fr 1fr!important}
+  /* Tags */
+  .tag{font-size:9px!important}
+  /* Buttons */
+  .btn{font-size:12px!important;padding:12px 20px!important}
+  /* Cards */
+  .gc{padding:16px!important}
+  .fc{padding:16px!important}
+  /* Hide arrows in flow diagrams on mobile */
+  [style*="font-size:20px;color:var(--bd2)"]{display:none!important}
+  /* Stack flex layouts */
+  [style*="display:flex;gap:40px"]{flex-direction:column!important}
+  [style*="display:grid;grid-template-columns:1fr 1fr;gap:40px"]{grid-template-columns:1fr!important}
+  /* Stat strip responsive */
+  [style*="display:inline-flex;gap:24px"]{gap:16px!important}
+  /* Nav */
+  nav{padding:0 12px!important}
+  .logo img{height:26px!important}
+  .nc{font-size:10px!important;padding:8px 12px!important}
+}
+
 @media(min-width:600px){
   [style*="grid-template-columns:repeat(2,1fr)"]{grid-template-columns:repeat(2,1fr)!important}
   [style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:repeat(2,1fr)!important}
@@ -842,9 +882,9 @@ section{overflow-x:hidden}
   <h2 class="h3 rv" data-d="1">40+ Features / 20+ Modes / <span class="grd">Complete Stack</span></h2>
   <p class="rv" data-d="2" style="font-size:14px;color:var(--tx2);max-width:520px;font-weight:300;margin-bottom:32px;line-height:1.6">Smart Control · Usage Intelligence · Authentication · AI Engine · Firmware Engine</p>
   <div class="rv" data-d="3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
-    <div class="img-card" onmouseenter="var v=this.querySelector('video');v.style.opacity='.9';v.play()" onmouseleave="var v=this.querySelector('video');v.pause();v.currentTime=0;v.style.opacity='.4'" onclick="go('sc')" style="background:linear-gradient(180deg,#0a0a2e,#060618);height:280px"><video src="Media/Video/Smart Control.mp4" loop muted playsinline preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.4;transition:opacity .6s"></video><div class="img-card-content"><h3>Smart<br>Control</h3><p>31+ features · AI heating · Precision dosage · 6 groups</p></div></div>
-    <div class="img-card" onmouseenter="var v=this.querySelector('video');v.style.opacity='.9';v.play()" onmouseleave="var v=this.querySelector('video');v.pause();v.currentTime=0;v.style.opacity='.4'" onclick="go('fw')" style="background:linear-gradient(180deg,#1a1a2e,#16213e);height:280px"><video src="Media/Video/Firmware Enginemp4.mp4" loop muted playsinline preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.4;transition:opacity .6s"></video><div class="img-card-content"><h3>Firmware<br>Engine</h3><p>∞ builds · &lt;2s compile · 4-step wizard · OTA ready</p></div></div>
-    <div class="img-card" onmouseenter="var v=this.querySelector('video');v.style.opacity='.9';v.play()" onmouseleave="var v=this.querySelector('video');v.pause();v.currentTime=0;v.style.opacity='.4'" onclick="go('ai')" style="background:linear-gradient(180deg,#1a0a2e,#2d1b69);height:280px"><video src="Media/Video/AI Engine.mp4" loop muted playsinline preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.4;transition:opacity .6s"></video><div class="img-card-content"><h3>AI Engine<br>Mood Logic™</h3><p>7 data pipelines · 7 mood presets · Adaptive learning</p></div></div>
+    <div class="img-card" onmouseenter="var v=this.querySelector('video');v.style.opacity='.9';v.play()" onmouseleave="var v=this.querySelector('video');v.pause();v.currentTime=0;v.style.opacity='.4'" onclick="go('sc')" style="background:linear-gradient(180deg,#0a0a2e,#060618);height:280px"><video src="Media/Video/Smart Control.mp4" loop muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.4;transition:opacity .6s"></video><div class="img-card-content"><h3>Smart<br>Control</h3><p>31+ features · AI heating · Precision dosage · 6 groups</p></div></div>
+    <div class="img-card" onmouseenter="var v=this.querySelector('video');v.style.opacity='.9';v.play()" onmouseleave="var v=this.querySelector('video');v.pause();v.currentTime=0;v.style.opacity='.4'" onclick="go('fw')" style="background:linear-gradient(180deg,#1a1a2e,#16213e);height:280px"><video src="Media/Video/Firmware Enginemp4.mp4" loop muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.4;transition:opacity .6s"></video><div class="img-card-content"><h3>Firmware<br>Engine</h3><p>∞ builds · &lt;2s compile · 4-step wizard · OTA ready</p></div></div>
+    <div class="img-card" onmouseenter="var v=this.querySelector('video');v.style.opacity='.9';v.play()" onmouseleave="var v=this.querySelector('video');v.pause();v.currentTime=0;v.style.opacity='.4'" onclick="go('ai')" style="background:linear-gradient(180deg,#1a0a2e,#2d1b69);height:280px"><video src="Media/Video/AI Engine.mp4" loop muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.4;transition:opacity .6s"></video><div class="img-card-content"><h3>AI Engine<br>Mood Logic™</h3><p>7 data pipelines · 7 mood presets · Adaptive learning</p></div></div>
   </div>
   <div class="rv" data-d="4" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
     <div class="img-card" onmouseenter="var v=this.querySelector('video');v.style.opacity='1';v.play()" onmouseleave="var v=this.querySelector('video');v.pause();v.currentTime=0;v.style.opacity='.7'" onclick="go('ui')" style="background:linear-gradient(135deg,#1e293b,#0f172a);height:180px"><video src="Media/Video/Usage Intelligence.mp4" loop muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.7;transition:opacity .6s"></video><div class="img-card-content"><h3>Usage Intelligence</h3><p>mg/ml extract tracking · Software-only · Behavioral analytics</p></div></div>
@@ -4086,6 +4126,64 @@ function brandSlide(n){
     });
   });
 })();
+
+// Mobile swipe navigation
+(function(){
+  var startX=0,startY=0,startTime=0;
+  var pages=['home','sc','ui','auth','ai','fw','arena','live','moodi','fusiq','brand','factory','venue','about','support','contact'];
+  document.addEventListener('touchstart',function(e){
+    startX=e.touches[0].clientX;startY=e.touches[0].clientY;startTime=Date.now();
+  },{passive:true});
+  document.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-startX;
+    var dy=e.changedTouches[0].clientY-startY;
+    var dt=Date.now()-startTime;
+    // Only trigger on horizontal swipe (>80px, <300ms, mostly horizontal)
+    if(Math.abs(dx)>80 && Math.abs(dx)>Math.abs(dy)*1.5 && dt<300){
+      // Don't swipe if interacting with slider or carousel
+      if(e.target.closest('.rbd-slider,.phone-carousel,#app4-wrap')) return;
+      var current=document.querySelector('.pg.on');
+      if(!current) return;
+      var currentId=current.id.replace('p-','');
+      var idx=pages.indexOf(currentId);
+      if(idx===-1) return;
+      if(dx>0 && idx>0) go(pages[idx-1]); // swipe right = prev
+      else if(dx<0 && idx<pages.length-1) go(pages[idx+1]); // swipe left = next
+    }
+  },{passive:true});
+})();
+
+
+// Before/After slider drag
+function rbdDrag(e){
+  e.preventDefault();
+  var slider=document.getElementById('rbdSlider');
+  if(!slider) return;
+  var handle=document.getElementById('rbdHandle');
+  var afterImg=slider.querySelector('.rbd-after');
+  function move(ev){
+    var rect=slider.getBoundingClientRect();
+    var x=((ev.touches?ev.touches[0].clientX:ev.clientX)-rect.left)/rect.width;
+    x=Math.max(0.05,Math.min(0.95,x));
+    var pct=(x*100)+'%';
+    handle.style.left=pct;
+    afterImg.style.clipPath='inset(0 0 0 '+pct+')';
+  }
+  function up(){document.removeEventListener('mousemove',move);document.removeEventListener('mouseup',up);document.removeEventListener('touchmove',move);document.removeEventListener('touchend',up)}
+  document.addEventListener('mousemove',move);
+  document.addEventListener('mouseup',up);
+  document.addEventListener('touchmove',move,{passive:false});
+  document.addEventListener('touchend',up);
+}
+
+
+// Show first frame of all card videos on page load
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('.img-card video').forEach(function(v){
+    v.play().then(function(){v.pause();v.currentTime=0}).catch(function(){});
+  });
+});
+
 </script>
 </body>
 </html>
