@@ -574,7 +574,7 @@ footer{padding:clamp(40px,5vw,72px) clamp(24px,5vw,64px);border-top:1px solid va
 @keyframes pulseDown{0%{top:-5%;opacity:0}30%{opacity:1}70%{opacity:1}100%{top:95%;opacity:0}}
 @keyframes dotPulse{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
 .rbd-card:hover{transform:translateX(4px);border-color:rgba(255,255,255,.12)!important}
-.rbd-slider{position:relative;width:100%;max-width:960px;margin:0 auto;aspect-ratio:21/9;border-radius:20px;overflow:hidden;cursor:col-resize;border:1px solid var(--bd2);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.rbd-slider{position:relative;width:100%;max-width:960px;margin:0 auto;aspect-ratio:16/9;border-radius:20px;overflow:hidden;cursor:col-resize;border:1px solid var(--bd2);box-shadow:0 20px 60px rgba(0,0,0,.4)}
 .rbd-slider img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none}
 .rbd-slider .rbd-after{clip-path:inset(0 0 0 50%)}
 .rbd-slider .rbd-handle{position:absolute;top:0;bottom:0;left:50%;width:4px;background:linear-gradient(180deg,var(--gn),var(--cy));transform:translateX(-50%);z-index:5;box-shadow:0 0 20px rgba(52,211,153,.3),0 0 40px rgba(52,211,153,.1);transition:box-shadow .3s}
@@ -1011,76 +1011,32 @@ section{overflow-x:hidden}
   <p class="rv" data-d="2" style="text-align:center;font-size:15px;color:var(--tx2);font-weight:300;max-width:620px;margin:0 auto 8px;line-height:1.65">Most devices offer zero control, zero visibility, and zero safety features. Users can't track what they consume. Parents can't restrict access. Brands can't differentiate on responsibility.</p>
   <p class="rv" data-d="2" style="text-align:center;font-size:16px;color:var(--tx);font-weight:600;max-width:620px;margin:0 auto 48px;line-height:1.65">We built technology that changes all of that.</p>
 
-  <!-- Safety Features Bento Grid -->
-  <div class="rv" data-d="2" style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:960px;margin:0 auto">
-    <!-- Feature 1: Large card -->
-    <div class="gc rv" style="padding:32px;grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between;border-color:rgba(52,211,153,.1)">
-      <div>
-        <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(52,211,153,.12),rgba(52,211,153,.03));border:1px solid rgba(52,211,153,.15);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px">🎯</div>
-        <h4 style="font-size:18px;font-weight:800;color:var(--gn);margin-bottom:8px">Precision Dosage Control</h4>
-        <p style="font-size:13px;color:var(--tx2);line-height:1.65">Exact delivery — users decide precisely how much, every time. mg/ml tracking with AI accuracy that improves to 94%+ over time. No guessing. No overconsumption.</p>
-      </div>
-      <div style="display:flex;gap:8px;margin-top:20px">
-        <span style="padding:5px 12px;border-radius:100px;background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.1);font-size:10px;color:var(--gn)">mg/ml Tracking</span>
-        <span style="padding:5px 12px;border-radius:100px;background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.1);font-size:10px;color:var(--gn)">AI-Powered</span>
-      </div>
-    </div>
-    <!-- Feature 2 -->
-    <div class="gc rv" data-d="1" style="padding:24px;border-color:rgba(0,232,255,.1)">
-      <div style="display:flex;align-items:center;gap:14px">
-        <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,rgba(0,232,255,.12),rgba(0,232,255,.03));border:1px solid rgba(0,232,255,.15);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">🔒</div>
-        <div><h4 style="font-size:14px;font-weight:800;color:var(--cy);margin-bottom:4px">Device Lock & Child-Lock</h4><p style="font-size:11px;color:var(--tx2);line-height:1.5">Hardware-level access control. Parental safeguards that cannot be bypassed without authentication.</p></div>
-      </div>
-    </div>
-    <!-- Feature 3 -->
-    <div class="gc rv" data-d="1" style="padding:24px;border-color:rgba(168,85,247,.1)">
-      <div style="display:flex;align-items:center;gap:14px">
-        <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,rgba(168,85,247,.12),rgba(168,85,247,.03));border:1px solid rgba(168,85,247,.15);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">⏱️</div>
-        <div><h4 style="font-size:14px;font-weight:800;color:var(--pu);margin-bottom:4px">Session Limits & Scheduling</h4><p style="font-size:11px;color:var(--tx2);line-height:1.5">Set daily usage limits, enforce cooling-off periods, schedule sessions. Boundaries that respect the user.</p></div>
-      </div>
-    </div>
-    <!-- Feature 4 -->
-    <div class="gc rv" data-d="2" style="padding:24px;border-color:rgba(236,72,153,.1)">
-      <div style="display:flex;align-items:center;gap:14px">
-        <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,rgba(236,72,153,.12),rgba(236,72,153,.03));border:1px solid rgba(236,72,153,.15);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">📊</div>
-        <div><h4 style="font-size:14px;font-weight:800;color:var(--pk);margin-bottom:4px">Usage Tracking & Smart Alerts</h4><p style="font-size:11px;color:var(--tx2);line-height:1.5">Real-time consumption visibility. Blinker detection. Overuse warnings. AI-powered safety intelligence.</p></div>
-      </div>
-    </div>
-    <!-- Feature 5 -->
-    <div class="gc rv" data-d="2" style="padding:24px;border-color:rgba(245,158,11,.1)">
-      <div style="display:flex;align-items:center;gap:14px">
-        <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(245,158,11,.03));border:1px solid rgba(245,158,11,.15);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">🛡️</div>
-        <div><h4 style="font-size:14px;font-weight:800;color:var(--am);margin-bottom:4px">Damage Prevention</h4><p style="font-size:11px;color:var(--tx2);line-height:1.5">AI monitors coil temperature, prevents overheating, auto-cools on dangerous patterns. Protects both user and device.</p></div>
-      </div>
-    </div>
-    <!-- Feature 6: Wide card -->
-    <div class="gc rv" data-d="3" style="padding:24px;grid-column:span 2;border-color:rgba(52,211,153,.1)">
-      <div style="display:flex;align-items:center;gap:14px">
-        <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,rgba(52,211,153,.12),rgba(52,211,153,.03));border:1px solid rgba(52,211,153,.15);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">✅</div>
-        <div><h4 style="font-size:14px;font-weight:800;color:var(--gn);margin-bottom:4px">Compliance-Ready by Default</h4><p style="font-size:11px;color:var(--tx2);line-height:1.5">Every safety feature creates an audit trail. When regulations require traceability, dosage tracking, or access controls — your devices are already compliant. Position your brand as the responsible industry leader.</p></div>
-      </div>
-    </div>
-  </div>
 
-
-  <!-- Before / After Image Slider -->
-  <div class="rv" data-d="2" style="margin-top:48px;text-align:center">
+  <!-- Before / After Image Slider — FOCAL POINT -->
+  <div class="rv" data-d="2" style="text-align:center">
     <div style="font-family:var(--fm);font-size:10px;color:var(--gn);letter-spacing:2px;margin-bottom:12px">DRAG TO COMPARE</div>
     <h3 style="font-size:clamp(18px,2.5vw,24px);font-weight:800;margin-bottom:24px">The <span style="color:#f87171">Industry Standard</span> vs <span style="color:var(--gn)">With Mood Lab</span></h3>
-    <div class="rbd-slider" id="rbdSlider" onmousedown="rbdDrag(event)" ontouchstart="rbdDrag(event)">
-      <!-- Before image (placeholder - user will replace) -->
-      <img class="rbd-before" src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200&q=80" alt="Before: Industry Standard - generic, no intelligence">
-      <!-- After image (placeholder - user will replace) -->
-      <img class="rbd-after" src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1200&q=80" alt="After: With Mood Lab - smart, controlled, safe">
-      <!-- Draggable handle -->
+    <div class="rbd-slider" id="rbdSlider" onmousedown="rbdDrag(event)" ontouchstart="rbdDrag(event)" style="max-width:100%;aspect-ratio:16/9">
+      <img class="rbd-before" src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1400&q=80" alt="Before: Industry Standard">
+      <img class="rbd-after" src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1400&q=80" alt="After: With Mood Lab">
       <div class="rbd-handle" id="rbdHandle"></div>
-      <!-- Labels -->
       <div class="rbd-label rbd-label-before">BEFORE</div>
       <div class="rbd-label rbd-label-after">WITH MOOD LAB</div>
     </div>
     <p style="font-size:11px;color:var(--tx3);margin-top:12px">← Drag the handle to compare →</p>
   </div>
 
+  <!-- Safety Features — Compact bullets below slider -->
+  <div class="rv" data-d="3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px">
+    <div style="display:flex;align-items:flex-start;gap:12px"><div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,rgba(52,211,153,.1),rgba(52,211,153,.03));border:1px solid rgba(52,211,153,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">🎯</div><div><div style="font-size:12px;font-weight:800;color:var(--gn)">Precision Dosage</div><div style="font-size:10px;color:var(--tx3);margin-top:2px">mg/ml tracking · 94%+ AI accuracy</div></div></div>
+    <div style="display:flex;align-items:flex-start;gap:12px"><div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,rgba(0,232,255,.1),rgba(0,232,255,.03));border:1px solid rgba(0,232,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">🔒</div><div><div style="font-size:12px;font-weight:800;color:var(--cy)">Device & Child Lock</div><div style="font-size:10px;color:var(--tx3);margin-top:2px">Hardware-level access control</div></div></div>
+    <div style="display:flex;align-items:flex-start;gap:12px"><div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,rgba(168,85,247,.1),rgba(168,85,247,.03));border:1px solid rgba(168,85,247,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">⏱️</div><div><div style="font-size:12px;font-weight:800;color:var(--pu)">Session Limits</div><div style="font-size:10px;color:var(--tx3);margin-top:2px">Usage caps · Scheduling · Breaks</div></div></div>
+    <div style="display:flex;align-items:flex-start;gap:12px"><div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,rgba(236,72,153,.1),rgba(236,72,153,.03));border:1px solid rgba(236,72,153,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">📊</div><div><div style="font-size:12px;font-weight:800;color:var(--pk)">Smart Alerts</div><div style="font-size:10px;color:var(--tx3);margin-top:2px">Blinker detection · Overuse warnings</div></div></div>
+    <div style="display:flex;align-items:flex-start;gap:12px"><div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(245,158,11,.03));border:1px solid rgba(245,158,11,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">🛡️</div><div><div style="font-size:12px;font-weight:800;color:var(--am)">Damage Prevention</div><div style="font-size:10px;color:var(--tx3);margin-top:2px">AI thermal protection · Auto-cool</div></div></div>
+    <div style="display:flex;align-items:flex-start;gap:12px"><div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,rgba(52,211,153,.1),rgba(52,211,153,.03));border:1px solid rgba(52,211,153,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">✅</div><div><div style="font-size:12px;font-weight:800;color:var(--gn)">Compliance-Ready</div><div style="font-size:10px;color:var(--tx3);margin-top:2px">Audit trail · Regulation-ready</div></div></div>
+  </div>
+
+  <!-- Closing statement -->
 
   <!-- Closing statement -->
   <div class="rv" data-d="3" style="text-align:center;margin-top:48px;padding:28px 32px;border-radius:20px;background:linear-gradient(135deg,rgba(52,211,153,.04),rgba(0,232,255,.02));border:1px solid rgba(52,211,153,.08)">
