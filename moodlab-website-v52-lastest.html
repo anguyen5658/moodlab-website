@@ -576,13 +576,15 @@ footer{padding:clamp(40px,5vw,72px) clamp(24px,5vw,64px);border-top:1px solid va
 .rbd-card:hover{transform:translateX(4px);border-color:rgba(255,255,255,.12)!important}
 .rbd-slider{position:relative;width:100%;max-width:920px;margin:0 auto;aspect-ratio:2/1;border-radius:16px;overflow:hidden;cursor:col-resize;border:1px solid rgba(255,255,255,.06)}
 .rbd-slider img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none}
-.rbd-slider .rbd-after{clip-path:inset(0 0 0 50%)}
-.rbd-slider .rbd-handle{position:absolute;top:0;bottom:0;left:50%;width:2px;background:rgba(255,255,255,.5);transform:translateX(-50%);z-index:5}
+.rbd-slider .rbd-after{clip-path:inset(0 0 0 0%)}
+.rbd-slider .rbd-handle{position:absolute;top:0;bottom:0;left:0%;width:2px;background:rgba(255,255,255,.5);transform:translateX(-50%);z-index:5}
 .rbd-slider .rbd-handle::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.1);backdrop-filter:blur(8px);border:1.5px solid rgba(255,255,255,.3)}
 .rbd-slider .rbd-handle::after{content:'\2194';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:14px;color:rgba(255,255,255,.7);z-index:1}
-.rbd-slider .rbd-label{position:absolute;bottom:12px;padding:5px 12px;border-radius:6px;font-size:10px;font-weight:600;letter-spacing:.5px;font-family:var(--fm);z-index:4;backdrop-filter:blur(8px)}
-.rbd-slider .rbd-label-before{left:12px;background:rgba(0,0,0,.4);color:rgba(255,255,255,.6)}
-.rbd-slider .rbd-label-after{right:12px;background:rgba(0,0,0,.4);color:rgba(255,255,255,.6)}
+.rbd-slider .rbd-label{position:absolute;bottom:16px;padding:8px 16px;border-radius:8px;font-size:11px;font-weight:800;letter-spacing:1px;font-family:var(--fm);z-index:4;backdrop-filter:blur(12px)}
+.rbd-slider .rbd-label-before{left:12px;background:rgba(248,113,113,.2);border:1px solid rgba(248,113,113,.4);color:#f87171;font-weight:800}
+@keyframes rbdHintPulse{0%,100%{opacity:.9;transform:translate(-50%,-50%) scale(1)}50%{opacity:.6;transform:translate(-50%,-50%) scale(.95)}}
+@keyframes rbdArrowBounce{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+.rbd-slider .rbd-label-after{right:12px;background:rgba(52,211,153,.2);border:1px solid rgba(52,211,153,.4);color:var(--gn);font-weight:800}
 .rbd-bad:hover{border-color:rgba(248,113,113,.15)!important;box-shadow:0 4px 24px rgba(248,113,113,.06)}
 .rbd-good:hover{border-color:rgba(52,211,153,.18)!important;box-shadow:0 4px 24px rgba(52,211,153,.08)}
 .rbd-good:hover>div:nth-child(2){opacity:1!important}
@@ -1023,11 +1025,17 @@ section{overflow-x:hidden}
   <!-- Before / After Image Slider -->
   <div class="rv" data-d="2" style="text-align:center">
     <div class="rbd-slider" id="rbdSlider" onmousedown="rbdDrag(event)">
-      <img class="rbd-before" src="Media/Image/Responsible Before.png" alt="Before: Industry Standard">
-      <img class="rbd-after" src="Media/Image/Responsible After.png" alt="After: With Mood Lab">
+      <img class="rbd-before" src="Media/Image/Responsible After.png" alt="After: With Mood Lab">
+      <img class="rbd-after" src="Media/Image/Responsible Before.png" alt="Before: Industry Standard">
       <div class="rbd-handle" id="rbdHandle"></div>
       <div class="rbd-label rbd-label-before">INDUSTRY STANDARD</div>
       <div class="rbd-label rbd-label-after">MOOD LAB</div>
+      <!-- Drag hint -->
+      <div id="rbdHint" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:6;pointer-events:none;display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:100px;background:rgba(0,0,0,.6);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.15);animation:rbdHintPulse 2s ease-in-out infinite">
+        <span style="font-size:16px">👆</span>
+        <span style="font-size:12px;font-weight:700;color:#fff;letter-spacing:.5px">Drag to Compare</span>
+        <span style="font-size:14px;animation:rbdArrowBounce 1.5s ease-in-out infinite">→</span>
+      </div>
     </div>
   </div>
 
@@ -1044,26 +1052,26 @@ section{overflow-x:hidden}
         <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:11px">🛡️</span><span style="font-size:10px;font-weight:700;color:var(--am);transition:all .4s">Damage Prevention</span></div>
       </div>
     </div>
-    <!-- Zone 1: Sessions + Alerts (initially revealed at x=0.5) -->
-    <div id="rbd-zone-1" style="padding:14px 12px;border-right:1px solid rgba(255,255,255,.03);transition:all .4s;background:rgba(168,85,247,.04);border-bottom:2px solid rgba(168,85,247,.4)">
+    <!-- Zone 1: Sessions + Alerts -->
+    <div id="rbd-zone-1" style="padding:14px 12px;border-right:1px solid rgba(255,255,255,.03);transition:all .4s">
       <div class="rbd-pair" style="margin-bottom:8px">
-        <div class="rbd-before-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">No session limits</span></div>
-        <div class="rbd-after-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:11px">⏱️</span><span style="font-size:10px;font-weight:700;color:var(--pu);transition:all .4s">Session Limits</span></div>
+        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">No session limits</span></div>
+        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:11px">⏱️</span><span style="font-size:10px;font-weight:700;color:var(--pu);transition:all .4s">Session Limits</span></div>
       </div>
       <div class="rbd-pair">
-        <div class="rbd-before-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">No safety alerts</span></div>
-        <div class="rbd-after-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:11px">📊</span><span style="font-size:10px;font-weight:700;color:var(--pk);transition:all .4s">Smart Alerts</span></div>
+        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">No safety alerts</span></div>
+        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:11px">📊</span><span style="font-size:10px;font-weight:700;color:var(--pk);transition:all .4s">Smart Alerts</span></div>
       </div>
     </div>
-    <!-- Zone 2: Lock + Compliance (initially revealed at x=0.5) -->
-    <div id="rbd-zone-2" style="padding:14px 12px;transition:all .4s;background:rgba(0,232,255,.04);border-bottom:2px solid rgba(0,232,255,.4)">
+    <!-- Zone 2: Lock + Compliance -->
+    <div id="rbd-zone-2" style="padding:14px 12px;transition:all .4s">
       <div class="rbd-pair" style="margin-bottom:8px">
-        <div class="rbd-before-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">No access control</span></div>
-        <div class="rbd-after-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:11px">🔒</span><span style="font-size:10px;font-weight:700;color:var(--cy);transition:all .4s">Device & Child Lock</span></div>
+        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">No access control</span></div>
+        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:11px">🔒</span><span style="font-size:10px;font-weight:700;color:var(--cy);transition:all .4s">Device & Child Lock</span></div>
       </div>
       <div class="rbd-pair">
-        <div class="rbd-before-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">Not compliant</span></div>
-        <div class="rbd-after-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:11px">✅</span><span style="font-size:10px;font-weight:700;color:var(--gn);transition:all .4s">Compliance-Ready</span></div>
+        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">Not compliant</span></div>
+        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:11px">✅</span><span style="font-size:10px;font-weight:700;color:var(--gn);transition:all .4s">Compliance-Ready</span></div>
       </div>
     </div>
   </div>
@@ -4198,7 +4206,7 @@ function rbdDrag(e){
       var z=document.getElementById(id);
       if(!z)return;
       var pairs=z.querySelectorAll('.rbd-pair');
-      var isRevealed = x < zoneEdges[i]; // After visible in this zone
+      var isRevealed = x > zoneEdges[i]; // Mood Lab revealed as handle moves RIGHT
       pairs.forEach(function(pair){
         var bm=pair.querySelector('.rbd-before-msg');
         var am=pair.querySelector('.rbd-after-msg');
@@ -4226,6 +4234,7 @@ function rbdDrag(e){
     var x=(clientX-rect.left)/rect.width;
     x=Math.max(0.02,Math.min(0.98,x));
     handle.style.left=(x*100)+'%';
+    var hint=document.getElementById('rbdHint');if(hint)hint.style.display='none';
     afterImg.style.clipPath='inset(0 0 0 '+(x*100)+'%)';
     updateZones(x);
   }
@@ -4252,6 +4261,7 @@ function rbdDrag(e){
     var h=document.getElementById('rbdHandle');
     var a=s.querySelector('.rbd-after');
     if(h)h.style.left=(x*100)+'%';
+    var hint=document.getElementById('rbdHint');if(hint)hint.style.display='none';
     if(a)a.style.clipPath='inset(0 0 0 '+(x*100)+'%)';
     // Zone update — same logic as updateZones(x)
     var zones=['rbd-zone-0','rbd-zone-1','rbd-zone-2'];
@@ -4261,7 +4271,7 @@ function rbdDrag(e){
     zones.forEach(function(id,i){
       var z=document.getElementById(id);if(!z)return;
       var pairs=z.querySelectorAll('.rbd-pair');
-      var isRevealed=x<zoneEdges[i];
+      var isRevealed=x>zoneEdges[i];
       pairs.forEach(function(pair){
         var bm=pair.querySelector('.rbd-before-msg');
         var am=pair.querySelector('.rbd-after-msg');
