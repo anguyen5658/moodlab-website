@@ -745,7 +745,9 @@ section{overflow-x:hidden}
   .rbd-slider .rbd-handle::before{width:28px!important;height:28px!important}
   .rbd-slider .rbd-handle::after{font-size:11px!important}
   [style*="grid-template-columns:repeat(3,1fr);gap:1px"]{grid-template-columns:repeat(3,1fr)!important}
-  #rbd-zone-0,#rbd-zone-1,#rbd-zone-2{padding:10px 6px!important}
+  #rbd-zone-0,#rbd-zone-1,#rbd-zone-2{padding:10px 8px!important}
+  .rbd-problem div:first-child,.rbd-solution div{font-size:9px!important}
+  .rbd-problem div:last-child{font-size:8px!important}
   #rbd-zone-0 span,#rbd-zone-1 span,#rbd-zone-2 span{font-size:8px!important}
   #rbd-zone-0>div,#rbd-zone-1>div,#rbd-zone-2>div{gap:6px!important}
   #rbd-zone-0>div>div,#rbd-zone-1>div>div,#rbd-zone-2>div>div{gap:4px!important}
@@ -1028,27 +1030,43 @@ section{overflow-x:hidden}
     </div>
   </div>
 
-  <!-- 3 Zone Feature Groups — light up based on slider position -->
-  <div class="rv" data-d="3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:24px;border-radius:12px;overflow:hidden">
-    <div id="rbd-zone-0" style="padding:20px;background:rgba(52,211,153,.06);border-bottom:2px solid var(--gn);transition:all .4s">
-      <div style="display:flex;flex-direction:column;gap:10px">
-        <div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px">🎯</span><span style="font-size:11px;font-weight:700;color:var(--gn)">Precision Dosage</span></div>
-        <div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px">🛡️</span><span style="font-size:11px;font-weight:700;color:var(--am)">Damage Prevention</span></div>
+  <!-- 3 Zone Feature Groups — dual state: problem (red) vs solution (colored) -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:20px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.04)">
+    <div id="rbd-zone-0" style="padding:16px 14px;border-right:1px solid rgba(255,255,255,.03);transition:all .5s">
+      <!-- Problem state (visible when slider hasn't reached this zone) -->
+      <div class="rbd-problem" style="transition:all .4s">
+        <div style="font-size:10px;font-weight:700;color:#f87171;margin-bottom:8px;font-family:var(--fm);letter-spacing:.5px">✗ NO TRACKING</div>
+        <div style="font-size:10px;color:var(--tx3);line-height:1.5">Zero dosage visibility. No damage prevention.</div>
+      </div>
+      <!-- Solution state (visible when slider reveals this zone) -->
+      <div class="rbd-solution" style="display:none;transition:all .4s">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><span style="font-size:12px">🎯</span><span style="font-size:10px;font-weight:700;color:var(--gn)">Precision Dosage</span></div>
+        <div style="display:flex;align-items:center;gap:6px"><span style="font-size:12px">🛡️</span><span style="font-size:10px;font-weight:700;color:var(--am)">Damage Prevention</span></div>
       </div>
     </div>
-    <div id="rbd-zone-1" style="padding:20px;background:rgba(255,255,255,.02);border-bottom:2px solid transparent;transition:all .4s">
-      <div style="display:flex;flex-direction:column;gap:10px">
-        <div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px">⏱️</span><span style="font-size:11px;font-weight:700;color:var(--tx3)">Session Limits</span></div>
-        <div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px">📊</span><span style="font-size:11px;font-weight:700;color:var(--tx3)">Smart Alerts</span></div>
+    <div id="rbd-zone-1" style="padding:16px 14px;border-right:1px solid rgba(255,255,255,.03);transition:all .5s">
+      <div class="rbd-problem" style="transition:all .4s">
+        <div style="font-size:10px;font-weight:700;color:#f87171;margin-bottom:8px;font-family:var(--fm);letter-spacing:.5px">✗ NO LIMITS</div>
+        <div style="font-size:10px;color:var(--tx3);line-height:1.5">Unlimited sessions. No safety alerts.</div>
+      </div>
+      <div class="rbd-solution" style="display:none;transition:all .4s">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><span style="font-size:12px">⏱️</span><span style="font-size:10px;font-weight:700;color:var(--pu)">Session Limits</span></div>
+        <div style="display:flex;align-items:center;gap:6px"><span style="font-size:12px">📊</span><span style="font-size:10px;font-weight:700;color:var(--pk)">Smart Alerts</span></div>
       </div>
     </div>
-    <div id="rbd-zone-2" style="padding:20px;background:rgba(255,255,255,.02);border-bottom:2px solid transparent;transition:all .4s">
-      <div style="display:flex;flex-direction:column;gap:10px">
-        <div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px">🔒</span><span style="font-size:11px;font-weight:700;color:var(--tx3)">Device & Child Lock</span></div>
-        <div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px">✅</span><span style="font-size:11px;font-weight:700;color:var(--tx3)">Compliance-Ready</span></div>
+    <div id="rbd-zone-2" style="padding:16px 14px;transition:all .5s">
+      <div class="rbd-problem" style="transition:all .4s">
+        <div style="font-size:10px;font-weight:700;color:#f87171;margin-bottom:8px;font-family:var(--fm);letter-spacing:.5px">✗ NO PROTECTION</div>
+        <div style="font-size:10px;color:var(--tx3);line-height:1.5">No access control. Not compliant.</div>
+      </div>
+      <div class="rbd-solution" style="display:none;transition:all .4s">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><span style="font-size:12px">🔒</span><span style="font-size:10px;font-weight:700;color:var(--cy)">Device & Child Lock</span></div>
+        <div style="display:flex;align-items:center;gap:6px"><span style="font-size:12px">✅</span><span style="font-size:10px;font-weight:700;color:var(--gn)">Compliance-Ready</span></div>
       </div>
     </div>
   </div>
+
+
 
 
   <!-- Closing statement -->
@@ -4157,6 +4175,52 @@ function brandSlide(n){
 
 
 // Before/After slider drag
+function rbdDrag(e){
+  e.preventDefault();
+  var slider=document.getElementById('rbdSlider');
+  if(!slider) return;
+  var handle=document.getElementById('rbdHandle');
+  var afterImg=slider.querySelector('.rbd-after');
+  var zones=[document.getElementById('rbd-zone-0'),document.getElementById('rbd-zone-1'),document.getElementById('rbd-zone-2')];
+  var zoneBgs=['rgba(52,211,153,.05)','rgba(168,85,247,.05)','rgba(0,232,255,.05)'];
+  var zoneBorders=['var(--gn)','var(--pu)','var(--cy)'];
+  function updateZones(x){
+    // Each zone flips from problem→solution when slider passes its threshold
+    var thresholds=[0.333,0.666,1.0];
+    zones.forEach(function(z,i){
+      if(!z)return;
+      var prob=z.querySelector('.rbd-problem');
+      var sol=z.querySelector('.rbd-solution');
+      var revealed=x>thresholds[i];
+      // Show solution when slider has passed this zone (After image revealed)
+      if(revealed){
+        if(prob){prob.style.display='none'}
+        if(sol){sol.style.display='block'}
+        z.style.background=zoneBgs[i];
+        z.style.borderBottom='2px solid '+zoneBorders[i];
+      }else{
+        if(prob){prob.style.display='block'}
+        if(sol){sol.style.display='none'}
+        z.style.background='transparent';
+        z.style.borderBottom='2px solid transparent';
+      }
+    });
+  }
+  function move(ev){
+    var rect=slider.getBoundingClientRect();
+    var x=((ev.touches?ev.touches[0].clientX:ev.clientX)-rect.left)/rect.width;
+    x=Math.max(0.02,Math.min(0.98,x));
+    var pct=(x*100)+'%';
+    handle.style.left=pct;
+    afterImg.style.clipPath='inset(0 0 0 '+pct+')';
+    updateZones(1-x);
+  }
+  function up(){document.removeEventListener('mousemove',move);document.removeEventListener('mouseup',up);document.removeEventListener('touchmove',move);document.removeEventListener('touchend',up)}
+  document.addEventListener('mousemove',move);
+  document.addEventListener('mouseup',up);
+  document.addEventListener('touchmove',move,{passive:false});
+  document.addEventListener('touchend',up);
+}
 function rbdDrag(e){
   e.preventDefault();
   var slider=document.getElementById('rbdSlider');
