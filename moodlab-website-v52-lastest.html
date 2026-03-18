@@ -668,10 +668,13 @@ section{overflow-x:hidden}
 
 /* ── Mobile-first: <600px (iPhone) ── */
 @media(max-width:599px){
-  /* CRITICAL: Prevent horizontal overflow */
-  *{max-width:100vw}
+  /* CRITICAL: Prevent horizontal overflow (exclude fixed overlays) */
+  *:not(.nv-mob):not(nav):not(.ham){max-width:100vw}
   .w{padding:0 16px!important;overflow:hidden}
   section{overflow:hidden!important}
+  /* Mobile nav must be full screen and above everything */
+  .nv-mob{top:56px!important;max-width:none!important;width:100%!important;height:calc(100vh - 56px)!important;z-index:1001!important}
+  .nv-mob.show{display:flex!important}
   /* Hero text — single column, no grid */
   .hero .w{display:flex!important;flex-direction:column!important;text-align:center!important;padding-top:80px!important}
   .hero .w>div:last-child{display:none!important}
