@@ -4207,12 +4207,12 @@ function rbdDrag(e){
     // Zone 1 (center, 33-66%) reveals next
     // Zone 0 (left, 0-33%) reveals last
     // Zone is "revealed" when handle position < zone's right edge
-    var zoneEdges=[0.33, 0.66, 1.0]; // right edge of each zone
+    var zoneEdges=[0.01, 0.33, 0.66]; // left edge of each zone
     zones.forEach(function(id,i){
       var z=document.getElementById(id);
       if(!z)return;
       var pairs=z.querySelectorAll('.rbd-pair');
-      var isRevealed = x > zoneEdges[i]; // Mood Lab revealed as handle moves RIGHT
+      var isRevealed = x > zoneEdges[i]; // lights up when slider enters zone
       pairs.forEach(function(pair){
         var bm=pair.querySelector('.rbd-before-msg');
         var am=pair.querySelector('.rbd-after-msg');
@@ -4273,7 +4273,7 @@ function rbdDrag(e){
     var zones=['rbd-zone-0','rbd-zone-1','rbd-zone-2'];
     var solBgs=['rgba(52,211,153,.04)','rgba(168,85,247,.04)','rgba(0,232,255,.04)'];
     var solBorders=['rgba(52,211,153,.4)','rgba(168,85,247,.4)','rgba(0,232,255,.4)'];
-    var zoneEdges=[0.33,0.66,1.0];
+    var zoneEdges=[0.01,0.33,0.66];
     zones.forEach(function(id,i){
       var z=document.getElementById(id);if(!z)return;
       var pairs=z.querySelectorAll('.rbd-pair');
