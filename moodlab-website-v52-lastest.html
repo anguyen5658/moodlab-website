@@ -1031,13 +1031,13 @@ section{overflow-x:hidden}
         <span style="font-size:14px;animation:rbdArrowBounce 1.5s ease-in-out infinite">→</span>
       </div>
     </div>
-    <!-- Labels below slider frame -->
+    <!-- Labels below slider frame — clickable -->
     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;max-width:920px;margin-left:auto;margin-right:auto">
-      <div style="display:flex;align-items:center;gap:6px">
+      <div onclick="rbdJump(0.01)" style="display:flex;align-items:center;gap:6px;cursor:pointer;transition:opacity .2s" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
         <div style="width:6px;height:6px;border-radius:50%;background:#f87171;box-shadow:0 0 6px rgba(248,113,113,.5)"></div>
         <span style="font-size:10px;font-weight:800;color:#f87171;font-family:var(--fm);letter-spacing:1px">INDUSTRY STANDARD</span>
       </div>
-      <div style="display:flex;align-items:center;gap:6px">
+      <div onclick="rbdJump(0.99)" style="display:flex;align-items:center;gap:6px;cursor:pointer;transition:opacity .2s" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
         <span style="font-size:10px;font-weight:800;color:var(--gn);font-family:var(--fm);letter-spacing:1px">MOOD LAB</span>
         <div style="width:6px;height:6px;border-radius:50%;background:var(--gn);box-shadow:0 0 6px rgba(52,211,153,.5)"></div>
       </div>
@@ -4188,6 +4188,44 @@ function brandSlide(n){
 })();
 
 
+
+// Jump slider to position (with smooth animation)
+function rbdJump(targetX){
+  var slider=document.getElementById('rbdSlider');
+  if(!slider)return;
+  var handle=document.getElementById('rbdHandle');
+  var afterImg=slider.querySelector('.rbd-after');
+  var hint=document.getElementById('rbdHint');
+  if(hint)hint.style.display='none';
+  // Animate smoothly
+  handle.style.transition='left .5s cubic-bezier(.22,1,.36,1)';
+  handle.style.left=(targetX*100)+'%';
+  afterImg.style.transition='clip-path .5s cubic-bezier(.22,1,.36,1)';
+  afterImg.style.clipPath='inset(0 0 0 '+(targetX*100)+'%)';
+  // Update zones
+  var zones=['rbd-zone-0','rbd-zone-1','rbd-zone-2'];
+  var solBgs=['rgba(52,211,153,.04)','rgba(168,85,247,.04)','rgba(0,232,255,.04)'];
+  var solBorders=['rgba(52,211,153,.4)','rgba(168,85,247,.4)','rgba(0,232,255,.4)'];
+  var zoneEdges=[0.01,0.33,0.66];
+  zones.forEach(function(id,i){
+    var z=document.getElementById(id);if(!z)return;
+    var pairs=z.querySelectorAll('.rbd-pair');
+    var isRevealed=targetX>zoneEdges[i];
+    pairs.forEach(function(pair){
+      var bm=pair.querySelector('.rbd-before-msg');
+      var am=pair.querySelector('.rbd-after-msg');
+      if(isRevealed){if(bm)bm.style.display='none';if(am)am.style.display='flex'}
+      else{if(bm)bm.style.display='flex';if(am)am.style.display='none'}
+    });
+    z.style.background=isRevealed?solBgs[i]:'transparent';
+    z.style.borderBottom=isRevealed?'2px solid '+solBorders[i]:'2px solid transparent';
+  });
+  // Remove transition after animation completes
+  setTimeout(function(){
+    handle.style.transition='none';
+    afterImg.style.transition='none';
+  },550);
+}
 // Before/After slider drag
 function rbdDrag(e){
   e.preventDefault();
@@ -4299,6 +4337,24 @@ if(window.innerWidth<600){
   document.querySelectorAll('.img-card').forEach(function(c){vo.observe(c)});
 }
 
+
+// Desktop: play card videos on hover
+if(window.innerWidth>=600){
+  document.querySelectorAll('.img-card video').forEach(function(v){
+    var card=v.closest('.img-card');
+    if(!card)return;
+    var origOpacity=v.style.opacity||'.4';
+    card.addEventListener('mouseenter',function(){
+      v.style.opacity='.9';
+      v.play().catch(function(){});
+    });
+    card.addEventListener('mouseleave',function(){
+      v.pause();
+      v.currentTime=0;
+      v.style.opacity=origOpacity;
+    });
+  });
+}
 </script>
 </body>
 </html>
