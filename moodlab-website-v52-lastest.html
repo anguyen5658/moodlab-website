@@ -746,6 +746,7 @@ section{overflow-x:hidden}
   .rbd-slider .rbd-handle::after{font-size:11px!important}
   [style*="grid-template-columns:repeat(3,1fr);gap:1px"]{grid-template-columns:repeat(3,1fr)!important}
   #rbd-zone-0,#rbd-zone-1,#rbd-zone-2{padding:10px 8px!important}
+  .rbd-before-msg span,.rbd-after-msg span{font-size:9px!important}
   .rbd-problem div:first-child,.rbd-solution div{font-size:9px!important}
   .rbd-problem div:last-child{font-size:8px!important}
   #rbd-zone-0 span,#rbd-zone-1 span,#rbd-zone-2 span{font-size:8px!important}
@@ -1021,7 +1022,7 @@ section{overflow-x:hidden}
 
   <!-- Before / After Image Slider -->
   <div class="rv" data-d="2" style="text-align:center">
-    <div class="rbd-slider" id="rbdSlider" onmousedown="rbdDrag(event)" ontouchstart="rbdDrag(event)">
+    <div class="rbd-slider" id="rbdSlider" onmousedown="rbdDrag(event)">
       <img class="rbd-before" src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1400&q=80" alt="Before: Industry Standard">
       <img class="rbd-after" src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1400&q=80" alt="After: With Mood Lab">
       <div class="rbd-handle" id="rbdHandle"></div>
@@ -1030,42 +1031,42 @@ section{overflow-x:hidden}
     </div>
   </div>
 
-  <!-- 3 Zone Feature Groups — dual state: problem (red) vs solution (colored) -->
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:20px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.04)">
-    <div id="rbd-zone-0" style="padding:16px 14px;border-right:1px solid rgba(255,255,255,.03);transition:all .5s">
-      <!-- Problem state (visible when slider hasn't reached this zone) -->
-      <div class="rbd-problem" style="transition:all .4s">
-        <div style="font-size:10px;font-weight:700;color:#f87171;margin-bottom:8px;font-family:var(--fm);letter-spacing:.5px">✗ NO TRACKING</div>
-        <div style="font-size:10px;color:var(--tx3);line-height:1.5">Zero dosage visibility. No damage prevention.</div>
+  <!-- 3 Zone Indicators — 6 pairs of before/after -->
+  <div id="rbd-zones" style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:20px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.04)">
+    <!-- Zone 0: Dosage + Damage -->
+    <div id="rbd-zone-0" style="padding:14px 12px;border-right:1px solid rgba(255,255,255,.03);transition:all .4s">
+      <div class="rbd-pair" style="margin-bottom:8px">
+        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">No dosage tracking</span></div>
+        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:11px">🎯</span><span style="font-size:10px;font-weight:700;color:var(--gn);transition:all .4s">Precision Dosage</span></div>
       </div>
-      <!-- Solution state (visible when slider reveals this zone) -->
-      <div class="rbd-solution" style="display:none;transition:all .4s">
-        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><span style="font-size:12px">🎯</span><span style="font-size:10px;font-weight:700;color:var(--gn)">Precision Dosage</span></div>
-        <div style="display:flex;align-items:center;gap:6px"><span style="font-size:12px">🛡️</span><span style="font-size:10px;font-weight:700;color:var(--am)">Damage Prevention</span></div>
-      </div>
-    </div>
-    <div id="rbd-zone-1" style="padding:16px 14px;border-right:1px solid rgba(255,255,255,.03);transition:all .5s">
-      <div class="rbd-problem" style="transition:all .4s">
-        <div style="font-size:10px;font-weight:700;color:#f87171;margin-bottom:8px;font-family:var(--fm);letter-spacing:.5px">✗ NO LIMITS</div>
-        <div style="font-size:10px;color:var(--tx3);line-height:1.5">Unlimited sessions. No safety alerts.</div>
-      </div>
-      <div class="rbd-solution" style="display:none;transition:all .4s">
-        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><span style="font-size:12px">⏱️</span><span style="font-size:10px;font-weight:700;color:var(--pu)">Session Limits</span></div>
-        <div style="display:flex;align-items:center;gap:6px"><span style="font-size:12px">📊</span><span style="font-size:10px;font-weight:700;color:var(--pk)">Smart Alerts</span></div>
+      <div class="rbd-pair">
+        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">No damage prevention</span></div>
+        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:11px">🛡️</span><span style="font-size:10px;font-weight:700;color:var(--am);transition:all .4s">Damage Prevention</span></div>
       </div>
     </div>
-    <div id="rbd-zone-2" style="padding:16px 14px;transition:all .5s">
-      <div class="rbd-problem" style="transition:all .4s">
-        <div style="font-size:10px;font-weight:700;color:#f87171;margin-bottom:8px;font-family:var(--fm);letter-spacing:.5px">✗ NO PROTECTION</div>
-        <div style="font-size:10px;color:var(--tx3);line-height:1.5">No access control. Not compliant.</div>
+    <!-- Zone 1: Sessions + Alerts -->
+    <div id="rbd-zone-1" style="padding:14px 12px;border-right:1px solid rgba(255,255,255,.03);transition:all .4s">
+      <div class="rbd-pair" style="margin-bottom:8px">
+        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">No session limits</span></div>
+        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:11px">⏱️</span><span style="font-size:10px;font-weight:700;color:var(--pu);transition:all .4s">Session Limits</span></div>
       </div>
-      <div class="rbd-solution" style="display:none;transition:all .4s">
-        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><span style="font-size:12px">🔒</span><span style="font-size:10px;font-weight:700;color:var(--cy)">Device & Child Lock</span></div>
-        <div style="display:flex;align-items:center;gap:6px"><span style="font-size:12px">✅</span><span style="font-size:10px;font-weight:700;color:var(--gn)">Compliance-Ready</span></div>
+      <div class="rbd-pair">
+        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">No safety alerts</span></div>
+        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:11px">📊</span><span style="font-size:10px;font-weight:700;color:var(--pk);transition:all .4s">Smart Alerts</span></div>
+      </div>
+    </div>
+    <!-- Zone 2: Lock + Compliance -->
+    <div id="rbd-zone-2" style="padding:14px 12px;transition:all .4s">
+      <div class="rbd-pair" style="margin-bottom:8px">
+        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">No access control</span></div>
+        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:11px">🔒</span><span style="font-size:10px;font-weight:700;color:var(--cy);transition:all .4s">Device & Child Lock</span></div>
+      </div>
+      <div class="rbd-pair">
+        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">Not compliant</span></div>
+        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:11px">✅</span><span style="font-size:10px;font-weight:700;color:var(--gn);transition:all .4s">Compliance-Ready</span></div>
       </div>
     </div>
   </div>
-
 
 
 
@@ -4175,6 +4176,103 @@ function brandSlide(n){
 
 
 // Before/After slider drag
+function rbdDrag(e){
+  e.preventDefault();
+  var slider=document.getElementById('rbdSlider');
+  if(!slider)return;
+  var handle=document.getElementById('rbdHandle');
+  var afterImg=slider.querySelector('.rbd-after');
+  var zones=['rbd-zone-0','rbd-zone-1','rbd-zone-2'];
+  var solBgs=['rgba(52,211,153,.04)','rgba(168,85,247,.04)','rgba(0,232,255,.04)'];
+  var solBorders=['rgba(52,211,153,.4)','rgba(168,85,247,.4)','rgba(0,232,255,.4)'];
+
+  function updateZones(sliderX){
+    // sliderX = 0 means After fully shown, 1 means Before fully shown
+    // Zone 0 revealed when After covers left third (sliderX < 0.333)
+    // Zone 1 revealed when After covers center (sliderX < 0.666)  
+    // Zone 2 revealed when After covers right (sliderX < 1.0)
+    var revealProgress=1-sliderX; // 0=all Before, 1=all After
+    var thresholds=[0.33,0.66,0.98];
+    zones.forEach(function(id,i){
+      var z=document.getElementById(id);
+      if(!z)return;
+      var pairs=z.querySelectorAll('.rbd-pair');
+      var isRevealed=revealProgress>thresholds[i];
+      pairs.forEach(function(pair){
+        var bm=pair.querySelector('.rbd-before-msg');
+        var am=pair.querySelector('.rbd-after-msg');
+        if(isRevealed){
+          if(bm)bm.style.display='none';
+          if(am)am.style.display='flex';
+        }else{
+          if(bm)bm.style.display='flex';
+          if(am)am.style.display='none';
+        }
+      });
+      if(isRevealed){
+        z.style.background=solBgs[i];
+        z.style.borderBottom='2px solid '+solBorders[i];
+      }else{
+        z.style.background='transparent';
+        z.style.borderBottom='2px solid transparent';
+      }
+    });
+  }
+
+  function move(ev){
+    var rect=slider.getBoundingClientRect();
+    var clientX=ev.touches?ev.touches[0].clientX:ev.clientX;
+    var x=(clientX-rect.left)/rect.width;
+    x=Math.max(0.02,Math.min(0.98,x));
+    handle.style.left=(x*100)+'%';
+    afterImg.style.clipPath='inset(0 0 0 '+(x*100)+'%)';
+    updateZones(x);
+  }
+  function up(){
+    document.removeEventListener('mousemove',move);
+    document.removeEventListener('mouseup',up);
+    document.removeEventListener('touchmove',move);
+    document.removeEventListener('touchend',up);
+  }
+  document.addEventListener('mousemove',move);
+  document.addEventListener('mouseup',up);
+  document.addEventListener('touchmove',move,{passive:false});
+  document.addEventListener('touchend',up);
+}
+// Also handle touch directly on slider for better mobile support
+(function(){
+  var s=document.getElementById('rbdSlider');
+  if(!s)return;
+  s.addEventListener('touchstart',function(e){rbdDrag(e)},{passive:false});
+  s.addEventListener('click',function(e){
+    var rect=s.getBoundingClientRect();
+    var x=(e.clientX-rect.left)/rect.width;
+    x=Math.max(0.02,Math.min(0.98,x));
+    var h=document.getElementById('rbdHandle');
+    var a=s.querySelector('.rbd-after');
+    if(h)h.style.left=(x*100)+'%';
+    if(a)a.style.clipPath='inset(0 0 0 '+(x*100)+'%)';
+    // Trigger zone update
+    var zones=['rbd-zone-0','rbd-zone-1','rbd-zone-2'];
+    var solBgs=['rgba(52,211,153,.04)','rgba(168,85,247,.04)','rgba(0,232,255,.04)'];
+    var solBorders=['rgba(52,211,153,.4)','rgba(168,85,247,.4)','rgba(0,232,255,.4)'];
+    var revealProgress=1-x;
+    var thresholds=[0.33,0.66,0.98];
+    zones.forEach(function(id,i){
+      var z=document.getElementById(id);if(!z)return;
+      var pairs=z.querySelectorAll('.rbd-pair');
+      var isRevealed=revealProgress>thresholds[i];
+      pairs.forEach(function(pair){
+        var bm=pair.querySelector('.rbd-before-msg');
+        var am=pair.querySelector('.rbd-after-msg');
+        if(isRevealed){if(bm)bm.style.display='none';if(am)am.style.display='flex'}
+        else{if(bm)bm.style.display='flex';if(am)am.style.display='none'}
+      });
+      z.style.background=isRevealed?solBgs[i]:'transparent';
+      z.style.borderBottom=isRevealed?'2px solid '+solBorders[i]:'2px solid transparent';
+    });
+  });
+})();
 function rbdDrag(e){
   e.preventDefault();
   var slider=document.getElementById('rbdSlider');
