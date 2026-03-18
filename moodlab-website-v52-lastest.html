@@ -62,6 +62,35 @@ function authChain(n){
     else{el.style.background='rgba(255,255,255,.02)';el.style.borderColor='var(--bd)';el.querySelector('div:last-child').style.color='var(--tx3)'}
   }
 }
+
+// AI Pipeline detail viewer
+var aiPipes=[
+  {t:'Extract Type Pipeline',d:'Analyzes the chemical composition of the current cartridge — THC percentage, CBD ratio, terpene profile, extraction method (distillate, live resin, liquid diamond, live rosin). Adjusts voltage curves and heating patterns to maximize flavor and efficacy for each specific extract type.'},
+  {t:'Product Profile Pipeline',d:'Cross-references the specific product SKU with manufacturer-provided optimal settings. Strain data (Sativa, Indica, Hybrid), concentration percentage, and recommended temperature ranges are all factored into the output configuration.'},
+  {t:'User Behavior Pipeline',d:'Learns individual draw patterns over time — average draw duration, preferred intensity, frequency patterns, and mode preferences. Builds a personal behavioral profile that gets more accurate with every session.'},
+  {t:'Device State Pipeline',d:'Monitors real-time hardware conditions — battery level, coil temperature, coil resistance, cartridge fill level. Compensates for battery voltage drop and coil aging to maintain consistent delivery quality.'},
+  {t:'Session History Pipeline',d:'Analyzes patterns from past sessions — what modes were used, at what times, for how long. Identifies trends and uses them to predict optimal starting configurations for the current session.'},
+  {t:'Environment Pipeline',d:'Factors in ambient conditions that affect delivery — ambient temperature, estimated altitude (affects boiling points), and humidity. Automatically adjusts voltage curves for consistent experience regardless of environment.'},
+  {t:'Feedback Loop Pipeline',d:'Incorporates explicit and implicit user feedback. If a user adjusts settings after AI configuration, the system learns from the correction. Over time, these micro-adjustments dramatically improve personalization accuracy.'}
+];
+function aiPipe(n){
+  var d=aiPipes[n];
+  document.getElementById('ai-pd-title').textContent=d.t;
+  document.getElementById('ai-pd-desc').textContent=d.d;
+  var colors=['var(--pk)','var(--pu)','var(--cy)','var(--gn)','var(--am)','var(--cy)','var(--pk)'];
+  document.getElementById('ai-pd-title').style.color=colors[n];
+  for(var i=0;i<7;i++){
+    var el=document.getElementById('ai-p-'+i);
+    el.style.borderColor=i===n?colors[i].replace('var(','rgba(').replace('--pk','236,72,153').replace('--pu','168,85,247').replace('--cy','0,232,255').replace('--gn','52,211,153').replace('--am','245,158,11').replace(')',',.2)'):'var(--bd)';
+  }
+}
+// Adaptive learning stage highlight
+function aiLearn(n){
+  var colors=['rgba(245,158,11,.15)','rgba(168,85,247,.15)','rgba(52,211,153,.15)'];
+  for(var i=0;i<3;i++){
+    document.getElementById('ai-ln-'+i).style.borderColor=i===n?colors[i]:'var(--bd)';
+  }
+}
 </script>
 <script>
 tailwind.config = {
@@ -129,6 +158,35 @@ function authChain(n){
     var el=document.getElementById('auth-c-'+i);
     if(i===n){el.style.background='rgba(168,85,247,.06)';el.style.borderColor='rgba(168,85,247,.15)';el.querySelector('div:last-child').style.color='var(--pu)'}
     else{el.style.background='rgba(255,255,255,.02)';el.style.borderColor='var(--bd)';el.querySelector('div:last-child').style.color='var(--tx3)'}
+  }
+}
+
+// AI Pipeline detail viewer
+var aiPipes=[
+  {t:'Extract Type Pipeline',d:'Analyzes the chemical composition of the current cartridge — THC percentage, CBD ratio, terpene profile, extraction method (distillate, live resin, liquid diamond, live rosin). Adjusts voltage curves and heating patterns to maximize flavor and efficacy for each specific extract type.'},
+  {t:'Product Profile Pipeline',d:'Cross-references the specific product SKU with manufacturer-provided optimal settings. Strain data (Sativa, Indica, Hybrid), concentration percentage, and recommended temperature ranges are all factored into the output configuration.'},
+  {t:'User Behavior Pipeline',d:'Learns individual draw patterns over time — average draw duration, preferred intensity, frequency patterns, and mode preferences. Builds a personal behavioral profile that gets more accurate with every session.'},
+  {t:'Device State Pipeline',d:'Monitors real-time hardware conditions — battery level, coil temperature, coil resistance, cartridge fill level. Compensates for battery voltage drop and coil aging to maintain consistent delivery quality.'},
+  {t:'Session History Pipeline',d:'Analyzes patterns from past sessions — what modes were used, at what times, for how long. Identifies trends and uses them to predict optimal starting configurations for the current session.'},
+  {t:'Environment Pipeline',d:'Factors in ambient conditions that affect delivery — ambient temperature, estimated altitude (affects boiling points), and humidity. Automatically adjusts voltage curves for consistent experience regardless of environment.'},
+  {t:'Feedback Loop Pipeline',d:'Incorporates explicit and implicit user feedback. If a user adjusts settings after AI configuration, the system learns from the correction. Over time, these micro-adjustments dramatically improve personalization accuracy.'}
+];
+function aiPipe(n){
+  var d=aiPipes[n];
+  document.getElementById('ai-pd-title').textContent=d.t;
+  document.getElementById('ai-pd-desc').textContent=d.d;
+  var colors=['var(--pk)','var(--pu)','var(--cy)','var(--gn)','var(--am)','var(--cy)','var(--pk)'];
+  document.getElementById('ai-pd-title').style.color=colors[n];
+  for(var i=0;i<7;i++){
+    var el=document.getElementById('ai-p-'+i);
+    el.style.borderColor=i===n?colors[i].replace('var(','rgba(').replace('--pk','236,72,153').replace('--pu','168,85,247').replace('--cy','0,232,255').replace('--gn','52,211,153').replace('--am','245,158,11').replace(')',',.2)'):'var(--bd)';
+  }
+}
+// Adaptive learning stage highlight
+function aiLearn(n){
+  var colors=['rgba(245,158,11,.15)','rgba(168,85,247,.15)','rgba(52,211,153,.15)'];
+  for(var i=0;i<3;i++){
+    document.getElementById('ai-ln-'+i).style.borderColor=i===n?colors[i]:'var(--bd)';
   }
 }
 </script>
@@ -1852,46 +1910,156 @@ section{overflow-x:hidden}
   <p class="p1 rv" data-d="2">7 data pipelines process in real-time. User selects a feeling — AI translates emotion into precise technical configuration. Adaptive learning improves with every session.</p>
 </div></section>
 
-<!-- Interactive mood selector with pipeline visualization -->
-<section style="padding:clamp(60px,8vw,100px) 0"><div class="w">
-  <!-- Mood selector -->
-  <div class="rv" style="display:flex;gap:10px;justify-content:center;margin-bottom:40px;flex-wrap:wrap">
-    <div onclick="aiMood(0)" id="ai-m-0" style="cursor:pointer;padding:14px 18px;border-radius:16px;background:rgba(96,165,250,.1);border:2px solid rgba(96,165,250,.25);text-align:center;transition:all .3s;min-width:80px"><div style="font-size:24px;margin-bottom:4px">😌</div><div style="font-size:11px;font-weight:700;color:#60a5fa">Relax</div></div>
-    <div onclick="aiMood(1)" id="ai-m-1" style="cursor:pointer;padding:14px 18px;border-radius:16px;background:rgba(255,255,255,.02);border:2px solid var(--bd);text-align:center;transition:all .3s;min-width:80px"><div style="font-size:24px;margin-bottom:4px">🎯</div><div style="font-size:11px;font-weight:700;color:var(--tx2)">Focus</div></div>
-    <div onclick="aiMood(2)" id="ai-m-2" style="cursor:pointer;padding:14px 18px;border-radius:16px;background:rgba(255,255,255,.02);border:2px solid var(--bd);text-align:center;transition:all .3s;min-width:80px"><div style="font-size:24px;margin-bottom:4px">⚡</div><div style="font-size:11px;font-weight:700;color:var(--tx2)">Energy</div></div>
-    <div onclick="aiMood(3)" id="ai-m-3" style="cursor:pointer;padding:14px 18px;border-radius:16px;background:rgba(255,255,255,.02);border:2px solid var(--bd);text-align:center;transition:all .3s;min-width:80px"><div style="font-size:24px;margin-bottom:4px">🌙</div><div style="font-size:11px;font-weight:700;color:var(--tx2)">Sleep</div></div>
-    <div onclick="aiMood(4)" id="ai-m-4" style="cursor:pointer;padding:14px 18px;border-radius:16px;background:rgba(255,255,255,.02);border:2px solid var(--bd);text-align:center;transition:all .3s;min-width:80px"><div style="font-size:24px;margin-bottom:4px">🎉</div><div style="font-size:11px;font-weight:700;color:var(--tx2)">Social</div></div>
-    <div onclick="aiMood(5)" id="ai-m-5" style="cursor:pointer;padding:14px 18px;border-radius:16px;background:rgba(255,255,255,.02);border:2px solid var(--bd);text-align:center;transition:all .3s;min-width:80px"><div style="font-size:24px;margin-bottom:4px">🎨</div><div style="font-size:11px;font-weight:700;color:var(--tx2)">Creative</div></div>
-    <div onclick="aiMood(6)" id="ai-m-6" style="cursor:pointer;padding:14px 18px;border-radius:16px;background:rgba(255,255,255,.02);border:2px solid var(--bd);text-align:center;transition:all .3s;min-width:80px"><div style="font-size:24px;margin-bottom:4px">💚</div><div style="font-size:11px;font-weight:700;color:var(--tx2)">Recovery</div></div>
+<!-- Section Nav -->
+<div style="position:sticky;top:68px;z-index:100;background:rgba(2,2,5,.95);backdrop-filter:blur(20px) saturate(160%);border-bottom:1px solid var(--bd)">
+  <div class="w" style="display:flex;align-items:stretch;padding:0;overflow-x:auto;-webkit-overflow-scrolling:touch">
+    <a onclick="document.getElementById('ai-moods').scrollIntoView({behavior:'smooth',block:'start'})" style="flex:1;padding:14px 8px;text-align:center;cursor:pointer;transition:.3s;border-right:1px solid var(--bd);border-bottom:2px solid transparent;white-space:nowrap" onmouseover="this.style.background='rgba(236,72,153,.04)';this.style.borderBottomColor='var(--pk)'" onmouseout="this.style.background='transparent';this.style.borderBottomColor='transparent'">
+      <div style="font-size:16px;margin-bottom:3px">🎭</div><div style="font-size:10px;font-weight:700;color:var(--tx2)">Mood Selector</div>
+    </a>
+    <a onclick="document.getElementById('ai-pipes').scrollIntoView({behavior:'smooth',block:'start'})" style="flex:1;padding:14px 8px;text-align:center;cursor:pointer;transition:.3s;border-right:1px solid var(--bd);border-bottom:2px solid transparent;white-space:nowrap" onmouseover="this.style.background='rgba(0,232,255,.04)';this.style.borderBottomColor='var(--cy)'" onmouseout="this.style.background='transparent';this.style.borderBottomColor='transparent'">
+      <div style="font-size:16px;margin-bottom:3px">🔬</div><div style="font-size:10px;font-weight:700;color:var(--tx2)">7 Pipelines</div>
+    </a>
+    <a onclick="document.getElementById('ai-learn').scrollIntoView({behavior:'smooth',block:'start'})" style="flex:1;padding:14px 8px;text-align:center;cursor:pointer;transition:.3s;border-right:1px solid var(--bd);border-bottom:2px solid transparent;white-space:nowrap" onmouseover="this.style.background='rgba(168,85,247,.04)';this.style.borderBottomColor='var(--pu)'" onmouseout="this.style.background='transparent';this.style.borderBottomColor='transparent'">
+      <div style="font-size:16px;margin-bottom:3px">📈</div><div style="font-size:10px;font-weight:700;color:var(--tx2)">Adaptive Learning</div>
+    </a>
+    <a onclick="document.getElementById('ai-suggest').scrollIntoView({behavior:'smooth',block:'start'})" style="flex:1;padding:14px 8px;text-align:center;cursor:pointer;transition:.3s;border-bottom:2px solid transparent;white-space:nowrap" onmouseover="this.style.background='rgba(52,211,153,.04)';this.style.borderBottomColor='var(--gn)'" onmouseout="this.style.background='transparent';this.style.borderBottomColor='transparent'">
+      <div style="font-size:16px;margin-bottom:3px">💡</div><div style="font-size:10px;font-weight:700;color:var(--tx2)">Smart Suggestions</div>
+    </a>
   </div>
-  <!-- AI Pipeline visualization -->
-  <div class="rv" data-d="1" style="border-radius:24px;padding:clamp(28px,3vw,40px);background:linear-gradient(135deg,rgba(236,72,153,.04),rgba(168,85,247,.03));border:1px solid rgba(236,72,153,.1)">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px"><div style="font-size:18px;font-weight:800" id="ai-mood-label">😌 Relax Mode</div><div style="padding:4px 12px;border-radius:8px;font-size:10px;font-weight:700;letter-spacing:1px;animation:pu 2s infinite" id="ai-status" style="background:rgba(236,72,153,.1);color:var(--pk)">AI PROCESSING</div></div>
-    <!-- 7 pipeline bars -->
-    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:24px">
-      <div style="display:flex;align-items:center;gap:12px"><div style="width:110px;font-size:10px;color:var(--tx3);text-align:right;flex-shrink:0">Extract Type</div><div style="flex:1;height:8px;border-radius:4px;background:rgba(255,255,255,.03)"><div id="ai-p-0" style="height:100%;border-radius:4px;background:linear-gradient(90deg,var(--pk),rgba(236,72,153,.4));width:70%;transition:width .8s cubic-bezier(.22,1,.36,1)"></div></div></div>
-      <div style="display:flex;align-items:center;gap:12px"><div style="width:110px;font-size:10px;color:var(--tx3);text-align:right;flex-shrink:0">User Profile</div><div style="flex:1;height:8px;border-radius:4px;background:rgba(255,255,255,.03)"><div id="ai-p-1" style="height:100%;border-radius:4px;background:linear-gradient(90deg,var(--pu),rgba(168,85,247,.4));width:85%;transition:width .8s cubic-bezier(.22,1,.36,1)"></div></div></div>
-      <div style="display:flex;align-items:center;gap:12px"><div style="width:110px;font-size:10px;color:var(--tx3);text-align:right;flex-shrink:0">Device State</div><div style="flex:1;height:8px;border-radius:4px;background:rgba(255,255,255,.03)"><div id="ai-p-2" style="height:100%;border-radius:4px;background:linear-gradient(90deg,var(--cy),rgba(0,232,255,.4));width:60%;transition:width .8s cubic-bezier(.22,1,.36,1)"></div></div></div>
-      <div style="display:flex;align-items:center;gap:12px"><div style="width:110px;font-size:10px;color:var(--tx3);text-align:right;flex-shrink:0">Session History</div><div style="flex:1;height:8px;border-radius:4px;background:rgba(255,255,255,.03)"><div id="ai-p-3" style="height:100%;border-radius:4px;background:linear-gradient(90deg,var(--gn),rgba(52,211,153,.4));width:90%;transition:width .8s cubic-bezier(.22,1,.36,1)"></div></div></div>
-      <div style="display:flex;align-items:center;gap:12px"><div style="width:110px;font-size:10px;color:var(--tx3);text-align:right;flex-shrink:0">Environment</div><div style="flex:1;height:8px;border-radius:4px;background:rgba(255,255,255,.03)"><div id="ai-p-4" style="height:100%;border-radius:4px;background:linear-gradient(90deg,var(--am),rgba(245,158,11,.4));width:45%;transition:width .8s cubic-bezier(.22,1,.36,1)"></div></div></div>
-      <div style="display:flex;align-items:center;gap:12px"><div style="width:110px;font-size:10px;color:var(--tx3);text-align:right;flex-shrink:0">Behavior</div><div style="flex:1;height:8px;border-radius:4px;background:rgba(255,255,255,.03)"><div id="ai-p-5" style="height:100%;border-radius:4px;background:linear-gradient(90deg,var(--pk),rgba(236,72,153,.4));width:75%;transition:width .8s cubic-bezier(.22,1,.36,1)"></div></div></div>
-      <div style="display:flex;align-items:center;gap:12px"><div style="width:110px;font-size:10px;color:var(--tx3);text-align:right;flex-shrink:0">Feedback Loop</div><div style="flex:1;height:8px;border-radius:4px;background:rgba(255,255,255,.03)"><div id="ai-p-6" style="height:100%;border-radius:4px;background:linear-gradient(90deg,var(--pu),rgba(168,85,247,.4));width:55%;transition:width .8s cubic-bezier(.22,1,.36,1)"></div></div></div>
+</div>
+
+<!-- ═══ 01 · MOOD SELECTOR ═══ -->
+<section id="ai-moods" style="padding:clamp(60px,8vw,100px) 0"><div class="w">
+  <div class="tag rv">01 · Mood Selector</div>
+  <h2 class="h3 rv" data-d="1">Select a Feeling. <span class="se" style="color:var(--pk)">AI Handles the Rest.</span></h2>
+  <p class="p1 rv" data-d="2" style="margin-bottom:40px;max-width:600px">7 mood presets, each backed by unique pipeline configurations. Users choose emotion — AI translates to precise voltage, temperature, delivery speed, and timing parameters.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 300px;gap:40px;align-items:start">
+    <div>
+      <!-- Mood buttons -->
+      <div class="rv" style="display:flex;gap:10px;justify-content:flex-start;margin-bottom:40px;flex-wrap:wrap">
+        <div onclick="aiMood(0)" id="ai-m-0" style="cursor:pointer;padding:14px 18px;border-radius:16px;background:rgba(96,165,250,.1);border:2px solid rgba(96,165,250,.25);text-align:center;transition:all .3s;min-width:80px"><div style="font-size:24px;margin-bottom:4px">😌</div><div style="font-size:11px;font-weight:700;color:#60a5fa">Relax</div></div>
+        <div onclick="aiMood(1)" id="ai-m-1" style="cursor:pointer;padding:14px 18px;border-radius:16px;background:rgba(255,255,255,.02);border:2px solid var(--bd);text-align:center;transition:all .3s;min-width:80px"><div style="font-size:24px;margin-bottom:4px">🎯</div><div style="font-size:11px;font-weight:700;color:var(--tx2)">Focus</div></div>
+        <div onclick="aiMood(2)" id="ai-m-2" style="cursor:pointer;padding:14px 18px;border-radius:16px;background:rgba(255,255,255,.02);border:2px solid var(--bd);text-align:center;transition:all .3s;min-width:80px"><div style="font-size:24px;margin-bottom:4px">⚡</div><div style="font-size:11px;font-weight:700;color:var(--tx2)">Energy</div></div>
+        <div onclick="aiMood(3)" id="ai-m-3" style="cursor:pointer;padding:14px 18px;border-radius:16px;background:rgba(255,255,255,.02);border:2px solid var(--bd);text-align:center;transition:all .3s;min-width:80px"><div style="font-size:24px;margin-bottom:4px">💤</div><div style="font-size:11px;font-weight:700;color:var(--tx2)">Sleep</div></div>
+        <div onclick="aiMood(4)" id="ai-m-4" style="cursor:pointer;padding:14px 18px;border-radius:16px;background:rgba(255,255,255,.02);border:2px solid var(--bd);text-align:center;transition:all .3s;min-width:80px"><div style="font-size:24px;margin-bottom:4px">🎉</div><div style="font-size:11px;font-weight:700;color:var(--tx2)">Social</div></div>
+        <div onclick="aiMood(5)" id="ai-m-5" style="cursor:pointer;padding:14px 18px;border-radius:16px;background:rgba(255,255,255,.02);border:2px solid var(--bd);text-align:center;transition:all .3s;min-width:80px"><div style="font-size:24px;margin-bottom:4px">🎨</div><div style="font-size:11px;font-weight:700;color:var(--tx2)">Creative</div></div>
+        <div onclick="aiMood(6)" id="ai-m-6" style="cursor:pointer;padding:14px 18px;border-radius:16px;background:rgba(255,255,255,.02);border:2px solid var(--bd);text-align:center;transition:all .3s;min-width:80px"><div style="font-size:24px;margin-bottom:4px">🧘</div><div style="font-size:11px;font-weight:700;color:var(--tx2)">Recovery</div></div>
+      </div>
+      <!-- Pipeline bars -->
+      <div class="rv" data-d="1" style="border-radius:20px;padding:28px;background:linear-gradient(135deg,rgba(236,72,153,.03),rgba(168,85,247,.02));border:1px solid rgba(236,72,153,.08)">
+        <div style="font-size:14px;font-weight:800;margin-bottom:20px">AI Pipeline Activity</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:center;gap:10px"><span style="font-size:9px;color:var(--tx3);width:90px;flex-shrink:0">Extract Type</span><div style="flex:1;height:8px;border-radius:4px;background:rgba(255,255,255,.04)"><div id="ai-bar-0" style="height:100%;border-radius:4px;background:var(--pk);width:85%;transition:width .6s var(--e)"></div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="font-size:9px;color:var(--tx3);width:90px;flex-shrink:0">Product Profile</span><div style="flex:1;height:8px;border-radius:4px;background:rgba(255,255,255,.04)"><div id="ai-bar-1" style="height:100%;border-radius:4px;background:var(--pu);width:70%;transition:width .6s var(--e)"></div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="font-size:9px;color:var(--tx3);width:90px;flex-shrink:0">User Behavior</span><div style="flex:1;height:8px;border-radius:4px;background:rgba(255,255,255,.04)"><div id="ai-bar-2" style="height:100%;border-radius:4px;background:var(--cy);width:60%;transition:width .6s var(--e)"></div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="font-size:9px;color:var(--tx3);width:90px;flex-shrink:0">Device State</span><div style="flex:1;height:8px;border-radius:4px;background:rgba(255,255,255,.04)"><div id="ai-bar-3" style="height:100%;border-radius:4px;background:var(--gn);width:90%;transition:width .6s var(--e)"></div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="font-size:9px;color:var(--tx3);width:90px;flex-shrink:0">Session History</span><div style="flex:1;height:8px;border-radius:4px;background:rgba(255,255,255,.04)"><div id="ai-bar-4" style="height:100%;border-radius:4px;background:var(--am);width:75%;transition:width .6s var(--e)"></div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="font-size:9px;color:var(--tx3);width:90px;flex-shrink:0">Environment</span><div style="flex:1;height:8px;border-radius:4px;background:rgba(255,255,255,.04)"><div id="ai-bar-5" style="height:100%;border-radius:4px;background:var(--cy);width:40%;transition:width .6s var(--e)"></div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="font-size:9px;color:var(--tx3);width:90px;flex-shrink:0">Feedback Loop</span><div style="flex:1;height:8px;border-radius:4px;background:rgba(255,255,255,.04)"><div id="ai-bar-6" style="height:100%;border-radius:4px;background:var(--pk);width:55%;transition:width .6s var(--e)"></div></div></div>
+        </div>
+      </div>
+      <!-- Output parameters -->
+      <div class="rv" data-d="2" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px">
+        <div style="padding:12px;border-radius:10px;background:rgba(255,255,255,.02);border:1px solid var(--bd);text-align:center"><div id="ai-out-temp" style="font-size:16px;font-weight:800;color:var(--cy)">168°</div><div style="font-size:9px;color:var(--tx3)">Temperature</div></div>
+        <div style="padding:12px;border-radius:10px;background:rgba(255,255,255,.02);border:1px solid var(--bd);text-align:center"><div id="ai-out-del" style="font-size:16px;font-weight:800;color:var(--pu)">Slow</div><div style="font-size:9px;color:var(--tx3)">Delivery</div></div>
+        <div style="padding:12px;border-radius:10px;background:rgba(255,255,255,.02);border:1px solid var(--bd);text-align:center"><div id="ai-out-pri" style="font-size:16px;font-weight:800;color:var(--pk)">CBD</div><div style="font-size:9px;color:var(--tx3)">Priority</div></div>
+        <div style="padding:12px;border-radius:10px;background:rgba(255,255,255,.02);border:1px solid var(--bd);text-align:center"><div id="ai-out-pat" style="font-size:16px;font-weight:800;color:var(--gn)">Wave</div><div style="font-size:9px;color:var(--tx3)">Pattern</div></div>
+      </div>
     </div>
-    <!-- Output -->
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
-      <div style="padding:14px;border-radius:12px;background:rgba(255,255,255,.02);border:1px solid var(--bd);text-align:center"><div style="font-size:10px;color:var(--tx3);margin-bottom:4px">Temperature</div><div style="font-size:16px;font-weight:800" id="ai-out-temp" style="color:var(--cy)">172°</div></div>
-      <div style="padding:14px;border-radius:12px;background:rgba(255,255,255,.02);border:1px solid var(--bd);text-align:center"><div style="font-size:10px;color:var(--tx3);margin-bottom:4px">Delivery</div><div style="font-size:16px;font-weight:800" id="ai-out-delivery">Slow</div></div>
-      <div style="padding:14px;border-radius:12px;background:rgba(255,255,255,.02);border:1px solid var(--bd);text-align:center"><div style="font-size:10px;color:var(--tx3);margin-bottom:4px">Priority</div><div style="font-size:16px;font-weight:800" id="ai-out-priority">CBD</div></div>
-      <div style="padding:14px;border-radius:12px;background:rgba(255,255,255,.02);border:1px solid var(--bd);text-align:center"><div style="font-size:10px;color:var(--tx3);margin-bottom:4px">Pattern</div><div style="font-size:16px;font-weight:800" id="ai-out-pattern">Calming</div></div>
+    <!-- Phone -->
+    <div class="phone rv" data-d="2" style="margin:0 auto"><div class="phone-scr" style="background:linear-gradient(180deg,#120818,#050510)"><div style="padding:16px 14px"><div style="font-family:var(--fm);font-size:8px;color:var(--tx3);letter-spacing:1px;margin-bottom:10px">MOOD LOGIC™</div><div id="ai-phone-emoji" style="font-size:48px;text-align:center;margin:16px 0">😌</div><div id="ai-phone-mood" style="font-size:16px;font-weight:800;text-align:center;margin-bottom:4px;color:#60a5fa">Relax Mode</div><div style="font-size:10px;color:var(--tx3);text-align:center;margin-bottom:16px">AI configuring 7 pipelines...</div><div style="display:flex;flex-direction:column;gap:4px"><div style="display:flex;justify-content:space-between;padding:6px 8px;border-radius:6px;background:rgba(255,255,255,.03)"><span style="font-size:8px;color:var(--tx3)">Temp</span><span id="ai-ph-temp" style="font-size:8px;font-weight:700;color:var(--cy)">168°C</span></div><div style="display:flex;justify-content:space-between;padding:6px 8px;border-radius:6px;background:rgba(255,255,255,.03)"><span style="font-size:8px;color:var(--tx3)">Delivery</span><span id="ai-ph-del" style="font-size:8px;font-weight:700;color:var(--pu)">Slow Draw</span></div><div style="display:flex;justify-content:space-between;padding:6px 8px;border-radius:6px;background:rgba(255,255,255,.03)"><span style="font-size:8px;color:var(--tx3)">Priority</span><span id="ai-ph-pri" style="font-size:8px;font-weight:700;color:var(--pk)">CBD First</span></div></div></div></div></div>
+  </div>
+</div></section>
+
+<!-- ═══ 02 · 7 PIPELINES DEEP-DIVE ═══ -->
+<section id="ai-pipes" style="padding:clamp(60px,8vw,100px) 0;border-top:1px solid var(--bd)"><div class="w">
+  <div class="tag rv">02 · Data Pipelines</div>
+  <h2 class="h3 rv" data-d="1">7 Pipelines. <span class="se" style="color:var(--cy)">Real-Time Processing.</span></h2>
+  <p class="p1 rv" data-d="2" style="margin-bottom:40px;max-width:600px">Each mood preset is computed from 7 independent data pipelines running simultaneously. Every pipeline contributes different context to the final output configuration.</p>
+
+  <!-- Image section -->
+  <div class="img-card rv" style="height:240px;margin-bottom:40px;cursor:default"><img src="Media/Image/a-cinematic-abstract-data-visualization-_tmPlHWqgQ2KJ_OdnICwfZQ_q-Af5XIgTiewgMPvLe2yQw_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3" loading="lazy"><div class="img-card-content"><h3>7 Data Pipelines</h3><p>Extract type · Product profile · User behavior · Device state · Session history · Environment · Feedback loops</p></div></div>
+
+  <!-- Pipeline cards -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+    <div onclick="aiPipe(0)" id="ai-p-0" class="gc rv" style="cursor:pointer;padding:20px;text-align:center;border-color:rgba(236,72,153,.15);transition:.3s"><div style="font-size:22px;margin-bottom:8px">🧪</div><h4 style="font-size:12px;font-weight:800;color:var(--pk)">Extract Type</h4><p style="font-size:10px;color:var(--tx3);margin-top:4px">THC, CBD, terpene profile</p></div>
+    <div onclick="aiPipe(1)" id="ai-p-1" class="gc rv" data-d="1" style="cursor:pointer;padding:20px;text-align:center;transition:.3s"><div style="font-size:22px;margin-bottom:8px">📋</div><h4 style="font-size:12px;font-weight:800">Product Profile</h4><p style="font-size:10px;color:var(--tx3);margin-top:4px">Strain, method, concentration</p></div>
+    <div onclick="aiPipe(2)" id="ai-p-2" class="gc rv" data-d="1" style="cursor:pointer;padding:20px;text-align:center;transition:.3s"><div style="font-size:22px;margin-bottom:8px">👤</div><h4 style="font-size:12px;font-weight:800">User Behavior</h4><p style="font-size:10px;color:var(--tx3);margin-top:4px">Draw patterns, preferences</p></div>
+    <div onclick="aiPipe(3)" id="ai-p-3" class="gc rv" data-d="2" style="cursor:pointer;padding:20px;text-align:center;transition:.3s"><div style="font-size:22px;margin-bottom:8px">🔋</div><h4 style="font-size:12px;font-weight:800">Device State</h4><p style="font-size:10px;color:var(--tx3);margin-top:4px">Battery, temperature, age</p></div>
+    <div onclick="aiPipe(4)" id="ai-p-4" class="gc rv" data-d="2" style="cursor:pointer;padding:20px;text-align:center;transition:.3s"><div style="font-size:22px;margin-bottom:8px">📊</div><h4 style="font-size:12px;font-weight:800">Session History</h4><p style="font-size:10px;color:var(--tx3);margin-top:4px">Past sessions, time of day</p></div>
+    <div onclick="aiPipe(5)" id="ai-p-5" class="gc rv" data-d="3" style="cursor:pointer;padding:20px;text-align:center;transition:.3s"><div style="font-size:22px;margin-bottom:8px">🌡️</div><h4 style="font-size:12px;font-weight:800">Environment</h4><p style="font-size:10px;color:var(--tx3);margin-top:4px">Ambient temp, altitude</p></div>
+    <div onclick="aiPipe(6)" id="ai-p-6" class="gc rv" data-d="3" style="cursor:pointer;padding:20px;text-align:center;transition:.3s"><div style="font-size:22px;margin-bottom:8px">🔄</div><h4 style="font-size:12px;font-weight:800">Feedback Loop</h4><p style="font-size:10px;color:var(--tx3);margin-top:4px">User ratings, adjustments</p></div>
+  </div>
+
+  <!-- Pipeline detail panel -->
+  <div id="ai-pipe-detail" class="rv" data-d="2" style="margin-top:24px;padding:28px;border-radius:20px;background:linear-gradient(135deg,rgba(236,72,153,.03),rgba(0,0,0,.2));border:1px solid rgba(236,72,153,.08);transition:.3s">
+    <h4 id="ai-pd-title" style="font-size:15px;font-weight:800;color:var(--pk);margin-bottom:8px">Extract Type Pipeline</h4>
+    <p id="ai-pd-desc" style="font-size:12px;color:var(--tx2);line-height:1.7">Analyzes the chemical composition of the current cartridge — THC percentage, CBD ratio, terpene profile, extraction method (distillate, live resin, liquid diamond, live rosin). Adjusts voltage curves and heating patterns to maximize flavor and efficacy for each specific extract type.</p>
+  </div>
+</div></section>
+
+<!-- ═══ 03 · ADAPTIVE LEARNING ═══ -->
+<section id="ai-learn" style="padding:clamp(60px,8vw,100px) 0;border-top:1px solid var(--bd)"><div class="w">
+  <div class="tag rv">03 · Adaptive Learning</div>
+  <h2 class="h3 rv" data-d="1">Gets Smarter <span class="se" style="color:var(--pu)">Every Session.</span></h2>
+  <p class="p1 rv" data-d="2" style="margin-bottom:40px;max-width:600px">Mood Logic™ builds a personal profile over time. The more you use it, the better it understands your preferences. No manual calibration required.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+    <div onclick="aiLearn(0)" id="ai-ln-0" class="gc rv" style="cursor:pointer;padding:28px;text-align:center;border-color:rgba(245,158,11,.15);transition:.3s">
+      <div style="font-size:32px;margin-bottom:12px">🌱</div>
+      <h4 style="font-size:14px;font-weight:800;color:var(--am);margin-bottom:6px">First Session</h4>
+      <p style="font-size:12px;color:var(--tx2);line-height:1.5;margin-bottom:12px">Uses extract profile and general population data. Baseline configuration applied. Good — but generic.</p>
+      <div style="font-size:24px;font-weight:900;color:var(--am)">78%</div><div style="font-size:10px;color:var(--tx3)">Accuracy</div>
+    </div>
+    <div onclick="aiLearn(1)" id="ai-ln-1" class="gc rv" data-d="1" style="cursor:pointer;padding:28px;text-align:center;transition:.3s">
+      <div style="font-size:32px;margin-bottom:12px">🌿</div>
+      <h4 style="font-size:14px;font-weight:800;margin-bottom:6px">After 10 Sessions</h4>
+      <p style="font-size:12px;color:var(--tx2);line-height:1.5;margin-bottom:12px">Personal draw patterns detected. Temperature preferences learned. Time-of-day patterns emerging. Noticeably better.</p>
+      <div style="font-size:24px;font-weight:900;color:var(--pu)">89%</div><div style="font-size:10px;color:var(--tx3)">Accuracy</div>
+    </div>
+    <div onclick="aiLearn(2)" id="ai-ln-2" class="gc rv" data-d="2" style="cursor:pointer;padding:28px;text-align:center;transition:.3s">
+      <div style="font-size:32px;margin-bottom:12px">🌳</div>
+      <h4 style="font-size:14px;font-weight:800;margin-bottom:6px">After 100+ Sessions</h4>
+      <p style="font-size:12px;color:var(--tx2);line-height:1.5;margin-bottom:12px">Full personal profile built. Anticipates preferences before selection. Cross-extract optimization. Feels like it reads your mind.</p>
+      <div style="font-size:24px;font-weight:900;color:var(--gn)">94%+</div><div style="font-size:10px;color:var(--tx3)">Accuracy</div>
     </div>
   </div>
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px">
-    <div class="fc rv"><div class="fc-ic">🧠</div><h4>7 Pipelines</h4><p>Extract, profile, behavior, device, history, environment, feedback.</p></div>
-    <div class="fc rv" data-d="1"><div class="fc-ic">📚</div><h4>Adaptive Learning</h4><p>Personal profile builds over time. More sessions = better.</p></div>
-    <div class="fc rv" data-d="2"><div class="fc-ic">💡</div><h4>Smart Suggestions</h4><p>Cross-sell, upsell based on preferences and patterns.</p></div>
-    <div class="fc rv" data-d="3"><div class="fc-ic">🤖</div><h4>Mood Assistant</h4><p>Personalized guidance, mixing tips, dosage optimization.</p></div>
+</div></section>
+
+<!-- ═══ 04 · SMART SUGGESTIONS ═══ -->
+<section id="ai-suggest" style="padding:clamp(60px,8vw,100px) 0;border-top:1px solid var(--bd)"><div class="w">
+  <div class="tag rv">04 · Smart Suggestions</div>
+  <h2 class="h3 rv" data-d="1">AI That <span class="se" style="color:var(--gn)">Recommends.</span></h2>
+  <p class="p1 rv" data-d="2" style="margin-bottom:40px;max-width:600px">Beyond configuration — Mood Logic™ actively suggests products, timing, and custom mix recipes based on your profile and current state.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:48px">
+    <div class="gc rv" style="padding:28px">
+      <div style="font-size:28px;margin-bottom:12px">🛒</div>
+      <h4 style="font-size:14px;font-weight:800;margin-bottom:8px;color:var(--cy)">Product Recommendations</h4>
+      <p style="font-size:12px;color:var(--tx2);line-height:1.6">Based on usage patterns, AI suggests new extracts and products that match preferences. Cross-sell and upsell for brands — genuinely helpful for users.</p>
+    </div>
+    <div class="gc rv" data-d="1" style="padding:28px">
+      <div style="font-size:28px;margin-bottom:12px">⏰</div>
+      <h4 style="font-size:14px;font-weight:800;margin-bottom:8px;color:var(--pu)">Timing Suggestions</h4>
+      <p style="font-size:12px;color:var(--tx2);line-height:1.6">AI learns optimal timing for each mood. Morning Focus, afternoon Energy, evening Relax. Suggests sessions based on your historical pattern.</p>
+    </div>
+    <div class="gc rv" data-d="2" style="padding:28px">
+      <div style="font-size:28px;margin-bottom:12px">🧪</div>
+      <h4 style="font-size:14px;font-weight:800;margin-bottom:8px;color:var(--pk)">Mix Recipes</h4>
+      <p style="font-size:12px;color:var(--tx2);line-height:1.6">Custom blending ratios (CBD:THC, terpene combos) tailored to your goals. Save favorites. Share anonymized recipes with the ecosystem.</p>
+    </div>
   </div>
-  <div style="text-align:center;margin-top:48px"><a class="btn bp" onclick="go('contact')">Integrate Mood Logic™ →</a></div>
+
+  <!-- Stats -->
+  <div class="rv" data-d="2" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:48px">
+    <div class="gc" style="text-align:center;padding:20px"><div style="font-size:28px;font-weight:800;color:var(--pk)">7</div><div style="font-size:11px;color:var(--tx3)">Data Pipelines</div></div>
+    <div class="gc" style="text-align:center;padding:20px"><div style="font-size:28px;font-weight:800;color:var(--pu)">7</div><div style="font-size:11px;color:var(--tx3)">Mood Presets</div></div>
+    <div class="gc" style="text-align:center;padding:20px"><div style="font-size:28px;font-weight:800;color:var(--cy)">94%+</div><div style="font-size:11px;color:var(--tx3)">AI Accuracy</div></div>
+    <div class="gc" style="text-align:center;padding:20px"><div style="font-size:28px;font-weight:800;color:var(--gn)">Real-time</div><div style="font-size:11px;color:var(--tx3)">Processing</div></div>
+  </div>
+
+  <div style="text-align:center"><a class="btn bp" onclick="go('contact')" style="padding:14px 32px">Integrate Mood Logic™ →</a></div>
 </div></section>
 </div>
 <!-- Firmware Engine -->
@@ -2806,6 +2974,35 @@ function authChain(n){
     var el=document.getElementById('auth-c-'+i);
     if(i===n){el.style.background='rgba(168,85,247,.06)';el.style.borderColor='rgba(168,85,247,.15)';el.querySelector('div:last-child').style.color='var(--pu)'}
     else{el.style.background='rgba(255,255,255,.02)';el.style.borderColor='var(--bd)';el.querySelector('div:last-child').style.color='var(--tx3)'}
+  }
+}
+
+// AI Pipeline detail viewer
+var aiPipes=[
+  {t:'Extract Type Pipeline',d:'Analyzes the chemical composition of the current cartridge — THC percentage, CBD ratio, terpene profile, extraction method (distillate, live resin, liquid diamond, live rosin). Adjusts voltage curves and heating patterns to maximize flavor and efficacy for each specific extract type.'},
+  {t:'Product Profile Pipeline',d:'Cross-references the specific product SKU with manufacturer-provided optimal settings. Strain data (Sativa, Indica, Hybrid), concentration percentage, and recommended temperature ranges are all factored into the output configuration.'},
+  {t:'User Behavior Pipeline',d:'Learns individual draw patterns over time — average draw duration, preferred intensity, frequency patterns, and mode preferences. Builds a personal behavioral profile that gets more accurate with every session.'},
+  {t:'Device State Pipeline',d:'Monitors real-time hardware conditions — battery level, coil temperature, coil resistance, cartridge fill level. Compensates for battery voltage drop and coil aging to maintain consistent delivery quality.'},
+  {t:'Session History Pipeline',d:'Analyzes patterns from past sessions — what modes were used, at what times, for how long. Identifies trends and uses them to predict optimal starting configurations for the current session.'},
+  {t:'Environment Pipeline',d:'Factors in ambient conditions that affect delivery — ambient temperature, estimated altitude (affects boiling points), and humidity. Automatically adjusts voltage curves for consistent experience regardless of environment.'},
+  {t:'Feedback Loop Pipeline',d:'Incorporates explicit and implicit user feedback. If a user adjusts settings after AI configuration, the system learns from the correction. Over time, these micro-adjustments dramatically improve personalization accuracy.'}
+];
+function aiPipe(n){
+  var d=aiPipes[n];
+  document.getElementById('ai-pd-title').textContent=d.t;
+  document.getElementById('ai-pd-desc').textContent=d.d;
+  var colors=['var(--pk)','var(--pu)','var(--cy)','var(--gn)','var(--am)','var(--cy)','var(--pk)'];
+  document.getElementById('ai-pd-title').style.color=colors[n];
+  for(var i=0;i<7;i++){
+    var el=document.getElementById('ai-p-'+i);
+    el.style.borderColor=i===n?colors[i].replace('var(','rgba(').replace('--pk','236,72,153').replace('--pu','168,85,247').replace('--cy','0,232,255').replace('--gn','52,211,153').replace('--am','245,158,11').replace(')',',.2)'):'var(--bd)';
+  }
+}
+// Adaptive learning stage highlight
+function aiLearn(n){
+  var colors=['rgba(245,158,11,.15)','rgba(168,85,247,.15)','rgba(52,211,153,.15)'];
+  for(var i=0;i<3;i++){
+    document.getElementById('ai-ln-'+i).style.borderColor=i===n?colors[i]:'var(--bd)';
   }
 }
 </script>
