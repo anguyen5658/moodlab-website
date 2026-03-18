@@ -580,11 +580,8 @@ footer{padding:clamp(40px,5vw,72px) clamp(24px,5vw,64px);border-top:1px solid va
 .rbd-slider .rbd-handle{position:absolute;top:0;bottom:0;left:0%;width:2px;background:rgba(255,255,255,.5);transform:translateX(-50%);z-index:5}
 .rbd-slider .rbd-handle::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.1);backdrop-filter:blur(8px);border:1.5px solid rgba(255,255,255,.3)}
 .rbd-slider .rbd-handle::after{content:'\2194';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:14px;color:rgba(255,255,255,.7);z-index:1}
-.rbd-slider .rbd-label{position:absolute;bottom:16px;padding:8px 16px;border-radius:8px;font-size:11px;font-weight:800;letter-spacing:1px;font-family:var(--fm);z-index:4;backdrop-filter:blur(12px)}
-.rbd-slider .rbd-label-before{left:12px;background:rgba(248,113,113,.2);border:1px solid rgba(248,113,113,.4);color:#f87171;font-weight:800}
 @keyframes rbdHintPulse{0%,100%{opacity:.9;transform:translate(-50%,-50%) scale(1)}50%{opacity:.6;transform:translate(-50%,-50%) scale(.95)}}
 @keyframes rbdArrowBounce{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
-.rbd-slider .rbd-label-after{right:12px;background:rgba(52,211,153,.2);border:1px solid rgba(52,211,153,.4);color:var(--gn);font-weight:800}
 .rbd-bad:hover{border-color:rgba(248,113,113,.15)!important;box-shadow:0 4px 24px rgba(248,113,113,.06)}
 .rbd-good:hover{border-color:rgba(52,211,153,.18)!important;box-shadow:0 4px 24px rgba(52,211,153,.08)}
 .rbd-good:hover>div:nth-child(2){opacity:1!important}
@@ -743,7 +740,6 @@ section{overflow-x:hidden}
   [style*="grid-template-columns:1fr 1fr;gap:40px"]{display:flex!important;flex-direction:column!important}
   /* Before/After slider */
   .rbd-slider{aspect-ratio:2/1!important;border-radius:10px!important;max-width:100%!important}
-  .rbd-slider .rbd-label{font-size:7px!important;padding:3px 6px!important;bottom:6px!important}
   .rbd-slider .rbd-handle::before{width:28px!important;height:28px!important}
   .rbd-slider .rbd-handle::after{font-size:11px!important}
   [style*="grid-template-columns:repeat(3,1fr);gap:1px"]{grid-template-columns:repeat(3,1fr)!important}
@@ -1028,13 +1024,23 @@ section{overflow-x:hidden}
       <img class="rbd-before" src="Media/Image/Responsible After.png" alt="After: With Mood Lab">
       <img class="rbd-after" src="Media/Image/Responsible Before.png" alt="Before: Industry Standard">
       <div class="rbd-handle" id="rbdHandle"></div>
-      <div class="rbd-label rbd-label-before">INDUSTRY STANDARD</div>
-      <div class="rbd-label rbd-label-after">MOOD LAB</div>
       <!-- Drag hint -->
       <div id="rbdHint" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:6;pointer-events:none;display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:100px;background:rgba(0,0,0,.6);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.15);animation:rbdHintPulse 2s ease-in-out infinite">
         <span style="font-size:16px">👆</span>
         <span style="font-size:12px;font-weight:700;color:#fff;letter-spacing:.5px">Drag to Compare</span>
         <span style="font-size:14px;animation:rbdArrowBounce 1.5s ease-in-out infinite">→</span>
+      </div>
+    </div>
+    <!-- Labels below slider frame -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+      <div id="rbdLabelBefore" style="display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:8px;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.15);transition:all .4s">
+        <div style="width:8px;height:8px;border-radius:50%;background:#f87171;box-shadow:0 0 8px rgba(248,113,113,.4)"></div>
+        <span style="font-size:11px;font-weight:800;color:#f87171;font-family:var(--fm);letter-spacing:1px">INDUSTRY STANDARD</span>
+      </div>
+      <div style="font-size:10px;color:var(--tx3)">← drag →</div>
+      <div id="rbdLabelAfter" style="display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:8px;background:rgba(52,211,153,.03);border:1px solid rgba(52,211,153,.08);transition:all .4s;opacity:.4">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--gn);opacity:.4"></div>
+        <span style="font-size:11px;font-weight:800;color:var(--gn);font-family:var(--fm);letter-spacing:1px;opacity:.4">MOOD LAB</span>
       </div>
     </div>
   </div>
@@ -4232,7 +4238,7 @@ function rbdDrag(e){
     var rect=slider.getBoundingClientRect();
     var clientX=ev.touches?ev.touches[0].clientX:ev.clientX;
     var x=(clientX-rect.left)/rect.width;
-    x=Math.max(0.02,Math.min(0.98,x));
+    x=Math.max(0.01,Math.min(0.99,x));
     handle.style.left=(x*100)+'%';
     var hint=document.getElementById('rbdHint');if(hint)hint.style.display='none';
     afterImg.style.clipPath='inset(0 0 0 '+(x*100)+'%)';
@@ -4257,7 +4263,7 @@ function rbdDrag(e){
   s.addEventListener('click',function(e){
     var rect=s.getBoundingClientRect();
     var x=(e.clientX-rect.left)/rect.width;
-    x=Math.max(0.02,Math.min(0.98,x));
+    x=Math.max(0.01,Math.min(0.99,x));
     var h=document.getElementById('rbdHandle');
     var a=s.querySelector('.rbd-after');
     if(h)h.style.left=(x*100)+'%';
