@@ -91,6 +91,14 @@ function aiLearn(n){
     document.getElementById('ai-ln-'+i).style.borderColor=i===n?colors[i]:'var(--bd)';
   }
 }
+
+// OTA strategy selector
+function fwOta(n){
+  var colors=['rgba(0,232,255,.15)','rgba(168,85,247,.15)','rgba(236,72,153,.15)'];
+  for(var i=0;i<3;i++){
+    document.getElementById('fw-ota-'+i).style.borderColor=i===n?colors[i]:'var(--bd)';
+  }
+}
 </script>
 <script>
 tailwind.config = {
@@ -187,6 +195,14 @@ function aiLearn(n){
   var colors=['rgba(245,158,11,.15)','rgba(168,85,247,.15)','rgba(52,211,153,.15)'];
   for(var i=0;i<3;i++){
     document.getElementById('ai-ln-'+i).style.borderColor=i===n?colors[i]:'var(--bd)';
+  }
+}
+
+// OTA strategy selector
+function fwOta(n){
+  var colors=['rgba(0,232,255,.15)','rgba(168,85,247,.15)','rgba(236,72,153,.15)'];
+  for(var i=0;i<3;i++){
+    document.getElementById('fw-ota-'+i).style.borderColor=i===n?colors[i]:'var(--bd)';
   }
 }
 </script>
@@ -2064,91 +2080,222 @@ section{overflow-x:hidden}
 </div>
 <!-- Firmware Engine -->
 <div class="pg" id="p-fw">
-<section class="hero-sm" style="background:var(--bg2);position:relative;overflow:hidden"><video src="Media/Video/Firmware Enginemp4.mp4" autoplay loop muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.25"></video><div class="w">
+<section class="hero-sm" style="background:var(--bg2);position:relative;overflow:hidden"><video src="Media/Video/Firmware Enginemp4.mp4" autoplay loop muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.25"></video><div class="w" style="position:relative;z-index:2">
   <h1 class="h2 rv" data-d="1">Firmware Engine<br><span class="gl">Unlimited Builds. &lt;2s Compile.</span></h1>
   <p class="p1 rv" data-d="2">50 products = 50 firmware builds = nightmare. With Firmware Engine: 4-step wizard, one compilation, all variations. No caps, no extra costs, forever.</p>
 </div></section>
 
-<!-- Interactive 4-step wizard -->
-<section style="padding:clamp(60px,8vw,100px) 0"><div class="w">
-  <div class="rv" style="display:grid;grid-template-columns:1fr 340px;gap:40px;align-items:start">
-    <div>
-      <!-- Step tabs -->
-      <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap">
-        <div onclick="fwStep(0)" id="fw-s-0" style="cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;background:rgba(0,232,255,.1);border:1px solid rgba(0,232,255,.2);transition:all .3s"><div style="width:24px;height:24px;border-radius:50%;background:var(--cy);color:#000;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center">1</div><div style="font-size:12px;font-weight:700;color:var(--cy)">Device</div></div>
-        <div onclick="fwStep(1)" id="fw-s-1" style="cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;background:rgba(255,255,255,.02);border:1px solid var(--bd);transition:all .3s"><div style="width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.06);color:var(--tx3);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center">2</div><div style="font-size:12px;font-weight:600;color:var(--tx2)">Hardware</div></div>
-        <div onclick="fwStep(2)" id="fw-s-2" style="cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;background:rgba(255,255,255,.02);border:1px solid var(--bd);transition:all .3s"><div style="width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.06);color:var(--tx3);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center">3</div><div style="font-size:12px;font-weight:600;color:var(--tx2)">Extract</div></div>
-        <div onclick="fwStep(3)" id="fw-s-3" style="cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;background:rgba(255,255,255,.02);border:1px solid var(--bd);transition:all .3s"><div style="width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.06);color:var(--tx3);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center">4</div><div style="font-size:12px;font-weight:600;color:var(--tx2)">Modules</div></div>
-      </div>
-      <!-- Step content panels -->
-      <div id="fw-panel-0" style="border-radius:20px;padding:clamp(24px,3vw,36px);background:linear-gradient(135deg,rgba(0,232,255,.04),rgba(0,232,255,.01));border:1px solid rgba(0,232,255,.1)">
-        <div style="font-size:18px;font-weight:800;margin-bottom:6px">📦 Step 1: Select Device Type</div>
-        <div style="font-size:12px;color:var(--tx3);margin-bottom:20px">Choose your device form factor</div>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="padding:14px 16px;border-radius:12px;background:rgba(0,232,255,.06);border:2px solid rgba(0,232,255,.15);display:flex;align-items:center;gap:12px"><div style="width:8px;height:8px;border-radius:50%;background:var(--cy)"></div><div><div style="font-size:13px;font-weight:700">Disposable</div><div style="font-size:10px;color:var(--tx3)">Single-use · 1-5 tanks · Fixed config</div></div></div>
-          <div style="padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.02);border:1px solid var(--bd);display:flex;align-items:center;gap:12px"><div style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.15)"></div><div><div style="font-size:13px;font-weight:700;color:var(--tx2)">Cartridge / Pod</div><div style="font-size:10px;color:var(--tx3)">Reusable · Swappable · Full control</div></div></div>
-          <div style="padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.02);border:1px solid var(--bd);display:flex;align-items:center;gap:12px"><div style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.15)"></div><div><div style="font-size:13px;font-weight:700;color:var(--tx2)">Modular</div><div style="font-size:10px;color:var(--tx3)">Multi-chamber · Hotswap · Advanced</div></div></div>
-        </div>
-      </div>
-      <div id="fw-panel-1" style="display:none;border-radius:20px;padding:clamp(24px,3vw,36px);background:linear-gradient(135deg,rgba(168,85,247,.04),rgba(168,85,247,.01));border:1px solid rgba(168,85,247,.1)">
-        <div style="font-size:18px;font-weight:800;margin-bottom:6px">🔧 Step 2: Hardware Config</div>
-        <div style="font-size:12px;color:var(--tx3);margin-bottom:20px">Define your hardware capabilities</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div style="padding:14px;border-radius:12px;background:rgba(168,85,247,.04);border:1px solid rgba(168,85,247,.08);text-align:center"><div style="font-size:20px;margin-bottom:4px">📺</div><div style="font-size:11px;font-weight:700">Screen</div><div style="font-size:9px;color:var(--tx3)">OLED / None</div></div>
-          <div style="padding:14px;border-radius:12px;background:rgba(168,85,247,.04);border:1px solid rgba(168,85,247,.08);text-align:center"><div style="font-size:20px;margin-bottom:4px">🔘</div><div style="font-size:11px;font-weight:700">Button</div><div style="font-size:9px;color:var(--tx3)">Single / Multi / None</div></div>
-          <div style="padding:14px;border-radius:12px;background:rgba(168,85,247,.04);border:1px solid rgba(168,85,247,.08);text-align:center"><div style="font-size:20px;margin-bottom:4px">💡</div><div style="font-size:11px;font-weight:700">LED</div><div style="font-size:9px;color:var(--tx3)">RGB / Single / None</div></div>
-          <div style="padding:14px;border-radius:12px;background:rgba(168,85,247,.04);border:1px solid rgba(168,85,247,.08);text-align:center"><div style="font-size:20px;margin-bottom:4px">📡</div><div style="font-size:11px;font-weight:700">BLE Chip</div><div style="font-size:9px;color:var(--tx3)">5.0 / 5.2 / 5.3</div></div>
-        </div>
-      </div>
-      <div id="fw-panel-2" style="display:none;border-radius:20px;padding:clamp(24px,3vw,36px);background:linear-gradient(135deg,rgba(52,211,153,.04),rgba(52,211,153,.01));border:1px solid rgba(52,211,153,.1)">
-        <div style="font-size:18px;font-weight:800;margin-bottom:6px">🧪 Step 3: Extract Profile</div>
-        <div style="font-size:12px;color:var(--tx3);margin-bottom:20px">AI optimizes heating curves per extract</div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="display:flex;align-items:center;gap:12px"><div style="width:60px;font-size:10px;color:var(--tx3);text-align:right">THC %</div><div style="flex:1;height:10px;border-radius:5px;background:rgba(255,255,255,.03)"><div style="height:100%;width:75%;border-radius:5px;background:linear-gradient(90deg,var(--gn),rgba(52,211,153,.3))"></div></div><div style="font-size:11px;font-weight:700;color:var(--gn);width:35px">75%</div></div>
-          <div style="display:flex;align-items:center;gap:12px"><div style="width:60px;font-size:10px;color:var(--tx3);text-align:right">CBD %</div><div style="flex:1;height:10px;border-radius:5px;background:rgba(255,255,255,.03)"><div style="height:100%;width:25%;border-radius:5px;background:linear-gradient(90deg,var(--pu),rgba(168,85,247,.3))"></div></div><div style="font-size:11px;font-weight:700;color:var(--pu);width:35px">25%</div></div>
-          <div style="display:flex;align-items:center;gap:12px"><div style="width:60px;font-size:10px;color:var(--tx3);text-align:right">Viscosity</div><div style="flex:1;height:10px;border-radius:5px;background:rgba(255,255,255,.03)"><div style="height:100%;width:60%;border-radius:5px;background:linear-gradient(90deg,var(--am),rgba(245,158,11,.3))"></div></div><div style="font-size:11px;font-weight:700;color:var(--am);width:35px">Med</div></div>
-        </div>
-      </div>
-      <div id="fw-panel-3" style="display:none;border-radius:20px;padding:clamp(24px,3vw,36px);background:linear-gradient(135deg,rgba(245,158,11,.04),rgba(245,158,11,.01));border:1px solid rgba(245,158,11,.1)">
-        <div style="font-size:18px;font-weight:800;margin-bottom:6px">⚙️ Step 4: Feature Modules</div>
-        <div style="font-size:12px;color:var(--tx3);margin-bottom:20px">Toggle 26+ features on/off</div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px">
-          <span style="padding:8px 14px;border-radius:10px;background:rgba(0,232,255,.06);border:1px solid rgba(0,232,255,.1);font-size:11px;font-weight:600;color:var(--cy)">✓ Smart Control</span>
-          <span style="padding:8px 14px;border-radius:10px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.1);font-size:11px;font-weight:600;color:var(--pu)">✓ Mood Logic™</span>
-          <span style="padding:8px 14px;border-radius:10px;background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.1);font-size:11px;font-weight:600;color:var(--gn)">✓ Usage Tracking</span>
-          <span style="padding:8px 14px;border-radius:10px;background:rgba(236,72,153,.06);border:1px solid rgba(236,72,153,.1);font-size:11px;font-weight:600;color:var(--pk)">✓ Authentication</span>
-          <span style="padding:8px 14px;border-radius:10px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.1);font-size:11px;font-weight:600;color:var(--am)">✓ OTA Updates</span>
-          <span style="padding:8px 14px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid var(--bd);font-size:11px;font-weight:600;color:var(--tx3)">○ Child Lock</span>
-          <span style="padding:8px 14px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid var(--bd);font-size:11px;font-weight:600;color:var(--tx3)">○ LED Sync</span>
-          <span style="padding:8px 14px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid var(--bd);font-size:11px;font-weight:600;color:var(--tx3)">○ Arena</span>
-        </div>
-      </div>
-    </div>
-    <!-- Right: Compile output terminal -->
-    <div style="border-radius:20px;background:#0a0a12;border:1px solid rgba(0,232,255,.1);overflow:hidden">
-      <div style="padding:10px 16px;background:rgba(0,232,255,.04);border-bottom:1px solid rgba(0,232,255,.06);display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#f87171"></div><div style="width:8px;height:8px;border-radius:50%;background:#fbbf24"></div><div style="width:8px;height:8px;border-radius:50%;background:#34d399"></div><div style="flex:1;text-align:center;font-size:10px;color:var(--tx3);font-family:monospace">firmware-engine</div></div>
-      <div style="padding:16px;font-family:monospace;font-size:10px;line-height:1.8;color:var(--tx3)">
-        <div><span style="color:var(--cy)">$</span> mood-fw compile</div>
-        <div style="color:var(--gn)">✓ Device: Disposable (3-tank)</div>
-        <div style="color:var(--gn)">✓ Hardware: BLE 5.0, RGB LED</div>
-        <div style="color:var(--gn)">✓ Extract: THC 75% / CBD 25%</div>
-        <div style="color:var(--gn)">✓ Modules: 5 active</div>
-        <div style="margin-top:8px"><span style="color:var(--am)">⚡</span> Compiling...</div>
-        <div style="margin-top:4px;color:var(--cy);font-weight:700">✓ Build complete in 1.8s</div>
-        <div style="color:var(--tx3);margin-top:4px">Output: firmware_v3.2.1.bin</div>
-        <div style="color:var(--tx3)">Size: 48.2KB · OTA-ready</div>
-      </div>
-    </div>
+<!-- Section Nav -->
+<div style="position:sticky;top:68px;z-index:100;background:rgba(2,2,5,.95);backdrop-filter:blur(20px) saturate(160%);border-bottom:1px solid var(--bd)">
+  <div class="w" style="display:flex;align-items:stretch;padding:0;overflow-x:auto;-webkit-overflow-scrolling:touch">
+    <a onclick="document.getElementById('fw-wizard').scrollIntoView({behavior:'smooth',block:'start'})" style="flex:1;padding:14px 8px;text-align:center;cursor:pointer;transition:.3s;border-right:1px solid var(--bd);border-bottom:2px solid transparent;white-space:nowrap" onmouseover="this.style.background='rgba(0,232,255,.04)';this.style.borderBottomColor='var(--cy)'" onmouseout="this.style.background='transparent';this.style.borderBottomColor='transparent'">
+      <div style="font-size:16px;margin-bottom:3px">🧙</div><div style="font-size:10px;font-weight:700;color:var(--tx2)">Build Wizard</div>
+    </a>
+    <a onclick="document.getElementById('fw-modules').scrollIntoView({behavior:'smooth',block:'start'})" style="flex:1;padding:14px 8px;text-align:center;cursor:pointer;transition:.3s;border-right:1px solid var(--bd);border-bottom:2px solid transparent;white-space:nowrap" onmouseover="this.style.background='rgba(168,85,247,.04)';this.style.borderBottomColor='var(--pu)'" onmouseout="this.style.background='transparent';this.style.borderBottomColor='transparent'">
+      <div style="font-size:16px;margin-bottom:3px">📦</div><div style="font-size:10px;font-weight:700;color:var(--tx2)">Module Library</div>
+    </a>
+    <a onclick="document.getElementById('fw-compile').scrollIntoView({behavior:'smooth',block:'start'})" style="flex:1;padding:14px 8px;text-align:center;cursor:pointer;transition:.3s;border-right:1px solid var(--bd);border-bottom:2px solid transparent;white-space:nowrap" onmouseover="this.style.background='rgba(52,211,153,.04)';this.style.borderBottomColor='var(--gn)'" onmouseout="this.style.background='transparent';this.style.borderBottomColor='transparent'">
+      <div style="font-size:16px;margin-bottom:3px">⚡</div><div style="font-size:10px;font-weight:700;color:var(--tx2)">Compile & Deploy</div>
+    </a>
+    <a onclick="document.getElementById('fw-ota').scrollIntoView({behavior:'smooth',block:'start'})" style="flex:1;padding:14px 8px;text-align:center;cursor:pointer;transition:.3s;border-bottom:2px solid transparent;white-space:nowrap" onmouseover="this.style.background='rgba(236,72,153,.04)';this.style.borderBottomColor='var(--pk)'" onmouseout="this.style.background='transparent';this.style.borderBottomColor='transparent'">
+      <div style="font-size:16px;margin-bottom:3px">📡</div><div style="font-size:10px;font-weight:700;color:var(--tx2)">OTA Updates</div>
+    </a>
   </div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:48px">
-    <div class="gc rv" style="text-align:center;padding:20px;border:1px solid rgba(0,232,255,.08);background:linear-gradient(180deg,rgba(0,232,255,.03),transparent)"><div style="font-size:28px;font-weight:800;color:var(--cy)">∞</div><div style="font-size:12px;font-weight:700;margin-top:4px">Unlimited Builds</div></div>
-    <div class="gc rv" data-d="1" style="text-align:center;padding:20px;border:1px solid rgba(168,85,247,.08);background:linear-gradient(180deg,rgba(168,85,247,.03),transparent)"><div style="font-size:28px;font-weight:800;color:var(--pu)">&lt;2s</div><div style="font-size:12px;font-weight:700;margin-top:4px">Compile Time</div></div>
-    <div class="gc rv" data-d="2" style="text-align:center;padding:20px;border:1px solid rgba(52,211,153,.08);background:linear-gradient(180deg,rgba(52,211,153,.03),transparent)"><div style="font-size:28px;font-weight:800;color:var(--gn)">26+</div><div style="font-size:12px;font-weight:700;margin-top:4px">Feature Modules</div></div>
-  </div>
-  <div style="text-align:center;margin-top:48px"><a class="btn bp" onclick="go('contact')">Start Building Firmware →</a></div>
-</div></section>
 </div>
 
+<!-- ═══ 01 · BUILD WIZARD ═══ -->
+<section id="fw-wizard" style="padding:clamp(60px,8vw,100px) 0"><div class="w">
+  <div class="tag rv">01 · Build Wizard</div>
+  <h2 class="h3 rv" data-d="1">4 Steps to <span class="se" style="color:var(--cy)">Production Firmware.</span></h2>
+  <p class="p1 rv" data-d="2" style="margin-bottom:40px;max-width:600px">Configure any device variation in 4 simple steps. The wizard handles all complexity — from single-tank disposables to multi-cartridge smart devices.</p>
+
+  <!-- Wizard step tabs -->
+  <div class="rv" style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap">
+    <div onclick="fwStep(0)" id="fw-s-0" style="cursor:pointer;padding:12px 20px;border-radius:12px;background:rgba(0,232,255,.1);border:1px solid rgba(0,232,255,.2);font-size:12px;font-weight:700;color:var(--cy);transition:.3s;display:flex;align-items:center;gap:8px"><span style="width:22px;height:22px;border-radius:50%;background:var(--cy);color:#000;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center">1</span> Device & Tanks</div>
+    <div onclick="fwStep(1)" id="fw-s-1" style="cursor:pointer;padding:12px 20px;border-radius:12px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:12px;font-weight:600;color:var(--tx2);transition:.3s;display:flex;align-items:center;gap:8px"><span style="width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.1);color:var(--tx3);font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center">2</span> Hardware</div>
+    <div onclick="fwStep(2)" id="fw-s-2" style="cursor:pointer;padding:12px 20px;border-radius:12px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:12px;font-weight:600;color:var(--tx2);transition:.3s;display:flex;align-items:center;gap:8px"><span style="width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.1);color:var(--tx3);font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center">3</span> Extract Config</div>
+    <div onclick="fwStep(3)" id="fw-s-3" style="cursor:pointer;padding:12px 20px;border-radius:12px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:12px;font-weight:600;color:var(--tx2);transition:.3s;display:flex;align-items:center;gap:8px"><span style="width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.1);color:var(--tx3);font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center">4</span> Feature Modules</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 300px;gap:40px;align-items:start">
+    <div>
+      <!-- Panel 0: Device & Tanks -->
+      <div id="fw-p-0" style="border-radius:20px;padding:28px;background:linear-gradient(135deg,rgba(0,232,255,.04),rgba(0,0,0,.2));border:1px solid rgba(0,232,255,.08)">
+        <div style="font-size:16px;font-weight:800;margin-bottom:20px">Step 1: Device & Tanks</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div class="gc" style="padding:16px;cursor:pointer;text-align:center;border-color:rgba(0,232,255,.15)" onclick="this.style.borderColor=this.style.borderColor==='var(--bd)'?'rgba(0,232,255,.15)':'var(--bd)'"><div style="font-size:22px;margin-bottom:6px">📱</div><div style="font-size:12px;font-weight:700">Disposable</div><div style="font-size:10px;color:var(--tx3)">Fixed config at manufacturing</div></div>
+          <div class="gc" style="padding:16px;cursor:pointer;text-align:center" onclick="this.style.borderColor=this.style.borderColor==='var(--bd)'?'rgba(0,232,255,.15)':'var(--bd)'"><div style="font-size:22px;margin-bottom:6px">🔄</div><div style="font-size:12px;font-weight:700">Cartridge/Pod</div><div style="font-size:10px;color:var(--tx3)">Reusable, user configures</div></div>
+        </div>
+        <div style="margin-top:16px;display:flex;gap:8px;align-items:center"><span style="font-size:11px;color:var(--tx2)">Tank Count:</span>
+          <span style="padding:6px 14px;border-radius:8px;background:rgba(0,232,255,.08);border:1px solid rgba(0,232,255,.12);font-size:12px;font-weight:700;color:var(--cy)">1</span>
+          <span style="padding:6px 14px;border-radius:8px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:12px;color:var(--tx3)">2</span>
+          <span style="padding:6px 14px;border-radius:8px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:12px;color:var(--tx3)">3</span>
+          <span style="padding:6px 14px;border-radius:8px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:12px;color:var(--tx3)">5</span>
+        </div>
+      </div>
+      <!-- Panel 1: Hardware -->
+      <div id="fw-p-1" style="display:none;border-radius:20px;padding:28px;background:linear-gradient(135deg,rgba(168,85,247,.04),rgba(0,0,0,.2));border:1px solid rgba(168,85,247,.08)">
+        <div style="font-size:16px;font-weight:800;margin-bottom:20px">Step 2: Hardware Config</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div class="gc" style="padding:14px"><div style="font-size:11px;color:var(--tx3);margin-bottom:6px">Screen</div><div style="display:flex;gap:6px"><span style="padding:4px 10px;border-radius:6px;background:rgba(168,85,247,.08);border:1px solid rgba(168,85,247,.12);font-size:10px;color:var(--pu)">OLED</span><span style="padding:4px 10px;border-radius:6px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:10px;color:var(--tx3)">None</span></div></div>
+          <div class="gc" style="padding:14px"><div style="font-size:11px;color:var(--tx3);margin-bottom:6px">Buttons</div><div style="display:flex;gap:6px"><span style="padding:4px 10px;border-radius:6px;background:rgba(168,85,247,.08);border:1px solid rgba(168,85,247,.12);font-size:10px;color:var(--pu)">1 Button</span><span style="padding:4px 10px;border-radius:6px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:10px;color:var(--tx3)">3 Buttons</span></div></div>
+          <div class="gc" style="padding:14px"><div style="font-size:11px;color:var(--tx3);margin-bottom:6px">LEDs</div><div style="display:flex;gap:6px"><span style="padding:4px 10px;border-radius:6px;background:rgba(168,85,247,.08);border:1px solid rgba(168,85,247,.12);font-size:10px;color:var(--pu)">RGB</span><span style="padding:4px 10px;border-radius:6px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:10px;color:var(--tx3)">Single</span></div></div>
+          <div class="gc" style="padding:14px"><div style="font-size:11px;color:var(--tx3);margin-bottom:6px">Battery</div><div style="font-size:14px;font-weight:800;color:var(--pu)">650mAh</div></div>
+        </div>
+      </div>
+      <!-- Panel 2: Extract -->
+      <div id="fw-p-2" style="display:none;border-radius:20px;padding:28px;background:linear-gradient(135deg,rgba(236,72,153,.04),rgba(0,0,0,.2));border:1px solid rgba(236,72,153,.08)">
+        <div style="font-size:16px;font-weight:800;margin-bottom:20px">Step 3: Extract Config (Per-Tank)</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div class="gc" style="padding:14px"><div style="font-size:11px;color:var(--tx3);margin-bottom:6px">Extract Type</div><div style="display:flex;gap:4px;flex-wrap:wrap"><span style="padding:4px 8px;border-radius:6px;background:rgba(236,72,153,.08);border:1px solid rgba(236,72,153,.12);font-size:9px;color:var(--pk)">THC</span><span style="padding:4px 8px;border-radius:6px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:9px;color:var(--tx3)">CBD</span><span style="padding:4px 8px;border-radius:6px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:9px;color:var(--tx3)">Flavor</span></div></div>
+          <div class="gc" style="padding:14px"><div style="font-size:11px;color:var(--tx3);margin-bottom:6px">Strain</div><div style="display:flex;gap:4px"><span style="padding:4px 8px;border-radius:6px;background:rgba(236,72,153,.08);border:1px solid rgba(236,72,153,.12);font-size:9px;color:var(--pk)">Sativa</span><span style="padding:4px 8px;border-radius:6px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:9px;color:var(--tx3)">Indica</span><span style="padding:4px 8px;border-radius:6px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:9px;color:var(--tx3)">Hybrid</span></div></div>
+          <div class="gc" style="padding:14px"><div style="font-size:11px;color:var(--tx3);margin-bottom:6px">Method</div><div style="display:flex;gap:4px;flex-wrap:wrap"><span style="padding:4px 8px;border-radius:6px;background:rgba(236,72,153,.08);border:1px solid rgba(236,72,153,.12);font-size:9px;color:var(--pk)">Distillate</span><span style="padding:4px 8px;border-radius:6px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:9px;color:var(--tx3)">Live Resin</span></div></div>
+          <div class="gc" style="padding:14px"><div style="font-size:11px;color:var(--tx3);margin-bottom:6px">Concentration</div><div style="font-size:18px;font-weight:800;color:var(--pk)">85%</div></div>
+        </div>
+      </div>
+      <!-- Panel 3: Modules -->
+      <div id="fw-p-3" style="display:none;border-radius:20px;padding:28px;background:linear-gradient(135deg,rgba(52,211,153,.04),rgba(0,0,0,.2));border:1px solid rgba(52,211,153,.08)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px"><div style="font-size:16px;font-weight:800">Step 4: Feature Modules</div><div style="padding:6px 14px;border-radius:8px;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.15);font-size:10px;color:var(--gn);font-weight:700" id="fw-mod-count">8 modules selected</div></div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="padding:6px 12px;border-radius:8px;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.15);font-size:10px;color:var(--gn);cursor:pointer">✓ Quick Heat</span>
+          <span style="padding:6px 12px;border-radius:8px;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.15);font-size:10px;color:var(--gn);cursor:pointer">✓ Precision Heat</span>
+          <span style="padding:6px 12px;border-radius:8px;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.15);font-size:10px;color:var(--gn);cursor:pointer">✓ Mood Modes</span>
+          <span style="padding:6px 12px;border-radius:8px;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.15);font-size:10px;color:var(--gn);cursor:pointer">✓ Pro Modes</span>
+          <span style="padding:6px 12px;border-radius:8px;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.15);font-size:10px;color:var(--gn);cursor:pointer">✓ Puff Counting</span>
+          <span style="padding:6px 12px;border-radius:8px;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.15);font-size:10px;color:var(--gn);cursor:pointer">✓ BLE Auth</span>
+          <span style="padding:6px 12px;border-radius:8px;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.15);font-size:10px;color:var(--gn);cursor:pointer">✓ Extract Tracking</span>
+          <span style="padding:6px 12px;border-radius:8px;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.15);font-size:10px;color:var(--gn);cursor:pointer">✓ OTA Updates</span>
+          <span style="padding:6px 12px;border-radius:8px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:10px;color:var(--tx3);cursor:pointer">+ Arena</span>
+          <span style="padding:6px 12px;border-radius:8px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:10px;color:var(--tx3);cursor:pointer">+ Live</span>
+          <span style="padding:6px 12px;border-radius:8px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:10px;color:var(--tx3);cursor:pointer">+ Group Sync</span>
+          <span style="padding:6px 12px;border-radius:8px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:10px;color:var(--tx3);cursor:pointer">+ LED Control</span>
+          <span style="padding:6px 12px;border-radius:8px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:10px;color:var(--tx3);cursor:pointer">+ Blinker Detect</span>
+          <span style="padding:6px 12px;border-radius:8px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:10px;color:var(--tx3);cursor:pointer">+ Damage Prevention</span>
+        </div>
+      </div>
+    </div>
+    <!-- Phone: Terminal mockup -->
+    <div class="phone rv" data-d="2" style="margin:0 auto"><div class="phone-scr" style="background:#0a0a14"><div style="padding:12px 10px"><div style="display:flex;align-items:center;gap:6px;margin-bottom:12px"><div style="width:8px;height:8px;border-radius:50%;background:#ff5f56"></div><div style="width:8px;height:8px;border-radius:50%;background:#ffbd2e"></div><div style="width:8px;height:8px;border-radius:50%;background:#27c93f"></div><span style="font-family:var(--fm);font-size:8px;color:var(--tx3);margin-left:6px">firmware-engine</span></div><div style="font-family:var(--fm);font-size:8px;line-height:1.8;color:var(--gn)"><div style="color:var(--tx3)">$ mood-compile --build</div><div>→ Loading config...</div><div>→ Device: Disposable 1-tank</div><div>→ Modules: 8 selected</div><div>→ Extract: THC Sativa 85%</div><div style="color:var(--cy)">→ Compiling firmware...</div><div style="color:var(--am)">→ Optimizing AI pipelines...</div><div style="color:var(--gn)">✓ Build complete: 1.8s</div><div style="color:var(--gn)">✓ Size: 247KB / 512KB</div><div style="color:var(--gn)">✓ Ready for flash</div></div></div></div></div>
+  </div>
+</div></section>
+
+<!-- ═══ 02 · MODULE LIBRARY ═══ -->
+<section id="fw-modules" style="padding:clamp(60px,8vw,100px) 0;border-top:1px solid var(--bd)"><div class="w">
+  <div class="tag rv">02 · Module Library</div>
+  <h2 class="h3 rv" data-d="1">26+ Modules. <span class="se" style="color:var(--pu)">Pick What You Need.</span></h2>
+  <p class="p1 rv" data-d="2" style="margin-bottom:40px;max-width:600px">Every feature in the Mood Lab ecosystem is a toggleable module. Core safety features are auto-included. Everything else — you choose. Mix and match for any product.</p>
+
+  <!-- Image bg -->
+  <div class="img-card rv" style="height:240px;margin-bottom:40px;cursor:default"><img src="Media/Image/a-close-up-industrial-photography-shot-o_djEdhnBuRiOxIOgNYT1J-Q_oyTxAsRnS6ikNo3qy3-wWw_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3" loading="lazy"><div class="img-card-content"><h3>Config-Driven Architecture</h3><p>Every module is independent · Toggle on/off · No code changes required</p></div></div>
+
+  <!-- Module categories -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+    <div class="gc rv" style="padding:24px">
+      <div style="font-size:11px;font-weight:800;color:var(--cy);font-family:var(--fm);letter-spacing:1px;margin-bottom:14px">CORE (Auto-included)</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:12px;color:var(--tx2);padding:8px;border-radius:6px;background:rgba(0,232,255,.03)">🔥 Quick Heat Control</div>
+        <div style="font-size:12px;color:var(--tx2);padding:8px;border-radius:6px;background:rgba(0,232,255,.03)">🛡️ Safety Systems</div>
+        <div style="font-size:12px;color:var(--tx2);padding:8px;border-radius:6px;background:rgba(0,232,255,.03)">🔋 Battery Management</div>
+        <div style="font-size:12px;color:var(--tx2);padding:8px;border-radius:6px;background:rgba(0,232,255,.03)">📱 BLE Communication</div>
+        <div style="font-size:12px;color:var(--tx2);padding:8px;border-radius:6px;background:rgba(0,232,255,.03)">🔐 Authentication</div>
+      </div>
+    </div>
+    <div class="gc rv" data-d="1" style="padding:24px">
+      <div style="font-size:11px;font-weight:800;color:var(--pu);font-family:var(--fm);letter-spacing:1px;margin-bottom:14px">INTELLIGENCE</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:12px;color:var(--tx2);padding:8px;border-radius:6px;background:rgba(168,85,247,.03)">🧠 Mood Logic™ AI</div>
+        <div style="font-size:12px;color:var(--tx2);padding:8px;border-radius:6px;background:rgba(168,85,247,.03)">📊 Puff Analytics</div>
+        <div style="font-size:12px;color:var(--tx2);padding:8px;border-radius:6px;background:rgba(168,85,247,.03)">🧪 Extract Tracking</div>
+        <div style="font-size:12px;color:var(--tx2);padding:8px;border-radius:6px;background:rgba(168,85,247,.03)">⚠️ Blinker Detection</div>
+        <div style="font-size:12px;color:var(--tx2);padding:8px;border-radius:6px;background:rgba(168,85,247,.03)">🎯 Precision Heat</div>
+      </div>
+    </div>
+    <div class="gc rv" data-d="2" style="padding:24px">
+      <div style="font-size:11px;font-weight:800;color:var(--pk);font-family:var(--fm);letter-spacing:1px;margin-bottom:14px">ENTERTAINMENT</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:12px;color:var(--tx2);padding:8px;border-radius:6px;background:rgba(236,72,153,.03)">🎮 Arena Games</div>
+        <div style="font-size:12px;color:var(--tx2);padding:8px;border-radius:6px;background:rgba(236,72,153,.03)">📺 Live Streaming</div>
+        <div style="font-size:12px;color:var(--tx2);padding:8px;border-radius:6px;background:rgba(236,72,153,.03)">👥 Group Sync</div>
+        <div style="font-size:12px;color:var(--tx2);padding:8px;border-radius:6px;background:rgba(236,72,153,.03)">💡 LED Control</div>
+        <div style="font-size:12px;color:var(--tx2);padding:8px;border-radius:6px;background:rgba(236,72,153,.03)">🏆 Progression System</div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ═══ 03 · COMPILE & DEPLOY ═══ -->
+<section id="fw-compile" style="padding:clamp(60px,8vw,100px) 0;border-top:1px solid var(--bd)"><div class="w">
+  <div class="tag rv">03 · Compile & Deploy</div>
+  <h2 class="h3 rv" data-d="1">&lt;2 Seconds. <span class="se" style="color:var(--gn)">Every Time.</span></h2>
+  <p class="p1 rv" data-d="2" style="margin-bottom:40px;max-width:600px">Hit compile. Wait less than 2 seconds. Get production-ready firmware binary. Flash to device or deploy via OTA. That simple.</p>
+
+  <!-- Compile stats -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:40px">
+    <div class="gc rv" style="padding:28px;text-align:center">
+      <div style="font-size:36px;font-weight:900;color:var(--gn);margin-bottom:8px">&lt;2s</div>
+      <div style="font-size:12px;font-weight:700;margin-bottom:4px">Compile Time</div>
+      <p style="font-size:11px;color:var(--tx3)">Full firmware binary generated in under 2 seconds regardless of module count or device complexity.</p>
+    </div>
+    <div class="gc rv" data-d="1" style="padding:28px;text-align:center">
+      <div style="font-size:36px;font-weight:900;color:var(--cy);margin-bottom:8px">∞</div>
+      <div style="font-size:12px;font-weight:700;margin-bottom:4px">Unlimited Builds</div>
+      <p style="font-size:11px;color:var(--tx3)">No build caps. No per-compile fees. Generate as many firmware variations as your product line needs.</p>
+    </div>
+    <div class="gc rv" data-d="2" style="padding:28px;text-align:center">
+      <div style="font-size:36px;font-weight:900;color:var(--pu);margin-bottom:8px">247KB</div>
+      <div style="font-size:12px;font-weight:700;margin-bottom:4px">Typical Size</div>
+      <p style="font-size:11px;color:var(--tx3)">Highly optimized binary. Fits on any modern MCU. Leaves room for OTA partition.</p>
+    </div>
+  </div>
+
+  <!-- Capability pills -->
+  <div class="rv" data-d="2" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+    <span style="padding:8px 16px;border-radius:100px;background:rgba(0,232,255,.06);border:1px solid rgba(0,232,255,.1);font-size:11px;color:var(--cy);font-weight:600">Config-Driven</span>
+    <span style="padding:8px 16px;border-radius:100px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.1);font-size:11px;color:var(--pu);font-weight:600">AI-Optimized</span>
+    <span style="padding:8px 16px;border-radius:100px;background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.1);font-size:11px;color:var(--gn);font-weight:600">OTA Ready</span>
+    <span style="padding:8px 16px;border-radius:100px;background:rgba(236,72,153,.06);border:1px solid rgba(236,72,153,.1);font-size:11px;color:var(--pk);font-weight:600">Safety Built-in</span>
+    <span style="padding:8px 16px;border-radius:100px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.1);font-size:11px;color:var(--am);font-weight:600">&lt;2s Compile</span>
+    <span style="padding:8px 16px;border-radius:100px;background:rgba(255,255,255,.03);border:1px solid var(--bd2);font-size:11px;color:var(--tx2);font-weight:600">∞ Unlimited</span>
+  </div>
+</div></section>
+
+<!-- ═══ 04 · OTA UPDATES ═══ -->
+<section id="fw-ota" style="padding:clamp(60px,8vw,100px) 0;border-top:1px solid var(--bd)"><div class="w">
+  <div class="tag rv">04 · OTA Updates</div>
+  <h2 class="h3 rv" data-d="1">Update Any Device. <span class="se" style="color:var(--pk)">Anywhere. Anytime.</span></h2>
+  <p class="p1 rv" data-d="2" style="margin-bottom:40px;max-width:600px">Over-the-air firmware updates deployed via BLE. Three deployment strategies for different business needs. Rollback capability built-in.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:40px">
+    <div onclick="fwOta(0)" id="fw-ota-0" class="gc rv" style="cursor:pointer;padding:28px;text-align:center;border-color:rgba(0,232,255,.15);transition:.3s">
+      <div style="font-size:28px;margin-bottom:12px">⚡</div>
+      <h4 style="font-size:14px;font-weight:800;color:var(--cy);margin-bottom:8px">Immediate</h4>
+      <p style="font-size:12px;color:var(--tx2);line-height:1.5">Push to all devices on next connection. Best for critical security patches or urgent fixes.</p>
+    </div>
+    <div onclick="fwOta(1)" id="fw-ota-1" class="gc rv" data-d="1" style="cursor:pointer;padding:28px;text-align:center;transition:.3s">
+      <div style="font-size:28px;margin-bottom:12px">📊</div>
+      <h4 style="font-size:14px;font-weight:800;margin-bottom:8px">Staged Rollout</h4>
+      <p style="font-size:12px;color:var(--tx2);line-height:1.5">5% → 25% → 50% → 100%. Monitor success rates at each stage. Auto-pause on failure threshold.</p>
+    </div>
+    <div onclick="fwOta(2)" id="fw-ota-2" class="gc rv" data-d="2" style="cursor:pointer;padding:28px;text-align:center;transition:.3s">
+      <div style="font-size:28px;margin-bottom:12px">📅</div>
+      <h4 style="font-size:14px;font-weight:800;margin-bottom:8px">Scheduled</h4>
+      <p style="font-size:12px;color:var(--tx2);line-height:1.5">Set date and time window for deployment. Coordinate with marketing launches or seasonal updates.</p>
+    </div>
+  </div>
+
+  <!-- OTA detail panel -->
+  <div id="fw-ota-detail" class="rv" data-d="2" style="padding:28px;border-radius:20px;background:linear-gradient(135deg,rgba(0,232,255,.03),rgba(0,0,0,.2));border:1px solid rgba(0,232,255,.08);transition:.3s">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+      <div><div style="font-size:11px;color:var(--tx3);margin-bottom:4px">Success Rate</div><div style="font-size:18px;font-weight:800;color:var(--gn)">99.7%</div></div>
+      <div><div style="font-size:11px;color:var(--tx3);margin-bottom:4px">Transfer Time</div><div style="font-size:18px;font-weight:800;color:var(--cy)">~45 sec</div></div>
+      <div><div style="font-size:11px;color:var(--tx3);margin-bottom:4px">Rollback</div><div style="font-size:18px;font-weight:800;color:var(--pu)">Instant</div></div>
+      <div><div style="font-size:11px;color:var(--tx3);margin-bottom:4px">Protocol</div><div style="font-size:18px;font-weight:800;color:var(--pk)">BLE 5.0</div></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:48px"><a class="btn bp" onclick="go('contact')" style="padding:14px 32px">Build Your Firmware →</a></div>
+</div></section>
+</div>
 <!-- ═══════════════════════════════════════════════════════════
      ARENA PAGE
      ═══════════════════════════════════════════════════════════ -->
@@ -3003,6 +3150,14 @@ function aiLearn(n){
   var colors=['rgba(245,158,11,.15)','rgba(168,85,247,.15)','rgba(52,211,153,.15)'];
   for(var i=0;i<3;i++){
     document.getElementById('ai-ln-'+i).style.borderColor=i===n?colors[i]:'var(--bd)';
+  }
+}
+
+// OTA strategy selector
+function fwOta(n){
+  var colors=['rgba(0,232,255,.15)','rgba(168,85,247,.15)','rgba(236,72,153,.15)'];
+  for(var i=0;i<3;i++){
+    document.getElementById('fw-ota-'+i).style.borderColor=i===n?colors[i]:'var(--bd)';
   }
 }
 </script>
