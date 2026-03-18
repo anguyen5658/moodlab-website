@@ -1039,12 +1039,12 @@ section{overflow-x:hidden}
     <!-- Labels below slider frame — clickable -->
     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;max-width:920px;margin-left:auto;margin-right:auto">
       <div onclick="rbdJump(0.01)" style="display:flex;align-items:center;gap:6px;cursor:pointer;transition:opacity .2s" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
-        <div style="width:6px;height:6px;border-radius:50%;background:#f87171;box-shadow:0 0 6px rgba(248,113,113,.5)"></div>
+        <span style="font-size:14px;color:#f87171">←</span>
         <span style="font-size:10px;font-weight:800;color:#f87171;font-family:var(--fm);letter-spacing:1px">INDUSTRY STANDARD</span>
       </div>
       <div onclick="rbdJump(0.99)" style="display:flex;align-items:center;gap:6px;cursor:pointer;transition:opacity .2s" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
         <span style="font-size:10px;font-weight:800;color:var(--gn);font-family:var(--fm);letter-spacing:1px">MOOD LAB</span>
-        <div style="width:6px;height:6px;border-radius:50%;background:var(--gn);box-shadow:0 0 6px rgba(52,211,153,.5)"></div>
+        <span style="font-size:14px;color:var(--gn)">→</span>
       </div>
     </div>
   </div>
@@ -1052,36 +1052,36 @@ section{overflow-x:hidden}
   <!-- 3 Zone Indicators — 6 pairs of before/after -->
   <div id="rbd-zones" style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:20px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.04)">
     <!-- Zone 0: Dosage + Damage -->
-    <div id="rbd-zone-0" style="padding:14px 12px;border-right:1px solid rgba(255,255,255,.03);transition:all .4s">
+    <div id="rbd-zone-0" style="padding:16px 14px;border-right:1px solid rgba(255,255,255,.03);transition:all .4s">
       <div class="rbd-pair" style="margin-bottom:8px">
-        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:11px;color:#f87171">✗</span><span style="font-size:12px;color:var(--tx3);transition:all .4s">No dosage tracking</span></div>
-        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:14px">🎯</span><span style="font-size:12px;font-weight:700;color:var(--gn);transition:all .4s">Precision Dosage</span></div>
+        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:12px;color:#f87171">✗</span><span style="font-size:13px;color:var(--tx3);transition:all .4s">No dosage tracking</span></div>
+        <div class="rbd-after-msg" style="display:none;align-items:center;gap:8px"><span style="font-size:15px">🎯</span><span style="font-size:13px;font-weight:700;color:var(--gn);transition:all .4s">Precision Dosage</span></div>
       </div>
       <div class="rbd-pair">
-        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:11px;color:#f87171">✗</span><span style="font-size:12px;color:var(--tx3);transition:all .4s">No damage prevention</span></div>
-        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:14px">🛡️</span><span style="font-size:12px;font-weight:700;color:var(--am);transition:all .4s">Damage Prevention</span></div>
+        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:12px;color:#f87171">✗</span><span style="font-size:13px;color:var(--tx3);transition:all .4s">No damage prevention</span></div>
+        <div class="rbd-after-msg" style="display:none;align-items:center;gap:8px"><span style="font-size:15px">🛡️</span><span style="font-size:13px;font-weight:700;color:var(--am);transition:all .4s">Damage Prevention</span></div>
       </div>
     </div>
     <!-- Zone 1: Sessions + Alerts -->
-    <div id="rbd-zone-1" style="padding:14px 12px;border-right:1px solid rgba(255,255,255,.03);transition:all .4s">
+    <div id="rbd-zone-1" style="padding:16px 14px;border-right:1px solid rgba(255,255,255,.03);transition:all .4s">
       <div class="rbd-pair" style="margin-bottom:8px">
-        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:11px;color:#f87171">✗</span><span style="font-size:12px;color:var(--tx3);transition:all .4s">No session limits</span></div>
-        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:14px">⏱️</span><span style="font-size:12px;font-weight:700;color:var(--pu);transition:all .4s">Session Limits</span></div>
+        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:12px;color:#f87171">✗</span><span style="font-size:13px;color:var(--tx3);transition:all .4s">No session limits</span></div>
+        <div class="rbd-after-msg" style="display:none;align-items:center;gap:8px"><span style="font-size:15px">⏱️</span><span style="font-size:13px;font-weight:700;color:var(--pu);transition:all .4s">Session Limits</span></div>
       </div>
       <div class="rbd-pair">
-        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:11px;color:#f87171">✗</span><span style="font-size:12px;color:var(--tx3);transition:all .4s">No safety alerts</span></div>
-        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:14px">📊</span><span style="font-size:12px;font-weight:700;color:var(--pk);transition:all .4s">Smart Alerts</span></div>
+        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:12px;color:#f87171">✗</span><span style="font-size:13px;color:var(--tx3);transition:all .4s">No safety alerts</span></div>
+        <div class="rbd-after-msg" style="display:none;align-items:center;gap:8px"><span style="font-size:15px">📊</span><span style="font-size:13px;font-weight:700;color:var(--pk);transition:all .4s">Smart Alerts</span></div>
       </div>
     </div>
     <!-- Zone 2: Lock + Compliance -->
-    <div id="rbd-zone-2" style="padding:14px 12px;transition:all .4s">
+    <div id="rbd-zone-2" style="padding:16px 14px;transition:all .4s">
       <div class="rbd-pair" style="margin-bottom:8px">
-        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:11px;color:#f87171">✗</span><span style="font-size:12px;color:var(--tx3);transition:all .4s">No access control</span></div>
-        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:14px">🔒</span><span style="font-size:12px;font-weight:700;color:var(--cy);transition:all .4s">Device & Child Lock</span></div>
+        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:12px;color:#f87171">✗</span><span style="font-size:13px;color:var(--tx3);transition:all .4s">No access control</span></div>
+        <div class="rbd-after-msg" style="display:none;align-items:center;gap:8px"><span style="font-size:15px">🔒</span><span style="font-size:13px;font-weight:700;color:var(--cy);transition:all .4s">Device & Child Lock</span></div>
       </div>
       <div class="rbd-pair">
-        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:11px;color:#f87171">✗</span><span style="font-size:12px;color:var(--tx3);transition:all .4s">Not compliant</span></div>
-        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:14px">✅</span><span style="font-size:12px;font-weight:700;color:var(--gn);transition:all .4s">Compliance-Ready</span></div>
+        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:12px;color:#f87171">✗</span><span style="font-size:13px;color:var(--tx3);transition:all .4s">Not compliant</span></div>
+        <div class="rbd-after-msg" style="display:none;align-items:center;gap:8px"><span style="font-size:15px">✅</span><span style="font-size:13px;font-weight:700;color:var(--gn);transition:all .4s">Compliance-Ready</span></div>
       </div>
     </div>
   </div>
