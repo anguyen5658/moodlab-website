@@ -4,7 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mood Lab — We Build the Intelligence</title>
-<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.tailwindcss.com">
+// Usage Intelligence period toggle
+function uiPeriod(n){
+  var stats=[[121,'4.2s',0],[847,'3.8s',2],[3420,'4.0s',8]];
+  var labels=['Day','Week','Month'];
+  for(var i=0;i<3;i++){
+    var el=document.getElementById('ui-per-'+i);
+    if(i===n){el.style.background='rgba(168,85,247,.1)';el.style.border='1px solid rgba(168,85,247,.2)';el.style.color='var(--pu)';el.style.fontWeight='700'}
+    else{el.style.background='rgba(255,255,255,.02)';el.style.border='1px solid var(--bd)';el.style.color='var(--tx2)';el.style.fontWeight='600'}
+  }
+  var s=stats[n];
+  var pe=document.getElementById('ui-stat-puffs');if(pe)pe.textContent=s[0];
+  var de=document.getElementById('ui-stat-dur');if(de)de.textContent=s[1];
+  var ae=document.getElementById('ui-stat-alert');if(ae)ae.textContent=s[2];
+}
+</script>
 <script>
 tailwind.config = {
   prefix: 'tw-',
@@ -14,6 +29,21 @@ tailwind.config = {
       screens: { 'xs': '380px', 'sm': '600px', 'md': '900px', 'lg': '1200px' }
     }
   }
+}
+
+// Usage Intelligence period toggle
+function uiPeriod(n){
+  var stats=[[121,'4.2s',0],[847,'3.8s',2],[3420,'4.0s',8]];
+  var labels=['Day','Week','Month'];
+  for(var i=0;i<3;i++){
+    var el=document.getElementById('ui-per-'+i);
+    if(i===n){el.style.background='rgba(168,85,247,.1)';el.style.border='1px solid rgba(168,85,247,.2)';el.style.color='var(--pu)';el.style.fontWeight='700'}
+    else{el.style.background='rgba(255,255,255,.02)';el.style.border='1px solid var(--bd)';el.style.color='var(--tx2)';el.style.fontWeight='600'}
+  }
+  var s=stats[n];
+  var pe=document.getElementById('ui-stat-puffs');if(pe)pe.textContent=s[0];
+  var de=document.getElementById('ui-stat-dur');if(de)de.textContent=s[1];
+  var ae=document.getElementById('ui-stat-alert');if(ae)ae.textContent=s[2];
 }
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@200;300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -1300,19 +1330,49 @@ section{overflow-x:hidden}
 <div class="pg" id="p-ui">
 <section class="hero-sm" style="background:var(--bg2);position:relative;overflow:hidden"><video src="Media/Video/Usage Intelligence.mp4" autoplay loop muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.25"></video><div class="w" style="position:relative;z-index:2">
   <h1 class="h2 rv" data-d="1">Usage Intelligence<br><span style="color:var(--pu)">Know Your Customers.</span></h1>
-  <p class="p1 rv" data-d="2">Turn device data into business decisions. Track consumption patterns, identify preferences, understand behavior at scale. Including the industry-unique Extract Consumption estimation.</p>
+  <p class="p1 rv" data-d="2">Turn device data into business decisions. Track consumption patterns, identify preferences, understand behavior at scale. Including the industry-unique Extract Consumption estimation — software-only, no extra hardware.</p>
 </div></section>
 
-<!-- Interactive Dashboard -->
-<section style="padding:clamp(60px,8vw,100px) 0"><div class="w">
-  <div class="rv" style="display:grid;grid-template-columns:1fr 300px;gap:40px;align-items:start">
-    <!-- Left: Dashboard Panel -->
+<!-- Section Nav -->
+<div style="position:sticky;top:68px;z-index:100;background:rgba(2,2,5,.95);backdrop-filter:blur(20px) saturate(160%);border-bottom:1px solid var(--bd)">
+  <div class="w" style="display:flex;align-items:stretch;padding:0;overflow-x:auto;-webkit-overflow-scrolling:touch">
+    <a onclick="document.getElementById('ui-analytics').scrollIntoView({behavior:'smooth',block:'start'})" style="flex:1;padding:14px 8px;text-align:center;cursor:pointer;transition:.3s;border-right:1px solid var(--bd);border-bottom:2px solid transparent;white-space:nowrap" onmouseover="this.style.background='rgba(168,85,247,.04)';this.style.borderBottomColor='var(--pu)'" onmouseout="this.style.background='transparent';this.style.borderBottomColor='transparent'">
+      <div style="font-size:16px;margin-bottom:3px">📊</div><div style="font-size:10px;font-weight:700;color:var(--tx2)">Analytics</div>
+    </a>
+    <a onclick="document.getElementById('ui-extract').scrollIntoView({behavior:'smooth',block:'start'})" style="flex:1;padding:14px 8px;text-align:center;cursor:pointer;transition:.3s;border-right:1px solid var(--bd);border-bottom:2px solid transparent;white-space:nowrap" onmouseover="this.style.background='rgba(0,232,255,.04)';this.style.borderBottomColor='var(--cy)'" onmouseout="this.style.background='transparent';this.style.borderBottomColor='transparent'">
+      <div style="font-size:16px;margin-bottom:3px">🧪</div><div style="font-size:10px;font-weight:700;color:var(--tx2)">Extract Tracking</div>
+    </a>
+    <a onclick="document.getElementById('ui-blinker').scrollIntoView({behavior:'smooth',block:'start'})" style="flex:1;padding:14px 8px;text-align:center;cursor:pointer;transition:.3s;border-right:1px solid var(--bd);border-bottom:2px solid transparent;white-space:nowrap" onmouseover="this.style.background='rgba(236,72,153,.04)';this.style.borderBottomColor='var(--pk)'" onmouseout="this.style.background='transparent';this.style.borderBottomColor='transparent'">
+      <div style="font-size:16px;margin-bottom:3px">⚠️</div><div style="font-size:10px;font-weight:700;color:var(--tx2)">Blinker Detection</div>
+    </a>
+    <a onclick="document.getElementById('ui-bi').scrollIntoView({behavior:'smooth',block:'start'})" style="flex:1;padding:14px 8px;text-align:center;cursor:pointer;transition:.3s;border-bottom:2px solid transparent;white-space:nowrap" onmouseover="this.style.background='rgba(52,211,153,.04)';this.style.borderBottomColor='var(--gn)'" onmouseout="this.style.background='transparent';this.style.borderBottomColor='transparent'">
+      <div style="font-size:16px;margin-bottom:3px">📈</div><div style="font-size:10px;font-weight:700;color:var(--tx2)">Business Intel</div>
+    </a>
+  </div>
+</div>
+
+<!-- ═══ 01 · ANALYTICS DASHBOARD ═══ -->
+<section id="ui-analytics" style="padding:clamp(60px,8vw,100px) 0"><div class="w">
+  <div class="tag rv">01 · Analytics Dashboard</div>
+  <h2 class="h3 rv" data-d="1" style="margin-bottom:8px">Real-Time <span class="se">Consumption Data.</span></h2>
+  <p class="p1 rv" data-d="2" style="margin-bottom:40px;max-width:600px">Every session captured. Every pattern visible. Three views give you complete understanding of how devices are used.</p>
+
+  <!-- Period Toggle -->
+  <div class="rv" style="display:flex;gap:6px;margin-bottom:24px">
+    <div onclick="uiPeriod(0)" id="ui-per-0" style="cursor:pointer;padding:8px 16px;border-radius:8px;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.2);font-size:11px;font-weight:700;color:var(--pu);transition:.3s">Day</div>
+    <div onclick="uiPeriod(1)" id="ui-per-1" style="cursor:pointer;padding:8px 16px;border-radius:8px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:11px;font-weight:600;color:var(--tx2);transition:.3s">Week</div>
+    <div onclick="uiPeriod(2)" id="ui-per-2" style="cursor:pointer;padding:8px 16px;border-radius:8px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:11px;font-weight:600;color:var(--tx2);transition:.3s">Month</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 300px;gap:40px;align-items:start">
+    <!-- Dashboard tabs -->
     <div>
       <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap">
         <div onclick="uiTab(0)" id="ui-tab-0" style="cursor:pointer;padding:10px 20px;border-radius:12px;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.2);font-size:12px;font-weight:700;color:var(--pu);transition:all .3s">📊 Puff Analytics</div>
         <div onclick="uiTab(1)" id="ui-tab-1" style="cursor:pointer;padding:10px 20px;border-radius:12px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:12px;font-weight:600;color:var(--tx2);transition:all .3s">🧪 Extract Tracking</div>
         <div onclick="uiTab(2)" id="ui-tab-2" style="cursor:pointer;padding:10px 20px;border-radius:12px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:12px;font-weight:600;color:var(--tx2);transition:all .3s">📈 Session History</div>
       </div>
+      <!-- Panel 0: Puff Analytics -->
       <div id="ui-panel-0" style="border-radius:20px;padding:clamp(24px,3vw,36px);background:linear-gradient(135deg,rgba(168,85,247,.04),rgba(0,232,255,.02));border:1px solid rgba(168,85,247,.1);transition:all .4s">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px"><div><div style="font-size:18px;font-weight:800">Puff Analytics</div><div style="font-size:11px;color:var(--tx3);margin-top:2px">Real-time consumption data</div></div><div style="padding:6px 14px;border-radius:8px;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.15);font-size:10px;color:var(--gn);font-weight:700">● LIVE</div></div>
         <div style="display:flex;align-items:flex-end;gap:8px;height:140px;padding:0 10px;margin-bottom:16px">
@@ -1325,11 +1385,12 @@ section{overflow-x:hidden}
           <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:100%;border-radius:6px 6px 0 0;background:linear-gradient(180deg,var(--am),rgba(245,158,11,.3));height:70px;animation:uiBarPulse 3s ease-in-out infinite 1.2s"></div><div style="font-size:9px;color:var(--tx3)">Sun</div></div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
-          <div style="padding:12px;border-radius:10px;background:rgba(255,255,255,.02);border:1px solid var(--bd)"><div style="font-size:20px;font-weight:800;color:var(--cy)">847</div><div style="font-size:10px;color:var(--tx3)">Weekly Puffs</div></div>
-          <div style="padding:12px;border-radius:10px;background:rgba(255,255,255,.02);border:1px solid var(--bd)"><div style="font-size:20px;font-weight:800;color:var(--pu)">4.2s</div><div style="font-size:10px;color:var(--tx3)">Avg Duration</div></div>
-          <div style="padding:12px;border-radius:10px;background:rgba(255,255,255,.02);border:1px solid var(--bd)"><div style="font-size:20px;font-weight:800;color:var(--gn)">2</div><div style="font-size:10px;color:var(--tx3)">Blinker Alerts</div></div>
+          <div style="padding:12px;border-radius:10px;background:rgba(255,255,255,.02);border:1px solid var(--bd)"><div id="ui-stat-puffs" style="font-size:20px;font-weight:800;color:var(--cy)">121</div><div style="font-size:10px;color:var(--tx3)">Puffs</div></div>
+          <div style="padding:12px;border-radius:10px;background:rgba(255,255,255,.02);border:1px solid var(--bd)"><div id="ui-stat-dur" style="font-size:20px;font-weight:800;color:var(--pu)">4.2s</div><div style="font-size:10px;color:var(--tx3)">Avg Duration</div></div>
+          <div style="padding:12px;border-radius:10px;background:rgba(255,255,255,.02);border:1px solid var(--bd)"><div id="ui-stat-alert" style="font-size:20px;font-weight:800;color:var(--gn)">0</div><div style="font-size:10px;color:var(--tx3)">Blinker Alerts</div></div>
         </div>
       </div>
+      <!-- Panel 1: Extract Tracking -->
       <div id="ui-panel-1" style="display:none;border-radius:20px;padding:clamp(24px,3vw,36px);background:linear-gradient(135deg,rgba(168,85,247,.06),rgba(168,85,247,.01));border:1px solid rgba(168,85,247,.15)">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px"><div><div style="font-size:18px;font-weight:800">Extract Consumption</div><div style="font-size:11px;color:var(--tx3)">Software-only estimation · No extra hardware</div></div><span style="background:rgba(168,85,247,.1);color:var(--pu);padding:4px 10px;border-radius:6px;font-size:10px;font-weight:700">UNIQUE</span></div>
         <div style="display:flex;justify-content:center;margin-bottom:20px"><svg width="180" height="180" viewBox="0 0 180 180"><circle cx="90" cy="90" r="76" fill="none" stroke="rgba(168,85,247,.08)" stroke-width="12"/><circle cx="90" cy="90" r="76" fill="none" stroke="var(--pu)" stroke-width="12" stroke-dasharray="478" stroke-dashoffset="143" stroke-linecap="round" transform="rotate(-90 90 90)" style="filter:drop-shadow(0 0 6px rgba(168,85,247,.4))"/><text x="90" y="78" text-anchor="middle" fill="var(--tx)" font-size="28" font-weight="800">0.7ml</text><text x="90" y="98" text-anchor="middle" fill="var(--tx3)" font-size="11">consumed today</text><text x="90" y="116" text-anchor="middle" fill="var(--pu)" font-size="12" font-weight="600">≈ 14mg THC</text></svg></div>
@@ -1338,25 +1399,161 @@ section{overflow-x:hidden}
           <div style="padding:14px;border-radius:10px;background:rgba(255,255,255,.02);border:1px solid var(--bd)"><div style="font-size:11px;color:var(--tx3);margin-bottom:4px">AI Accuracy</div><div style="font-size:18px;font-weight:800;color:var(--gn)">94.2%</div><div style="font-size:10px;color:var(--tx3)">Improves per session</div></div>
         </div>
       </div>
+      <!-- Panel 2: Session History -->
       <div id="ui-panel-2" style="display:none;border-radius:20px;padding:clamp(24px,3vw,36px);background:linear-gradient(135deg,rgba(0,232,255,.04),rgba(52,211,153,.02));border:1px solid rgba(0,232,255,.1)">
         <div style="font-size:18px;font-weight:800;margin-bottom:20px">Session History</div>
         <div style="display:flex;flex-direction:column;gap:10px">
           <div style="display:flex;align-items:center;gap:14px;padding:14px;border-radius:12px;background:rgba(255,255,255,.02);border:1px solid var(--bd)"><div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,rgba(0,232,255,.1),transparent);display:flex;align-items:center;justify-content:center;font-size:16px">🎯</div><div style="flex:1"><div style="font-size:13px;font-weight:700">Focus Mode</div><div style="font-size:10px;color:var(--tx3)">Today, 2:30 PM · 12 min · 18 puffs</div></div><div style="font-size:12px;font-weight:700;color:var(--cy)">0.3ml</div></div>
           <div style="display:flex;align-items:center;gap:14px;padding:14px;border-radius:12px;background:rgba(255,255,255,.02);border:1px solid var(--bd)"><div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,rgba(168,85,247,.1),transparent);display:flex;align-items:center;justify-content:center;font-size:16px">😌</div><div style="flex:1"><div style="font-size:13px;font-weight:700">Relax Mode</div><div style="font-size:10px;color:var(--tx3)">Today, 11:15 AM · 8 min · 11 puffs</div></div><div style="font-size:12px;font-weight:700;color:var(--pu)">0.2ml</div></div>
           <div style="display:flex;align-items:center;gap:14px;padding:14px;border-radius:12px;background:rgba(255,255,255,.02);border:1px solid var(--bd)"><div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,rgba(236,72,153,.1),transparent);display:flex;align-items:center;justify-content:center;font-size:16px">⚡</div><div style="flex:1"><div style="font-size:13px;font-weight:700">Energy Mode</div><div style="font-size:10px;color:var(--tx3)">Yesterday, 6:45 PM · 15 min · 22 puffs</div></div><div style="font-size:12px;font-weight:700;color:var(--pk)">0.4ml</div></div>
+          <div style="display:flex;align-items:center;gap:14px;padding:14px;border-radius:12px;background:rgba(255,255,255,.02);border:1px solid var(--bd)"><div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,rgba(52,211,153,.1),transparent);display:flex;align-items:center;justify-content:center;font-size:16px">💤</div><div style="flex:1"><div style="font-size:13px;font-weight:700">Sleep Mode</div><div style="font-size:10px;color:var(--tx3)">Yesterday, 10:20 PM · 5 min · 7 puffs</div></div><div style="font-size:12px;font-weight:700;color:var(--gn)">0.1ml</div></div>
         </div>
       </div>
     </div>
     <!-- Phone mockup -->
     <div class="phone rv" data-d="2" style="margin:0 auto"><div class="phone-scr" style="background:linear-gradient(180deg,#0c0818,#050510)"><div style="padding:16px 14px"><div style="font-family:var(--fm);font-size:8px;color:var(--tx3);letter-spacing:1px;margin-bottom:12px">USAGE INTELLIGENCE</div><div id="ui-phone-title" style="font-size:14px;font-weight:800;margin-bottom:14px;transition:all .3s">📊 Puff Analytics</div><div style="display:flex;align-items:flex-end;gap:3px;height:60px;margin-bottom:12px"><div style="flex:1;height:42px;border-radius:3px;background:var(--cy);opacity:.7"></div><div style="flex:1;height:55px;border-radius:3px;background:var(--cy);opacity:.8"></div><div style="flex:1;height:32px;border-radius:3px;background:var(--pu);opacity:.7"></div><div style="flex:1;height:48px;border-radius:3px;background:var(--pu);opacity:.8"></div><div style="flex:1;height:60px;border-radius:3px;background:var(--pk);opacity:.9"></div><div style="flex:1;height:56px;border-radius:3px;background:var(--pk);opacity:.8"></div><div style="flex:1;height:35px;border-radius:3px;background:var(--am);opacity:.7"></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px"><div style="padding:8px;border-radius:8px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.04)"><div style="font-size:14px;font-weight:800;color:var(--cy)">847</div><div style="font-size:7px;color:var(--tx3)">WEEKLY</div></div><div style="padding:8px;border-radius:8px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.04)"><div style="font-size:14px;font-weight:800;color:var(--pu)">4.2s</div><div style="font-size:7px;color:var(--tx3)">AVG</div></div></div></div></div></div>
   </div>
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px">
-    <div class="fc rv"><div class="fc-ic">📊</div><h4>Puff Counting</h4><p>Per-session, daily, weekly metrics. Core analytics foundation.</p></div>
-    <div class="fc rv" data-d="1"><div class="fc-ic">⚠️</div><h4>Blinker Detection</h4><p>Identifies excessively long draws. Safety + data quality.</p></div>
-    <div class="fc rv" data-d="2"><div class="fc-ic">🧪</div><h4>Extract Tracking</h4><p>Software-only mg/ml estimation. No extra hardware needed.</p></div>
-    <div class="fc rv" data-d="3"><div class="fc-ic">📈</div><h4>Session Analytics</h4><p>Mode usage, timing patterns, behavioral data for BI.</p></div>
+</div></section>
+
+<!-- ═══ 02 · EXTRACT CONSUMPTION ═══ -->
+<section id="ui-extract" style="padding:clamp(60px,8vw,100px) 0;border-top:1px solid var(--bd)"><div class="w">
+  <div class="tag rv">02 · Extract Consumption</div>
+  <h2 class="h3 rv" data-d="1">The Industry-Unique <span class="se" style="color:var(--pu)">mg/ml Tracking.</span></h2>
+  <p class="p1 rv" data-d="2" style="margin-bottom:40px;max-width:600px">Software-only extract consumption estimation. No additional sensors or hardware required. AI accuracy improves with every session through adaptive learning.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px">
+    <!-- How it works -->
+    <div class="gc rv" style="padding:28px;text-align:center">
+      <div style="font-size:32px;margin-bottom:12px">⚡</div>
+      <h4 style="font-size:14px;font-weight:800;margin-bottom:8px">Voltage Analysis</h4>
+      <p style="font-size:12px;color:var(--tx2);line-height:1.6">AI analyzes power delivery curves, resistance changes, and energy consumption patterns during each draw.</p>
+      <div style="margin-top:16px;padding:8px;border-radius:8px;background:rgba(0,232,255,.04);border:1px solid rgba(0,232,255,.08)"><span style="font-family:var(--fm);font-size:10px;color:var(--cy)">STEP 1</span></div>
+    </div>
+    <div class="gc rv" data-d="1" style="padding:28px;text-align:center">
+      <div style="font-size:32px;margin-bottom:12px">🧠</div>
+      <h4 style="font-size:14px;font-weight:800;margin-bottom:8px">AI Estimation</h4>
+      <p style="font-size:12px;color:var(--tx2);line-height:1.6">Mood Logic™ cross-references voltage data with extract profile, temperature, and historical patterns to estimate consumption.</p>
+      <div style="margin-top:16px;padding:8px;border-radius:8px;background:rgba(168,85,247,.04);border:1px solid rgba(168,85,247,.08)"><span style="font-family:var(--fm);font-size:10px;color:var(--pu)">STEP 2</span></div>
+    </div>
+    <div class="gc rv" data-d="2" style="padding:28px;text-align:center">
+      <div style="font-size:32px;margin-bottom:12px">📊</div>
+      <h4 style="font-size:14px;font-weight:800;margin-bottom:8px">Dashboard Output</h4>
+      <p style="font-size:12px;color:var(--tx2);line-height:1.6">Both mg and ml tracking displayed in real-time. Daily, weekly, monthly views. Export data for compliance and business reporting.</p>
+      <div style="margin-top:16px;padding:8px;border-radius:8px;background:rgba(236,72,153,.04);border:1px solid rgba(236,72,153,.08)"><span style="font-family:var(--fm);font-size:10px;color:var(--pk)">STEP 3</span></div>
+    </div>
   </div>
-  <div style="text-align:center;margin-top:48px"><a class="btn bp" onclick="go('contact')">Get Usage Intelligence →</a></div>
+
+  <!-- Accuracy timeline -->
+  <div class="rv" data-d="2" style="margin-top:48px;padding:32px;border-radius:20px;background:linear-gradient(135deg,rgba(168,85,247,.03),rgba(0,232,255,.02));border:1px solid rgba(168,85,247,.08)">
+    <div style="font-size:15px;font-weight:800;margin-bottom:24px">Accuracy Improves Over Time</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+      <div style="text-align:center"><div style="font-size:28px;font-weight:900;color:var(--tx3)">78%</div><div style="font-size:10px;color:var(--tx3);margin-top:4px">First Session</div><div style="height:4px;border-radius:2px;background:rgba(255,255,255,.05);margin-top:8px"><div style="height:100%;width:78%;border-radius:2px;background:var(--tx3)"></div></div></div>
+      <div style="text-align:center"><div style="font-size:28px;font-weight:900;color:var(--am)">86%</div><div style="font-size:10px;color:var(--tx3);margin-top:4px">After 10 Sessions</div><div style="height:4px;border-radius:2px;background:rgba(255,255,255,.05);margin-top:8px"><div style="height:100%;width:86%;border-radius:2px;background:var(--am)"></div></div></div>
+      <div style="text-align:center"><div style="font-size:28px;font-weight:900;color:var(--pu)">92%</div><div style="font-size:10px;color:var(--tx3);margin-top:4px">After 50 Sessions</div><div style="height:4px;border-radius:2px;background:rgba(255,255,255,.05);margin-top:8px"><div style="height:100%;width:92%;border-radius:2px;background:var(--pu)"></div></div></div>
+      <div style="text-align:center"><div style="font-size:28px;font-weight:900;color:var(--gn)">94.2%</div><div style="font-size:10px;color:var(--tx3);margin-top:4px">After 100+ Sessions</div><div style="height:4px;border-radius:2px;background:rgba(255,255,255,.05);margin-top:8px"><div style="height:100%;width:94%;border-radius:2px;background:var(--gn)"></div></div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ═══ 03 · BLINKER DETECTION ═══ -->
+<section id="ui-blinker" style="padding:clamp(60px,8vw,100px) 0;border-top:1px solid var(--bd)"><div class="w">
+  <div class="tag rv">03 · Blinker Detection</div>
+  <h2 class="h3 rv" data-d="1">Safety Meets <span class="se" style="color:var(--pk)">Intelligence.</span></h2>
+  <p class="p1 rv" data-d="2" style="margin-bottom:40px;max-width:600px">Automatically identifies excessively long or strong draws. Protects users. Improves data quality. Gives brands actionable safety insights.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center">
+    <!-- Animated bar timeline -->
+    <div class="rv" style="padding:28px;border-radius:20px;background:linear-gradient(135deg,rgba(236,72,153,.03),rgba(0,0,0,.2));border:1px solid rgba(236,72,153,.08)">
+      <div style="font-size:13px;font-weight:700;color:var(--tx2);margin-bottom:20px">Session Draw Timeline</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;align-items:center;gap:10px"><span style="font-size:9px;color:var(--tx3);width:40px">0:12</span><div style="height:12px;width:35%;border-radius:6px;background:linear-gradient(90deg,var(--gn),rgba(52,211,153,.4));animation:uiBarPulse 4s infinite"></div><span style="font-size:9px;color:var(--gn)">3.2s</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="font-size:9px;color:var(--tx3);width:40px">0:28</span><div style="height:12px;width:45%;border-radius:6px;background:linear-gradient(90deg,var(--gn),rgba(52,211,153,.4));animation:uiBarPulse 4s infinite .3s"></div><span style="font-size:9px;color:var(--gn)">4.1s</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="font-size:9px;color:var(--tx3);width:40px">0:45</span><div style="height:12px;width:30%;border-radius:6px;background:linear-gradient(90deg,var(--gn),rgba(52,211,153,.4));animation:uiBarPulse 4s infinite .6s"></div><span style="font-size:9px;color:var(--gn)">2.8s</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="font-size:9px;color:var(--pk);width:40px;font-weight:700">1:03</span><div style="height:14px;width:90%;border-radius:6px;background:linear-gradient(90deg,var(--pk),rgba(236,72,153,.6));animation:uiBarPulse 2s infinite;box-shadow:0 0 12px rgba(236,72,153,.3)"></div><span style="font-size:9px;color:var(--pk);font-weight:700">⚠️ 8.4s BLINKER</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="font-size:9px;color:var(--tx3);width:40px">1:22</span><div style="height:12px;width:38%;border-radius:6px;background:linear-gradient(90deg,var(--gn),rgba(52,211,153,.4));animation:uiBarPulse 4s infinite .9s"></div><span style="font-size:9px;color:var(--gn)">3.5s</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="font-size:9px;color:var(--tx3);width:40px">1:40</span><div style="height:12px;width:42%;border-radius:6px;background:linear-gradient(90deg,var(--gn),rgba(52,211,153,.4));animation:uiBarPulse 4s infinite 1.2s"></div><span style="font-size:9px;color:var(--gn)">3.9s</span></div>
+      </div>
+      <div style="margin-top:16px;padding:10px 14px;border-radius:10px;background:rgba(236,72,153,.06);border:1px solid rgba(236,72,153,.12);display:flex;align-items:center;gap:8px">
+        <span style="font-size:14px">🛡️</span>
+        <span style="font-size:11px;color:var(--pk);font-weight:600">AI auto-flagged 1 blinker draw at 1:03 — 2x above threshold</span>
+      </div>
+    </div>
+    <!-- Stats + info -->
+    <div>
+      <div class="rv" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px">
+        <div class="gc" style="padding:20px;text-align:center"><div style="font-size:24px;font-weight:900;color:var(--gn)">98.7%</div><div style="font-size:10px;color:var(--tx3);margin-top:4px">Detection Rate</div></div>
+        <div class="gc" style="padding:20px;text-align:center"><div style="font-size:24px;font-weight:900;color:var(--cy)">0.3%</div><div style="font-size:10px;color:var(--tx3);margin-top:4px">False Positive</div></div>
+        <div class="gc" style="padding:20px;text-align:center"><div style="font-size:24px;font-weight:900;color:var(--pk)">6s</div><div style="font-size:10px;color:var(--tx3);margin-top:4px">Default Threshold</div></div>
+        <div class="gc" style="padding:20px;text-align:center"><div style="font-size:24px;font-weight:900;color:var(--pu)">AI</div><div style="font-size:10px;color:var(--tx3);margin-top:4px">Adaptive Threshold</div></div>
+      </div>
+      <div class="fc rv" data-d="1"><div class="fc-ic">🔧</div><h4>Configurable Thresholds</h4><p>Brands set their own blinker duration limits. AI adapts per-user based on extract type, device model, and behavioral patterns.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ═══ 04 · BUSINESS INTELLIGENCE ═══ -->
+<section id="ui-bi" style="padding:clamp(60px,8vw,100px) 0;border-top:1px solid var(--bd)"><div class="w">
+  <div class="tag rv">04 · Business Intelligence</div>
+  <h2 class="h3 rv" data-d="1">Data That Drives <span class="se" style="color:var(--gn)">Decisions.</span></h2>
+  <p class="p1 rv" data-d="2" style="margin-bottom:40px;max-width:600px">Every data point feeds into a brand-level analytics dashboard. Understand your customers like never before — without asking a single question.</p>
+
+  <!-- Image hero card -->
+  <div class="img-card rv" style="height:280px;margin-bottom:40px;cursor:default"><img src="Media/Image/a-cinematic-abstract-data-visualization-_YFyCrRE6QhaMHtvuQGzCEg_snim8wgDRBKtzGrdhLZGEg_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35" loading="lazy"><div class="img-card-content"><h3>Brand Analytics Dashboard</h3><p>Real-time insights across your entire device fleet</p></div></div>
+
+  <!-- 2x2 insight grid -->
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px">
+    <div class="gc rv" style="padding:28px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span style="font-size:22px">📈</span><h4 style="font-size:15px;font-weight:800">Consumption Trends</h4></div>
+      <p style="font-size:12px;color:var(--tx2);line-height:1.6;margin-bottom:16px">Daily, weekly, monthly usage curves. Identify peak consumption times. Seasonal patterns across your entire fleet.</p>
+      <div style="display:flex;gap:8px"><span style="font-size:10px;padding:4px 10px;border-radius:100px;background:rgba(0,232,255,.06);border:1px solid rgba(0,232,255,.1);color:var(--cy)">Time Series</span><span style="font-size:10px;padding:4px 10px;border-radius:100px;background:rgba(0,232,255,.06);border:1px solid rgba(0,232,255,.1);color:var(--cy)">Cohort Analysis</span></div>
+    </div>
+    <div class="gc rv" data-d="1" style="padding:28px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span style="font-size:22px">🕐</span><h4 style="font-size:15px;font-weight:800">Peak Hours</h4></div>
+      <p style="font-size:12px;color:var(--tx2);line-height:1.6;margin-bottom:16px">When are your devices most active? Heatmap visualization shows usage by hour and day. Optimize marketing timing.</p>
+      <div style="display:flex;gap:8px"><span style="font-size:10px;padding:4px 10px;border-radius:100px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.1);color:var(--pu)">Heatmap</span><span style="font-size:10px;padding:4px 10px;border-radius:100px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.1);color:var(--pu)">Day/Night Split</span></div>
+    </div>
+    <div class="gc rv" data-d="2" style="padding:28px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span style="font-size:22px">🧪</span><h4 style="font-size:15px;font-weight:800">Product Preferences</h4></div>
+      <p style="font-size:12px;color:var(--tx2);line-height:1.6;margin-bottom:16px">Which extract types are most popular? What temperature ranges do users prefer? Which modes drive the most engagement?</p>
+      <div style="display:flex;gap:8px"><span style="font-size:10px;padding:4px 10px;border-radius:100px;background:rgba(236,72,153,.06);border:1px solid rgba(236,72,153,.1);color:var(--pk)">Extract Ranking</span><span style="font-size:10px;padding:4px 10px;border-radius:100px;background:rgba(236,72,153,.06);border:1px solid rgba(236,72,153,.1);color:var(--pk)">Mode Popularity</span></div>
+    </div>
+    <div class="gc rv" data-d="3" style="padding:28px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span style="font-size:22px">🔄</span><h4 style="font-size:15px;font-weight:800">Retention Signals</h4></div>
+      <p style="font-size:12px;color:var(--tx2);line-height:1.6;margin-bottom:16px">Identify at-risk users before they churn. Usage frequency drops, mode abandonment, cartridge lifecycle — all tracked automatically.</p>
+      <div style="display:flex;gap:8px"><span style="font-size:10px;padding:4px 10px;border-radius:100px;background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.1);color:var(--gn)">Churn Risk</span><span style="font-size:10px;padding:4px 10px;border-radius:100px;background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.1);color:var(--gn)">Lifetime Value</span></div>
+    </div>
+  </div>
+
+  <!-- How it integrates -->
+  <div class="rv" data-d="2" style="margin-top:48px;display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:0;align-items:center">
+    <div style="padding:24px;border-radius:16px;background:rgba(0,232,255,.04);border:1px solid rgba(0,232,255,.08);text-align:center">
+      <div style="font-size:28px;margin-bottom:8px">📱</div>
+      <div style="font-size:12px;font-weight:700">Device Collects</div>
+      <div style="font-size:10px;color:var(--tx3);margin-top:4px">Every draw, every session</div>
+    </div>
+    <div style="font-size:20px;color:var(--bd2);padding:0 8px">→</div>
+    <div style="padding:24px;border-radius:16px;background:rgba(168,85,247,.04);border:1px solid rgba(168,85,247,.08);text-align:center">
+      <div style="font-size:28px;margin-bottom:8px">🧠</div>
+      <div style="font-size:12px;font-weight:700">AI Processes</div>
+      <div style="font-size:10px;color:var(--tx3);margin-top:4px">7 pipelines, real-time</div>
+    </div>
+    <div style="font-size:20px;color:var(--bd2);padding:0 8px">→</div>
+    <div style="padding:24px;border-radius:16px;background:rgba(52,211,153,.04);border:1px solid rgba(52,211,153,.08);text-align:center">
+      <div style="font-size:28px;margin-bottom:8px">📊</div>
+      <div style="font-size:12px;font-weight:700">Dashboard Displays</div>
+      <div style="font-size:10px;color:var(--tx3);margin-top:4px">Actionable brand insights</div>
+    </div>
+  </div>
+
+  <!-- Stats strip -->
+  <div class="rv" data-d="3" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px">
+    <div class="gc" style="text-align:center;padding:20px"><div style="font-size:28px;font-weight:800;color:var(--cy)">847</div><div style="font-size:11px;color:var(--tx3)">Avg Weekly Puffs</div></div>
+    <div class="gc" style="text-align:center;padding:20px"><div style="font-size:28px;font-weight:800;color:var(--pu)">94.2%</div><div style="font-size:11px;color:var(--tx3)">AI Accuracy</div></div>
+    <div class="gc" style="text-align:center;padding:20px"><div style="font-size:28px;font-weight:800;color:var(--pk)">0.7ml</div><div style="font-size:11px;color:var(--tx3)">Avg Daily Extract</div></div>
+    <div class="gc" style="text-align:center;padding:20px"><div style="font-size:28px;font-weight:800;color:var(--gn)">0</div><div style="font-size:11px;color:var(--tx3)">Extra Hardware</div></div>
+  </div>
+
+  <div style="text-align:center;margin-top:48px"><a class="btn bp" onclick="go('contact')" style="padding:14px 32px">Get Usage Intelligence →</a></div>
 </div></section>
 </div>
 <!-- Authentication -->
@@ -2310,6 +2507,21 @@ function moodiMode(n){
   if(desc)desc.innerHTML=d.e+' <strong style="color:'+d.c+'">'+d.n+'</strong> — '+d.d;
 }
 
+
+// Usage Intelligence period toggle
+function uiPeriod(n){
+  var stats=[[121,'4.2s',0],[847,'3.8s',2],[3420,'4.0s',8]];
+  var labels=['Day','Week','Month'];
+  for(var i=0;i<3;i++){
+    var el=document.getElementById('ui-per-'+i);
+    if(i===n){el.style.background='rgba(168,85,247,.1)';el.style.border='1px solid rgba(168,85,247,.2)';el.style.color='var(--pu)';el.style.fontWeight='700'}
+    else{el.style.background='rgba(255,255,255,.02)';el.style.border='1px solid var(--bd)';el.style.color='var(--tx2)';el.style.fontWeight='600'}
+  }
+  var s=stats[n];
+  var pe=document.getElementById('ui-stat-puffs');if(pe)pe.textContent=s[0];
+  var de=document.getElementById('ui-stat-dur');if(de)de.textContent=s[1];
+  var ae=document.getElementById('ui-stat-alert');if(ae)ae.textContent=s[2];
+}
 </script>
 </body>
 </html>
