@@ -342,7 +342,7 @@ function brandSlide(n){
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#020205;--bg2:#060610;--bg3:#0a0a18;--cy:#00e8ff;--pu:#a855f7;--pk:#ec4899;--gn:#34d399;--am:#f59e0b;--tx:#eeeef3;--tx2:rgba(238,238,243,.5);--tx3:rgba(238,238,243,.35);--bd:rgba(255,255,255,.04);--bd2:rgba(255,255,255,.08);--gl:rgba(255,255,255,.02);--ff:'Outfit',system-ui;--fs:'Instrument Serif',Georgia;--fm:'Space Mono',monospace;--e:cubic-bezier(.22,1,.36,1)}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-html{overflow-x:clip}body{font-family:var(--ff);background:var(--bg);color:var(--tx);overflow-x:clip;max-width:100vw}
+html,body{max-width:100vw}body{font-family:var(--ff);background:var(--bg);color:var(--tx)}
 ::selection{background:rgba(0,232,255,.15)}
 body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.02;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
 a{text-decoration:none;color:inherit;cursor:pointer}
@@ -370,6 +370,7 @@ nav.s{background:rgba(2,2,5,.92);backdrop-filter:blur(28px) saturate(160%);borde
 
 /* ═══ PAGE SYSTEM ═══ */
 .pg{display:none;min-height:100vh}.pg.on{display:block;animation:pgIn .6s var(--e)}
+.subnav-fixed{position:fixed!important;top:68px!important;left:0!important;right:0!important;z-index:999!important}
 @keyframes pgIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 
 /* ═══ REVEAL ═══ */
@@ -660,7 +661,7 @@ footer{grid-template-columns:1fr!important;gap:24px}
 [style*="grid-template-columns:repeat(4,1fr);gap:12px"]{grid-template-columns:1fr 1fr!important}
 .hero{min-height:auto!important;padding:100px 0 40px}
 .hero-sm{min-height:auto!important;padding:100px 0 40px}
-section{overflow-x:hidden}
+
 
 /* ── sm: 600px+ ── */
 
@@ -4360,6 +4361,55 @@ if(window.innerWidth>=600){
     });
   });
 }
+
+// Fix sub-nav sticky: use JS-based fixed positioning
+(function(){
+  var subnavs=[];
+  document.querySelectorAll('[style*="position:sticky"][style*="top:68px"]').forEach(function(nav){
+    var placeholder=document.createElement('div');
+    placeholder.style.display='none';
+    nav.parentNode.insertBefore(placeholder,nav);
+    subnavs.push({nav:nav,placeholder:placeholder,origTop:0});
+  });
+  function updateSubnavs(){
+    subnavs.forEach(function(item){
+      var pg=item.nav.closest('.pg');
+      if(!pg||!pg.classList.contains('on'))return;
+      if(!item.origTop||item.placeholder.style.display==='none'){
+        item.nav.classList.remove('subnav-fixed');
+        item.placeholder.style.display='none';
+        var rect=item.nav.getBoundingClientRect();
+        item.origTop=window.scrollY+rect.top;
+      }
+      if(window.scrollY>item.origTop-68){
+        if(!item.nav.classList.contains('subnav-fixed')){
+          item.placeholder.style.display='block';
+          item.placeholder.style.height=item.nav.offsetHeight+'px';
+          item.nav.classList.add('subnav-fixed');
+        }
+      }else{
+        item.nav.classList.remove('subnav-fixed');
+        item.placeholder.style.display='none';
+      }
+    });
+  }
+  window.addEventListener('scroll',updateSubnavs,{passive:true});
+  // Reset on page change
+  var origGo=window.go;
+  if(origGo){
+    window.go=function(id){
+      subnavs.forEach(function(item){
+        item.nav.classList.remove('subnav-fixed');
+        item.placeholder.style.display='none';
+        item.origTop=0;
+      });
+      origGo(id);
+      setTimeout(function(){
+        subnavs.forEach(function(item){item.origTop=0});
+      },100);
+    };
+  }
+})();
 </script>
 </body>
 </html>
