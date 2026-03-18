@@ -1044,26 +1044,26 @@ section{overflow-x:hidden}
         <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:11px">🛡️</span><span style="font-size:10px;font-weight:700;color:var(--am);transition:all .4s">Damage Prevention</span></div>
       </div>
     </div>
-    <!-- Zone 1: Sessions + Alerts -->
-    <div id="rbd-zone-1" style="padding:14px 12px;border-right:1px solid rgba(255,255,255,.03);transition:all .4s">
+    <!-- Zone 1: Sessions + Alerts (initially revealed at x=0.5) -->
+    <div id="rbd-zone-1" style="padding:14px 12px;border-right:1px solid rgba(255,255,255,.03);transition:all .4s;background:rgba(168,85,247,.04);border-bottom:2px solid rgba(168,85,247,.4)">
       <div class="rbd-pair" style="margin-bottom:8px">
-        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">No session limits</span></div>
-        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:11px">⏱️</span><span style="font-size:10px;font-weight:700;color:var(--pu);transition:all .4s">Session Limits</span></div>
+        <div class="rbd-before-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">No session limits</span></div>
+        <div class="rbd-after-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:11px">⏱️</span><span style="font-size:10px;font-weight:700;color:var(--pu);transition:all .4s">Session Limits</span></div>
       </div>
       <div class="rbd-pair">
-        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">No safety alerts</span></div>
-        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:11px">📊</span><span style="font-size:10px;font-weight:700;color:var(--pk);transition:all .4s">Smart Alerts</span></div>
+        <div class="rbd-before-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">No safety alerts</span></div>
+        <div class="rbd-after-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:11px">📊</span><span style="font-size:10px;font-weight:700;color:var(--pk);transition:all .4s">Smart Alerts</span></div>
       </div>
     </div>
-    <!-- Zone 2: Lock + Compliance -->
-    <div id="rbd-zone-2" style="padding:14px 12px;transition:all .4s">
+    <!-- Zone 2: Lock + Compliance (initially revealed at x=0.5) -->
+    <div id="rbd-zone-2" style="padding:14px 12px;transition:all .4s;background:rgba(0,232,255,.04);border-bottom:2px solid rgba(0,232,255,.4)">
       <div class="rbd-pair" style="margin-bottom:8px">
-        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">No access control</span></div>
-        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:11px">🔒</span><span style="font-size:10px;font-weight:700;color:var(--cy);transition:all .4s">Device & Child Lock</span></div>
+        <div class="rbd-before-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">No access control</span></div>
+        <div class="rbd-after-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:11px">🔒</span><span style="font-size:10px;font-weight:700;color:var(--cy);transition:all .4s">Device & Child Lock</span></div>
       </div>
       <div class="rbd-pair">
-        <div class="rbd-before-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">Not compliant</span></div>
-        <div class="rbd-after-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:11px">✅</span><span style="font-size:10px;font-weight:700;color:var(--gn);transition:all .4s">Compliance-Ready</span></div>
+        <div class="rbd-before-msg" style="display:none;align-items:center;gap:6px"><span style="font-size:9px;color:#f87171">✗</span><span style="font-size:10px;color:var(--tx3);transition:all .4s">Not compliant</span></div>
+        <div class="rbd-after-msg" style="display:flex;align-items:center;gap:6px"><span style="font-size:11px">✅</span><span style="font-size:10px;font-weight:700;color:var(--gn);transition:all .4s">Compliance-Ready</span></div>
       </div>
     </div>
   </div>
@@ -4186,18 +4186,19 @@ function rbdDrag(e){
   var solBgs=['rgba(52,211,153,.04)','rgba(168,85,247,.04)','rgba(0,232,255,.04)'];
   var solBorders=['rgba(52,211,153,.4)','rgba(168,85,247,.4)','rgba(0,232,255,.4)'];
 
-  function updateZones(sliderX){
-    // sliderX = 0 means After fully shown, 1 means Before fully shown
-    // Zone 0 revealed when After covers left third (sliderX < 0.333)
-    // Zone 1 revealed when After covers center (sliderX < 0.666)  
-    // Zone 2 revealed when After covers right (sliderX < 1.0)
-    var revealProgress=1-sliderX; // 0=all Before, 1=all After
-    var thresholds=[0.33,0.66,0.98];
+  function updateZones(x){
+    // clip-path:inset(0 0 0 X%) clips After from LEFT
+    // So After image is visible from X% to 100% (right side)
+    // Zone 2 (right, 66-100%) reveals first as handle moves left
+    // Zone 1 (center, 33-66%) reveals next
+    // Zone 0 (left, 0-33%) reveals last
+    // Zone is "revealed" when handle position < zone's right edge
+    var zoneEdges=[0.33, 0.66, 1.0]; // right edge of each zone
     zones.forEach(function(id,i){
       var z=document.getElementById(id);
       if(!z)return;
       var pairs=z.querySelectorAll('.rbd-pair');
-      var isRevealed=revealProgress>thresholds[i];
+      var isRevealed = x < zoneEdges[i]; // After visible in this zone
       pairs.forEach(function(pair){
         var bm=pair.querySelector('.rbd-before-msg');
         var am=pair.querySelector('.rbd-after-msg');
@@ -4239,7 +4240,7 @@ function rbdDrag(e){
   document.addEventListener('touchmove',move,{passive:false});
   document.addEventListener('touchend',up);
 }
-// Also handle touch directly on slider for better mobile support
+// Touch + click on slider for mobile support
 (function(){
   var s=document.getElementById('rbdSlider');
   if(!s)return;
@@ -4252,16 +4253,15 @@ function rbdDrag(e){
     var a=s.querySelector('.rbd-after');
     if(h)h.style.left=(x*100)+'%';
     if(a)a.style.clipPath='inset(0 0 0 '+(x*100)+'%)';
-    // Trigger zone update
+    // Zone update — same logic as updateZones(x)
     var zones=['rbd-zone-0','rbd-zone-1','rbd-zone-2'];
     var solBgs=['rgba(52,211,153,.04)','rgba(168,85,247,.04)','rgba(0,232,255,.04)'];
     var solBorders=['rgba(52,211,153,.4)','rgba(168,85,247,.4)','rgba(0,232,255,.4)'];
-    var revealProgress=1-x;
-    var thresholds=[0.33,0.66,0.98];
+    var zoneEdges=[0.33,0.66,1.0];
     zones.forEach(function(id,i){
       var z=document.getElementById(id);if(!z)return;
       var pairs=z.querySelectorAll('.rbd-pair');
-      var isRevealed=revealProgress>thresholds[i];
+      var isRevealed=x<zoneEdges[i];
       pairs.forEach(function(pair){
         var bm=pair.querySelector('.rbd-before-msg');
         var am=pair.querySelector('.rbd-after-msg');
@@ -4273,93 +4273,6 @@ function rbdDrag(e){
     });
   });
 })();
-function rbdDrag(e){
-  e.preventDefault();
-  var slider=document.getElementById('rbdSlider');
-  if(!slider) return;
-  var handle=document.getElementById('rbdHandle');
-  var afterImg=slider.querySelector('.rbd-after');
-  var zones=[document.getElementById('rbd-zone-0'),document.getElementById('rbd-zone-1'),document.getElementById('rbd-zone-2')];
-  var zoneBgs=['rgba(52,211,153,.05)','rgba(168,85,247,.05)','rgba(0,232,255,.05)'];
-  var zoneBorders=['var(--gn)','var(--pu)','var(--cy)'];
-  function updateZones(x){
-    // Each zone flips from problem→solution when slider passes its threshold
-    var thresholds=[0.333,0.666,1.0];
-    zones.forEach(function(z,i){
-      if(!z)return;
-      var prob=z.querySelector('.rbd-problem');
-      var sol=z.querySelector('.rbd-solution');
-      var revealed=x>thresholds[i];
-      // Show solution when slider has passed this zone (After image revealed)
-      if(revealed){
-        if(prob){prob.style.display='none'}
-        if(sol){sol.style.display='block'}
-        z.style.background=zoneBgs[i];
-        z.style.borderBottom='2px solid '+zoneBorders[i];
-      }else{
-        if(prob){prob.style.display='block'}
-        if(sol){sol.style.display='none'}
-        z.style.background='transparent';
-        z.style.borderBottom='2px solid transparent';
-      }
-    });
-  }
-  function move(ev){
-    var rect=slider.getBoundingClientRect();
-    var x=((ev.touches?ev.touches[0].clientX:ev.clientX)-rect.left)/rect.width;
-    x=Math.max(0.02,Math.min(0.98,x));
-    var pct=(x*100)+'%';
-    handle.style.left=pct;
-    afterImg.style.clipPath='inset(0 0 0 '+pct+')';
-    updateZones(1-x);
-  }
-  function up(){document.removeEventListener('mousemove',move);document.removeEventListener('mouseup',up);document.removeEventListener('touchmove',move);document.removeEventListener('touchend',up)}
-  document.addEventListener('mousemove',move);
-  document.addEventListener('mouseup',up);
-  document.addEventListener('touchmove',move,{passive:false});
-  document.addEventListener('touchend',up);
-}
-function rbdDrag(e){
-  e.preventDefault();
-  var slider=document.getElementById('rbdSlider');
-  if(!slider) return;
-  var handle=document.getElementById('rbdHandle');
-  var afterImg=slider.querySelector('.rbd-after');
-  var zones=[document.getElementById('rbd-zone-0'),document.getElementById('rbd-zone-1'),document.getElementById('rbd-zone-2')];
-  var zoneColors=[['rgba(52,211,153,.06)','var(--gn)','var(--gn)','var(--am)'],['rgba(168,85,247,.06)','var(--pu)','var(--pu)','var(--pk)'],['rgba(0,232,255,.06)','var(--cy)','var(--cy)','var(--gn)']];
-  function updateZones(x){
-    var activeZone=x<0.333?0:x<0.666?1:2;
-    zones.forEach(function(z,i){
-      if(!z)return;
-      var spans=z.querySelectorAll('span[style*="font-weight"]');
-      if(i===activeZone){
-        z.style.background=zoneColors[i][0];
-        z.style.borderBottomColor=zoneColors[i][1];
-        if(spans[0])spans[0].style.color=zoneColors[i][2];
-        if(spans[1])spans[1].style.color=zoneColors[i][3];
-      }else{
-        z.style.background='rgba(255,255,255,.02)';
-        z.style.borderBottomColor='transparent';
-        if(spans[0])spans[0].style.color='var(--tx3)';
-        if(spans[1])spans[1].style.color='var(--tx3)';
-      }
-    });
-  }
-  function move(ev){
-    var rect=slider.getBoundingClientRect();
-    var x=((ev.touches?ev.touches[0].clientX:ev.clientX)-rect.left)/rect.width;
-    x=Math.max(0.02,Math.min(0.98,x));
-    var pct=(x*100)+'%';
-    handle.style.left=pct;
-    afterImg.style.clipPath='inset(0 0 0 '+pct+')';
-    updateZones(x);
-  }
-  function up(){document.removeEventListener('mousemove',move);document.removeEventListener('mouseup',up);document.removeEventListener('touchmove',move);document.removeEventListener('touchend',up)}
-  document.addEventListener('mousemove',move);
-  document.addEventListener('mouseup',up);
-  document.addEventListener('touchmove',move,{passive:false});
-  document.addEventListener('touchend',up);
-}
 
 
 // Lazy load: play card videos only when scrolled into view on mobile
