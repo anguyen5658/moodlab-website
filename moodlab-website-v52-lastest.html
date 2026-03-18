@@ -574,7 +574,7 @@ footer{padding:clamp(40px,5vw,72px) clamp(24px,5vw,64px);border-top:1px solid va
 @keyframes pulseDown{0%{top:-5%;opacity:0}30%{opacity:1}70%{opacity:1}100%{top:95%;opacity:0}}
 @keyframes dotPulse{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
 .rbd-card:hover{transform:translateX(4px);border-color:rgba(255,255,255,.12)!important}
-.rbd-slider{position:relative;width:100%;margin:0 auto;aspect-ratio:16/9;border-radius:16px;overflow:hidden;cursor:col-resize;border:1px solid rgba(255,255,255,.06)}
+.rbd-slider{position:relative;width:100%;max-width:880px;margin:0 auto;aspect-ratio:2/1;border-radius:16px;overflow:hidden;cursor:col-resize;border:1px solid rgba(255,255,255,.06)}
 .rbd-slider img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none}
 .rbd-slider .rbd-after{clip-path:inset(0 0 0 50%)}
 .rbd-slider .rbd-handle{position:absolute;top:0;bottom:0;left:50%;width:2px;background:rgba(255,255,255,.5);transform:translateX(-50%);z-index:5}
@@ -716,7 +716,7 @@ section{overflow-x:hidden}
   [style*="position:sticky"] a div:first-child{font-size:14px!important;margin-bottom:1px!important}
   [style*="position:sticky"] a div:last-child{font-size:8px!important}
   /* Slider */
-  .rbd-slider{aspect-ratio:16/9!important}
+  .rbd-slider{aspect-ratio:2/1!important}
   /* Footer */
   footer{padding:40px 20px!important}
   .fcols{grid-template-columns:1fr 1fr!important}
@@ -740,7 +740,7 @@ section{overflow-x:hidden}
   [style*="grid-template-columns:300px 1fr"]{display:flex!important;flex-direction:column!important}
   [style*="grid-template-columns:1fr 1fr;gap:40px"]{display:flex!important;flex-direction:column!important}
   /* Before/After slider */
-  .rbd-slider{aspect-ratio:16/9!important;border-radius:10px!important}
+  .rbd-slider{aspect-ratio:2/1!important;border-radius:10px!important;max-width:100%!important}
   .rbd-slider .rbd-label{font-size:7px!important;padding:3px 6px!important;bottom:6px!important}
   .rbd-slider .rbd-handle::before{width:28px!important;height:28px!important}
   .rbd-slider .rbd-handle::after{font-size:11px!important}
