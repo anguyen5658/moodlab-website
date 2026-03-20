@@ -1036,7 +1036,7 @@ footer{grid-template-columns:1fr!important;gap:24px}
   <p style="font-size:14px;color:var(--tx2);margin:10px auto 44px;max-width:480px;font-weight:300;text-align:center" class="rv" data-d="2">Branded Smart Control for your product. Games, streams, and rewards for your customers.</p>
 
   <!-- 4-Phone 3D Layout -->
-  <div class="rv" data-d="2" id="app4-wrap" style="display:flex;align-items:center;justify-content:center;gap:16px;perspective:1200px;padding:20px 0 40px;cursor:pointer">
+  <div class="rv" data-d="2" id="app4-wrap" style="display:flex;align-items:center;justify-content:center;gap:16px;perspective:1200px;padding:20px 0 40px;cursor:grab">
     <!-- Phone 0: Control -->
     <div class="app4-phone" data-idx="0" onclick="focusApp(0)" onmouseenter="focusApp(0)" style="width:220px;height:440px;border-radius:32px;background:#0d0d18;border:2.5px solid rgba(255,255,255,.08);overflow:hidden;position:relative;transition:all .6s cubic-bezier(.22,1,.36,1);transform:perspective(1200px) rotateY(12deg) scale(.82);opacity:.55;flex-shrink:0;box-shadow:0 20px 60px rgba(0,0,0,.4)">
       <div style="position:absolute;top:6px;left:50%;transform:translateX(-50%);width:72px;height:18px;background:#000;border-radius:12px;z-index:10"></div>
@@ -1437,7 +1437,7 @@ footer{grid-template-columns:1fr!important;gap:24px}
   <p class="rv" data-d="2" style="font-size:15px;color:var(--tx2);max-width:540px;font-weight:300;margin-bottom:40px;line-height:1.65">Multi-tank devices unlock blending. CBD:THC ratio control and Sativa + Indica True Hybrid — category-first features.</p>
 
   <!-- Image Slider: 2 blend mode screens -->
-  <div class="rv" data-d="2" style="max-width:500px;margin:0 auto 40px;position:relative;border-radius:20px;overflow:hidden;aspect-ratio:3/4" id="blend-slider-wrap">
+  <div class="rv" data-d="2" style="max-width:500px;margin:0 auto 40px;position:relative;border-radius:20px;overflow:hidden;aspect-ratio:3/4;cursor:grab" id="blend-slider-wrap">
     <div class="blend-slide" data-blend="0" style="position:absolute;inset:0;transition:opacity .5s;opacity:1">
       <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0c0818 0%,#100a1a 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px">
         <div style="font-size:8px;font-weight:700;color:var(--pk);letter-spacing:3px;margin-bottom:16px">CBD + THC CONTROL</div>
@@ -1554,7 +1554,7 @@ footer{grid-template-columns:1fr!important;gap:24px}
   <p class="rv" data-d="2" style="font-size:15px;color:var(--tx2);max-width:520px;font-weight:300;margin-bottom:40px;line-height:1.65">Six specialized tools. Tap any phone to explore.</p>
 
   <!-- Phone Carousel (same pattern as homepage Powerful Web-App) -->
-  <div class="rv" data-d="2" id="sctool-wrap" style="display:flex;align-items:center;justify-content:center;gap:16px;perspective:1200px;padding:20px 0 40px;cursor:pointer">
+  <div class="rv" data-d="2" id="sctool-wrap" style="display:flex;align-items:center;justify-content:center;gap:16px;perspective:1200px;padding:20px 0 40px;cursor:grab">
     <!-- Tool 0: Pre-Heat -->
     <div class="sctool-phone" data-idx="0" onclick="focusTool(0)" onmouseenter="focusTool(0)" style="width:200px;height:400px;border-radius:30px;background:#0d0d18;border:2.5px solid rgba(255,255,255,.06);overflow:hidden;position:relative;transition:all .6s cubic-bezier(.22,1,.36,1);transform:perspective(1200px) rotateY(14deg) scale(.78);opacity:.45;flex-shrink:0;box-shadow:0 16px 50px rgba(0,0,0,.4)">
       <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80px;height:20px;background:#000;border-radius:0 0 14px 14px;z-index:5"></div>
@@ -3845,24 +3845,44 @@ function focusTool(n){
   document.querySelectorAll('.tool-desc').forEach(function(d,i){d.style.display=i===n?'block':'none'});
 }
 
-// Swipe gestures for mood and pro sliders
+// Universal swipe/drag for all sliders (touch + mouse)
 (function(){
-  var moodIdx=0,proIdx=0;
-  function addSwipe(el,onSwipe){
-    var sx=0;
+  var moodIdx=0,proIdx=0,blendIdx=0,toolIdx=2;
+  function addDragSwipe(el,onSwipe){
+    if(!el)return;
+    var sx=0,dragging=false;
+    // Touch
     el.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
     el.addEventListener('touchend',function(e){
       var dx=e.changedTouches[0].clientX-sx;
-      if(Math.abs(dx)>40)onSwipe(dx<0?1:-1);
+      if(Math.abs(dx)>30)onSwipe(dx<0?1:-1);
     },{passive:true});
+    // Mouse drag
+    el.addEventListener('mousedown',function(e){sx=e.clientX;dragging=true;el.style.cursor='grabbing';e.preventDefault()});
+    el.addEventListener('mousemove',function(e){if(dragging)e.preventDefault()});
+    el.addEventListener('mouseup',function(e){
+      if(!dragging)return;dragging=false;el.style.cursor='grab';
+      var dx=e.clientX-sx;
+      if(Math.abs(dx)>30)onSwipe(dx<0?1:-1);
+    });
+    el.addEventListener('mouseleave',function(){if(dragging){dragging=false;el.style.cursor='grab'}});
   }
-  var mw=document.getElementById('mood-slider-wrap');
-  if(mw)addSwipe(mw,function(dir){moodIdx=Math.max(0,Math.min(6,moodIdx+dir));scMood(moodIdx)});
-  var pw=document.getElementById('pro-slider-wrap');
-  if(pw)addSwipe(pw,function(dir){proIdx=Math.max(0,Math.min(3,proIdx+dir));scSetPro(proIdx)});
-  var blendIdx=0;
-  var bw=document.getElementById('blend-slider-wrap');
-  if(bw)addSwipe(bw,function(dir){blendIdx=Math.max(0,Math.min(1,blendIdx+dir));scBlend(blendIdx)});
+  // Mood slider
+  addDragSwipe(document.getElementById('mood-slider-wrap'),function(dir){
+    moodIdx=Math.max(0,Math.min(6,moodIdx+dir));scMood(moodIdx);
+  });
+  // Pro modes slider
+  addDragSwipe(document.getElementById('pro-slider-wrap'),function(dir){
+    proIdx=Math.max(0,Math.min(3,proIdx+dir));scSetPro(proIdx);
+  });
+  // Blend slider
+  addDragSwipe(document.getElementById('blend-slider-wrap'),function(dir){
+    blendIdx=Math.max(0,Math.min(1,blendIdx+dir));scBlend(blendIdx);
+  });
+  // Pro Tools carousel — swipe/drag to cycle through tools
+  addDragSwipe(document.getElementById('sctool-wrap'),function(dir){
+    toolIdx=Math.max(0,Math.min(5,toolIdx+dir));focusTool(toolIdx);
+  });
 })();
 
 // Blend slider
