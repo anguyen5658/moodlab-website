@@ -2475,8 +2475,15 @@ footer{grid-template-columns:1fr!important;gap:24px}
   <h2 class="h3 rv" data-d="1">18 Games. <span class="se" style="color:var(--am)">3 Categories.</span></h2>
   <p class="p1 rv" data-d="2" style="margin-bottom:24px;max-width:600px">Every game requires physical device interaction. Not just screen taps — real draws, button presses, and timing challenges.</p>
 
-  <!-- Image bg -->
-  <div class="img-card rv" style="height:240px;margin-bottom:40px;cursor:default"><img src="Media/Image/a-dark-cinematic-gaming-arena-stage-capt_r23JdZJJSPuyBEqriA0WKg_gkPtvr0-RlO-vzic-W1cPg_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35" loading="lazy"><div class="img-card-content"><h3>The Arena</h3><p>18 games · 4 input methods · Real device interaction</p></div></div>
+  <!-- Image Slider -->
+  <div class="rv" style="position:relative;border-radius:20px;overflow:hidden;aspect-ratio:2/1;margin-bottom:40px;cursor:grab" id="arena-img-slider">
+    <img class="arena-img-slide" data-idx="0" src="Media/Image/a-dark-cinematic-gaming-arena-stage-capt_r23JdZJJSPuyBEqriA0WKg_gkPtvr0-RlO-vzic-W1cPg_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:1" loading="lazy" alt="Arena">
+    <img class="arena-img-slide" data-idx="1" src="Media/Image/a-futuristic-holographic-analytics-dashb_0EWO3lqKQSWtRNgi1KTOIQ_qoK-wHfxQJacyzxuNtbfXQ_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" loading="lazy" alt="Leaderboard">
+    <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,2,5,.7) 0%,transparent 50%);pointer-events:none"></div>
+    <div style="position:absolute;bottom:16px;left:20px;z-index:2"><h3 style="font-size:20px;font-weight:900">The Arena</h3><p style="font-size:11px;color:rgba(255,255,255,.6)">18 games · 4 input methods · Real device interaction</p></div>
+    <div style="position:absolute;bottom:16px;right:16px;display:flex;gap:8px;z-index:2"><div class="arena-img-dot" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.8);cursor:pointer" onclick="arenaImgSlide(0)"></div><div class="arena-img-dot" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;margin-top:1px" onclick="arenaImgSlide(1)"></div></div>
+  </div>
+  <div class="img-card rv" style="height:0;display:none"><img src="Media/Image/a-dark-cinematic-gaming-arena-stage-capt_r23JdZJJSPuyBEqriA0WKg_gkPtvr0-RlO-vzic-W1cPg_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35" loading="lazy"><div class="img-card-content"><h3>The Arena</h3><p>18 games · 4 input methods · Real device interaction</p></div></div>
 
   <!-- Game category tabs -->
   <div class="rv" style="display:flex;gap:8px;margin-bottom:24px">
@@ -2628,8 +2635,15 @@ footer{grid-template-columns:1fr!important;gap:24px}
   <h2 class="h3 rv" data-d="1">See Your Audience. <span class="se" style="color:var(--cy)">For Real.</span></h2>
   <p class="p1 rv" data-d="2" style="margin-bottom:40px;max-width:600px">Connected devices appear as floating bubbles in the stream. Device-verified — cannot be faked. Tangible proof of real engagement that no other platform can offer.</p>
 
-  <!-- Image bg -->
-  <div class="img-card rv" style="height:240px;margin-bottom:40px;cursor:default"><img src="Media/Image/a-futuristic-holographic-analytics-dashb_0EWO3lqKQSWtRNgi1KTOIQ_qoK-wHfxQJacyzxuNtbfXQ_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3" loading="lazy"><div class="img-card-content"><h3>Device-Verified Engagement</h3><p>Every bubble represents a real, connected device — not a bot, not a fake account</p></div></div>
+  <!-- Image Slider -->
+  <div class="rv" style="position:relative;border-radius:20px;overflow:hidden;aspect-ratio:2/1;margin-bottom:40px;cursor:grab" id="live-img-slider">
+    <img class="live-img-slide" data-idx="0" src="Media/Image/a-futuristic-holographic-analytics-dashb_0EWO3lqKQSWtRNgi1KTOIQ_qoK-wHfxQJacyzxuNtbfXQ_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:1" loading="lazy" alt="Live">
+    <img class="live-img-slide" data-idx="1" src="Media/Image/a-wide-panoramic-digital-illustration-of_PtuTV0T4Rg2t3hr57Vxaww_Y1fPXYehTXaCsKBHlUUtBQ_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" loading="lazy" alt="Stream">
+    <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,2,5,.7) 0%,transparent 50%);pointer-events:none"></div>
+    <div style="position:absolute;bottom:16px;left:20px;z-index:2"><h3 style="font-size:20px;font-weight:900">Device-Verified Engagement</h3><p style="font-size:11px;color:rgba(255,255,255,.6)">Every bubble is a real, connected device</p></div>
+    <div style="position:absolute;bottom:16px;right:16px;display:flex;gap:8px;z-index:2"><div class="live-img-dot" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.8);cursor:pointer" onclick="liveImgSlide(0)"></div><div class="live-img-dot" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;margin-top:1px" onclick="liveImgSlide(1)"></div></div>
+  </div>
+  <div class="img-card rv" style="height:0;display:none"><img src="Media/Image/a-futuristic-holographic-analytics-dashb_0EWO3lqKQSWtRNgi1KTOIQ_qoK-wHfxQJacyzxuNtbfXQ_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3" loading="lazy"><div class="img-card-content"><h3>Device-Verified Engagement</h3><p>Every bubble represents a real, connected device — not a bot, not a fake account</p></div></div>
 
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center">
     <!-- Animated bubbles -->
@@ -2777,6 +2791,15 @@ footer{grid-template-columns:1fr!important;gap:24px}
 
 <section id="md-overview" style="padding:clamp(60px,8vw,100px) 0"><div class="w">
   <div class="rv" style="max-width:900px;margin:0 auto 48px;border-radius:20px;overflow:hidden;aspect-ratio:16/9;position:relative"><video src="Media/Video/Moodi Pro Bullet Video-web.mp4" autoplay loop muted playsinline preload="none" style="width:100%;height:100%;object-fit:cover"></video></div>
+  <!-- Product Image Slider -->
+  <div class="rv" style="position:relative;border-radius:20px;overflow:hidden;aspect-ratio:2/1;margin-bottom:40px;cursor:grab" id="moodi-img-slider">
+    <img class="moodi-img-slide" data-idx="0" src="Media/Image/a-premium-abstract-composition-featuring_-aHNtxeKSxWK9LxvcvUtTw_b8L_P3wFT4CzD3V97PQO5Q_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:1" loading="lazy" alt="Moodi Pro">
+    <img class="moodi-img-slide" data-idx="1" src="Media/Image/a-wide-panoramic-holographic-analytics-d_Jucm4MqDTx-0srJwHOQpqg_1SbMusCdRgaoqEIdEmwLFQ_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" loading="lazy" alt="Smart Technology">
+    <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,2,5,.7) 0%,transparent 50%);pointer-events:none"></div>
+    <div style="position:absolute;bottom:16px;left:20px;z-index:2"><h3 style="font-size:20px;font-weight:900">Moodi Pro</h3><p style="font-size:11px;color:rgba(255,255,255,.6)">Triple cartridge · AI precision · BLE 5.0</p></div>
+    <div style="position:absolute;bottom:16px;right:16px;display:flex;gap:8px;z-index:2"><div class="moodi-img-dot" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.8);cursor:pointer" onclick="moodiImgSlide(0)"></div><div class="moodi-img-dot" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;margin-top:1px" onclick="moodiImgSlide(1)"></div></div>
+  </div>
+
   <div class="tag rv">01 · Product Overview</div>
   <h2 class="h3 rv" data-d="1">Triple Cartridge. <span class="se" style="color:var(--cy)">Infinite Possibilities.</span></h2>
   <p class="p1 rv" data-d="2" style="margin-bottom:40px;max-width:600px">Mix and match up to three cartridges for custom flavor and effect combinations. Patent-pending blending chamber.</p>
@@ -2918,6 +2941,15 @@ footer{grid-template-columns:1fr!important;gap:24px}
 
 <section id="fq-overview" style="padding:clamp(60px,8vw,100px) 0"><div class="w">
   <div class="rv" style="max-width:900px;margin:0 auto 48px;border-radius:20px;overflow:hidden;aspect-ratio:16/9;position:relative"><video src="Media/Video/Fusiq Pro Bullet Video-web.mp4" autoplay loop muted playsinline preload="none" style="width:100%;height:100%;object-fit:cover"></video></div>
+  <!-- Product Image Slider -->
+  <div class="rv" style="position:relative;border-radius:20px;overflow:hidden;aspect-ratio:2/1;margin-bottom:40px;cursor:grab" id="fusiq-img-slider">
+    <img class="fusiq-img-slide" data-idx="0" src="Media/Image/a-wide-panoramic-digital-illustration-of_PtuTV0T4Rg2t3hr57Vxaww_Y1fPXYehTXaCsKBHlUUtBQ_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:1" loading="lazy" alt="Fusiq Pro">
+    <img class="fusiq-img-slide" data-idx="1" src="Media/Image/a-birds-eye-architectural-photograph-of-_0KtnSnImSgS0US3pVc_J8Q_m05zrGX0Rb--HamwXa8uIA_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" loading="lazy" alt="Venue">
+    <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,2,5,.7) 0%,transparent 50%);pointer-events:none"></div>
+    <div style="position:absolute;bottom:16px;left:20px;z-index:2"><h3 style="font-size:20px;font-weight:900">Fusiq Pro</h3><p style="font-size:11px;color:rgba(255,255,255,.6)">Group sync · LED control · Venue-ready</p></div>
+    <div style="position:absolute;bottom:16px;right:16px;display:flex;gap:8px;z-index:2"><div class="fusiq-img-dot" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.8);cursor:pointer" onclick="fusiqImgSlide(0)"></div><div class="fusiq-img-dot" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;margin-top:1px" onclick="fusiqImgSlide(1)"></div></div>
+  </div>
+
   <div class="tag rv">01 · Product Overview</div>
   <h2 class="h3 rv" data-d="1">The Social <span class="se" style="color:var(--pu)">Experience Device.</span></h2>
   <p class="p1 rv" data-d="2" style="margin-bottom:40px;max-width:600px">Designed for group sessions, venues, and social gatherings. Shisha-compatible. Smart cartridges with built-in authentication.</p>
@@ -3965,6 +3997,24 @@ setTimeout(function(){
     el.addEventListener('mouseleave',function(){if(dragging){dragging=false;el.style.cursor='grab'}});
   });
 },500);
+
+// Batch 2 sliders
+var arenaImgSlide=makeImgSlider('arena-img',2);
+var liveImgSlide=makeImgSlider('live-img',2);
+var moodiImgSlide=makeImgSlider('moodi-img',2);
+var fusiqImgSlide=makeImgSlider('fusiq-img',2);
+
+setTimeout(function(){
+  [['arena-img-slider',2,arenaImgSlide],['live-img-slider',2,liveImgSlide],['moodi-img-slider',2,moodiImgSlide],['fusiq-img-slider',2,fusiqImgSlide]].forEach(function(p){
+    var el=document.getElementById(p[0]);if(!el)return;
+    var idx=0,max=p[1]-1,fn=p[2],sx=0,dragging=false;
+    el.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+    el.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>30){idx=Math.max(0,Math.min(max,idx+(dx<0?1:-1)));fn(idx)}},{passive:true});
+    el.addEventListener('mousedown',function(e){sx=e.clientX;dragging=true;el.style.cursor='grabbing';e.preventDefault()});
+    el.addEventListener('mouseup',function(e){if(!dragging)return;dragging=false;el.style.cursor='grab';var dx=e.clientX-sx;if(Math.abs(dx)>30){idx=Math.max(0,Math.min(max,idx+(dx<0?1:-1)));fn(idx)}});
+    el.addEventListener('mouseleave',function(){if(dragging){dragging=false;el.style.cursor='grab'}});
+  });
+},600);
 </script>
 </body>
 </html>
