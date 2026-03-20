@@ -819,10 +819,12 @@ footer{grid-template-columns:1fr!important;gap:24px}
   .sc-tool-slider{overflow-x:auto!important;-webkit-overflow-scrolling:touch!important;scroll-snap-type:x mandatory!important;gap:12px!important;padding-bottom:16px!important}
   .sc-tool-slider .sc-tool-phone{min-width:220px!important;scroll-snap-align:center!important;flex-shrink:0!important}
   /* Pro Tools carousel on mobile — horizontal scroll */
-  #sctool-wrap{flex-wrap:nowrap!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch!important;justify-content:flex-start!important;padding:10px 16px 24px!important;gap:12px!important;scroll-snap-type:x mandatory!important;perspective:none!important}
-  .sctool-phone{min-width:160px!important;width:160px!important;height:320px!important;border-radius:22px!important;scroll-snap-align:center!important;transform:none!important;opacity:1!important}
-  /* Pro modes simulation — stack on mobile */
-  [style*="grid-template-columns:1fr auto 1fr;gap:16px"]{grid-template-columns:1fr!important;gap:12px!important}
+  #sctool-wrap{flex-wrap:nowrap!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch!important;justify-content:flex-start!important;padding:10px 8px 24px!important;gap:8px!important;scroll-snap-type:x mandatory!important;perspective:none!important}
+  .sctool-phone{min-width:200px!important;width:200px!important;height:380px!important;border-radius:26px!important;scroll-snap-align:center!important;transform:none!important;opacity:1!important}
+  /* Pro modes triple split — stack on mobile */
+  [style*="grid-template-columns:1fr 60px 1fr"]{grid-template-columns:1fr!important;gap:16px!important}
+  [style*="grid-template-columns:1fr 60px 1fr"]>div:nth-child(2){flex-direction:row!important;writing-mode:horizontal-tb!important}
+  [style*="grid-template-columns:1fr 60px 1fr"]>div:nth-child(2) div:last-child{writing-mode:horizontal-tb!important;transform:none!important}
 
   /* ═══ PHONE-FIRST LAYOUT ON MOBILE ═══ */
   /* When grid stacks to column, put phone FIRST so user sees it
@@ -1356,65 +1358,74 @@ footer{grid-template-columns:1fr!important;gap:24px}
 <div class="w" style="position:relative;z-index:2">
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div style="width:36px;height:3px;border-radius:2px;background:var(--pu)"></div><span class="rv" style="font-family:var(--fm);font-size:10px;color:var(--pu);letter-spacing:4px">02 · PRO MODES</span></div>
   <h2 class="h2 rv" data-d="1" style="max-width:500px">One Tap. <span class="se">Everything Changes.</span></h2>
-  <p class="rv" data-d="2" style="font-size:15px;color:var(--tx2);max-width:520px;font-weight:300;margin-bottom:40px;line-height:1.65">Each Pro Mode transforms entire device behavior instantly. AI still optimizes in the background.</p>
+  <p class="rv" data-d="2" style="font-size:15px;color:var(--tx2);max-width:520px;font-weight:300;margin-bottom:40px;line-height:1.65">Each Pro Mode transforms entire device behavior instantly. Swipe to select — AI Engine processes — app screen updates.</p>
 
-  <!-- AI Simulation: Select mode → AI processes → Result screen -->
-  <div class="rv" data-d="2" style="max-width:700px;margin:0 auto 32px">
-    <!-- Simulation flow -->
-    <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;margin-bottom:24px">
-      <!-- Left: Mode Selection -->
-      <div style="border-radius:16px;background:rgba(168,85,247,.03);border:1px solid rgba(168,85,247,.08);padding:16px;text-align:center">
-        <div style="font-size:8px;font-weight:700;color:var(--tx3);letter-spacing:2px;margin-bottom:8px">USER SELECTS</div>
-        <div id="pm-sim-emoji" style="font-size:36px;transition:.4s">🚀</div>
-        <div id="pm-sim-mode" style="font-size:14px;font-weight:900;color:#fb923c;margin-top:4px;transition:.4s">Beast</div>
+  <!-- Triple Split: Mode Slider | AI Engine | App Screen -->
+  <div class="rv" data-d="2" style="display:grid;grid-template-columns:1fr 60px 1fr;gap:12px;align-items:stretch">
+    <!-- Left: Mode Image Slider -->
+    <div style="position:relative;border-radius:20px;overflow:hidden;min-height:360px;cursor:grab" id="pro-slider-wrap">
+      <div class="pro-slide" data-pro="0" style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(251,146,60,.12),rgba(251,146,60,.02));display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .5s;opacity:1">
+        <div style="font-size:64px;margin-bottom:12px;filter:drop-shadow(0 0 20px rgba(251,146,60,.3))">🚀</div>
+        <div style="font-size:22px;font-weight:900;color:#fb923c;margin-bottom:4px">Beast Mode</div>
+        <div style="font-size:11px;color:var(--tx2)">Maximum power. All tanks → Intense.</div>
       </div>
-      <!-- Arrow with AI processing -->
-      <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
-        <div style="font-size:18px;color:var(--pu)">🧠</div>
-        <div style="width:60px;height:3px;border-radius:2px;background:rgba(168,85,247,.15);position:relative;overflow:hidden"><div style="position:absolute;top:0;left:0;width:30px;height:100%;background:linear-gradient(90deg,transparent,var(--pu),transparent);animation:authPulse 1.5s ease-in-out infinite"></div></div>
-        <div style="font-size:7px;color:var(--tx3);letter-spacing:1px">AI ENGINE</div>
+      <div class="pro-slide" data-pro="1" style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(52,211,153,.12),rgba(52,211,153,.02));display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .5s;opacity:0">
+        <div style="font-size:64px;margin-bottom:12px;filter:drop-shadow(0 0 20px rgba(52,211,153,.3))">🌿</div>
+        <div style="font-size:22px;font-weight:900;color:var(--gn);margin-bottom:4px">Eco Mode</div>
+        <div style="font-size:11px;color:var(--tx2)">Minimal activation. All tanks → Chill.</div>
       </div>
-      <!-- Right: Result App Screen -->
-      <div style="border-radius:16px;background:linear-gradient(180deg,#0e0e1a,#08080e);border:1px solid rgba(168,85,247,.12);padding:16px;text-align:center;overflow:hidden;position:relative">
-        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(168,85,247,.06),transparent 60%);pointer-events:none"></div>
-        <div style="position:relative;z-index:2">
-          <div style="font-size:8px;font-weight:700;color:var(--pu);letter-spacing:2px;margin-bottom:6px">AI OUTPUT</div>
-          <div id="pm-screen-emoji" style="font-size:32px;transition:.4s">🚀</div>
-          <div id="pm-screen-name" style="font-size:14px;font-weight:900;color:#fb923c;margin-top:4px;transition:.4s">Beast Mode</div>
-          <div id="pm-screen-desc" style="font-size:9px;color:var(--tx2);margin-top:4px;transition:.4s">Max power · AI compensates</div>
-          <div style="display:flex;gap:3px;justify-content:center;margin-top:8px" id="pm-screen-bars">
-            <div style="width:4px;height:20px;border-radius:2px;background:#fb923c;animation:pmPulse 2s ease-in-out infinite"></div>
-            <div style="width:4px;height:20px;border-radius:2px;background:#fb923c;animation:pmPulse 2s ease-in-out infinite .2s"></div>
-            <div style="width:4px;height:20px;border-radius:2px;background:#fb923c;animation:pmPulse 2s ease-in-out infinite .4s"></div>
-            <div style="width:4px;height:20px;border-radius:2px;background:#fb923c;animation:pmPulse 2s ease-in-out infinite .6s"></div>
-            <div style="width:4px;height:20px;border-radius:2px;background:#fb923c;animation:pmPulse 2s ease-in-out infinite .8s"></div>
+      <div class="pro-slide" data-pro="2" style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(96,165,250,.12),rgba(96,165,250,.02));display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .5s;opacity:0">
+        <div style="font-size:64px;margin-bottom:12px;filter:drop-shadow(0 0 20px rgba(96,165,250,.3))">⚖️</div>
+        <div style="font-size:22px;font-weight:900;color:#60a5fa;margin-bottom:4px">Balance Mode</div>
+        <div style="font-size:11px;color:var(--tx2)">Equal power. All tanks → Medium.</div>
+      </div>
+      <div class="pro-slide" data-pro="3" style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(168,85,247,.12),rgba(168,85,247,.02));display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .5s;opacity:0">
+        <div style="font-size:64px;margin-bottom:12px;filter:drop-shadow(0 0 20px rgba(168,85,247,.3))">✨</div>
+        <div style="font-size:22px;font-weight:900;color:var(--pu);margin-bottom:4px">Microdose</div>
+        <div style="font-size:11px;color:var(--tx2)">Ultra-low. Minimal activation.</div>
+      </div>
+      <!-- Dots -->
+      <div style="position:absolute;top:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:2">
+        <div class="pro-dot" data-pro="0" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.8);transition:.3s;cursor:pointer" onclick="scSetPro(0)"></div>
+        <div class="pro-dot" data-pro="1" style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);transition:.3s;cursor:pointer;margin-top:1px" onclick="scSetPro(1)"></div>
+        <div class="pro-dot" data-pro="2" style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);transition:.3s;cursor:pointer;margin-top:1px" onclick="scSetPro(2)"></div>
+        <div class="pro-dot" data-pro="3" style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);transition:.3s;cursor:pointer;margin-top:1px" onclick="scSetPro(3)"></div>
+      </div>
+      <!-- Swipe arrows -->
+      <div style="position:absolute;top:50%;right:10px;transform:translateY(-50%);font-size:18px;color:rgba(255,255,255,.3);z-index:2;pointer-events:none">›</div>
+      <div style="position:absolute;top:50%;left:10px;transform:translateY(-50%);font-size:18px;color:rgba(255,255,255,.15);z-index:2;pointer-events:none">‹</div>
+    </div>
+
+    <!-- Center: AI Engine Processing -->
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
+      <div style="font-size:24px">🧠</div>
+      <div style="width:3px;flex:1;border-radius:2px;background:rgba(168,85,247,.1);position:relative;overflow:hidden;max-height:200px">
+        <div style="position:absolute;top:0;left:0;width:100%;height:30px;background:linear-gradient(180deg,transparent,var(--pu),transparent);animation:authPulse 2s ease-in-out infinite;transform:rotate(90deg)"></div>
+      </div>
+      <div style="font-size:7px;color:var(--tx3);letter-spacing:1px;writing-mode:vertical-lr;transform:rotate(180deg)">AI ENGINE</div>
+    </div>
+
+    <!-- Right: Result App Screen -->
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center">
+      <div style="position:relative;width:260px;height:420px;margin:0 auto;border-radius:36px;background:linear-gradient(180deg,#0c0c14,#080810);border:2px solid rgba(255,255,255,.08);box-shadow:0 20px 80px rgba(0,0,0,.6);overflow:hidden">
+        <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:110px;height:26px;background:#000;border-radius:0 0 18px 18px;z-index:5"></div>
+        <div style="padding:34px 18px 0;display:flex;justify-content:space-between;align-items:center"><div style="font-size:9px;font-weight:600;color:rgba(255,255,255,.5)">9:41</div><div style="width:12px;height:7px;border-radius:2px;border:1px solid rgba(255,255,255,.3)"><div style="width:70%;height:100%;background:rgba(255,255,255,.4);border-radius:1px"></div></div></div>
+        <div style="padding:14px 18px;text-align:center">
+          <div style="font-size:8px;font-weight:700;color:var(--pu);letter-spacing:3px;margin-bottom:8px">AI OUTPUT</div>
+          <div id="pm-screen-emoji" style="font-size:40px;transition:.4s;margin-bottom:6px">🚀</div>
+          <div id="pm-screen-name" style="font-size:16px;font-weight:900;color:#fb923c;transition:.4s">Beast Mode</div>
+          <div id="pm-screen-desc" style="font-size:10px;color:var(--tx2);margin-top:4px;margin-bottom:14px;transition:.4s">Max power · AI compensates</div>
+          <div style="display:flex;gap:3px;justify-content:center;margin-bottom:12px" id="pm-screen-bars">
+            <div style="width:5px;height:24px;border-radius:3px;background:#fb923c;animation:pmPulse 2s ease-in-out infinite"></div>
+            <div style="width:5px;height:24px;border-radius:3px;background:#fb923c;animation:pmPulse 2s ease-in-out infinite .2s"></div>
+            <div style="width:5px;height:24px;border-radius:3px;background:#fb923c;animation:pmPulse 2s ease-in-out infinite .4s"></div>
+            <div style="width:5px;height:24px;border-radius:3px;background:#fb923c;animation:pmPulse 2s ease-in-out infinite .6s"></div>
+            <div style="width:5px;height:24px;border-radius:3px;background:#fb923c;animation:pmPulse 2s ease-in-out infinite .8s"></div>
           </div>
+          <div style="display:flex;gap:4px"><div style="flex:1;padding:6px;border-radius:8px;background:rgba(0,232,255,.04);border:1px solid rgba(0,232,255,.06);text-align:center"><div style="font-size:7px;color:var(--tx3)">T1</div><div id="pm-ph-t1" style="font-size:9px;font-weight:800;color:var(--cy)">MAX</div></div><div style="flex:1;padding:6px;border-radius:8px;background:rgba(168,85,247,.04);border:1px solid rgba(168,85,247,.06);text-align:center"><div style="font-size:7px;color:var(--tx3)">T2</div><div id="pm-ph-t2" style="font-size:9px;font-weight:800;color:var(--pu)">MAX</div></div><div style="flex:1;padding:6px;border-radius:8px;background:rgba(236,72,153,.04);border:1px solid rgba(236,72,153,.06);text-align:center"><div style="font-size:7px;color:var(--tx3)">T3</div><div id="pm-ph-t3" style="font-size:9px;font-weight:800;color:var(--pk)">MAX</div></div></div>
         </div>
+        <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:90px;height:4px;border-radius:2px;background:rgba(255,255,255,.15)"></div>
       </div>
-    </div>
-  </div>
-
-  <!-- 4 Beautiful Mode Cards Below -->  <!-- 4 Beautiful Mode Cards Below -->
-  <div class="sc-pro-cards" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:640px;margin:0 auto">
-    <div onclick="scSetPro(0)" id="pm-card-0" style="cursor:pointer;padding:20px 12px;border-radius:16px;background:rgba(251,146,60,.06);border:2px solid rgba(251,146,60,.15);text-align:center;transition:all .4s">
-      <div style="font-size:28px;margin-bottom:6px">🚀</div>
-      <div style="font-size:12px;font-weight:800;color:#fb923c">Beast</div>
-      <div style="font-size:9px;color:var(--tx3);margin-top:2px">All → Max</div>
-    </div>
-    <div onclick="scSetPro(1)" id="pm-card-1" style="cursor:pointer;padding:20px 12px;border-radius:16px;background:rgba(52,211,153,.03);border:2px solid var(--bd);text-align:center;transition:all .4s">
-      <div style="font-size:28px;margin-bottom:6px">🌿</div>
-      <div style="font-size:12px;font-weight:800;color:var(--gn)">Eco</div>
-      <div style="font-size:9px;color:var(--tx3);margin-top:2px">All → Chill</div>
-    </div>
-    <div onclick="scSetPro(2)" id="pm-card-2" style="cursor:pointer;padding:20px 12px;border-radius:16px;background:rgba(96,165,250,.03);border:2px solid var(--bd);text-align:center;transition:all .4s">
-      <div style="font-size:28px;margin-bottom:6px">⚖️</div>
-      <div style="font-size:12px;font-weight:800;color:#60a5fa">Balance</div>
-      <div style="font-size:9px;color:var(--tx3);margin-top:2px">All → Med</div>
-    </div>
-    <div onclick="scSetPro(3)" id="pm-card-3" style="cursor:pointer;padding:20px 12px;border-radius:16px;background:rgba(168,85,247,.03);border:2px solid var(--bd);text-align:center;transition:all .4s">
-      <div style="font-size:28px;margin-bottom:6px">✨</div>
-      <div style="font-size:12px;font-weight:800;color:var(--pu)">Microdose</div>
-      <div style="font-size:9px;color:var(--tx3);margin-top:2px">Minimal</div>
     </div>
   </div>
 </div>
@@ -1428,28 +1439,8 @@ footer{grid-template-columns:1fr!important;gap:24px}
   <h2 class="h2 rv" data-d="1" style="max-width:600px">Mix. Blend. <span class="se">Create.</span></h2>
   <p class="rv" data-d="2" style="font-size:15px;color:var(--tx2);max-width:540px;font-weight:300;margin-bottom:40px;line-height:1.65">Multi-tank devices unlock blending capabilities. CBD:THC ratio control and Sativa + Indica True Hybrid — category-first features.</p>
 
-  <!-- Premium info cards with gradient accents -->
-  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px">
-    <div class="rv" style="padding:28px;border-radius:20px;background:linear-gradient(135deg,rgba(236,72,153,.04),rgba(168,85,247,.02));border:1px solid rgba(236,72,153,.08);position:relative;overflow:hidden">
-      <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle,rgba(236,72,153,.1),transparent 70%);filter:blur(30px)"></div>
-      <div style="font-size:28px;margin-bottom:12px">⚖️</div>
-      <h4 style="font-size:16px;font-weight:800;color:var(--pk);margin-bottom:8px">Entourage Mode</h4>
-      <p style="font-size:12px;color:var(--tx2);line-height:1.6;margin-bottom:12px">CBD:THC ratio slider from 10-90%. Fine-tune the balance between relaxation and activation. Category-first feature.</p>
-      <div style="display:flex;gap:4px"><span style="font-size:9px;padding:4px 8px;border-radius:100px;background:rgba(236,72,153,.06);border:1px solid rgba(236,72,153,.1);color:var(--pk)">CBD:THC Ratio</span><span style="font-size:9px;padding:4px 8px;border-radius:100px;background:rgba(236,72,153,.06);border:1px solid rgba(236,72,153,.1);color:var(--pk)">10-90%</span></div>
-    </div>
-    <div class="rv" data-d="1" style="padding:28px;border-radius:20px;background:linear-gradient(135deg,rgba(168,85,247,.04),rgba(0,232,255,.02));border:1px solid rgba(168,85,247,.08);position:relative;overflow:hidden">
-      <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle,rgba(168,85,247,.1),transparent 70%);filter:blur(30px)"></div>
-      <div style="font-size:28px;margin-bottom:12px">🧬</div>
-      <h4 style="font-size:16px;font-weight:800;color:var(--pu);margin-bottom:8px">True Hybrid</h4>
-      <p style="font-size:12px;color:var(--tx2);line-height:1.6;margin-bottom:12px">Sativa + Indica in one draw. AI manages separate heating curves for each strain type simultaneously.</p>
-      <div style="display:flex;gap:4px"><span style="font-size:9px;padding:4px 8px;border-radius:100px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.1);color:var(--pu)">Sativa + Indica</span><span style="font-size:9px;padding:4px 8px;border-radius:100px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.1);color:var(--pu)">Dual Curve</span></div>
-    </div>
-</div>
-    </div>
-  </div>
-
-  <!-- Blend Mode App Screen -->
-  <div class="rv" data-d="3" style="display:flex;flex-direction:column;align-items:center;margin-top:40px">
+  <!-- App Screen FIRST (above cards) -->
+  <div class="rv" data-d="2" style="display:flex;flex-direction:column;align-items:center;margin-bottom:40px">
     <div style="position:relative">
       <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:240px;height:240px;background:radial-gradient(circle,rgba(236,72,153,.06),transparent 70%);filter:blur(50px);pointer-events:none"></div>
       <div style="position:relative;width:260px;height:480px;margin:0 auto;border-radius:36px;background:linear-gradient(180deg,#0c0c14,#080810);border:2px solid rgba(255,255,255,.08);box-shadow:0 20px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03),inset 0 1px 0 rgba(255,255,255,.05);overflow:hidden">
@@ -1457,8 +1448,7 @@ footer{grid-template-columns:1fr!important;gap:24px}
         <div style="padding:34px 18px 0;display:flex;justify-content:space-between;align-items:center"><div style="font-size:9px;font-weight:600;color:rgba(255,255,255,.5)">9:41</div><div style="width:12px;height:7px;border-radius:2px;border:1px solid rgba(255,255,255,.3)"><div style="width:70%;height:100%;background:rgba(255,255,255,.4);border-radius:1px"></div></div></div>
         <div style="padding:12px 18px">
           <div style="font-size:8px;font-weight:700;color:var(--pk);letter-spacing:3px;margin-bottom:6px">BLEND MODE</div>
-          <div style="font-size:16px;font-weight:900;margin-bottom:12px">Entourage Active</div>
-          <!-- CBD:THC Slider -->
+          <div style="font-size:16px;font-weight:900;margin-bottom:12px">CBD + THC Blend</div>
           <div style="margin-bottom:16px">
             <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:8px;color:var(--tx3)">CBD</span><span style="font-size:8px;color:var(--tx3)">THC</span></div>
             <div style="height:8px;border-radius:4px;background:linear-gradient(90deg,rgba(52,211,153,.3),rgba(168,85,247,.3));position:relative">
@@ -1466,13 +1456,11 @@ footer{grid-template-columns:1fr!important;gap:24px}
             </div>
             <div style="text-align:center;margin-top:6px;font-size:11px;font-weight:800;color:var(--pk)">40% CBD : 60% THC</div>
           </div>
-          <!-- Tank assignments -->
           <div style="display:flex;gap:4px;margin-bottom:12px">
             <div style="flex:1;padding:8px 4px;border-radius:8px;background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.08);text-align:center"><div style="font-size:7px;color:var(--tx3)">TANK 1</div><div style="font-size:9px;font-weight:800;color:var(--gn)">CBD</div></div>
             <div style="flex:1;padding:8px 4px;border-radius:8px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.08);text-align:center"><div style="font-size:7px;color:var(--tx3)">TANK 2</div><div style="font-size:9px;font-weight:800;color:var(--pu)">THC</div></div>
             <div style="flex:1;padding:8px 4px;border-radius:8px;background:rgba(236,72,153,.06);border:1px solid rgba(236,72,153,.08);text-align:center"><div style="font-size:7px;color:var(--tx3)">TANK 3</div><div style="font-size:9px;font-weight:800;color:var(--pk)">Terpene</div></div>
           </div>
-          <!-- Blend indicator -->
           <div style="padding:10px;border-radius:10px;background:rgba(236,72,153,.04);border:1px solid rgba(236,72,153,.06);text-align:center">
             <div style="font-size:9px;color:var(--tx3);margin-bottom:4px">BLEND OUTPUT</div>
             <div style="font-size:12px;font-weight:800;color:var(--pk)">Full Entourage Effect</div>
@@ -1481,6 +1469,24 @@ footer{grid-template-columns:1fr!important;gap:24px}
         </div>
         <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:90px;height:4px;border-radius:2px;background:rgba(255,255,255,.15)"></div>
       </div>
+    </div>
+  </div>
+
+  <!-- Info cards BELOW app screen -->
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px">
+    <div class="rv" style="padding:28px;border-radius:20px;background:linear-gradient(135deg,rgba(236,72,153,.04),rgba(168,85,247,.02));border:1px solid rgba(236,72,153,.08);position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle,rgba(236,72,153,.1),transparent 70%);filter:blur(30px)"></div>
+      <div style="font-size:28px;margin-bottom:12px">⚖️</div>
+      <h4 style="font-size:16px;font-weight:800;color:var(--pk);margin-bottom:8px">CBD + THC Control</h4>
+      <p style="font-size:12px;color:var(--tx2);line-height:1.6;margin-bottom:12px">CBD:THC ratio slider from 10-90%. Fine-tune the balance between relaxation and activation. Category-first feature.</p>
+      <div style="display:flex;gap:4px"><span style="font-size:9px;padding:4px 8px;border-radius:100px;background:rgba(236,72,153,.06);border:1px solid rgba(236,72,153,.1);color:var(--pk)">Ratio Slider</span><span style="font-size:9px;padding:4px 8px;border-radius:100px;background:rgba(236,72,153,.06);border:1px solid rgba(236,72,153,.1);color:var(--pk)">10-90%</span></div>
+    </div>
+    <div class="rv" data-d="1" style="padding:28px;border-radius:20px;background:linear-gradient(135deg,rgba(168,85,247,.04),rgba(0,232,255,.02));border:1px solid rgba(168,85,247,.08);position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle,rgba(168,85,247,.1),transparent 70%);filter:blur(30px)"></div>
+      <div style="font-size:28px;margin-bottom:12px">🧬</div>
+      <h4 style="font-size:16px;font-weight:800;color:var(--pu);margin-bottom:8px">True Hybrid</h4>
+      <p style="font-size:12px;color:var(--tx2);line-height:1.6;margin-bottom:12px">Sativa + Indica in one draw. AI manages separate heating curves for each strain type simultaneously.</p>
+      <div style="display:flex;gap:4px"><span style="font-size:9px;padding:4px 8px;border-radius:100px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.1);color:var(--pu)">Sativa + Indica</span><span style="font-size:9px;padding:4px 8px;border-radius:100px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.1);color:var(--pu)">Dual Curve</span></div>
     </div>
   </div>
 </div>
@@ -1492,42 +1498,45 @@ footer{grid-template-columns:1fr!important;gap:24px}
 <div class="w" style="position:relative;z-index:2">
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div style="width:36px;height:3px;border-radius:2px;background:var(--am)"></div><span class="rv" style="font-family:var(--fm);font-size:10px;color:var(--am);letter-spacing:4px">04 · MOOD MODES</span></div>
   <h2 class="h2 rv" data-d="1" style="max-width:600px">Feel It. <span class="se">AI Delivers It.</span></h2>
-  <p class="rv" data-d="2" style="font-size:15px;color:var(--tx2);max-width:540px;font-weight:300;margin-bottom:40px;line-height:1.65">7 AI-powered mood presets. Select a feeling — Mood Logic™ handles temperature, delivery speed, CBD:THC ratio, and timing.</p>
+  <p class="rv" data-d="2" style="font-size:15px;color:var(--tx2);max-width:540px;font-weight:300;margin-bottom:40px;line-height:1.65">7 AI-powered mood presets. Swipe the image to explore each mood — the app screen updates automatically.</p>
 
-  <!-- Split Screen: Left = Mood Selector, Right = App Screen -->
-  <div class="sc-mood-split rv" data-d="2" style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start">
-    <!-- Left: Mood info panel + 7 buttons -->
-    <div>
-      <!-- Mood Image Slider -->
-      <div style="border-radius:20px;overflow:hidden;aspect-ratio:4/3;position:relative;margin-bottom:20px" id="mood-img-slider">
-        <img id="mood-img" src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80" style="width:100%;height:100%;object-fit:cover;transition:opacity .5s;position:absolute;inset:0" alt="Mood image">
-        <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,2,5,.7) 0%,transparent 50%);pointer-events:none"></div>
-        <div style="position:absolute;bottom:16px;left:16px;right:16px;z-index:2">
-          <div id="mood-screen-emoji" style="font-size:36px;margin-bottom:4px;transition:.4s">😌</div>
-          <div id="mood-screen-name" style="font-size:20px;font-weight:900;color:#60a5fa;transition:.4s">Relax</div>
-          <div id="mood-screen-config" style="font-size:10px;color:var(--tx3);transition:.4s">168° · Slow · CBD Priority · Wave</div>
-        </div>
+  <!-- Dual Split: Left = Image Slider, Right = App Screen -->
+  <div class="sc-mood-split rv" data-d="2" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch">
+    <!-- Left: Image Slider (swipeable, no buttons) -->
+    <div style="position:relative;border-radius:20px;overflow:hidden;min-height:400px;cursor:grab" id="mood-slider-wrap">
+      <!-- Images stacked, only active one visible -->
+      <img class="mood-slide" data-mood="0" src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:1" alt="Relax">
+      <img class="mood-slide" data-mood="1" src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" alt="Focus">
+      <img class="mood-slide" data-mood="2" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" alt="Energy">
+      <img class="mood-slide" data-mood="3" src="https://images.unsplash.com/photo-1455642305367-68834a1da7ab?w=600&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" alt="Sleep">
+      <img class="mood-slide" data-mood="4" src="https://images.unsplash.com/photo-1529543544282-ea57407bc2f7?w=600&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" alt="Social">
+      <img class="mood-slide" data-mood="5" src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" alt="Creative">
+      <img class="mood-slide" data-mood="6" src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" alt="Recovery">
+      <!-- Gradient overlay -->
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,2,5,.8) 0%,transparent 40%,transparent 60%,rgba(2,2,5,.3) 100%);pointer-events:none"></div>
+      <!-- Mood info overlay -->
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;z-index:2">
+        <div id="mood-sl-emoji" style="font-size:36px;margin-bottom:4px;transition:.4s">😌</div>
+        <div id="mood-sl-name" style="font-size:22px;font-weight:900;color:#60a5fa;transition:.4s">Relax</div>
+        <div id="mood-sl-cfg" style="font-size:10px;color:rgba(255,255,255,.6);margin-top:4px;transition:.4s">168° · Slow · CBD Priority · Wave</div>
+        <p id="mood-sl-desc" style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.5;margin-top:8px;transition:.4s">Gentle warmth. Slow delivery. CBD priority.</p>
       </div>
-      <p id="mood-screen-desc" style="font-size:12px;color:var(--tx2);line-height:1.6;margin-bottom:20px;transition:.4s">Gentle warmth. Slow delivery. CBD priority. Perfect for unwinding after a long day.</p>
-      <!-- 7 Mood Buttons in grid -->
-      <div style="border-radius:20px;background:linear-gradient(135deg,rgba(96,165,250,.04),rgba(96,165,250,.01));border:1px solid rgba(96,165,250,.08);padding:24px;margin-bottom:20px;text-align:center;transition:all .5s" id="mood-info-panel">
-        <div id="mood-screen-emoji" style="font-size:56px;margin-bottom:8px;transition:all .4s">😌</div>
-        <div id="mood-screen-name" style="font-size:22px;font-weight:900;color:#60a5fa;margin-bottom:4px;transition:all .4s">Relax</div>
-        <div id="mood-screen-config" style="font-size:10px;color:var(--tx3);transition:all .4s;margin-bottom:12px">168° · Slow · CBD Priority · Wave Pattern</div>
-        <p id="mood-screen-desc" style="font-size:12px;color:var(--tx2);line-height:1.6;transition:all .4s">Gentle warmth. Slow delivery. CBD priority. Perfect for unwinding after a long day.</p>
+      <!-- Swipe indicator dots -->
+      <div style="position:absolute;top:16px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:2">
+        <div class="mood-dot" data-mood="0" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.8);transition:.3s;cursor:pointer" onclick="scMood(0)"></div>
+        <div class="mood-dot" data-mood="1" style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);transition:.3s;cursor:pointer;margin-top:1px" onclick="scMood(1)"></div>
+        <div class="mood-dot" data-mood="2" style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);transition:.3s;cursor:pointer;margin-top:1px" onclick="scMood(2)"></div>
+        <div class="mood-dot" data-mood="3" style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);transition:.3s;cursor:pointer;margin-top:1px" onclick="scMood(3)"></div>
+        <div class="mood-dot" data-mood="4" style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);transition:.3s;cursor:pointer;margin-top:1px" onclick="scMood(4)"></div>
+        <div class="mood-dot" data-mood="5" style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);transition:.3s;cursor:pointer;margin-top:1px" onclick="scMood(5)"></div>
+        <div class="mood-dot" data-mood="6" style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);transition:.3s;cursor:pointer;margin-top:1px" onclick="scMood(6)"></div>
       </div>
-      <!-- 7 Mood Buttons in grid -->
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
-        <div onclick="scMood(0)" id="mood-btn-0" style="cursor:pointer;padding:12px 6px;border-radius:12px;background:rgba(96,165,250,.08);border:2px solid rgba(96,165,250,.2);text-align:center;transition:.3s"><div style="font-size:20px">😌</div><div style="font-size:8px;font-weight:700;color:#60a5fa;margin-top:4px">Relax</div></div>
-        <div onclick="scMood(1)" id="mood-btn-1" style="cursor:pointer;padding:12px 6px;border-radius:12px;background:rgba(255,255,255,.02);border:2px solid var(--bd);text-align:center;transition:.3s"><div style="font-size:20px">🎯</div><div style="font-size:8px;font-weight:700;color:var(--tx3);margin-top:4px">Focus</div></div>
-        <div onclick="scMood(2)" id="mood-btn-2" style="cursor:pointer;padding:12px 6px;border-radius:12px;background:rgba(255,255,255,.02);border:2px solid var(--bd);text-align:center;transition:.3s"><div style="font-size:20px">⚡</div><div style="font-size:8px;font-weight:700;color:var(--tx3);margin-top:4px">Energy</div></div>
-        <div onclick="scMood(3)" id="mood-btn-3" style="cursor:pointer;padding:12px 6px;border-radius:12px;background:rgba(255,255,255,.02);border:2px solid var(--bd);text-align:center;transition:.3s"><div style="font-size:20px">💤</div><div style="font-size:8px;font-weight:700;color:var(--tx3);margin-top:4px">Sleep</div></div>
-        <div onclick="scMood(4)" id="mood-btn-4" style="cursor:pointer;padding:12px 6px;border-radius:12px;background:rgba(255,255,255,.02);border:2px solid var(--bd);text-align:center;transition:.3s"><div style="font-size:20px">🎉</div><div style="font-size:8px;font-weight:700;color:var(--tx3);margin-top:4px">Social</div></div>
-        <div onclick="scMood(5)" id="mood-btn-5" style="cursor:pointer;padding:12px 6px;border-radius:12px;background:rgba(255,255,255,.02);border:2px solid var(--bd);text-align:center;transition:.3s"><div style="font-size:20px">🎨</div><div style="font-size:8px;font-weight:700;color:var(--tx3);margin-top:4px">Create</div></div>
-        <div onclick="scMood(6)" id="mood-btn-6" style="cursor:pointer;padding:12px 6px;border-radius:12px;background:rgba(255,255,255,.02);border:2px solid var(--bd);text-align:center;transition:.3s"><div style="font-size:20px">🧘</div><div style="font-size:8px;font-weight:700;color:var(--tx3);margin-top:4px">Recover</div></div>
+      <!-- Swipe hint -->
+      <div style="position:absolute;top:50%;right:12px;transform:translateY(-50%);font-size:20px;color:rgba(255,255,255,.3);z-index:2;pointer-events:none">›</div>
+      <div style="position:absolute;top:50%;left:12px;transform:translateY(-50%);font-size:20px;color:rgba(255,255,255,.15);z-index:2;pointer-events:none">‹</div>
     </div>
     <!-- Right: App Screen -->
-    <div style="display:flex;flex-direction:column;align-items:center">
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center">
       <div style="position:relative">
         <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:260px;height:260px;background:radial-gradient(circle,rgba(96,165,250,.06),transparent 70%);filter:blur(50px);pointer-events:none" id="mood-phone-glow"></div>
         <div style="position:relative;width:260px;height:500px;margin:0 auto;border-radius:36px;background:linear-gradient(180deg,#0c0c14,#080810);border:2px solid rgba(255,255,255,.08);box-shadow:0 20px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03),inset 0 1px 0 rgba(255,255,255,.05);overflow:hidden">
@@ -1538,7 +1547,6 @@ footer{grid-template-columns:1fr!important;gap:24px}
             <div id="mood-ph-emoji" style="font-size:52px;margin-bottom:6px;transition:.4s">😌</div>
             <div id="mood-ph-name" style="font-size:18px;font-weight:900;color:#60a5fa;margin-bottom:4px;transition:.4s">Relax</div>
             <div id="mood-ph-cfg" style="font-size:9px;color:var(--tx3);margin-bottom:14px;transition:.4s">168° · Slow · CBD</div>
-            <!-- Pipeline bars -->
             <div style="display:flex;flex-direction:column;gap:6px;text-align:left">
               <div style="display:flex;align-items:center;gap:6px"><span style="font-size:7px;color:var(--tx3);width:50px;flex-shrink:0">Temp</span><div style="flex:1;height:5px;border-radius:3px;background:rgba(255,255,255,.04)"><div id="mood-bar-0" style="height:100%;border-radius:3px;background:var(--cy);width:65%;transition:.6s"></div></div></div>
               <div style="display:flex;align-items:center;gap:6px"><span style="font-size:7px;color:var(--tx3);width:50px;flex-shrink:0">Delivery</span><div style="flex:1;height:5px;border-radius:3px;background:rgba(255,255,255,.04)"><div id="mood-bar-1" style="height:100%;border-radius:3px;background:var(--pu);width:30%;transition:.6s"></div></div></div>
@@ -3746,622 +3754,24 @@ var pmData=[
   {color:'#a855f7',desc:'Ultra-low output. Subtle effect. Wellness-focused micro-enhancement.',bars:[15,15,15]}
 ];
 function scSetPro(n){
-  var d=pmData[n];
-  var el=document.getElementById('pm-desc');if(el)el.textContent=d.desc;
-  // Update tank bars
-  for(var t=1;t<=3;t++){
-    var bar=document.getElementById('pm-bar'+t);
-    if(bar){var inner=bar.querySelector('div');if(inner)inner.style.width=d.bars[t-1]+'%'}
-  }
-  // Highlight active card glow
-  for(var i=0;i<4;i++){
-    var glow=document.getElementById('pm-glow-'+i);if(glow)glow.style.opacity=i===n?'1':'0';
-    var emoji=document.getElementById('pm-emoji-'+i);if(emoji)emoji.style.transform=i===n?'scale(1.15)':'scale(1)';
-  }
-}
-
-// ═══ SMART CONTROL — PRO TOOLS PHONE ═══
-var ptData=[
-  {label:'PRO TOOL',title:'🔥 Smart Pre-Heat',color:'#fb923c',ring:80,ringText:'74%',ringSub:'WARMING',status:'Active',dur:'~8s remaining'},
-  {label:'PRO TOOL',title:'💧 Last Drop',color:'#60a5fa',ring:30,ringText:'96%',ringSub:'EXTRACTING',status:'Active',dur:'~12s remaining'},
-  {label:'PRO TOOL',title:'🌿 Flavor Fusion',color:'#34d399',ring:157,ringText:'MIX',ringSub:'BLENDING',status:'Syncing',dur:'3 tanks active'},
-  {label:'PRO TOOL',title:'🧪 Extract Fusion',color:'#ec4899',ring:0,ringText:'ALL',ringSub:'FIRING',status:'Full Spectrum',dur:'Simultaneous'},
-  {label:'PRO TOOL',title:'✈️ Jet-Lag Recovery',color:'#a855f7',ring:120,ringText:'62%',ringSub:'RECOVERING',status:'AI-Guided',dur:'Timezone +8h'},
-  {label:'PRO TOOL',title:'🛡️ Damage Prevention',color:'#00e8ff',ring:250,ringText:'SAFE',ringSub:'PROTECTED',status:'Always On',dur:'Max 3.8V set'}
-];
-function scSetTool(n){
-  var d=ptData[n];
-  var el;
-  el=document.getElementById('pt-screen-label');if(el){el.textContent=d.label;el.style.color=d.color}
-  el=document.getElementById('pt-screen-title');if(el)el.textContent=d.title;
-  el=document.getElementById('pt-ring');if(el){el.setAttribute('stroke-dashoffset',d.ring);el.setAttribute('stroke',d.color);el.style.filter='drop-shadow(0 0 8px '+d.color+')'}
-  el=document.getElementById('pt-ring-text');if(el){el.textContent=d.ringText;el.setAttribute('fill',d.color)}
-  el=document.getElementById('pt-ring-sub');if(el)el.textContent=d.ringSub;
-  el=document.getElementById('pt-status-val');if(el){el.textContent=d.status;el.style.color=d.color}
-  el=document.getElementById('pt-dur-val');if(el)el.textContent=d.dur;
-  el=document.getElementById('pt-screen-status');if(el){el.style.background=d.color.replace(')',',0.04)').replace('#','rgba(').replace(/([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/,function(m,r,g,b){return parseInt(r,16)+','+parseInt(g,16)+','+parseInt(b,16)});el.style.borderColor=d.color.replace(')',',0.06)').replace('#','rgba(').replace(/([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/,function(m,r,g,b){return parseInt(r,16)+','+parseInt(g,16)+','+parseInt(b,16)})}
-  // Highlight card
-  for(var i=0;i<6;i++){var c=document.getElementById('pt-card-'+i);if(c)c.style.boxShadow=i===n?'inset 0 0 0 1px '+d.color+',0 0 20px '+d.color.replace(/[^,]+\)$/,'0.08)'):'none'}
-}
-
-// ═══ SMART CONTROL — PRECISION CURVE RANDOMIZER ═══
-function scRandomizeCurve(){
-  function rp(min,max){return Math.floor(Math.random()*(max-min)+min)}
-  // Tank 1
-  var c1y=[rp(120,160),rp(20,60),rp(30,80),rp(15,50),rp(30,70)];
-  var c1='M30,'+c1y[0]+' C80,'+(c1y[0]-10)+' 130,'+c1y[1]+' 200,'+c1y[2]+' S320,'+(c1y[3]+40)+' 380,'+c1y[3]+' S440,'+c1y[4]+' 490,'+(c1y[4]-10);
-  var c1f=c1+' L490,170 L30,170Z';
-  // Tank 2
-  var c2y=[rp(100,150),rp(25,70),rp(30,70),rp(20,55),rp(30,60)];
-  var c2='M30,'+c2y[0]+' C100,'+(c2y[0]-20)+' 160,'+c2y[1]+' 240,'+c2y[2]+' S360,'+c2y[3]+' 420,'+(c2y[3]+15)+' S470,'+c2y[4]+' 490,'+(c2y[4]-10);
-  var c2f=c2+' L490,170 L30,170Z';
-  // Tank 3
-  var c3y=[rp(90,140),rp(40,80),rp(50,100),rp(30,70),rp(40,80)];
-  var c3='M30,'+c3y[0]+' C70,'+(c3y[0]-20)+' 130,'+c3y[1]+' 200,'+c3y[2]+' S300,'+c3y[3]+' 370,'+(c3y[3]+30)+' S440,'+c3y[4]+' 490,'+(c3y[4]-20);
-  var c3f=c3+' L490,170 L30,170Z';
-  // Apply with smooth transitions
-  var el;
-  el=document.getElementById('sc-c1');if(el)el.setAttribute('d',c1);
-  el=document.getElementById('sc-c1-fill');if(el)el.setAttribute('d',c1f);
-  el=document.getElementById('sc-c1-p1');if(el){el.setAttribute('cx',200);el.setAttribute('cy',c1y[2])}
-  el=document.getElementById('sc-c1-p2');if(el){el.setAttribute('cx',380);el.setAttribute('cy',c1y[3])}
-  el=document.getElementById('sc-c2');if(el)el.setAttribute('d',c2);
-  el=document.getElementById('sc-c2-fill');if(el)el.setAttribute('d',c2f);
-  el=document.getElementById('sc-c3');if(el)el.setAttribute('d',c3);
-  el=document.getElementById('sc-c3-fill');if(el)el.setAttribute('d',c3f);
-}
-
-// ═══ USAGE INTELLIGENCE — TAB SWITCHING ═══
-function uiTab(n){
-  for(var i=0;i<3;i++){
-    var p=document.getElementById('ui-panel-'+i);if(p)p.style.display=i===n?'block':'none';
-    var t=document.getElementById('ui-tab-'+i);
-    if(t){
-      if(i===n){t.style.background='rgba(168,85,247,.1)';t.style.borderColor='rgba(168,85,247,.2)';t.style.color='#a855f7';t.style.fontWeight='700'}
-      else{t.style.background='rgba(255,255,255,.02)';t.style.borderColor='rgba(255,255,255,.06)';t.style.color='rgba(255,255,255,.5)';t.style.fontWeight='600'}
-    }
-  }
-  var titles=['📊 Puff Analytics','🧪 Extract Tracking','📈 Session History'];
-  var pt=document.getElementById('ui-phone-title');if(pt)pt.textContent=titles[n];
-}
-
-// ═══ AI ENGINE — MOOD SELECTOR ═══
-var aiMoods=[
-  {emoji:'😌',label:'Relax',color:'96,165,250',temp:'172°',delivery:'Slow',priority:'CBD',pattern:'Calming',pipes:[70,85,60,90,45,75,55]},
-  {emoji:'🎯',label:'Focus',color:'245,158,11',temp:'185°',delivery:'Steady',priority:'Sativa',pattern:'Consistent',pipes:[65,90,55,80,50,70,65]},
-  {emoji:'⚡',label:'Energy',color:'251,146,60',temp:'200°',delivery:'Burst',priority:'Sativa',pattern:'Active',pipes:[80,75,70,60,55,85,50]},
-  {emoji:'🌙',label:'Sleep',color:'167,139,250',temp:'165°',delivery:'Gentle',priority:'Indica',pattern:'Descending',pipes:[55,80,50,95,40,60,70]},
-  {emoji:'🎉',label:'Social',color:'236,72,153',temp:'190°',delivery:'Moderate',priority:'Hybrid',pattern:'Wave',pipes:[75,70,65,55,60,80,45]},
-  {emoji:'🎨',label:'Creative',color:'0,232,255',temp:'188°',delivery:'Varied',priority:'Sativa',pattern:'Wave',pipes:[85,65,75,50,70,90,60]},
-  {emoji:'💚',label:'Recovery',color:'52,211,153',temp:'160°',delivery:'Gentle',priority:'CBD',pattern:'Therapeutic',pipes:[50,90,45,85,35,55,75]}
-];
-function aiMood(n){
-  var d=aiMoods[n];
-  for(var i=0;i<7;i++){
-    var m=document.getElementById('ai-m-'+i);
-    if(m){
-      if(i===n){m.style.background='rgba('+d.color+',.1)';m.style.borderColor='rgba('+d.color+',.25)';m.querySelector('div:last-child').style.color='rgb('+d.color+')'}
-      else{m.style.background='rgba(255,255,255,.02)';m.style.borderColor='rgba(255,255,255,.06)';m.querySelector('div:last-child').style.color='rgba(255,255,255,.5)'}
-    }
-  }
-  var ml=document.getElementById('ai-mood-label');if(ml)ml.textContent=d.emoji+' '+d.label+' Mode';
-  for(var i=0;i<7;i++){var p=document.getElementById('ai-p-'+i);if(p)p.style.width=d.pipes[i]+'%'}
-  var ot=document.getElementById('ai-out-temp');if(ot){ot.textContent=d.temp;ot.style.color='rgb('+d.color+')'}
-  var od=document.getElementById('ai-out-delivery');if(od)od.textContent=d.delivery;
-  var op=document.getElementById('ai-out-priority');if(op)op.textContent=d.priority;
-  var opp=document.getElementById('ai-out-pattern');if(opp)opp.textContent=d.pattern;
-}
-
-// ═══ FIRMWARE ENGINE — STEP WIZARD ═══
-function fwStep(n){
-  var colors=[['rgba(0,232,255,.1)','rgba(0,232,255,.2)','#00e8ff'],['rgba(168,85,247,.1)','rgba(168,85,247,.2)','#a855f7'],['rgba(52,211,153,.1)','rgba(52,211,153,.2)','#34d399'],['rgba(245,158,11,.1)','rgba(245,158,11,.2)','#f59e0b']];
-  for(var i=0;i<4;i++){
-    var p=document.getElementById('fw-panel-'+i);if(p)p.style.display=i===n?'block':'none';
-    var s=document.getElementById('fw-s-'+i);
-    if(s){
-      var circle=s.querySelector('div:first-child div:first-child');
-      var label=s.querySelector('div:first-child div:last-child') || s.querySelector('div:last-child');
-      if(i===n){s.style.background=colors[i][0];s.style.borderColor=colors[i][1]}
-      else{s.style.background='rgba(255,255,255,.02)';s.style.borderColor='rgba(255,255,255,.06)'}
-    }
-  }
-}
-
-
-// ═══ ARENA — GAME TABS & PHONE ═══
-function arenaTab(n){
-  for(var i=0;i<3;i++){
-    var p=document.getElementById('ar-panel-'+i);
-    if(p)p.style.display=i===n?'grid':'none';
-    var t=document.getElementById('ar-tab-'+i);
-    if(t){
-      if(i===n){t.style.background='rgba(245,158,11,.1)';t.style.borderColor='rgba(245,158,11,.2)';t.style.color='#f59e0b';t.style.fontWeight='700'}
-      else{t.style.background='rgba(255,255,255,.02)';t.style.borderColor='rgba(255,255,255,.06)';t.style.color='rgba(255,255,255,.5)';t.style.fontWeight='600'}
-    }
-  }
-}
-var arGames=[
-  [{e:'⚽',n:'Final Kick',d:'Puff to shoot. 1v1 penalty kicks.'},{e:'💣',n:'Hot Potato',d:'Pass the bomb. 3-8 players.'},{e:'🤠',n:'Wild West Duel',d:'Fastest puff wins. Reaction game.'},{e:'🎈',n:'Balloon Pop',d:'Risk vs reward pump game.'},{e:'🎵',n:'Rhythm Puff',d:'Follow the memory sequence.'},{e:'🪢',n:'Tug of War',d:'Team-based puff battle.'}],
-  [{e:'🧠',n:'Vibe Check',d:'Cannabis trivia challenge.'},{e:'🎡',n:'Spin & Win',d:'Wheel of fortune rewards.'},{e:'🎰',n:'Russian Roulette',d:'Elimination. Who survives?'}],
-  [{e:'🏆',n:'Bracket Challenge',d:'Tournament prediction picks.'},{e:'📊',n:'Higher or Lower',d:'Predict the next number.'},{e:'🎯',n:'Daily Picks',d:'Daily predictions for rewards.'}]
-];
-function arenaGame(cat,idx){
-  var g=arGames[cat][idx];if(!g)return;
-  var e=document.getElementById('ar-phone-emoji');if(e)e.textContent=g.e;
-  var n=document.getElementById('ar-phone-name');if(n)n.textContent=g.n;
-  var d=document.getElementById('ar-phone-desc');if(d)d.textContent=g.d;
-}
-
-
-// ═══ MOODI PRO — EXPERT MODES ═══
-var moodiModes=[
-  {e:'✈️',n:'Jet-Lag Recovery',c:'var(--cy)',d:'Gentle CBD-priority delivery with descending heat curve. Designed for post-travel recovery sessions.'},
-  {e:'🚀',n:'Rocket Mode',c:'var(--am)',d:'Maximum output across all tanks. Full power, no restrictions. Short burst sessions for experienced users.'},
-  {e:'⭐',n:'CBD-THC Balance',c:'var(--pu)',d:'Precise 50/50 ratio delivery with AI-optimized heat per extract type. The best of both worlds.'},
-  {e:'☕',n:'Microdose',c:'var(--gn)',d:'Minimum effective delivery. AI calculates lowest output for desired effect. Maximum cartridge longevity.'},
-  {e:'🌀',n:'True Hybrid',c:'var(--pk)',d:'Simultaneous multi-tank delivery with real-time ratio blending. Patent-pending chamber technology.'},
-  {e:'💧',n:'Last-Drop',c:'var(--cy)',d:'AI detects low extract levels and adjusts heat curve to extract maximum value from remaining material.'}
-];
-function moodiMode(n){
-  var d=moodiModes[n];
-  var desc=document.getElementById('moodi-mode-desc');
-  if(desc)desc.innerHTML=d.e+' <strong style="color:'+d.c+'">'+d.n+'</strong> — '+d.d;
-}
-
-
-// Usage Intelligence period toggle
-function uiPeriod(n){
-  var stats=[[121,'4.2s',0],[847,'3.8s',2],[3420,'4.0s',8]];
-  var labels=['Day','Week','Month'];
-  for(var i=0;i<3;i++){
-    var el=document.getElementById('ui-per-'+i);
-    if(i===n){el.style.background='rgba(168,85,247,.1)';el.style.border='1px solid rgba(168,85,247,.2)';el.style.color='var(--pu)';el.style.fontWeight='700'}
-    else{el.style.background='rgba(255,255,255,.02)';el.style.border='1px solid var(--bd)';el.style.color='var(--tx2)';el.style.fontWeight='600'}
-  }
-  var s=stats[n];
-  var pe=document.getElementById('ui-stat-puffs');if(pe)pe.textContent=s[0];
-  var de=document.getElementById('ui-stat-dur');if(de)de.textContent=s[1];
-  var ae=document.getElementById('ui-stat-alert');if(ae)ae.textContent=s[2];
-}
-
-// Authentication step highlight
-function authStep(n){
-  for(var i=0;i<3;i++){
-    var el=document.getElementById('auth-s-'+i);
-    if(i===n){el.style.background='rgba(52,211,153,.08)';el.style.borderColor='rgba(52,211,153,.15)';el.querySelector('div:first-child').style.background='var(--gn)';el.querySelector('div:first-child').style.color='#000'}
-    else{el.style.background='rgba(52,211,153,.03)';el.style.borderColor='rgba(52,211,153,.06)';el.querySelector('div:first-child').style.background='rgba(52,211,153,.2)';el.querySelector('div:first-child').style.color='var(--gn)'}
-  }
-}
-// Security layer selector
-var authLayers=[
-  {proto:'AES-128 CBC',time:'0.2 seconds',hw:'None (BLE built-in)'},
-  {proto:'SHA-256 Hash',time:'0.1 seconds',hw:'Burned at factory'},
-  {proto:'RSA-2048 Sig',time:'0.3 seconds',hw:'Firmware flash'},
-  {proto:'ECDSA P-256',time:'0.2 seconds',hw:'Cartridge chip'}
-];
-function authLayer(n){
-  var d=authLayers[n];
-  document.getElementById('auth-ld-proto').textContent=d.proto;
-  document.getElementById('auth-ld-time').textContent=d.time;
-  document.getElementById('auth-ld-hw').textContent=d.hw;
-  for(var i=0;i<4;i++){
-    var el=document.getElementById('auth-l-'+i);
-    el.style.borderColor=i===n?'rgba(52,211,153,.2)':'var(--bd)';
-  }
-}
-// Supply chain stage selector
-var authChains=[
-  {t:'Manufacturing Stage',d:'Unique device identity and serial number burned into hardware during assembly. Firmware signed with cryptographic key. Cartridge chips programmed with batch and strain data.'},
-  {t:'Distribution Stage',d:'Each shipment batch verified against manufacturing records. Chain of custody logged. Temperature and handling conditions tracked for quality assurance.'},
-  {t:'Retail Stage',d:'Inventory authenticated at point of sale. Retailers can verify stock genuineness. Automated alerts for suspicious patterns or unauthorized resellers.'},
-  {t:'Consumer Stage',d:'Open the app, connect via BLE — device authenticity confirmed instantly. Consumers see firmware version, cartridge origin, and complete verification history.'}
-];
-function authChain(n){
-  var d=authChains[n];
-  document.getElementById('auth-cd-title').textContent=d.t;
-  document.getElementById('auth-cd-desc').textContent=d.d;
-  for(var i=0;i<4;i++){
-    var el=document.getElementById('auth-c-'+i);
-    if(i===n){el.style.background='rgba(168,85,247,.06)';el.style.borderColor='rgba(168,85,247,.15)';el.querySelector('div:last-child').style.color='var(--pu)'}
-    else{el.style.background='rgba(255,255,255,.02)';el.style.borderColor='var(--bd)';el.querySelector('div:last-child').style.color='var(--tx3)'}
-  }
-}
-
-// AI Pipeline detail viewer
-var aiPipes=[
-  {t:'Extract Type Pipeline',d:'Analyzes the chemical composition of the current cartridge — THC percentage, CBD ratio, terpene profile, extraction method (distillate, live resin, liquid diamond, live rosin). Adjusts voltage curves and heating patterns to maximize flavor and efficacy for each specific extract type.'},
-  {t:'Product Profile Pipeline',d:'Cross-references the specific product SKU with manufacturer-provided optimal settings. Strain data (Sativa, Indica, Hybrid), concentration percentage, and recommended temperature ranges are all factored into the output configuration.'},
-  {t:'User Behavior Pipeline',d:'Learns individual draw patterns over time — average draw duration, preferred intensity, frequency patterns, and mode preferences. Builds a personal behavioral profile that gets more accurate with every session.'},
-  {t:'Device State Pipeline',d:'Monitors real-time hardware conditions — battery level, coil temperature, coil resistance, cartridge fill level. Compensates for battery voltage drop and coil aging to maintain consistent delivery quality.'},
-  {t:'Session History Pipeline',d:'Analyzes patterns from past sessions — what modes were used, at what times, for how long. Identifies trends and uses them to predict optimal starting configurations for the current session.'},
-  {t:'Environment Pipeline',d:'Factors in ambient conditions that affect delivery — ambient temperature, estimated altitude (affects boiling points), and humidity. Automatically adjusts voltage curves for consistent experience regardless of environment.'},
-  {t:'Feedback Loop Pipeline',d:'Incorporates explicit and implicit user feedback. If a user adjusts settings after AI configuration, the system learns from the correction. Over time, these micro-adjustments dramatically improve personalization accuracy.'}
-];
-function aiPipe(n){
-  var d=aiPipes[n];
-  document.getElementById('ai-pd-title').textContent=d.t;
-  document.getElementById('ai-pd-desc').textContent=d.d;
-  var colors=['var(--pk)','var(--pu)','var(--cy)','var(--gn)','var(--am)','var(--cy)','var(--pk)'];
-  document.getElementById('ai-pd-title').style.color=colors[n];
-  for(var i=0;i<7;i++){
-    var el=document.getElementById('ai-p-'+i);
-    el.style.borderColor=i===n?colors[i].replace('var(','rgba(').replace('--pk','236,72,153').replace('--pu','168,85,247').replace('--cy','0,232,255').replace('--gn','52,211,153').replace('--am','245,158,11').replace(')',',.2)'):'var(--bd)';
-  }
-}
-// Adaptive learning stage highlight
-function aiLearn(n){
-  var colors=['rgba(245,158,11,.15)','rgba(168,85,247,.15)','rgba(52,211,153,.15)'];
-  for(var i=0;i<3;i++){
-    document.getElementById('ai-ln-'+i).style.borderColor=i===n?colors[i]:'var(--bd)';
-  }
-}
-
-// OTA strategy selector
-function fwOta(n){
-  var colors=['rgba(0,232,255,.15)','rgba(168,85,247,.15)','rgba(236,72,153,.15)'];
-  for(var i=0;i<3;i++){
-    document.getElementById('fw-ota-'+i).style.borderColor=i===n?colors[i]:'var(--bd)';
-  }
-}
-
-// Moodi Pro screen carousel
-function moodiScreen(n){
-  var colors=[['rgba(0,232,255,.1)','rgba(0,232,255,.2)','var(--cy)'],['rgba(168,85,247,.1)','rgba(168,85,247,.2)','var(--pu)'],['rgba(245,158,11,.1)','rgba(245,158,11,.2)','var(--am)']];
-  for(var i=0;i<3;i++){
-    var tab=document.getElementById('md-scr-'+i);
-    var ph=document.getElementById('md-ph-'+i);
-    if(i===n){tab.style.background=colors[i][0];tab.style.borderColor=colors[i][1];tab.style.color=colors[i][2];tab.style.fontWeight='700';if(ph){ph.style.transform='scale(1)';ph.style.opacity='1';ph.style.zIndex='2'}}
-    else{tab.style.background='rgba(255,255,255,.02)';tab.style.borderColor='var(--bd)';tab.style.color='var(--tx2)';tab.style.fontWeight='600';if(ph){ph.style.transform=i<n?'rotateY(15deg) scale(.88)':'rotateY(-15deg) scale(.88)';ph.style.opacity='.6';ph.style.zIndex='1'}}
-  }
-}
-
-// Brand app slider
-function brandSlide(n){
-  var colors=[['rgba(0,232,255,.1)','rgba(0,232,255,.2)','var(--cy)'],['rgba(168,85,247,.1)','rgba(168,85,247,.2)','var(--pu)'],['rgba(245,158,11,.1)','rgba(245,158,11,.2)','var(--am)']];
-  for(var i=0;i<3;i++){
-    var tab=document.getElementById('br-sl-'+i);
-    var ph=document.getElementById('br-ph-'+i);
-    if(i===n){tab.style.background=colors[i][0];tab.style.borderColor=colors[i][1];tab.style.color=colors[i][2];tab.style.fontWeight='700';if(ph){ph.style.transform='scale(.85)';ph.style.opacity='1'}}
-    else{tab.style.background='rgba(255,255,255,.02)';tab.style.borderColor='var(--bd)';tab.style.color='var(--tx2)';tab.style.fontWeight='600';if(ph){ph.style.transform='scale(.75)';ph.style.opacity='.4'}}
-  }
-}
-
-// Sub-nav section highlighting with IntersectionObserver
-(function(){
-  var subnavs = document.querySelectorAll('[style*="position:sticky"][style*="top:68px"]');
-  subnavs.forEach(function(nav){
-    var links = nav.querySelectorAll('a[onclick*="scrollIntoView"]');
-    if(!links.length) return;
-    var sectionIds = [];
-    links.forEach(function(link){
-      var match = link.getAttribute('onclick').match(/getElementById\('([^']+)'\)/);
-      if(match) sectionIds.push(match[1]);
-    });
-    var observer = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          var idx = sectionIds.indexOf(entry.target.id);
-          if(idx === -1) return;
-          links.forEach(function(l,i){
-            if(i===idx){
-              l.style.borderBottomColor = l.dataset.activeColor || 'var(--cy)';
-              l.style.background = l.dataset.activeBg || 'rgba(0,232,255,.04)';
-            } else {
-              l.style.borderBottomColor = 'transparent';
-              l.style.background = 'transparent';
-            }
-          });
-        }
-      });
-    },{threshold:0.3, rootMargin:'-80px 0px -50% 0px'});
-    sectionIds.forEach(function(id){
-      var el = document.getElementById(id);
-      if(el) observer.observe(el);
-    });
-    // Store colors from hover events for use by observer
-    links.forEach(function(link){
-      var hover = link.getAttribute('onmouseover') || '';
-      var bgMatch = hover.match(/background='([^']+)'/);
-      var borderMatch = hover.match(/borderBottomColor='([^']+)'/);
-      if(bgMatch) link.dataset.activeBg = bgMatch[1];
-      if(borderMatch) link.dataset.activeColor = borderMatch[1];
-    });
-  });
-})();
-
-// Mobile swipe navigation
-(function(){
-  var startX=0,startY=0,startTime=0;
-  var pages=['home','sc','ui','auth','ai','fw','arena','live','moodi','fusiq','brand','factory','venue','about','support','contact'];
-  document.addEventListener('touchstart',function(e){
-    startX=e.touches[0].clientX;startY=e.touches[0].clientY;startTime=Date.now();
-  },{passive:true});
-  document.addEventListener('touchend',function(e){
-    var dx=e.changedTouches[0].clientX-startX;
-    var dy=e.changedTouches[0].clientY-startY;
-    var dt=Date.now()-startTime;
-    // Only trigger on horizontal swipe (>80px, <300ms, mostly horizontal)
-    if(Math.abs(dx)>80 && Math.abs(dx)>Math.abs(dy)*1.5 && dt<300){
-      // Don't swipe if interacting with slider or carousel
-      if(e.target.closest('.rbd-slider,.phone-carousel,#app4-wrap')) return;
-      var current=document.querySelector('.pg.on');
-      if(!current) return;
-      var currentId=current.id.replace('p-','');
-      var idx=pages.indexOf(currentId);
-      if(idx===-1) return;
-      if(dx>0 && idx>0) go(pages[idx-1]); // swipe right = prev
-      else if(dx<0 && idx<pages.length-1) go(pages[idx+1]); // swipe left = next
-    }
-  },{passive:true});
-})();
-
-
-
-// Jump slider to position (with smooth animation)
-function rbdJump(targetX){
-  var slider=document.getElementById('rbdSlider');
-  if(!slider)return;
-  var handle=document.getElementById('rbdHandle');
-  var afterImg=slider.querySelector('.rbd-after');
-  var hint=document.getElementById('rbdHint');
-  if(hint)hint.style.display='none';
-  // Animate smoothly
-  handle.style.transition='left .5s cubic-bezier(.22,1,.36,1)';
-  handle.style.left=(targetX*100)+'%';
-  afterImg.style.transition='clip-path .5s cubic-bezier(.22,1,.36,1)';
-  afterImg.style.clipPath='inset(0 0 0 '+(targetX*100)+'%)';
-  // Update zones
-  var zones=['rbd-zone-0','rbd-zone-1','rbd-zone-2'];
-  var solBgs=['rgba(52,211,153,.04)','rgba(168,85,247,.04)','rgba(0,232,255,.04)'];
-  var solBorders=['rgba(52,211,153,.4)','rgba(168,85,247,.4)','rgba(0,232,255,.4)'];
-  var zoneEdges=[0.01,0.33,0.66];
-  zones.forEach(function(id,i){
-    var z=document.getElementById(id);if(!z)return;
-    var pairs=z.querySelectorAll('.rbd-pair');
-    var isRevealed=targetX>zoneEdges[i];
-    pairs.forEach(function(pair){
-      var bm=pair.querySelector('.rbd-before-msg');
-      var am=pair.querySelector('.rbd-after-msg');
-      if(isRevealed){if(bm)bm.style.display='none';if(am)am.style.display='flex'}
-      else{if(bm)bm.style.display='flex';if(am)am.style.display='none'}
-    });
-    z.style.background=isRevealed?solBgs[i]:'transparent';
-    z.style.borderBottom=isRevealed?'2px solid '+solBorders[i]:'2px solid transparent';
-  });
-  // Remove transition after animation completes
-  setTimeout(function(){
-    handle.style.transition='none';
-    afterImg.style.transition='none';
-  },550);
-}
-// Before/After slider drag
-function rbdDrag(e){
-  e.preventDefault();
-  var slider=document.getElementById('rbdSlider');
-  if(!slider)return;
-  var handle=document.getElementById('rbdHandle');
-  var afterImg=slider.querySelector('.rbd-after');
-  var zones=['rbd-zone-0','rbd-zone-1','rbd-zone-2'];
-  var solBgs=['rgba(52,211,153,.04)','rgba(168,85,247,.04)','rgba(0,232,255,.04)'];
-  var solBorders=['rgba(52,211,153,.4)','rgba(168,85,247,.4)','rgba(0,232,255,.4)'];
-
-  function updateZones(x){
-    // clip-path:inset(0 0 0 X%) clips After from LEFT
-    // So After image is visible from X% to 100% (right side)
-    // Zone 2 (right, 66-100%) reveals first as handle moves left
-    // Zone 1 (center, 33-66%) reveals next
-    // Zone 0 (left, 0-33%) reveals last
-    // Zone is "revealed" when handle position < zone's right edge
-    var zoneEdges=[0.01, 0.33, 0.66]; // left edge of each zone
-    zones.forEach(function(id,i){
-      var z=document.getElementById(id);
-      if(!z)return;
-      var pairs=z.querySelectorAll('.rbd-pair');
-      var isRevealed = x > zoneEdges[i]; // lights up when slider enters zone
-      pairs.forEach(function(pair){
-        var bm=pair.querySelector('.rbd-before-msg');
-        var am=pair.querySelector('.rbd-after-msg');
-        if(isRevealed){
-          if(bm)bm.style.display='none';
-          if(am)am.style.display='flex';
-        }else{
-          if(bm)bm.style.display='flex';
-          if(am)am.style.display='none';
-        }
-      });
-      if(isRevealed){
-        z.style.background=solBgs[i];
-        z.style.borderBottom='2px solid '+solBorders[i];
-      }else{
-        z.style.background='transparent';
-        z.style.borderBottom='2px solid transparent';
-      }
-    });
-  }
-
-  function move(ev){
-    var rect=slider.getBoundingClientRect();
-    var clientX=ev.touches?ev.touches[0].clientX:ev.clientX;
-    var x=(clientX-rect.left)/rect.width;
-    x=Math.max(0.01,Math.min(0.99,x));
-    handle.style.left=(x*100)+'%';
-    var hint=document.getElementById('rbdHint');if(hint)hint.style.display='none';
-    afterImg.style.clipPath='inset(0 0 0 '+(x*100)+'%)';
-    updateZones(x);
-  }
-  function up(){
-    document.removeEventListener('mousemove',move);
-    document.removeEventListener('mouseup',up);
-    document.removeEventListener('touchmove',move);
-    document.removeEventListener('touchend',up);
-  }
-  document.addEventListener('mousemove',move);
-  document.addEventListener('mouseup',up);
-  document.addEventListener('touchmove',move,{passive:false});
-  document.addEventListener('touchend',up);
-}
-// Touch + click on slider for mobile support
-(function(){
-  var s=document.getElementById('rbdSlider');
-  if(!s)return;
-  s.addEventListener('touchstart',function(e){rbdDrag(e)},{passive:false});
-  s.addEventListener('click',function(e){
-    var rect=s.getBoundingClientRect();
-    var x=(e.clientX-rect.left)/rect.width;
-    x=Math.max(0.01,Math.min(0.99,x));
-    var h=document.getElementById('rbdHandle');
-    var a=s.querySelector('.rbd-after');
-    if(h)h.style.left=(x*100)+'%';
-    var hint=document.getElementById('rbdHint');if(hint)hint.style.display='none';
-    if(a)a.style.clipPath='inset(0 0 0 '+(x*100)+'%)';
-    // Zone update — same logic as updateZones(x)
-    var zones=['rbd-zone-0','rbd-zone-1','rbd-zone-2'];
-    var solBgs=['rgba(52,211,153,.04)','rgba(168,85,247,.04)','rgba(0,232,255,.04)'];
-    var solBorders=['rgba(52,211,153,.4)','rgba(168,85,247,.4)','rgba(0,232,255,.4)'];
-    var zoneEdges=[0.01,0.33,0.66];
-    zones.forEach(function(id,i){
-      var z=document.getElementById(id);if(!z)return;
-      var pairs=z.querySelectorAll('.rbd-pair');
-      var isRevealed=x>zoneEdges[i];
-      pairs.forEach(function(pair){
-        var bm=pair.querySelector('.rbd-before-msg');
-        var am=pair.querySelector('.rbd-after-msg');
-        if(isRevealed){if(bm)bm.style.display='none';if(am)am.style.display='flex'}
-        else{if(bm)bm.style.display='flex';if(am)am.style.display='none'}
-      });
-      z.style.background=isRevealed?solBgs[i]:'transparent';
-      z.style.borderBottom=isRevealed?'2px solid '+solBorders[i]:'2px solid transparent';
-    });
-  });
-})();
-
-
-// Lazy load: play card videos only when scrolled into view on mobile
-if(window.innerWidth<600){
-  var vo=new IntersectionObserver(function(es){es.forEach(function(e){
-    var v=e.target.querySelector('video');if(!v)return;
-    if(e.isIntersecting)v.play().catch(function(){});else v.pause();
-  })},{threshold:0.1});
-  document.querySelectorAll('.img-card').forEach(function(c){vo.observe(c)});
-}
-
-
-// Desktop: play card videos on hover
-if(window.innerWidth>=600){
-  document.querySelectorAll('.img-card video').forEach(function(v){
-    var card=v.closest('.img-card');
-    if(!card)return;
-    var origOpacity=v.style.opacity||'.4';
-    card.addEventListener('mouseenter',function(){
-      v.style.opacity='.9';
-      v.play().catch(function(){});
-    });
-    card.addEventListener('mouseleave',function(){
-      v.pause();
-      v.currentTime=0;
-      v.style.opacity=origOpacity;
-    });
-  });
-}
-
-// Fix sub-nav sticky: use JS-based fixed positioning
-(function(){
-  var subnavs=[];
-  document.querySelectorAll('[style*="position:sticky"][style*="top:68px"]').forEach(function(nav){
-    var placeholder=document.createElement('div');
-    placeholder.style.display='none';
-    nav.parentNode.insertBefore(placeholder,nav);
-    subnavs.push({nav:nav,placeholder:placeholder,origTop:0});
-  });
-  function updateSubnavs(){
-    subnavs.forEach(function(item){
-      var pg=item.nav.closest('.pg');
-      if(!pg||!pg.classList.contains('on'))return;
-      if(!item.origTop||item.placeholder.style.display==='none'){
-        item.nav.classList.remove('subnav-fixed');
-        item.placeholder.style.display='none';
-        var rect=item.nav.getBoundingClientRect();
-        item.origTop=window.scrollY+rect.top;
-      }
-      if(window.scrollY>item.origTop-68){
-        if(!item.nav.classList.contains('subnav-fixed')){
-          item.placeholder.style.display='block';
-          item.placeholder.style.height=item.nav.offsetHeight+'px';
-          item.nav.classList.add('subnav-fixed');
-        }
-      }else{
-        item.nav.classList.remove('subnav-fixed');
-        item.placeholder.style.display='none';
-      }
-    });
-  }
-  window.addEventListener('scroll',updateSubnavs,{passive:true});
-  // Reset on page change
-  var origGo=window.go;
-  if(origGo){
-    window.go=function(id){
-      subnavs.forEach(function(item){
-        item.nav.classList.remove('subnav-fixed');
-        item.placeholder.style.display='none';
-        item.origTop=0;
-      });
-      origGo(id);
-      setTimeout(function(){
-        subnavs.forEach(function(item){item.origTop=0});
-      },100);
-    };
-  }
-})();
-
-// Mobile phone-first: make phones sticky on mobile
-(function(){
-  function setupStickyPhones(){
-    var isMobile=window.innerWidth<600;
-    document.querySelectorAll('.phone').forEach(function(phone){
-      var parent=phone.parentElement;
-      if(!parent)return;
-      var style=parent.getAttribute('style')||'';
-      var isInGrid=style.indexOf('grid-template-columns:1fr 3')!==-1||
-                   style.indexOf('grid-template-columns:1fr 2')!==-1;
-      if(isInGrid&&isMobile){
-        phone.classList.add('phone-sticky-mobile');
-      }else{
-        phone.classList.remove('phone-sticky-mobile');
-      }
-    });
-  }
-  setupStickyPhones();
-  window.addEventListener('resize',setupStickyPhones);
-  // Re-run on page change
-  var _origGo2=window.go;
-  if(_origGo2){
-    window.go=function(id){
-      _origGo2(id);
-      setTimeout(setupStickyPhones,200);
-    };
-  }
-})();
-
-// SC Pro Modes - update app screen
-var scProData=[
-  {e:'🚀',n:'Beast Mode',c:'#fb923c',d:'Maximum power. AI compensates as battery drops.',t:'ALL TANKS → INTENSE',bg:'rgba(251,146,60,'},
-  {e:'🌿',n:'Eco Mode',c:'var(--gn)',d:'Minimal activation. Extends battery and cartridge life.',t:'ALL TANKS → CHILL',bg:'rgba(52,211,153,'},
-  {e:'⚖️',n:'Balance Mode',c:'#60a5fa',d:'Equal power across all tanks. Consistent delivery.',t:'ALL TANKS → MEDIUM',bg:'rgba(96,165,250,'},
-  {e:'✨',n:'Microdose',c:'var(--pu)',d:'Ultra-low activation. Barely-there delivery for micro-sessions.',t:'MINIMAL ACTIVATION',bg:'rgba(168,85,247,'}
-];
-function scSetPro(n){
   var d=scProData[n];
-  var se=document.getElementById('pm-sim-emoji');if(se)se.textContent=d.e;
-  var sm=document.getElementById('pm-sim-mode');if(sm){sm.textContent=d.n.replace(' Mode','');sm.style.color=d.c}
+  // Update slider
+  document.querySelectorAll('.pro-slide').forEach(function(s,i){s.style.opacity=i===n?'1':'0'});
+  document.querySelectorAll('.pro-dot').forEach(function(dot,i){
+    dot.style.width=i===n?'8px':'6px';dot.style.height=i===n?'8px':'6px';
+    dot.style.background=i===n?'rgba(255,255,255,.8)':'rgba(255,255,255,.3)';
+    dot.style.marginTop=i===n?'0':'1px';
+  });
+  // Update app screen
   document.getElementById('pm-screen-emoji').textContent=d.e;
-  document.getElementById('pm-screen-name').textContent=d.n;
-  document.getElementById('pm-screen-name').style.color=d.c;
+  var sn=document.getElementById('pm-screen-name');sn.textContent=d.n;sn.style.color=d.c;
   document.getElementById('pm-screen-desc').textContent=d.d;
-  for(var i=0;i<4;i++){
-    var card=document.getElementById('pm-card-'+i);
-    card.style.background=i===n?d.bg+'.06)':'rgba(255,255,255,.02)';
-    card.style.borderColor=i===n?d.bg+'.15)':'var(--bd)';
-  }
+  // Update tank levels
+  var tanks=[['MAX','MAX','MAX'],['CHILL','CHILL','CHILL'],['MED','MED','MED'],['MIN','MIN','MIN']];
+  var t=tanks[n];
+  var t1=document.getElementById('pm-ph-t1');if(t1)t1.textContent=t[0];
+  var t2=document.getElementById('pm-ph-t2');if(t2)t2.textContent=t[1];
+  var t3=document.getElementById('pm-ph-t3');if(t3)t3.textContent=t[2];
 }
 
 // SC Mood Modes
@@ -4376,15 +3786,18 @@ var scMoodData=[
 ];
 function scMood(n){
   var d=scMoodData[n];
-  // Update info panel
-  document.getElementById('mood-screen-emoji').textContent=d.e;
-  document.getElementById('mood-screen-name').textContent=d.n;
-  document.getElementById('mood-screen-name').style.color=d.c;
-  document.getElementById('mood-screen-config').textContent=d.cfg;
-  document.getElementById('mood-screen-desc').textContent=d.desc;
-  var panel=document.getElementById('mood-info-panel');
-  panel.style.background='linear-gradient(135deg,'+d.bg+'.04),'+d.bg+'.01))';
-  panel.style.borderColor=d.bg+'.08)';
+  // Update image slider
+  document.querySelectorAll('.mood-slide').forEach(function(s,i){s.style.opacity=i===n?'1':'0'});
+  document.querySelectorAll('.mood-dot').forEach(function(dot,i){
+    dot.style.width=i===n?'8px':'6px';dot.style.height=i===n?'8px':'6px';
+    dot.style.background=i===n?'rgba(255,255,255,.8)':'rgba(255,255,255,.3)';
+    dot.style.marginTop=i===n?'0':'1px';
+  });
+  // Update overlay text
+  var se=document.getElementById('mood-sl-emoji');if(se)se.textContent=d.e;
+  var sn=document.getElementById('mood-sl-name');if(sn){sn.textContent=d.n;sn.style.color=d.c}
+  var sc=document.getElementById('mood-sl-cfg');if(sc)sc.textContent=d.cfg;
+  var sd=document.getElementById('mood-sl-desc');if(sd)sd.textContent=d.desc;
   // Update phone screen
   var pe=document.getElementById('mood-ph-emoji');if(pe)pe.textContent=d.e;
   var pn=document.getElementById('mood-ph-name');if(pn){pn.textContent=d.n;pn.style.color=d.c}
@@ -4395,16 +3808,6 @@ function scMood(n){
   for(var i=0;i<4;i++){var bar=document.getElementById('mood-bar-'+i);if(bar)bar.style.width=b[i]+'%'}
   // Update glow
   var glow=document.getElementById('mood-phone-glow');if(glow)glow.style.background='radial-gradient(circle,'+d.bg+'.06),transparent 70%)';
-  // Update mood image
-  var moodImgs=['https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80','https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80','https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80','https://images.unsplash.com/photo-1455642305367-68834a1da7ab?w=600&q=80','https://images.unsplash.com/photo-1529543544282-ea57407bc2f7?w=600&q=80','https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80','https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80'];
-  var mimg=document.getElementById('mood-img');if(mimg){mimg.style.opacity=0;setTimeout(function(){mimg.src=moodImgs[n];mimg.style.opacity=1},300)}
-  // Update buttons
-  for(var i=0;i<7;i++){
-    var btn=document.getElementById('mood-btn-'+i);
-    btn.style.background=i===n?scMoodData[i].bg+'.08)':'rgba(255,255,255,.02)';
-    btn.style.borderColor=i===n?scMoodData[i].bg+'.2)':'var(--bd)';
-    btn.querySelector('div:last-child').style.color=i===n?scMoodData[i].c:'var(--tx3)';
-  }
 }
 
 // SC Pro Tools
@@ -4458,6 +3861,23 @@ function focusTool(n){
   });
   document.querySelectorAll('.tool-desc').forEach(function(d,i){d.style.display=i===n?'block':'none'});
 }
+
+// Swipe gestures for mood and pro sliders
+(function(){
+  var moodIdx=0,proIdx=0;
+  function addSwipe(el,onSwipe){
+    var sx=0;
+    el.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+    el.addEventListener('touchend',function(e){
+      var dx=e.changedTouches[0].clientX-sx;
+      if(Math.abs(dx)>40)onSwipe(dx<0?1:-1);
+    },{passive:true});
+  }
+  var mw=document.getElementById('mood-slider-wrap');
+  if(mw)addSwipe(mw,function(dir){moodIdx=Math.max(0,Math.min(6,moodIdx+dir));scMood(moodIdx)});
+  var pw=document.getElementById('pro-slider-wrap');
+  if(pw)addSwipe(pw,function(dir){proIdx=Math.max(0,Math.min(3,proIdx+dir));scSetPro(proIdx)});
+})();
 </script>
 </body>
 </html>
