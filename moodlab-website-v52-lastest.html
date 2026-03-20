@@ -1784,8 +1784,15 @@ footer{grid-template-columns:1fr!important;gap:24px}
   <h2 class="h3 rv" data-d="1">Data That Drives <span class="se" style="color:var(--gn)">Decisions.</span></h2>
   <p class="p1 rv" data-d="2" style="margin-bottom:40px;max-width:600px">Every data point feeds into a brand-level analytics dashboard. Understand your customers like never before — without asking a single question.</p>
 
-  <!-- Image hero card -->
-  <div class="img-card rv" style="height:280px;margin-bottom:40px;cursor:default"><img src="Media/Image/a-cinematic-abstract-data-visualization-_YFyCrRE6QhaMHtvuQGzCEg_snim8wgDRBKtzGrdhLZGEg_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35" loading="lazy"><div class="img-card-content"><h3>Brand Analytics Dashboard</h3><p>Real-time insights across your entire device fleet</p></div></div>
+  <!-- Image Slider -->
+  <div class="rv" style="position:relative;border-radius:20px;overflow:hidden;aspect-ratio:2/1;margin-bottom:40px;cursor:grab" id="ui-bi-slider">
+    <img class="ui-bi-slide" data-idx="0" src="Media/Image/a-cinematic-abstract-data-visualization-_YFyCrRE6QhaMHtvuQGzCEg_snim8wgDRBKtzGrdhLZGEg_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:1" loading="lazy" alt="Analytics">
+    <img class="ui-bi-slide" data-idx="1" src="Media/Image/a-wide-panoramic-holographic-analytics-d_Jucm4MqDTx-0srJwHOQpqg_1SbMusCdRgaoqEIdEmwLFQ_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" loading="lazy" alt="Dashboard">
+    <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,2,5,.7) 0%,transparent 50%);pointer-events:none"></div>
+    <div style="position:absolute;bottom:16px;left:20px;z-index:2"><h3 style="font-size:20px;font-weight:900">Brand Analytics Dashboard</h3><p style="font-size:11px;color:rgba(255,255,255,.6)">Real-time insights across your entire device fleet</p></div>
+    <div style="position:absolute;bottom:16px;right:16px;display:flex;gap:8px;z-index:2"><div class="ui-bi-dot" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.8);cursor:pointer" onclick="uiBiSlide(0)"></div><div class="ui-bi-dot" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;margin-top:1px" onclick="uiBiSlide(1)"></div></div>
+  </div>
+  <div class="img-card rv" style="height:0;margin-bottom:0;display:none"><img src="Media/Image/a-cinematic-abstract-data-visualization-_YFyCrRE6QhaMHtvuQGzCEg_snim8wgDRBKtzGrdhLZGEg_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35" loading="lazy"><div class="img-card-content"><h3>Brand Analytics Dashboard</h3><p>Real-time insights across your entire device fleet</p></div></div>
 
   <!-- 2x2 insight grid -->
   <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px">
@@ -1917,8 +1924,15 @@ footer{grid-template-columns:1fr!important;gap:24px}
   <h2 class="h3 rv" data-d="1">Four Layers of <span class="se" style="color:var(--cy)">Protection.</span></h2>
   <p class="p1 rv" data-d="2" style="margin-bottom:40px;max-width:600px">Every connection passes through four independent security layers. No single point of failure. No additional hardware cost.</p>
 
-  <!-- Image background -->
-  <div class="img-card rv" style="height:240px;margin-bottom:40px;cursor:default"><img src="Media/Image/a-macro-photograph-of-a-microcontroller-_YrRqE1g6QrSo2cn1oJVKzg_BMOT-m06RYea21-TOYjvJQ_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3" loading="lazy"><div class="img-card-content"><h3>Zero Additional Hardware</h3><p>Security built into the BLE protocol layer — no NFC chips, no extra sensors, no added BOM cost</p></div></div>
+  <!-- Image Slider -->
+  <div class="rv" style="position:relative;border-radius:20px;overflow:hidden;aspect-ratio:2/1;margin-bottom:40px;cursor:grab" id="auth-img-slider">
+    <img class="auth-img-slide" data-idx="0" src="Media/Image/a-macro-photograph-of-a-microcontroller-_YrRqE1g6QrSo2cn1oJVKzg_BMOT-m06RYea21-TOYjvJQ_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:1" loading="lazy" alt="Security">
+    <img class="auth-img-slide" data-idx="1" src="Media/Image/a-close-up-industrial-photography-shot-o_djEdhnBuRiOxIOgNYT1J-Q_oyTxAsRnS6ikNo3qy3-wWw_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" loading="lazy" alt="Hardware">
+    <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,2,5,.7) 0%,transparent 50%);pointer-events:none"></div>
+    <div style="position:absolute;bottom:16px;left:20px;z-index:2"><h3 style="font-size:20px;font-weight:900">Zero Additional Hardware</h3><p style="font-size:11px;color:rgba(255,255,255,.6)">Security built into the BLE protocol layer</p></div>
+    <div style="position:absolute;bottom:16px;right:16px;display:flex;gap:8px;z-index:2"><div class="auth-img-dot" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.8);cursor:pointer" onclick="authImgSlide(0)"></div><div class="auth-img-dot" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;margin-top:1px" onclick="authImgSlide(1)"></div></div>
+  </div>
+  <div class="img-card rv" style="height:0;display:none"><img src="Media/Image/a-macro-photograph-of-a-microcontroller-_YrRqE1g6QrSo2cn1oJVKzg_BMOT-m06RYea21-TOYjvJQ_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3" loading="lazy"><div class="img-card-content"><h3>Zero Additional Hardware</h3><p>Security built into the BLE protocol layer — no NFC chips, no extra sensors, no added BOM cost</p></div></div>
 
   <!-- 4 interactive security layers -->
   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
@@ -2121,8 +2135,15 @@ footer{grid-template-columns:1fr!important;gap:24px}
   <h2 class="h3 rv" data-d="1">7 Pipelines. <span class="se" style="color:var(--cy)">Real-Time Processing.</span></h2>
   <p class="p1 rv" data-d="2" style="margin-bottom:40px;max-width:600px">Each mood preset is computed from 7 independent data pipelines running simultaneously. Every pipeline contributes different context to the final output configuration.</p>
 
-  <!-- Image section -->
-  <div class="img-card rv" style="height:240px;margin-bottom:40px;cursor:default"><img src="Media/Image/a-cinematic-abstract-data-visualization-_tmPlHWqgQ2KJ_OdnICwfZQ_q-Af5XIgTiewgMPvLe2yQw_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3" loading="lazy"><div class="img-card-content"><h3>7 Data Pipelines</h3><p>Extract type · Product profile · User behavior · Device state · Session history · Environment · Feedback loops</p></div></div>
+  <!-- Image Slider -->
+  <div class="rv" style="position:relative;border-radius:20px;overflow:hidden;aspect-ratio:2/1;margin-bottom:40px;cursor:grab" id="ai-img-slider">
+    <img class="ai-img-slide" data-idx="0" src="Media/Image/a-cinematic-abstract-data-visualization-_tmPlHWqgQ2KJ_OdnICwfZQ_q-Af5XIgTiewgMPvLe2yQw_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:1" loading="lazy" alt="Data Visualization">
+    <img class="ai-img-slide" data-idx="1" src="Media/Image/a-premium-abstract-composition-featuring_-aHNtxeKSxWK9LxvcvUtTw_b8L_P3wFT4CzD3V97PQO5Q_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" loading="lazy" alt="AI Processing">
+    <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,2,5,.7) 0%,transparent 50%);pointer-events:none"></div>
+    <div style="position:absolute;bottom:16px;left:20px;z-index:2"><h3 style="font-size:20px;font-weight:900">7 Data Pipelines</h3><p style="font-size:11px;color:rgba(255,255,255,.6)">Real-time context analysis for every session</p></div>
+    <div style="position:absolute;bottom:16px;right:16px;display:flex;gap:8px;z-index:2"><div class="ai-img-dot" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.8);cursor:pointer" onclick="aiImgSlide(0)"></div><div class="ai-img-dot" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;margin-top:1px" onclick="aiImgSlide(1)"></div></div>
+  </div>
+  <div class="img-card rv" style="height:0;display:none"><img src="Media/Image/a-cinematic-abstract-data-visualization-_tmPlHWqgQ2KJ_OdnICwfZQ_q-Af5XIgTiewgMPvLe2yQw_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3" loading="lazy"><div class="img-card-content"><h3>7 Data Pipelines</h3><p>Extract type · Product profile · User behavior · Device state · Session history · Environment · Feedback loops</p></div></div>
 
   <!-- Pipeline cards -->
   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
@@ -2311,8 +2332,15 @@ footer{grid-template-columns:1fr!important;gap:24px}
   <h2 class="h3 rv" data-d="1">26+ Modules. <span class="se" style="color:var(--pu)">Pick What You Need.</span></h2>
   <p class="p1 rv" data-d="2" style="margin-bottom:40px;max-width:600px">Every feature in the Mood Lab ecosystem is a toggleable module. Core safety features are auto-included. Everything else — you choose. Mix and match for any product.</p>
 
-  <!-- Image bg -->
-  <div class="img-card rv" style="height:240px;margin-bottom:40px;cursor:default"><img src="Media/Image/a-close-up-industrial-photography-shot-o_djEdhnBuRiOxIOgNYT1J-Q_oyTxAsRnS6ikNo3qy3-wWw_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3" loading="lazy"><div class="img-card-content"><h3>Config-Driven Architecture</h3><p>Every module is independent · Toggle on/off · No code changes required</p></div></div>
+  <!-- Image Slider -->
+  <div class="rv" style="position:relative;border-radius:20px;overflow:hidden;aspect-ratio:2/1;margin-bottom:40px;cursor:grab" id="fw-img-slider">
+    <img class="fw-img-slide" data-idx="0" src="Media/Image/a-close-up-industrial-photography-shot-o_djEdhnBuRiOxIOgNYT1J-Q_oyTxAsRnS6ikNo3qy3-wWw_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:1" loading="lazy" alt="Hardware">
+    <img class="fw-img-slide" data-idx="1" src="Media/Image/a-birds-eye-architectural-photograph-of-_0KtnSnImSgS0US3pVc_J8Q_m05zrGX0Rb--HamwXa8uIA_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" loading="lazy" alt="Factory">
+    <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,2,5,.7) 0%,transparent 50%);pointer-events:none"></div>
+    <div style="position:absolute;bottom:16px;left:20px;z-index:2"><h3 style="font-size:20px;font-weight:900">Config-Driven Architecture</h3><p style="font-size:11px;color:rgba(255,255,255,.6)">Every module is independent · Toggle on/off</p></div>
+    <div style="position:absolute;bottom:16px;right:16px;display:flex;gap:8px;z-index:2"><div class="fw-img-dot" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.8);cursor:pointer" onclick="fwImgSlide(0)"></div><div class="fw-img-dot" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;margin-top:1px" onclick="fwImgSlide(1)"></div></div>
+  </div>
+  <div class="img-card rv" style="height:0;display:none"><img src="Media/Image/a-close-up-industrial-photography-shot-o_djEdhnBuRiOxIOgNYT1J-Q_oyTxAsRnS6ikNo3qy3-wWw_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3" loading="lazy"><div class="img-card-content"><h3>Config-Driven Architecture</h3><p>Every module is independent · Toggle on/off · No code changes required</p></div></div>
 
   <!-- Module categories -->
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
@@ -3900,6 +3928,43 @@ function scBlend(n){
     dot.style.marginTop=i===n?'0':'1px';
   });
 }
+
+// Generic image slider function
+function makeImgSlider(prefix,count){
+  return function(n){
+    document.querySelectorAll('.'+prefix+'-slide').forEach(function(s,i){s.style.opacity=i===n?'1':'0'});
+    document.querySelectorAll('.'+prefix+'-dot').forEach(function(d,i){
+      d.style.width=i===n?'10px':'8px';d.style.height=i===n?'10px':'8px';
+      d.style.background=i===n?'rgba(255,255,255,.8)':'rgba(255,255,255,.25)';
+      d.style.marginTop=i===n?'0':'1px';
+    });
+  };
+}
+var uiBiSlide=makeImgSlider('ui-bi',2);
+var authImgSlide=makeImgSlider('auth-img',2);
+var aiImgSlide=makeImgSlider('ai-img',2);
+var fwImgSlide=makeImgSlider('fw-img',2);
+
+// Add swipe/drag to new sliders (after page load)
+setTimeout(function(){
+  var pairs=[
+    ['ui-bi-slider',2,uiBiSlide],
+    ['auth-img-slider',2,authImgSlide],
+    ['ai-img-slider',2,aiImgSlide],
+    ['fw-img-slider',2,fwImgSlide]
+  ];
+  pairs.forEach(function(p){
+    var el=document.getElementById(p[0]);
+    if(!el)return;
+    var idx=0,max=p[1]-1,fn=p[2];
+    var sx=0,dragging=false;
+    el.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+    el.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>30){idx=Math.max(0,Math.min(max,idx+(dx<0?1:-1)));fn(idx)}},{passive:true});
+    el.addEventListener('mousedown',function(e){sx=e.clientX;dragging=true;el.style.cursor='grabbing';e.preventDefault()});
+    el.addEventListener('mouseup',function(e){if(!dragging)return;dragging=false;el.style.cursor='grab';var dx=e.clientX-sx;if(Math.abs(dx)>30){idx=Math.max(0,Math.min(max,idx+(dx<0?1:-1)));fn(idx)}});
+    el.addEventListener('mouseleave',function(){if(dragging){dragging=false;el.style.cursor='grab'}});
+  });
+},500);
 </script>
 </body>
 </html>
