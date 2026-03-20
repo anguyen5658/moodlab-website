@@ -809,8 +809,39 @@ footer{grid-template-columns:1fr!important;gap:24px}
   [style*="max-width:600px"]{max-width:100%!important}
   [style*="max-width:800px"]{max-width:100%!important}
 
-  /* ═══ SC SPECIFIC: Heat level cards — 2 columns ═══ */
+  /* ═══ SC SPECIFIC ═══ */
   .sc-heat-levels{grid-template-columns:1fr 1fr!important}
+
+  /* ═══ PHONE-FIRST LAYOUT ON MOBILE ═══ */
+  /* When grid stacks to column, put phone FIRST so user sees it
+     while scrolling through options below. Uses CSS order. */
+  [style*="grid-template-columns:1fr 320px"],
+  [style*="grid-template-columns:1fr 300px"],
+  [style*="grid-template-columns:1fr 280px"],
+  [style*="grid-template-columns:1fr 260px"],
+  [style*="grid-template-columns:1fr 340px"],
+  [style*="grid-template-columns:1fr 380px"]{
+    display:flex!important;flex-direction:column!important;gap:20px!important
+  }
+  /* Phone mockups come first on mobile */
+  [style*="grid-template-columns:1fr 320px"]>.phone,
+  [style*="grid-template-columns:1fr 300px"]>.phone,
+  [style*="grid-template-columns:1fr 280px"]>.phone,
+  [style*="grid-template-columns:1fr 260px"]>.phone,
+  [style*="grid-template-columns:1fr 340px"]>.phone,
+  [style*="grid-template-columns:1fr 380px"]>.phone,
+  [style*="grid-template-columns:1fr 320px"]>div:last-child,
+  [style*="grid-template-columns:1fr 300px"]>div:last-child,
+  [style*="grid-template-columns:1fr 280px"]>div:last-child,
+  [style*="grid-template-columns:1fr 260px"]>div:last-child{
+    order:-1!important
+  }
+
+  /* Make phone sticky within its container on mobile so it stays visible */
+  .phone-sticky-mobile{
+    position:sticky!important;top:120px!important;z-index:50!important;
+    align-self:flex-start!important
+  }
 }
 
 @media(min-width:600px){
@@ -4451,6 +4482,35 @@ if(window.innerWidth>=600){
       setTimeout(function(){
         subnavs.forEach(function(item){item.origTop=0});
       },100);
+    };
+  }
+})();
+
+// Mobile phone-first: make phones sticky on mobile
+(function(){
+  function setupStickyPhones(){
+    var isMobile=window.innerWidth<600;
+    document.querySelectorAll('.phone').forEach(function(phone){
+      var parent=phone.parentElement;
+      if(!parent)return;
+      var style=parent.getAttribute('style')||'';
+      var isInGrid=style.indexOf('grid-template-columns:1fr 3')!==-1||
+                   style.indexOf('grid-template-columns:1fr 2')!==-1;
+      if(isInGrid&&isMobile){
+        phone.classList.add('phone-sticky-mobile');
+      }else{
+        phone.classList.remove('phone-sticky-mobile');
+      }
+    });
+  }
+  setupStickyPhones();
+  window.addEventListener('resize',setupStickyPhones);
+  // Re-run on page change
+  var _origGo2=window.go;
+  if(_origGo2){
+    window.go=function(id){
+      _origGo2(id);
+      setTimeout(setupStickyPhones,200);
     };
   }
 })();
