@@ -2821,7 +2821,14 @@ footer{grid-template-columns:1fr!important;gap:24px}
       <div class="gc rv" data-d="1" style="padding:24px;margin-bottom:14px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span style="font-size:22px">📊</span><h4 style="font-size:14px;font-weight:800;color:var(--pu)">Precision Heat</h4></div><p style="font-size:12px;color:var(--tx2);line-height:1.6">Full manual voltage. Per-second X-Y graph. Zero AI. App-exclusive for power users.</p></div>
       <div class="gc rv" data-d="2" style="padding:24px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span style="font-size:22px">🧠</span><h4 style="font-size:14px;font-weight:800;color:var(--cy)">Multi-Zone</h4></div><p style="font-size:12px;color:var(--tx2);line-height:1.6">Each slot has independent heating. Different temperatures simultaneously. AI manages thermal balance.</p></div>
     </div>
-    <div class="img-card rv" data-d="2" style="height:400px;cursor:default"><img src="Media/Image/a-wide-panoramic-holographic-analytics-d_Jucm4MqDTx-0srJwHOQpqg_1SbMusCdRgaoqEIdEmwLFQ_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3" loading="lazy"><div class="img-card-content"><h3>Independent Heating Zones</h3><p>AI manages thermal balance across all cartridges</p></div></div>
+    <div class="rv" data-d="2" style="position:relative;border-radius:20px;overflow:hidden;aspect-ratio:2/1;cursor:grab" id="moodi-mod-slider">
+      <img class="moodi-mod-slide" data-idx="0" src="Media/Image/a-wide-panoramic-holographic-analytics-d_Jucm4MqDTx-0srJwHOQpqg_1SbMusCdRgaoqEIdEmwLFQ_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:1" loading="lazy" alt="Holographic">
+      <img class="moodi-mod-slide" data-idx="1" src="Media/Image/a-macro-photograph-of-a-microcontroller-_YrRqE1g6QrSo2cn1oJVKzg_BMOT-m06RYea21-TOYjvJQ_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" loading="lazy" alt="Microcontroller">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,2,5,.7) 0%,transparent 50%);pointer-events:none"></div>
+      <div style="position:absolute;bottom:16px;left:20px;z-index:2"><h3 style="font-size:18px;font-weight:900">Independent Heating Zones</h3><p style="font-size:10px;color:rgba(255,255,255,.6)">AI manages thermal balance</p></div>
+      <div style="position:absolute;bottom:16px;right:16px;display:flex;gap:8px;z-index:2"><div class="moodi-mod-dot" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.8);cursor:pointer" onclick="moodiModSlide(0)"></div><div class="moodi-mod-dot" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;margin-top:1px" onclick="moodiModSlide(1)"></div></div>
+    </div>
+    <div class="img-card rv" data-d="2" style="height:0;display:none"><img src="Media/Image/a-wide-panoramic-holographic-analytics-d_Jucm4MqDTx-0srJwHOQpqg_1SbMusCdRgaoqEIdEmwLFQ_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3" loading="lazy"><div class="img-card-content"><h3>Independent Heating Zones</h3><p>AI manages thermal balance across all cartridges</p></div></div>
   </div>
 </div></section>
 
@@ -3084,8 +3091,15 @@ footer{grid-template-columns:1fr!important;gap:24px}
   <h2 class="h3 rv" data-d="1">We Are Your <span class="se" style="color:var(--cy)">Technology Partner.</span></h2>
   <p class="p1 rv" data-d="2" style="margin-bottom:40px;max-width:600px">We are a technology and software company. We build AI firmware, app platforms, and entertainment ecosystems. We are NOT a hardware manufacturer or your competitor.</p>
 
-  <!-- Image bg -->
-  <div class="img-card rv" style="height:240px;margin-bottom:40px;cursor:default"><img src="Media/Image/a-premium-abstract-composition-featuring_-aHNtxeKSxWK9LxvcvUtTw_b8L_P3wFT4CzD3V97PQO5Q_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3" loading="lazy"><div class="img-card-content"><h3>Technology & Software Partner</h3><p>AI Firmware · Branded App · Analytics · Entertainment Ecosystem</p></div></div>
+  <!-- Image Slider -->
+  <div class="rv" style="position:relative;border-radius:20px;overflow:hidden;aspect-ratio:2/1;margin-bottom:40px;cursor:grab" id="brand-img-slider">
+    <img class="brand-img-slide" data-idx="0" src="Media/Image/a-premium-abstract-composition-featuring_-aHNtxeKSxWK9LxvcvUtTw_b8L_P3wFT4CzD3V97PQO5Q_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:1" loading="lazy" alt="Brand">
+    <img class="brand-img-slide" data-idx="1" src="Media/Image/a-cinematic-abstract-data-visualization-_YFyCrRE6QhaMHtvuQGzCEg_snim8wgDRBKtzGrdhLZGEg_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" loading="lazy" alt="Technology">
+    <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,2,5,.7) 0%,transparent 50%);pointer-events:none"></div>
+    <div style="position:absolute;bottom:16px;left:20px;z-index:2"><h3 style="font-size:20px;font-weight:900">Technology & Software Partner</h3><p style="font-size:11px;color:rgba(255,255,255,.6)">AI Firmware · Branded App · Analytics</p></div>
+    <div style="position:absolute;bottom:16px;right:16px;display:flex;gap:8px;z-index:2"><div class="brand-img-dot" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.8);cursor:pointer" onclick="brandImgSlide(0)"></div><div class="brand-img-dot" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;margin-top:1px" onclick="brandImgSlide(1)"></div></div>
+  </div>
+  <div class="img-card rv" style="height:0;display:none"><img src="Media/Image/a-premium-abstract-composition-featuring_-aHNtxeKSxWK9LxvcvUtTw_b8L_P3wFT4CzD3V97PQO5Q_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3" loading="lazy"><div class="img-card-content"><h3>Technology & Software Partner</h3><p>AI Firmware · Branded App · Analytics · Entertainment Ecosystem</p></div></div>
 
   <!-- VS Compare -->
   <div class="rv" style="display:grid;grid-template-columns:1fr 50px 1fr;gap:0;align-items:stretch">
@@ -3202,7 +3216,14 @@ footer{grid-template-columns:1fr!important;gap:24px}
   <div class="tag rv">01 · Device Compatibility</div>
   <h2 class="h3 rv" data-d="1">50 Models = <span class="se" style="color:var(--am)">1 Engine.</span></h2>
   <p class="p1 rv" data-d="2" style="margin-bottom:40px;max-width:600px">Whether you make disposables or cartridge systems, single-tank or multi-tank — one Firmware Engine handles all variations.</p>
-  <div class="img-card rv" style="height:240px;margin-bottom:40px;cursor:default"><img src="Media/Image/a-birds-eye-architectural-photograph-of-_0KtnSnImSgS0US3pVc_J8Q_m05zrGX0Rb--HamwXa8uIA_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3" loading="lazy"><div class="img-card-content"><h3>Universal Firmware Platform</h3><p>Disposables · Cartridge systems · 1 to 5 tanks · Any form factor</p></div></div>
+  <div class="rv" style="position:relative;border-radius:20px;overflow:hidden;aspect-ratio:2/1;margin-bottom:40px;cursor:grab" id="factory-img-slider">
+    <img class="factory-img-slide" data-idx="0" src="Media/Image/a-birds-eye-architectural-photograph-of-_0KtnSnImSgS0US3pVc_J8Q_m05zrGX0Rb--HamwXa8uIA_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:1" loading="lazy" alt="Factory">
+    <img class="factory-img-slide" data-idx="1" src="Media/Image/a-close-up-industrial-photography-shot-o_djEdhnBuRiOxIOgNYT1J-Q_oyTxAsRnS6ikNo3qy3-wWw_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" loading="lazy" alt="Hardware">
+    <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,2,5,.7) 0%,transparent 50%);pointer-events:none"></div>
+    <div style="position:absolute;bottom:16px;left:20px;z-index:2"><h3 style="font-size:20px;font-weight:900">Universal Firmware Platform</h3><p style="font-size:11px;color:rgba(255,255,255,.6)">Disposables · Cartridge systems · Any form factor</p></div>
+    <div style="position:absolute;bottom:16px;right:16px;display:flex;gap:8px;z-index:2"><div class="factory-img-dot" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.8);cursor:pointer" onclick="factoryImgSlide(0)"></div><div class="factory-img-dot" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;margin-top:1px" onclick="factoryImgSlide(1)"></div></div>
+  </div>
+  <div style="display:none"><img src="Media/Image/a-birds-eye-architectural-photograph-of-_0KtnSnImSgS0US3pVc_J8Q_m05zrGX0Rb--HamwXa8uIA_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3" loading="lazy"><div class="img-card-content"><h3>Universal Firmware Platform</h3><p>Disposables · Cartridge systems · 1 to 5 tanks · Any form factor</p></div></div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
     <div class="gc rv" style="padding:28px"><div style="font-size:28px;margin-bottom:12px">📱</div><h4 style="font-size:14px;font-weight:800;color:var(--cy);margin-bottom:8px">Disposable Devices</h4><p style="font-size:12px;color:var(--tx2);line-height:1.6">1-5 tanks. Fixed configuration at manufacturing. Firmware compiled once, flashed to production line. Users get smart features out of box.</p><div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap"><span style="font-size:9px;padding:4px 8px;border-radius:100px;background:rgba(0,232,255,.06);border:1px solid rgba(0,232,255,.1);color:var(--cy)">1-5 Tanks</span><span style="font-size:9px;padding:4px 8px;border-radius:100px;background:rgba(0,232,255,.06);border:1px solid rgba(0,232,255,.1);color:var(--cy)">Fixed Config</span><span style="font-size:9px;padding:4px 8px;border-radius:100px;background:rgba(0,232,255,.06);border:1px solid rgba(0,232,255,.1);color:var(--cy)">Production Line</span></div></div>
     <div class="gc rv" data-d="1" style="padding:28px"><div style="font-size:28px;margin-bottom:12px">🔄</div><h4 style="font-size:14px;font-weight:800;color:var(--pu);margin-bottom:8px">Cartridge / Pod Systems</h4><p style="font-size:12px;color:var(--tx2);line-height:1.6">Reusable devices. Users swap cartridges. Firmware auto-detects extract type and adjusts. Smart authentication on every cartridge.</p><div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap"><span style="font-size:9px;padding:4px 8px;border-radius:100px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.1);color:var(--pu)">Reusable</span><span style="font-size:9px;padding:4px 8px;border-radius:100px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.1);color:var(--pu)">Auto-Detect</span><span style="font-size:9px;padding:4px 8px;border-radius:100px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.1);color:var(--pu)">Cart Auth</span></div></div>
@@ -3279,7 +3300,14 @@ footer{grid-template-columns:1fr!important;gap:24px}
   <div class="tag rv">01 · Venue Transformation</div>
   <h2 class="h3 rv" data-d="1">Every Zone. <span class="se" style="color:var(--pu)">Intelligent.</span></h2>
   <p class="p1 rv" data-d="2" style="margin-bottom:40px;max-width:600px">Different areas of your venue get different experiences. The bar gets social games. The lounge gets ambient sync. The VIP gets premium everything.</p>
-  <div class="img-card rv" style="height:240px;margin-bottom:40px;cursor:default"><img src="Media/Image/a-wide-panoramic-digital-illustration-of_PtuTV0T4Rg2t3hr57Vxaww_Y1fPXYehTXaCsKBHlUUtBQ_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3" loading="lazy"><div class="img-card-content"><h3>Smart Venue Zones</h3><p>Bar · Lounge · VIP · Dance Floor — each with tailored experiences</p></div></div>
+  <div class="rv" style="position:relative;border-radius:20px;overflow:hidden;aspect-ratio:2/1;margin-bottom:40px;cursor:grab" id="venue-img-slider">
+    <img class="venue-img-slide" data-idx="0" src="Media/Image/a-wide-panoramic-digital-illustration-of_PtuTV0T4Rg2t3hr57Vxaww_Y1fPXYehTXaCsKBHlUUtBQ_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:1" loading="lazy" alt="Venue">
+    <img class="venue-img-slide" data-idx="1" src="Media/Image/a-futuristic-holographic-analytics-dashb_0EWO3lqKQSWtRNgi1KTOIQ_qoK-wHfxQJacyzxuNtbfXQ_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" loading="lazy" alt="Holographic">
+    <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,2,5,.7) 0%,transparent 50%);pointer-events:none"></div>
+    <div style="position:absolute;bottom:16px;left:20px;z-index:2"><h3 style="font-size:20px;font-weight:900">Smart Venue Zones</h3><p style="font-size:11px;color:rgba(255,255,255,.6)">Bar · Lounge · VIP · Dance Floor</p></div>
+    <div style="position:absolute;bottom:16px;right:16px;display:flex;gap:8px;z-index:2"><div class="venue-img-dot" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.8);cursor:pointer" onclick="venueImgSlide(0)"></div><div class="venue-img-dot" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;margin-top:1px" onclick="venueImgSlide(1)"></div></div>
+  </div>
+  <div style="display:none"><img src="Media/Image/a-wide-panoramic-digital-illustration-of_PtuTV0T4Rg2t3hr57Vxaww_Y1fPXYehTXaCsKBHlUUtBQ_cover.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3" loading="lazy"><div class="img-card-content"><h3>Smart Venue Zones</h3><p>Bar · Lounge · VIP · Dance Floor — each with tailored experiences</p></div></div>
   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
     <div class="gc rv" style="padding:24px;text-align:center"><div style="font-size:28px;margin-bottom:10px">🍸</div><h4 style="font-size:13px;font-weight:800;color:var(--cy)">Bar Zone</h4><p style="font-size:11px;color:var(--tx3)">Social games, quick challenges, leaderboards on screens</p></div>
     <div class="gc rv" data-d="1" style="padding:24px;text-align:center"><div style="font-size:28px;margin-bottom:10px">🛋️</div><h4 style="font-size:13px;font-weight:800;color:var(--pu)">Lounge Zone</h4><p style="font-size:11px;color:var(--tx3)">Ambient LED sync, group mood settings, relaxed atmosphere</p></div>
@@ -4015,6 +4043,24 @@ setTimeout(function(){
     el.addEventListener('mouseleave',function(){if(dragging){dragging=false;el.style.cursor='grab'}});
   });
 },600);
+
+// Batch 3+4 sliders
+var brandImgSlide=makeImgSlider('brand-img',2);
+var factoryImgSlide=makeImgSlider('factory-img',2);
+var venueImgSlide=makeImgSlider('venue-img',2);
+var moodiModSlide=makeImgSlider('moodi-mod',2);
+
+setTimeout(function(){
+  [['brand-img-slider',2,brandImgSlide],['factory-img-slider',2,factoryImgSlide],['venue-img-slider',2,venueImgSlide],['moodi-mod-slider',2,moodiModSlide]].forEach(function(p){
+    var el=document.getElementById(p[0]);if(!el)return;
+    var idx=0,max=p[1]-1,fn=p[2],sx=0,dragging=false;
+    el.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+    el.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>30){idx=Math.max(0,Math.min(max,idx+(dx<0?1:-1)));fn(idx)}},{passive:true});
+    el.addEventListener('mousedown',function(e){sx=e.clientX;dragging=true;el.style.cursor='grabbing';e.preventDefault()});
+    el.addEventListener('mouseup',function(e){if(!dragging)return;dragging=false;el.style.cursor='grab';var dx=e.clientX-sx;if(Math.abs(dx)>30){idx=Math.max(0,Math.min(max,idx+(dx<0?1:-1)));fn(idx)}});
+    el.addEventListener('mouseleave',function(){if(dragging){dragging=false;el.style.cursor='grab'}});
+  });
+},700);
 </script>
 </body>
 </html>
