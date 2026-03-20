@@ -389,6 +389,7 @@ nav.s{background:rgba(2,2,5,.92);backdrop-filter:blur(28px) saturate(160%);borde
 .hero-mesh{position:absolute;inset:0;background:radial-gradient(ellipse 50% 50% at 20% 40%,rgba(0,232,255,.08),transparent 50%),radial-gradient(ellipse 40% 40% at 80% 60%,rgba(168,85,247,.06),transparent 50%),radial-gradient(ellipse 30% 30% at 50% 80%,rgba(236,72,153,.04),transparent 50%);animation:meshDrift 20s ease-in-out infinite alternate;pointer-events:none}
 @keyframes meshDrift{0%{transform:translate(0,0) scale(1) rotate(0)}50%{transform:translate(30px,20px) scale(1.04) rotate(.5deg)}100%{transform:translate(-20px,10px) scale(1.02) rotate(-.3deg)}}@keyframes uiBarPulse{0%,100%{opacity:.8}50%{opacity:1}}
 @keyframes authPulse{0%{left:0;opacity:0}50%{opacity:1}100%{left:calc(100% - 30px);opacity:0}}
+@keyframes aiPulseVert{0%{top:-30px}100%{top:100%}}
 @keyframes pmPulse{0%,100%{opacity:.4;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
 @keyframes blendFloat1{0%,100%{transform:translate(0,0)}50%{transform:translate(8px,-6px)}}
 @keyframes blendFloat2{0%,100%{transform:translate(0,0)}50%{transform:translate(-8px,6px)}}
@@ -821,10 +822,10 @@ footer{grid-template-columns:1fr!important;gap:24px}
   /* Pro Tools carousel on mobile — horizontal scroll */
   #sctool-wrap{flex-wrap:nowrap!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch!important;justify-content:flex-start!important;padding:10px 8px 24px!important;gap:8px!important;scroll-snap-type:x mandatory!important;perspective:none!important}
   .sctool-phone{min-width:200px!important;width:200px!important;height:380px!important;border-radius:26px!important;scroll-snap-align:center!important;transform:none!important;opacity:1!important}
-  /* Pro modes triple split — stack on mobile */
-  [style*="grid-template-columns:1fr 60px 1fr"]{grid-template-columns:1fr!important;gap:16px!important}
-  [style*="grid-template-columns:1fr 60px 1fr"]>div:nth-child(2){flex-direction:row!important;writing-mode:horizontal-tb!important}
-  [style*="grid-template-columns:1fr 60px 1fr"]>div:nth-child(2) div:last-child{writing-mode:horizontal-tb!important;transform:none!important}
+  /* Pro modes triple split — stack on mobile, AI Engine goes horizontal */
+  .sc-triple{grid-template-columns:1fr!important;gap:16px!important}
+  .sc-triple>div:nth-child(2){flex-direction:row!important;writing-mode:horizontal-tb!important;max-height:40px!important}
+  .sc-triple>div:nth-child(2) div:last-child{writing-mode:horizontal-tb!important;transform:none!important}
 
   /* ═══ PHONE-FIRST LAYOUT ON MOBILE ═══ */
   /* When grid stacks to column, put phone FIRST so user sees it
@@ -1358,54 +1359,11 @@ footer{grid-template-columns:1fr!important;gap:24px}
 <div class="w" style="position:relative;z-index:2">
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div style="width:36px;height:3px;border-radius:2px;background:var(--pu)"></div><span class="rv" style="font-family:var(--fm);font-size:10px;color:var(--pu);letter-spacing:4px">02 · PRO MODES</span></div>
   <h2 class="h2 rv" data-d="1" style="max-width:500px">One Tap. <span class="se">Everything Changes.</span></h2>
-  <p class="rv" data-d="2" style="font-size:15px;color:var(--tx2);max-width:520px;font-weight:300;margin-bottom:40px;line-height:1.65">Each Pro Mode transforms entire device behavior instantly. Swipe to select — AI Engine processes — app screen updates.</p>
+  <p class="rv" data-d="2" style="font-size:15px;color:var(--tx2);max-width:520px;font-weight:300;margin-bottom:40px;line-height:1.65">Each Pro Mode transforms entire device behavior. Swipe to select — AI Engine processes — app screen updates.</p>
 
-  <!-- Triple Split: Mode Slider | AI Engine | App Screen -->
-  <div class="rv" data-d="2" style="display:grid;grid-template-columns:1fr 60px 1fr;gap:12px;align-items:stretch">
-    <!-- Left: Mode Image Slider -->
-    <div style="position:relative;border-radius:20px;overflow:hidden;min-height:360px;cursor:grab" id="pro-slider-wrap">
-      <div class="pro-slide" data-pro="0" style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(251,146,60,.12),rgba(251,146,60,.02));display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .5s;opacity:1">
-        <div style="font-size:64px;margin-bottom:12px;filter:drop-shadow(0 0 20px rgba(251,146,60,.3))">🚀</div>
-        <div style="font-size:22px;font-weight:900;color:#fb923c;margin-bottom:4px">Beast Mode</div>
-        <div style="font-size:11px;color:var(--tx2)">Maximum power. All tanks → Intense.</div>
-      </div>
-      <div class="pro-slide" data-pro="1" style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(52,211,153,.12),rgba(52,211,153,.02));display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .5s;opacity:0">
-        <div style="font-size:64px;margin-bottom:12px;filter:drop-shadow(0 0 20px rgba(52,211,153,.3))">🌿</div>
-        <div style="font-size:22px;font-weight:900;color:var(--gn);margin-bottom:4px">Eco Mode</div>
-        <div style="font-size:11px;color:var(--tx2)">Minimal activation. All tanks → Chill.</div>
-      </div>
-      <div class="pro-slide" data-pro="2" style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(96,165,250,.12),rgba(96,165,250,.02));display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .5s;opacity:0">
-        <div style="font-size:64px;margin-bottom:12px;filter:drop-shadow(0 0 20px rgba(96,165,250,.3))">⚖️</div>
-        <div style="font-size:22px;font-weight:900;color:#60a5fa;margin-bottom:4px">Balance Mode</div>
-        <div style="font-size:11px;color:var(--tx2)">Equal power. All tanks → Medium.</div>
-      </div>
-      <div class="pro-slide" data-pro="3" style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(168,85,247,.12),rgba(168,85,247,.02));display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .5s;opacity:0">
-        <div style="font-size:64px;margin-bottom:12px;filter:drop-shadow(0 0 20px rgba(168,85,247,.3))">✨</div>
-        <div style="font-size:22px;font-weight:900;color:var(--pu);margin-bottom:4px">Microdose</div>
-        <div style="font-size:11px;color:var(--tx2)">Ultra-low. Minimal activation.</div>
-      </div>
-      <!-- Dots -->
-      <div style="position:absolute;top:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:2">
-        <div class="pro-dot" data-pro="0" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.8);transition:.3s;cursor:pointer" onclick="scSetPro(0)"></div>
-        <div class="pro-dot" data-pro="1" style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);transition:.3s;cursor:pointer;margin-top:1px" onclick="scSetPro(1)"></div>
-        <div class="pro-dot" data-pro="2" style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);transition:.3s;cursor:pointer;margin-top:1px" onclick="scSetPro(2)"></div>
-        <div class="pro-dot" data-pro="3" style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);transition:.3s;cursor:pointer;margin-top:1px" onclick="scSetPro(3)"></div>
-      </div>
-      <!-- Swipe arrows -->
-      <div style="position:absolute;top:50%;right:10px;transform:translateY(-50%);font-size:18px;color:rgba(255,255,255,.3);z-index:2;pointer-events:none">›</div>
-      <div style="position:absolute;top:50%;left:10px;transform:translateY(-50%);font-size:18px;color:rgba(255,255,255,.15);z-index:2;pointer-events:none">‹</div>
-    </div>
-
-    <!-- Center: AI Engine Processing -->
-    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
-      <div style="font-size:24px">🧠</div>
-      <div style="width:3px;flex:1;border-radius:2px;background:rgba(168,85,247,.1);position:relative;overflow:hidden;max-height:200px">
-        <div style="position:absolute;top:0;left:0;width:100%;height:30px;background:linear-gradient(180deg,transparent,var(--pu),transparent);animation:authPulse 2s ease-in-out infinite;transform:rotate(90deg)"></div>
-      </div>
-      <div style="font-size:7px;color:var(--tx3);letter-spacing:1px;writing-mode:vertical-lr;transform:rotate(180deg)">AI ENGINE</div>
-    </div>
-
-    <!-- Right: Result App Screen -->
+  <!-- Triple Split: App Screen | AI Engine | Mode Slider -->
+  <div class="rv sc-triple" data-d="2" style="display:grid;grid-template-columns:1fr 60px 1fr;gap:12px;align-items:stretch">
+    <!-- LEFT: App Screen (shows first on mobile) -->
     <div style="display:flex;flex-direction:column;align-items:center;justify-content:center">
       <div style="position:relative;width:260px;height:420px;margin:0 auto;border-radius:36px;background:linear-gradient(180deg,#0c0c14,#080810);border:2px solid rgba(255,255,255,.08);box-shadow:0 20px 80px rgba(0,0,0,.6);overflow:hidden">
         <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:110px;height:26px;background:#000;border-radius:0 0 18px 18px;z-index:5"></div>
@@ -1427,66 +1385,97 @@ footer{grid-template-columns:1fr!important;gap:24px}
         <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:90px;height:4px;border-radius:2px;background:rgba(255,255,255,.15)"></div>
       </div>
     </div>
+
+    <!-- CENTER: AI Engine -->
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
+      <div style="font-size:24px">🧠</div>
+      <div style="width:3px;flex:1;border-radius:2px;background:rgba(168,85,247,.1);position:relative;overflow:hidden;max-height:200px">
+        <div style="position:absolute;top:-30px;left:0;width:100%;height:30px;background:linear-gradient(180deg,transparent,var(--pu),transparent);animation:aiPulseVert 2s ease-in-out infinite"></div>
+      </div>
+      <div style="font-size:7px;color:var(--tx3);letter-spacing:1px;writing-mode:vertical-lr;transform:rotate(180deg)">AI ENGINE</div>
+    </div>
+
+    <!-- RIGHT: Mode Slider -->
+    <div style="position:relative;border-radius:20px;overflow:hidden;min-height:360px;cursor:grab" id="pro-slider-wrap">
+      <div class="pro-slide" data-pro="0" style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(251,146,60,.12),rgba(251,146,60,.02));display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .5s;opacity:1">
+        <div style="font-size:64px;margin-bottom:12px;filter:drop-shadow(0 0 20px rgba(251,146,60,.3))">🚀</div>
+        <div style="font-size:22px;font-weight:900;color:#fb923c;margin-bottom:4px">Beast Mode</div>
+        <div style="font-size:11px;color:var(--tx2);text-align:center;max-width:180px">Maximum power. All tanks → Intense.</div>
+      </div>
+      <div class="pro-slide" data-pro="1" style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(52,211,153,.12),rgba(52,211,153,.02));display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .5s;opacity:0">
+        <div style="font-size:64px;margin-bottom:12px;filter:drop-shadow(0 0 20px rgba(52,211,153,.3))">🌿</div>
+        <div style="font-size:22px;font-weight:900;color:var(--gn);margin-bottom:4px">Eco Mode</div>
+        <div style="font-size:11px;color:var(--tx2);text-align:center;max-width:180px">Minimal activation. All tanks → Chill.</div>
+      </div>
+      <div class="pro-slide" data-pro="2" style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(96,165,250,.12),rgba(96,165,250,.02));display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .5s;opacity:0">
+        <div style="font-size:64px;margin-bottom:12px;filter:drop-shadow(0 0 20px rgba(96,165,250,.3))">⚖️</div>
+        <div style="font-size:22px;font-weight:900;color:#60a5fa;margin-bottom:4px">Balance Mode</div>
+        <div style="font-size:11px;color:var(--tx2);text-align:center;max-width:180px">Equal power. All tanks → Medium.</div>
+      </div>
+      <div class="pro-slide" data-pro="3" style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(168,85,247,.12),rgba(168,85,247,.02));display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .5s;opacity:0">
+        <div style="font-size:64px;margin-bottom:12px;filter:drop-shadow(0 0 20px rgba(168,85,247,.3))">✨</div>
+        <div style="font-size:22px;font-weight:900;color:var(--pu);margin-bottom:4px">Microdose</div>
+        <div style="font-size:11px;color:var(--tx2);text-align:center;max-width:180px">Ultra-low. Minimal activation.</div>
+      </div>
+      <!-- Dots at BOTTOM -->
+      <div style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:2">
+        <div class="pro-dot" data-pro="0" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.8);transition:.3s;cursor:pointer" onclick="scSetPro(0)"></div>
+        <div class="pro-dot" data-pro="1" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);transition:.3s;cursor:pointer;margin-top:1px" onclick="scSetPro(1)"></div>
+        <div class="pro-dot" data-pro="2" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);transition:.3s;cursor:pointer;margin-top:1px" onclick="scSetPro(2)"></div>
+        <div class="pro-dot" data-pro="3" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);transition:.3s;cursor:pointer;margin-top:1px" onclick="scSetPro(3)"></div>
+      </div>
+    </div>
   </div>
 </div>
 </section>
 
 <!-- ═══ SECTION 3: BLEND MODES ═══ -->
 <section id="sc-ent" style="padding:clamp(60px,8vw,100px) 0;scroll-margin-top:130px;position:relative;overflow:visible">
-<div style="position:absolute;top:20%;right:0;width:300px;height:400px;background:radial-gradient(ellipse,rgba(236,72,153,.05),transparent 70%);filter:blur(80px);pointer-events:none"></div>
 <div class="w" style="position:relative;z-index:2">
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div style="width:36px;height:3px;border-radius:2px;background:var(--pk)"></div><span class="rv" style="font-family:var(--fm);font-size:10px;color:var(--pk);letter-spacing:4px">03 · BLEND MODES</span></div>
   <h2 class="h2 rv" data-d="1" style="max-width:600px">Mix. Blend. <span class="se">Create.</span></h2>
-  <p class="rv" data-d="2" style="font-size:15px;color:var(--tx2);max-width:540px;font-weight:300;margin-bottom:40px;line-height:1.65">Multi-tank devices unlock blending capabilities. CBD:THC ratio control and Sativa + Indica True Hybrid — category-first features.</p>
+  <p class="rv" data-d="2" style="font-size:15px;color:var(--tx2);max-width:540px;font-weight:300;margin-bottom:40px;line-height:1.65">Multi-tank devices unlock blending. CBD:THC ratio control and Sativa + Indica True Hybrid — category-first features.</p>
 
-  <!-- App Screen FIRST (above cards) -->
-  <div class="rv" data-d="2" style="display:flex;flex-direction:column;align-items:center;margin-bottom:40px">
-    <div style="position:relative">
-      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:240px;height:240px;background:radial-gradient(circle,rgba(236,72,153,.06),transparent 70%);filter:blur(50px);pointer-events:none"></div>
-      <div style="position:relative;width:260px;height:480px;margin:0 auto;border-radius:36px;background:linear-gradient(180deg,#0c0c14,#080810);border:2px solid rgba(255,255,255,.08);box-shadow:0 20px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03),inset 0 1px 0 rgba(255,255,255,.05);overflow:hidden">
-        <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:110px;height:26px;background:#000;border-radius:0 0 18px 18px;z-index:5"></div>
-        <div style="padding:34px 18px 0;display:flex;justify-content:space-between;align-items:center"><div style="font-size:9px;font-weight:600;color:rgba(255,255,255,.5)">9:41</div><div style="width:12px;height:7px;border-radius:2px;border:1px solid rgba(255,255,255,.3)"><div style="width:70%;height:100%;background:rgba(255,255,255,.4);border-radius:1px"></div></div></div>
-        <div style="padding:12px 18px">
-          <div style="font-size:8px;font-weight:700;color:var(--pk);letter-spacing:3px;margin-bottom:6px">BLEND MODE</div>
-          <div style="font-size:16px;font-weight:900;margin-bottom:12px">CBD + THC Blend</div>
-          <div style="margin-bottom:16px">
-            <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:8px;color:var(--tx3)">CBD</span><span style="font-size:8px;color:var(--tx3)">THC</span></div>
-            <div style="height:8px;border-radius:4px;background:linear-gradient(90deg,rgba(52,211,153,.3),rgba(168,85,247,.3));position:relative">
-              <div style="position:absolute;top:50%;left:40%;transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.3)"></div>
-            </div>
-            <div style="text-align:center;margin-top:6px;font-size:11px;font-weight:800;color:var(--pk)">40% CBD : 60% THC</div>
-          </div>
-          <div style="display:flex;gap:4px;margin-bottom:12px">
-            <div style="flex:1;padding:8px 4px;border-radius:8px;background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.08);text-align:center"><div style="font-size:7px;color:var(--tx3)">TANK 1</div><div style="font-size:9px;font-weight:800;color:var(--gn)">CBD</div></div>
-            <div style="flex:1;padding:8px 4px;border-radius:8px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.08);text-align:center"><div style="font-size:7px;color:var(--tx3)">TANK 2</div><div style="font-size:9px;font-weight:800;color:var(--pu)">THC</div></div>
-            <div style="flex:1;padding:8px 4px;border-radius:8px;background:rgba(236,72,153,.06);border:1px solid rgba(236,72,153,.08);text-align:center"><div style="font-size:7px;color:var(--tx3)">TANK 3</div><div style="font-size:9px;font-weight:800;color:var(--pk)">Terpene</div></div>
-          </div>
-          <div style="padding:10px;border-radius:10px;background:rgba(236,72,153,.04);border:1px solid rgba(236,72,153,.06);text-align:center">
-            <div style="font-size:9px;color:var(--tx3);margin-bottom:4px">BLEND OUTPUT</div>
-            <div style="font-size:12px;font-weight:800;color:var(--pk)">Full Entourage Effect</div>
-            <div style="font-size:8px;color:var(--tx3);margin-top:2px">AI balances heat per extract type</div>
-          </div>
+  <!-- Image Slider: 2 blend mode screens -->
+  <div class="rv" data-d="2" style="max-width:500px;margin:0 auto 40px;position:relative;border-radius:20px;overflow:hidden;aspect-ratio:3/4" id="blend-slider-wrap">
+    <div class="blend-slide" data-blend="0" style="position:absolute;inset:0;transition:opacity .5s;opacity:1">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0c0818 0%,#100a1a 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px">
+        <div style="font-size:8px;font-weight:700;color:var(--pk);letter-spacing:3px;margin-bottom:16px">CBD + THC CONTROL</div>
+        <div style="font-size:48px;margin-bottom:12px">⚖️</div>
+        <div style="font-size:22px;font-weight:900;color:var(--pk);margin-bottom:8px">Entourage Mode</div>
+        <div style="font-size:12px;color:var(--tx2);text-align:center;max-width:280px;margin-bottom:20px">CBD:THC ratio slider from 10-90%. Fine-tune the balance between relaxation and activation.</div>
+        <div style="width:80%;height:10px;border-radius:5px;background:linear-gradient(90deg,rgba(52,211,153,.4),rgba(168,85,247,.4));position:relative;margin-bottom:8px">
+          <div style="position:absolute;top:50%;left:40%;transform:translate(-50%,-50%);width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.4)"></div>
         </div>
-        <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:90px;height:4px;border-radius:2px;background:rgba(255,255,255,.15)"></div>
+        <div style="font-size:14px;font-weight:800;color:var(--pk)">40% CBD : 60% THC</div>
+        <div style="display:flex;gap:8px;margin-top:20px">
+          <div style="padding:10px 16px;border-radius:10px;background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.1);text-align:center"><div style="font-size:8px;color:var(--tx3)">TANK 1</div><div style="font-size:12px;font-weight:800;color:var(--gn)">CBD</div></div>
+          <div style="padding:10px 16px;border-radius:10px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.1);text-align:center"><div style="font-size:8px;color:var(--tx3)">TANK 2</div><div style="font-size:12px;font-weight:800;color:var(--pu)">THC</div></div>
+          <div style="padding:10px 16px;border-radius:10px;background:rgba(236,72,153,.06);border:1px solid rgba(236,72,153,.1);text-align:center"><div style="font-size:8px;color:var(--tx3)">TANK 3</div><div style="font-size:12px;font-weight:800;color:var(--pk)">Terpene</div></div>
+        </div>
       </div>
     </div>
-  </div>
-
-  <!-- Info cards BELOW app screen -->
-  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px">
-    <div class="rv" style="padding:28px;border-radius:20px;background:linear-gradient(135deg,rgba(236,72,153,.04),rgba(168,85,247,.02));border:1px solid rgba(236,72,153,.08);position:relative;overflow:hidden">
-      <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle,rgba(236,72,153,.1),transparent 70%);filter:blur(30px)"></div>
-      <div style="font-size:28px;margin-bottom:12px">⚖️</div>
-      <h4 style="font-size:16px;font-weight:800;color:var(--pk);margin-bottom:8px">CBD + THC Control</h4>
-      <p style="font-size:12px;color:var(--tx2);line-height:1.6;margin-bottom:12px">CBD:THC ratio slider from 10-90%. Fine-tune the balance between relaxation and activation. Category-first feature.</p>
-      <div style="display:flex;gap:4px"><span style="font-size:9px;padding:4px 8px;border-radius:100px;background:rgba(236,72,153,.06);border:1px solid rgba(236,72,153,.1);color:var(--pk)">Ratio Slider</span><span style="font-size:9px;padding:4px 8px;border-radius:100px;background:rgba(236,72,153,.06);border:1px solid rgba(236,72,153,.1);color:var(--pk)">10-90%</span></div>
+    <div class="blend-slide" data-blend="1" style="position:absolute;inset:0;transition:opacity .5s;opacity:0">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0a0c18 0%,#0e0a1a 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px">
+        <div style="font-size:8px;font-weight:700;color:var(--pu);letter-spacing:3px;margin-bottom:16px">TRUE HYBRID</div>
+        <div style="font-size:48px;margin-bottom:12px">🧬</div>
+        <div style="font-size:22px;font-weight:900;color:var(--pu);margin-bottom:8px">Sativa + Indica</div>
+        <div style="font-size:12px;color:var(--tx2);text-align:center;max-width:280px;margin-bottom:20px">AI manages separate heating curves for each strain type simultaneously in one draw.</div>
+        <div style="display:flex;gap:12px;margin-bottom:16px">
+          <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(245,158,11,.03));border:2px solid rgba(245,158,11,.15);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--am)">Sativa</div>
+          <div style="font-size:20px;color:var(--tx3);align-self:center">+</div>
+          <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,rgba(168,85,247,.1),rgba(168,85,247,.03));border:2px solid rgba(168,85,247,.15);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--pu)">Indica</div>
+        </div>
+        <div style="padding:12px 24px;border-radius:12px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.1);text-align:center">
+          <div style="font-size:10px;color:var(--tx3)">AI DUAL CURVE</div>
+          <div style="font-size:13px;font-weight:800;color:var(--pu);margin-top:2px">Independent heating per strain</div>
+        </div>
+      </div>
     </div>
-    <div class="rv" data-d="1" style="padding:28px;border-radius:20px;background:linear-gradient(135deg,rgba(168,85,247,.04),rgba(0,232,255,.02));border:1px solid rgba(168,85,247,.08);position:relative;overflow:hidden">
-      <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle,rgba(168,85,247,.1),transparent 70%);filter:blur(30px)"></div>
-      <div style="font-size:28px;margin-bottom:12px">🧬</div>
-      <h4 style="font-size:16px;font-weight:800;color:var(--pu);margin-bottom:8px">True Hybrid</h4>
-      <p style="font-size:12px;color:var(--tx2);line-height:1.6;margin-bottom:12px">Sativa + Indica in one draw. AI manages separate heating curves for each strain type simultaneously.</p>
-      <div style="display:flex;gap:4px"><span style="font-size:9px;padding:4px 8px;border-radius:100px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.1);color:var(--pu)">Sativa + Indica</span><span style="font-size:9px;padding:4px 8px;border-radius:100px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.1);color:var(--pu)">Dual Curve</span></div>
+    <!-- Dots at bottom -->
+    <div style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:2">
+      <div class="blend-dot" data-blend="0" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.8);transition:.3s;cursor:pointer" onclick="scBlend(0)"></div>
+      <div class="blend-dot" data-blend="1" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);transition:.3s;cursor:pointer;margin-top:1px" onclick="scBlend(1)"></div>
     </div>
   </div>
 </div>
@@ -1498,44 +1487,11 @@ footer{grid-template-columns:1fr!important;gap:24px}
 <div class="w" style="position:relative;z-index:2">
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div style="width:36px;height:3px;border-radius:2px;background:var(--am)"></div><span class="rv" style="font-family:var(--fm);font-size:10px;color:var(--am);letter-spacing:4px">04 · MOOD MODES</span></div>
   <h2 class="h2 rv" data-d="1" style="max-width:600px">Feel It. <span class="se">AI Delivers It.</span></h2>
-  <p class="rv" data-d="2" style="font-size:15px;color:var(--tx2);max-width:540px;font-weight:300;margin-bottom:40px;line-height:1.65">7 AI-powered mood presets. Swipe the image to explore each mood — the app screen updates automatically.</p>
+  <p class="rv" data-d="2" style="font-size:15px;color:var(--tx2);max-width:540px;font-weight:300;margin-bottom:40px;line-height:1.65">7 AI-powered mood presets. Swipe the images to explore — app screen updates automatically.</p>
 
-  <!-- Dual Split: Left = Image Slider, Right = App Screen -->
+  <!-- Dual Split: App Screen LEFT, Image Slider RIGHT -->
   <div class="sc-mood-split rv" data-d="2" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch">
-    <!-- Left: Image Slider (swipeable, no buttons) -->
-    <div style="position:relative;border-radius:20px;overflow:hidden;min-height:400px;cursor:grab" id="mood-slider-wrap">
-      <!-- Images stacked, only active one visible -->
-      <img class="mood-slide" data-mood="0" src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:1" alt="Relax">
-      <img class="mood-slide" data-mood="1" src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" alt="Focus">
-      <img class="mood-slide" data-mood="2" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" alt="Energy">
-      <img class="mood-slide" data-mood="3" src="https://images.unsplash.com/photo-1455642305367-68834a1da7ab?w=600&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" alt="Sleep">
-      <img class="mood-slide" data-mood="4" src="https://images.unsplash.com/photo-1529543544282-ea57407bc2f7?w=600&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" alt="Social">
-      <img class="mood-slide" data-mood="5" src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" alt="Creative">
-      <img class="mood-slide" data-mood="6" src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" alt="Recovery">
-      <!-- Gradient overlay -->
-      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,2,5,.8) 0%,transparent 40%,transparent 60%,rgba(2,2,5,.3) 100%);pointer-events:none"></div>
-      <!-- Mood info overlay -->
-      <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;z-index:2">
-        <div id="mood-sl-emoji" style="font-size:36px;margin-bottom:4px;transition:.4s">😌</div>
-        <div id="mood-sl-name" style="font-size:22px;font-weight:900;color:#60a5fa;transition:.4s">Relax</div>
-        <div id="mood-sl-cfg" style="font-size:10px;color:rgba(255,255,255,.6);margin-top:4px;transition:.4s">168° · Slow · CBD Priority · Wave</div>
-        <p id="mood-sl-desc" style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.5;margin-top:8px;transition:.4s">Gentle warmth. Slow delivery. CBD priority.</p>
-      </div>
-      <!-- Swipe indicator dots -->
-      <div style="position:absolute;top:16px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:2">
-        <div class="mood-dot" data-mood="0" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.8);transition:.3s;cursor:pointer" onclick="scMood(0)"></div>
-        <div class="mood-dot" data-mood="1" style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);transition:.3s;cursor:pointer;margin-top:1px" onclick="scMood(1)"></div>
-        <div class="mood-dot" data-mood="2" style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);transition:.3s;cursor:pointer;margin-top:1px" onclick="scMood(2)"></div>
-        <div class="mood-dot" data-mood="3" style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);transition:.3s;cursor:pointer;margin-top:1px" onclick="scMood(3)"></div>
-        <div class="mood-dot" data-mood="4" style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);transition:.3s;cursor:pointer;margin-top:1px" onclick="scMood(4)"></div>
-        <div class="mood-dot" data-mood="5" style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);transition:.3s;cursor:pointer;margin-top:1px" onclick="scMood(5)"></div>
-        <div class="mood-dot" data-mood="6" style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);transition:.3s;cursor:pointer;margin-top:1px" onclick="scMood(6)"></div>
-      </div>
-      <!-- Swipe hint -->
-      <div style="position:absolute;top:50%;right:12px;transform:translateY(-50%);font-size:20px;color:rgba(255,255,255,.3);z-index:2;pointer-events:none">›</div>
-      <div style="position:absolute;top:50%;left:12px;transform:translateY(-50%);font-size:20px;color:rgba(255,255,255,.15);z-index:2;pointer-events:none">‹</div>
-    </div>
-    <!-- Right: App Screen -->
+    <!-- LEFT: App Screen (shows first on mobile) -->
     <div style="display:flex;flex-direction:column;align-items:center;justify-content:center">
       <div style="position:relative">
         <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:260px;height:260px;background:radial-gradient(circle,rgba(96,165,250,.06),transparent 70%);filter:blur(50px);pointer-events:none" id="mood-phone-glow"></div>
@@ -1556,6 +1512,33 @@ footer{grid-template-columns:1fr!important;gap:24px}
           </div>
           <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:90px;height:4px;border-radius:2px;background:rgba(255,255,255,.15)"></div>
         </div>
+      </div>
+    </div>
+    <!-- RIGHT: Image Slider -->
+    <div style="position:relative;border-radius:20px;overflow:hidden;min-height:400px;cursor:grab" id="mood-slider-wrap">
+      <img class="mood-slide" data-mood="0" src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:1" alt="Relax">
+      <img class="mood-slide" data-mood="1" src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" alt="Focus">
+      <img class="mood-slide" data-mood="2" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" alt="Energy">
+      <img class="mood-slide" data-mood="3" src="https://images.unsplash.com/photo-1455642305367-68834a1da7ab?w=600&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" alt="Sleep">
+      <img class="mood-slide" data-mood="4" src="https://images.unsplash.com/photo-1529543544282-ea57407bc2f7?w=600&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" alt="Social">
+      <img class="mood-slide" data-mood="5" src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" alt="Creative">
+      <img class="mood-slide" data-mood="6" src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;opacity:0" alt="Recovery">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,2,5,.8) 0%,transparent 40%,transparent 70%,rgba(2,2,5,.3) 100%);pointer-events:none"></div>
+      <!-- Mood info overlay -->
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;z-index:2">
+        <div id="mood-sl-emoji" style="font-size:36px;margin-bottom:4px;transition:.4s">😌</div>
+        <div id="mood-sl-name" style="font-size:22px;font-weight:900;color:#60a5fa;transition:.4s">Relax</div>
+        <div id="mood-sl-desc" style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.5;margin-top:6px;transition:.4s">Gentle warmth. Slow delivery. CBD priority.</div>
+      </div>
+      <!-- Dots at BOTTOM -->
+      <div style="position:absolute;bottom:16px;right:16px;display:flex;gap:6px;z-index:3">
+        <div class="mood-dot" data-mood="0" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.8);transition:.3s;cursor:pointer" onclick="scMood(0)"></div>
+        <div class="mood-dot" data-mood="1" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);transition:.3s;cursor:pointer;margin-top:1px" onclick="scMood(1)"></div>
+        <div class="mood-dot" data-mood="2" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);transition:.3s;cursor:pointer;margin-top:1px" onclick="scMood(2)"></div>
+        <div class="mood-dot" data-mood="3" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);transition:.3s;cursor:pointer;margin-top:1px" onclick="scMood(3)"></div>
+        <div class="mood-dot" data-mood="4" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);transition:.3s;cursor:pointer;margin-top:1px" onclick="scMood(4)"></div>
+        <div class="mood-dot" data-mood="5" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);transition:.3s;cursor:pointer;margin-top:1px" onclick="scMood(5)"></div>
+        <div class="mood-dot" data-mood="6" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);transition:.3s;cursor:pointer;margin-top:1px" onclick="scMood(6)"></div>
       </div>
     </div>
   </div>
@@ -3877,7 +3860,20 @@ function focusTool(n){
   if(mw)addSwipe(mw,function(dir){moodIdx=Math.max(0,Math.min(6,moodIdx+dir));scMood(moodIdx)});
   var pw=document.getElementById('pro-slider-wrap');
   if(pw)addSwipe(pw,function(dir){proIdx=Math.max(0,Math.min(3,proIdx+dir));scSetPro(proIdx)});
+  var blendIdx=0;
+  var bw=document.getElementById('blend-slider-wrap');
+  if(bw)addSwipe(bw,function(dir){blendIdx=Math.max(0,Math.min(1,blendIdx+dir));scBlend(blendIdx)});
 })();
+
+// Blend slider
+function scBlend(n){
+  document.querySelectorAll('.blend-slide').forEach(function(s,i){s.style.opacity=i===n?'1':'0'});
+  document.querySelectorAll('.blend-dot').forEach(function(dot,i){
+    dot.style.width=i===n?'10px':'8px';dot.style.height=i===n?'10px':'8px';
+    dot.style.background=i===n?'rgba(255,255,255,.8)':'rgba(255,255,255,.25)';
+    dot.style.marginTop=i===n?'0':'1px';
+  });
+}
 </script>
 </body>
 </html>
