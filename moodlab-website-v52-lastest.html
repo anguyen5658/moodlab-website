@@ -818,6 +818,11 @@ footer{grid-template-columns:1fr!important;gap:24px}
   /* Pro tools: phone slider horizontal scroll on mobile */
   .sc-tool-slider{overflow-x:auto!important;-webkit-overflow-scrolling:touch!important;scroll-snap-type:x mandatory!important;gap:12px!important;padding-bottom:16px!important}
   .sc-tool-slider .sc-tool-phone{min-width:220px!important;scroll-snap-align:center!important;flex-shrink:0!important}
+  /* Pro Tools carousel on mobile — horizontal scroll */
+  #sctool-wrap{flex-wrap:nowrap!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch!important;justify-content:flex-start!important;padding:10px 16px 24px!important;gap:12px!important;scroll-snap-type:x mandatory!important;perspective:none!important}
+  .sctool-phone{min-width:160px!important;width:160px!important;height:320px!important;border-radius:22px!important;scroll-snap-align:center!important;transform:none!important;opacity:1!important}
+  /* Pro modes simulation — stack on mobile */
+  [style*="grid-template-columns:1fr auto 1fr;gap:16px"]{grid-template-columns:1fr!important;gap:12px!important}
 
   /* ═══ PHONE-FIRST LAYOUT ON MOBILE ═══ */
   /* When grid stacks to column, put phone FIRST so user sees it
@@ -1353,26 +1358,43 @@ footer{grid-template-columns:1fr!important;gap:24px}
   <h2 class="h2 rv" data-d="1" style="max-width:500px">One Tap. <span class="se">Everything Changes.</span></h2>
   <p class="rv" data-d="2" style="font-size:15px;color:var(--tx2);max-width:520px;font-weight:300;margin-bottom:40px;line-height:1.65">Each Pro Mode transforms entire device behavior instantly. AI still optimizes in the background.</p>
 
-  <!-- Centered App Screen -->
-  <div class="rv" data-d="2" style="max-width:320px;margin:0 auto 32px;border-radius:24px;background:linear-gradient(180deg,#0e0e1a,#08080e);border:1px solid rgba(168,85,247,.12);overflow:hidden;position:relative">
-    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(168,85,247,.06),transparent 60%);pointer-events:none"></div>
-    <div style="padding:16px 20px;text-align:center;position:relative;z-index:2">
-      <div style="font-size:9px;font-weight:700;color:var(--pu);letter-spacing:3px;margin-bottom:8px">PRO MODE ACTIVE</div>
-      <div id="pm-screen-emoji" style="font-size:48px;margin-bottom:8px;transition:all .4s">🚀</div>
-      <div id="pm-screen-name" style="font-size:22px;font-weight:900;color:#fb923c;margin-bottom:4px;transition:all .4s">Beast Mode</div>
-      <div id="pm-screen-desc" style="font-size:11px;color:var(--tx2);margin-bottom:16px;transition:all .4s">Maximum power. AI compensates as battery drops.</div>
-      <div style="display:flex;gap:3px;justify-content:center;margin-bottom:16px" id="pm-screen-bars">
-        <div style="width:6px;height:28px;border-radius:3px;background:#fb923c;animation:pmPulse 2s ease-in-out infinite"></div>
-        <div style="width:6px;height:28px;border-radius:3px;background:#fb923c;animation:pmPulse 2s ease-in-out infinite .2s"></div>
-        <div style="width:6px;height:28px;border-radius:3px;background:#fb923c;animation:pmPulse 2s ease-in-out infinite .4s"></div>
-        <div style="width:6px;height:28px;border-radius:3px;background:#fb923c;animation:pmPulse 2s ease-in-out infinite .6s"></div>
-        <div style="width:6px;height:28px;border-radius:3px;background:#fb923c;animation:pmPulse 2s ease-in-out infinite .8s"></div>
+  <!-- AI Simulation: Select mode → AI processes → Result screen -->
+  <div class="rv" data-d="2" style="max-width:700px;margin:0 auto 32px">
+    <!-- Simulation flow -->
+    <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;margin-bottom:24px">
+      <!-- Left: Mode Selection -->
+      <div style="border-radius:16px;background:rgba(168,85,247,.03);border:1px solid rgba(168,85,247,.08);padding:16px;text-align:center">
+        <div style="font-size:8px;font-weight:700;color:var(--tx3);letter-spacing:2px;margin-bottom:8px">USER SELECTS</div>
+        <div id="pm-sim-emoji" style="font-size:36px;transition:.4s">🚀</div>
+        <div id="pm-sim-mode" style="font-size:14px;font-weight:900;color:#fb923c;margin-top:4px;transition:.4s">Beast</div>
       </div>
-      <div style="display:flex;gap:6px"><div style="flex:1;padding:6px;border-radius:8px;background:rgba(0,232,255,.04);border:1px solid rgba(0,232,255,.06);text-align:center"><div style="font-size:7px;color:var(--tx3)">T1</div><div style="font-size:9px;font-weight:800;color:var(--cy)">MAX</div></div><div style="flex:1;padding:6px;border-radius:8px;background:rgba(168,85,247,.04);border:1px solid rgba(168,85,247,.06);text-align:center"><div style="font-size:7px;color:var(--tx3)">T2</div><div style="font-size:9px;font-weight:800;color:var(--pu)">MAX</div></div><div style="flex:1;padding:6px;border-radius:8px;background:rgba(236,72,153,.04);border:1px solid rgba(236,72,153,.06);text-align:center"><div style="font-size:7px;color:var(--tx3)">T3</div><div style="font-size:9px;font-weight:800;color:var(--pk)">MAX</div></div></div>
+      <!-- Arrow with AI processing -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+        <div style="font-size:18px;color:var(--pu)">🧠</div>
+        <div style="width:60px;height:3px;border-radius:2px;background:rgba(168,85,247,.15);position:relative;overflow:hidden"><div style="position:absolute;top:0;left:0;width:30px;height:100%;background:linear-gradient(90deg,transparent,var(--pu),transparent);animation:authPulse 1.5s ease-in-out infinite"></div></div>
+        <div style="font-size:7px;color:var(--tx3);letter-spacing:1px">AI ENGINE</div>
+      </div>
+      <!-- Right: Result App Screen -->
+      <div style="border-radius:16px;background:linear-gradient(180deg,#0e0e1a,#08080e);border:1px solid rgba(168,85,247,.12);padding:16px;text-align:center;overflow:hidden;position:relative">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(168,85,247,.06),transparent 60%);pointer-events:none"></div>
+        <div style="position:relative;z-index:2">
+          <div style="font-size:8px;font-weight:700;color:var(--pu);letter-spacing:2px;margin-bottom:6px">AI OUTPUT</div>
+          <div id="pm-screen-emoji" style="font-size:32px;transition:.4s">🚀</div>
+          <div id="pm-screen-name" style="font-size:14px;font-weight:900;color:#fb923c;margin-top:4px;transition:.4s">Beast Mode</div>
+          <div id="pm-screen-desc" style="font-size:9px;color:var(--tx2);margin-top:4px;transition:.4s">Max power · AI compensates</div>
+          <div style="display:flex;gap:3px;justify-content:center;margin-top:8px" id="pm-screen-bars">
+            <div style="width:4px;height:20px;border-radius:2px;background:#fb923c;animation:pmPulse 2s ease-in-out infinite"></div>
+            <div style="width:4px;height:20px;border-radius:2px;background:#fb923c;animation:pmPulse 2s ease-in-out infinite .2s"></div>
+            <div style="width:4px;height:20px;border-radius:2px;background:#fb923c;animation:pmPulse 2s ease-in-out infinite .4s"></div>
+            <div style="width:4px;height:20px;border-radius:2px;background:#fb923c;animation:pmPulse 2s ease-in-out infinite .6s"></div>
+            <div style="width:4px;height:20px;border-radius:2px;background:#fb923c;animation:pmPulse 2s ease-in-out infinite .8s"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- 4 Beautiful Mode Cards Below -->
+  <!-- 4 Beautiful Mode Cards Below -->  <!-- 4 Beautiful Mode Cards Below -->
   <div class="sc-pro-cards" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:640px;margin:0 auto">
     <div onclick="scSetPro(0)" id="pm-card-0" style="cursor:pointer;padding:20px 12px;border-radius:16px;background:rgba(251,146,60,.06);border:2px solid rgba(251,146,60,.15);text-align:center;transition:all .4s">
       <div style="font-size:28px;margin-bottom:6px">🚀</div>
@@ -1404,7 +1426,7 @@ footer{grid-template-columns:1fr!important;gap:24px}
 <div class="w" style="position:relative;z-index:2">
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div style="width:36px;height:3px;border-radius:2px;background:var(--pk)"></div><span class="rv" style="font-family:var(--fm);font-size:10px;color:var(--pk);letter-spacing:4px">03 · BLEND MODES</span></div>
   <h2 class="h2 rv" data-d="1" style="max-width:600px">Mix. Blend. <span class="se">Create.</span></h2>
-  <p class="rv" data-d="2" style="font-size:15px;color:var(--tx2);max-width:540px;font-weight:300;margin-bottom:40px;line-height:1.65">Multi-tank devices unlock blending capabilities. CBD:THC ratio control, Sativa + Indica True Hybrid, and full-spectrum Extract Fusion.</p>
+  <p class="rv" data-d="2" style="font-size:15px;color:var(--tx2);max-width:540px;font-weight:300;margin-bottom:40px;line-height:1.65">Multi-tank devices unlock blending capabilities. CBD:THC ratio control and Sativa + Indica True Hybrid — category-first features.</p>
 
   <!-- Premium info cards with gradient accents -->
   <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px">
@@ -1422,16 +1444,7 @@ footer{grid-template-columns:1fr!important;gap:24px}
       <p style="font-size:12px;color:var(--tx2);line-height:1.6;margin-bottom:12px">Sativa + Indica in one draw. AI manages separate heating curves for each strain type simultaneously.</p>
       <div style="display:flex;gap:4px"><span style="font-size:9px;padding:4px 8px;border-radius:100px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.1);color:var(--pu)">Sativa + Indica</span><span style="font-size:9px;padding:4px 8px;border-radius:100px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.1);color:var(--pu)">Dual Curve</span></div>
     </div>
-    <div class="rv" data-d="2" style="padding:28px;border-radius:20px;background:linear-gradient(135deg,rgba(0,232,255,.04),rgba(52,211,153,.02));border:1px solid rgba(0,232,255,.08);position:relative;overflow:hidden;grid-column:span 2">
-      <div style="position:absolute;top:0;right:0;width:120px;height:80px;background:radial-gradient(circle,rgba(0,232,255,.08),transparent 70%);filter:blur(30px)"></div>
-      <div style="display:flex;align-items:start;gap:20px">
-        <div style="font-size:36px;flex-shrink:0">🔬</div>
-        <div>
-          <h4 style="font-size:16px;font-weight:800;color:var(--cy);margin-bottom:8px">Extract Fusion</h4>
-          <p style="font-size:12px;color:var(--tx2);line-height:1.6;margin-bottom:12px">All tanks fire simultaneously through the patent-pending blending chamber. Full-spectrum experience in one draw — THC + CBD + Terpenes merged into a single, smooth delivery.</p>
-          <div style="display:flex;gap:4px;flex-wrap:wrap"><span style="font-size:9px;padding:4px 8px;border-radius:100px;background:rgba(0,232,255,.06);border:1px solid rgba(0,232,255,.1);color:var(--cy)">Patent-Pending</span><span style="font-size:9px;padding:4px 8px;border-radius:100px;background:rgba(0,232,255,.06);border:1px solid rgba(0,232,255,.1);color:var(--cy)">Full-Spectrum</span><span style="font-size:9px;padding:4px 8px;border-radius:100px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.1);color:var(--am)">🏆 Technology Showcase #2</span></div>
-        </div>
-      </div>
+</div>
     </div>
   </div>
 
@@ -1485,7 +1498,18 @@ footer{grid-template-columns:1fr!important;gap:24px}
   <div class="sc-mood-split rv" data-d="2" style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start">
     <!-- Left: Mood info panel + 7 buttons -->
     <div>
-      <!-- Current mood display -->
+      <!-- Mood Image Slider -->
+      <div style="border-radius:20px;overflow:hidden;aspect-ratio:4/3;position:relative;margin-bottom:20px" id="mood-img-slider">
+        <img id="mood-img" src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80" style="width:100%;height:100%;object-fit:cover;transition:opacity .5s;position:absolute;inset:0" alt="Mood image">
+        <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,2,5,.7) 0%,transparent 50%);pointer-events:none"></div>
+        <div style="position:absolute;bottom:16px;left:16px;right:16px;z-index:2">
+          <div id="mood-screen-emoji" style="font-size:36px;margin-bottom:4px;transition:.4s">😌</div>
+          <div id="mood-screen-name" style="font-size:20px;font-weight:900;color:#60a5fa;transition:.4s">Relax</div>
+          <div id="mood-screen-config" style="font-size:10px;color:var(--tx3);transition:.4s">168° · Slow · CBD Priority · Wave</div>
+        </div>
+      </div>
+      <p id="mood-screen-desc" style="font-size:12px;color:var(--tx2);line-height:1.6;margin-bottom:20px;transition:.4s">Gentle warmth. Slow delivery. CBD priority. Perfect for unwinding after a long day.</p>
+      <!-- 7 Mood Buttons in grid -->
       <div style="border-radius:20px;background:linear-gradient(135deg,rgba(96,165,250,.04),rgba(96,165,250,.01));border:1px solid rgba(96,165,250,.08);padding:24px;margin-bottom:20px;text-align:center;transition:all .5s" id="mood-info-panel">
         <div id="mood-screen-emoji" style="font-size:56px;margin-bottom:8px;transition:all .4s">😌</div>
         <div id="mood-screen-name" style="font-size:22px;font-weight:900;color:#60a5fa;margin-bottom:4px;transition:all .4s">Relax</div>
@@ -1501,7 +1525,6 @@ footer{grid-template-columns:1fr!important;gap:24px}
         <div onclick="scMood(4)" id="mood-btn-4" style="cursor:pointer;padding:12px 6px;border-radius:12px;background:rgba(255,255,255,.02);border:2px solid var(--bd);text-align:center;transition:.3s"><div style="font-size:20px">🎉</div><div style="font-size:8px;font-weight:700;color:var(--tx3);margin-top:4px">Social</div></div>
         <div onclick="scMood(5)" id="mood-btn-5" style="cursor:pointer;padding:12px 6px;border-radius:12px;background:rgba(255,255,255,.02);border:2px solid var(--bd);text-align:center;transition:.3s"><div style="font-size:20px">🎨</div><div style="font-size:8px;font-weight:700;color:var(--tx3);margin-top:4px">Create</div></div>
         <div onclick="scMood(6)" id="mood-btn-6" style="cursor:pointer;padding:12px 6px;border-radius:12px;background:rgba(255,255,255,.02);border:2px solid var(--bd);text-align:center;transition:.3s"><div style="font-size:20px">🧘</div><div style="font-size:8px;font-weight:700;color:var(--tx3);margin-top:4px">Recover</div></div>
-      </div>
     </div>
     <!-- Right: App Screen -->
     <div style="display:flex;flex-direction:column;align-items:center">
@@ -1531,44 +1554,60 @@ footer{grid-template-columns:1fr!important;gap:24px}
 </div>
 </section>
 
-<!-- ═══ SECTION 5: PRO TOOLS — Phone Slider ═══ -->
+<!-- ═══ SECTION 5: PRO TOOLS — Phone Carousel like Homepage ═══ -->
 <section id="sc-tools" style="padding:clamp(60px,8vw,100px) 0;scroll-margin-top:130px;position:relative;overflow:visible">
 <div style="position:absolute;bottom:0;left:20%;width:300px;height:300px;background:radial-gradient(circle,rgba(52,211,153,.04),transparent 70%);filter:blur(80px);pointer-events:none"></div>
 <div class="w" style="position:relative;z-index:2">
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div style="width:36px;height:3px;border-radius:2px;background:var(--gn)"></div><span class="rv" style="font-family:var(--fm);font-size:10px;color:var(--gn);letter-spacing:4px">05 · PRO TOOLS</span></div>
   <h2 class="h2 rv" data-d="1" style="max-width:500px">Advanced Tools for <span class="se">Power Users.</span></h2>
-  <p class="rv" data-d="2" style="font-size:15px;color:var(--tx2);max-width:520px;font-weight:300;margin-bottom:40px;line-height:1.65">Six specialized tools. Swipe to explore each one.</p>
+  <p class="rv" data-d="2" style="font-size:15px;color:var(--tx2);max-width:520px;font-weight:300;margin-bottom:40px;line-height:1.65">Six specialized tools. Tap any phone to explore.</p>
 
-  <!-- Phone Slider (horizontal scroll like homepage) -->
-  <div class="sc-tool-slider rv" data-d="2" style="display:flex;align-items:center;justify-content:center;gap:20px;padding:20px 0 40px;overflow-x:auto;-webkit-overflow-scrolling:touch">
+  <!-- Phone Carousel (same pattern as homepage Powerful Web-App) -->
+  <div class="rv" data-d="2" id="sctool-wrap" style="display:flex;align-items:center;justify-content:center;gap:16px;perspective:1200px;padding:20px 0 40px;cursor:pointer">
     <!-- Tool 0: Pre-Heat -->
-    <div class="sc-tool-phone" style="width:200px;height:400px;border-radius:30px;background:#0d0d18;border:2px solid rgba(52,211,153,.12);overflow:hidden;position:relative;flex-shrink:0;cursor:pointer;transition:all .4s;box-shadow:0 16px 50px rgba(0,0,0,.4)" onmouseenter="this.style.transform='translateY(-4px)';this.style.borderColor='rgba(52,211,153,.25)'" onmouseleave="this.style.transform='none';this.style.borderColor='rgba(52,211,153,.12)'">
+    <div class="sctool-phone" data-idx="0" onclick="focusTool(0)" onmouseenter="focusTool(0)" style="width:200px;height:400px;border-radius:30px;background:#0d0d18;border:2.5px solid rgba(255,255,255,.06);overflow:hidden;position:relative;transition:all .6s cubic-bezier(.22,1,.36,1);transform:perspective(1200px) rotateY(14deg) scale(.78);opacity:.45;flex-shrink:0;box-shadow:0 16px 50px rgba(0,0,0,.4)">
       <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80px;height:20px;background:#000;border-radius:0 0 14px 14px;z-index:5"></div>
-      <div style="padding:30px 14px 0"><div style="font-size:7px;font-weight:700;color:var(--gn);letter-spacing:2px;margin-bottom:8px">PRO TOOL</div><div style="font-size:24px;margin-bottom:4px">🔥</div><div style="font-size:13px;font-weight:900;margin-bottom:6px">Smart Pre-Heat</div><div style="font-size:9px;color:var(--tx2);line-height:1.5;margin-bottom:12px">AI pre-warms coil to optimal starting temp. Eliminates cold-start harshness.</div><div style="padding:10px;border-radius:10px;background:rgba(52,211,153,.04);border:1px solid rgba(52,211,153,.06)"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:8px;color:var(--tx3)">Duration</span><span style="font-size:8px;font-weight:700;color:var(--gn)">3-5s</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:8px;color:var(--tx3)">AI</span><span style="font-size:8px;font-weight:700;color:var(--gn)">Yes</span></div></div></div>
+      <div style="position:absolute;inset:3px;border-radius:27px;background:linear-gradient(180deg,#0a120e,#050510);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:14px"><div style="font-size:32px;margin-bottom:4px">🔥</div><div style="font-size:11px;font-weight:800">Pre-Heat</div><div style="font-size:8px;color:var(--tx3);text-align:center">AI pre-warms coil</div></div>
     </div>
     <!-- Tool 1: Last Drop -->
-    <div class="sc-tool-phone" style="width:200px;height:400px;border-radius:30px;background:#0d0d18;border:2px solid rgba(0,232,255,.12);overflow:hidden;position:relative;flex-shrink:0;cursor:pointer;transition:all .4s;box-shadow:0 16px 50px rgba(0,0,0,.4)" onmouseenter="this.style.transform='translateY(-4px)';this.style.borderColor='rgba(0,232,255,.25)'" onmouseleave="this.style.transform='none';this.style.borderColor='rgba(0,232,255,.12)'">
+    <div class="sctool-phone" data-idx="1" onclick="focusTool(1)" onmouseenter="focusTool(1)" style="width:200px;height:400px;border-radius:30px;background:#0d0d18;border:2.5px solid rgba(255,255,255,.06);overflow:hidden;position:relative;transition:all .6s cubic-bezier(.22,1,.36,1);transform:perspective(1200px) rotateY(8deg) scale(.85);opacity:.6;flex-shrink:0;box-shadow:0 16px 50px rgba(0,0,0,.4)">
       <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80px;height:20px;background:#000;border-radius:0 0 14px 14px;z-index:5"></div>
-      <div style="padding:30px 14px 0"><div style="font-size:7px;font-weight:700;color:var(--cy);letter-spacing:2px;margin-bottom:8px">PRO TOOL</div><div style="font-size:24px;margin-bottom:4px">💧</div><div style="font-size:13px;font-weight:900;margin-bottom:6px">Last Drop</div><div style="font-size:9px;color:var(--tx2);line-height:1.5;margin-bottom:12px">Special heating curve extracts every remaining drop without burning.</div><div style="padding:10px;border-radius:10px;background:rgba(0,232,255,.04);border:1px solid rgba(0,232,255,.06)"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:8px;color:var(--tx3)">Extraction</span><span style="font-size:8px;font-weight:700;color:var(--cy)">+15%</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:8px;color:var(--tx3)">Burn</span><span style="font-size:8px;font-weight:700;color:var(--cy)">Zero</span></div></div></div>
+      <div style="position:absolute;inset:3px;border-radius:27px;background:linear-gradient(180deg,#0a0e14,#050510);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:14px"><div style="font-size:32px;margin-bottom:4px">💧</div><div style="font-size:11px;font-weight:800">Last Drop</div><div style="font-size:8px;color:var(--tx3);text-align:center">Extract every drop</div></div>
     </div>
-    <!-- Tool 2: Flavor Fusion -->
-    <div class="sc-tool-phone" style="width:200px;height:400px;border-radius:30px;background:#0d0d18;border:2px solid rgba(52,211,153,.12);overflow:hidden;position:relative;flex-shrink:0;cursor:pointer;transition:all .4s;box-shadow:0 16px 50px rgba(0,0,0,.4)" onmouseenter="this.style.transform='translateY(-4px)';this.style.borderColor='rgba(52,211,153,.25)'" onmouseleave="this.style.transform='none';this.style.borderColor='rgba(52,211,153,.12)'">
+    <!-- Tool 2: Flavor Fusion (CENTER/FOCUSED) -->
+    <div class="sctool-phone" data-idx="2" onclick="focusTool(2)" onmouseenter="focusTool(2)" style="width:220px;height:440px;border-radius:34px;background:#0d0d18;border:2.5px solid rgba(255,255,255,.1);overflow:hidden;position:relative;transition:all .6s cubic-bezier(.22,1,.36,1);transform:scale(1);z-index:3;flex-shrink:0;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 50px rgba(52,211,153,.04)">
+      <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:90px;height:22px;background:#000;border-radius:0 0 16px 16px;z-index:5"></div>
+      <div style="position:absolute;inset:3px;border-radius:31px;background:linear-gradient(180deg,#0a120e,#050510);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:14px"><div style="font-size:36px;margin-bottom:4px">🌿</div><div style="font-size:13px;font-weight:900">Flavor Fusion</div><div style="font-size:9px;color:var(--tx3);text-align:center">Perfect taste blend</div></div>
+    </div>
+    <!-- Tool 3: Extract Fusion -->
+    <div class="sctool-phone" data-idx="3" onclick="focusTool(3)" onmouseenter="focusTool(3)" style="width:200px;height:400px;border-radius:30px;background:#0d0d18;border:2.5px solid rgba(255,255,255,.06);overflow:hidden;position:relative;transition:all .6s cubic-bezier(.22,1,.36,1);transform:perspective(1200px) rotateY(-8deg) scale(.85);opacity:.6;flex-shrink:0;box-shadow:0 16px 50px rgba(0,0,0,.4)">
       <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80px;height:20px;background:#000;border-radius:0 0 14px 14px;z-index:5"></div>
-      <div style="padding:30px 14px 0"><div style="font-size:7px;font-weight:700;color:var(--gn);letter-spacing:2px;margin-bottom:8px">PRO TOOL</div><div style="font-size:24px;margin-bottom:4px">🌿</div><div style="font-size:13px;font-weight:900;margin-bottom:6px">Flavor Fusion</div><div style="font-size:9px;color:var(--tx2);line-height:1.5;margin-bottom:12px">Controls heat timing between tanks for the perfect taste blend.</div><div style="padding:10px;border-radius:10px;background:rgba(52,211,153,.04);border:1px solid rgba(52,211,153,.06)"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:8px;color:var(--tx3)">Tanks</span><span style="font-size:8px;font-weight:700;color:var(--gn)">2-3</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:8px;color:var(--tx3)">Timing</span><span style="font-size:8px;font-weight:700;color:var(--gn)">Stagger</span></div></div></div>
+      <div style="position:absolute;inset:3px;border-radius:27px;background:linear-gradient(180deg,#0e0a14,#050510);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:14px"><div style="font-size:32px;margin-bottom:4px">🧪</div><div style="font-size:11px;font-weight:800">Extract Fusion</div><div style="font-size:8px;color:var(--tx3);text-align:center">Full-spectrum blend</div></div>
     </div>
-    <!-- Tool 3: Jet-Lag -->
-    <div class="sc-tool-phone" style="width:200px;height:400px;border-radius:30px;background:#0d0d18;border:2px solid rgba(236,72,153,.12);overflow:hidden;position:relative;flex-shrink:0;cursor:pointer;transition:all .4s;box-shadow:0 16px 50px rgba(0,0,0,.4)" onmouseenter="this.style.transform='translateY(-4px)';this.style.borderColor='rgba(236,72,153,.25)'" onmouseleave="this.style.transform='none';this.style.borderColor='rgba(236,72,153,.12)'">
+    <!-- Tool 4: Jet-Lag -->
+    <div class="sctool-phone" data-idx="4" onclick="focusTool(4)" onmouseenter="focusTool(4)" style="width:200px;height:400px;border-radius:30px;background:#0d0d18;border:2.5px solid rgba(255,255,255,.06);overflow:hidden;position:relative;transition:all .6s cubic-bezier(.22,1,.36,1);transform:perspective(1200px) rotateY(-12deg) scale(.8);opacity:.5;flex-shrink:0;box-shadow:0 16px 50px rgba(0,0,0,.4)">
       <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80px;height:20px;background:#000;border-radius:0 0 14px 14px;z-index:5"></div>
-      <div style="padding:30px 14px 0"><div style="font-size:7px;font-weight:700;color:var(--pk);letter-spacing:2px;margin-bottom:8px">PRO TOOL</div><div style="font-size:24px;margin-bottom:4px">✈️</div><div style="font-size:13px;font-weight:900;margin-bottom:6px">Jet-Lag Recovery</div><div style="font-size:9px;color:var(--tx2);line-height:1.5;margin-bottom:12px">AI adjusts delivery based on timezone shift, fatigue, and time.</div><div style="padding:10px;border-radius:10px;background:rgba(236,72,153,.04);border:1px solid rgba(236,72,153,.06)"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:8px;color:var(--tx3)">Input</span><span style="font-size:8px;font-weight:700;color:var(--pk)">TZ+Time</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:8px;color:var(--tx3)">Program</span><span style="font-size:8px;font-weight:700;color:var(--pk)">24-48h</span></div></div></div>
+      <div style="position:absolute;inset:3px;border-radius:27px;background:linear-gradient(180deg,#140a10,#050510);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:14px"><div style="font-size:32px;margin-bottom:4px">✈️</div><div style="font-size:11px;font-weight:800">Jet-Lag</div><div style="font-size:8px;color:var(--tx3);text-align:center">Timezone recovery</div></div>
     </div>
-    <!-- Tool 4: Damage Prevention -->
-    <div class="sc-tool-phone" style="width:200px;height:400px;border-radius:30px;background:#0d0d18;border:2px solid rgba(245,158,11,.12);overflow:hidden;position:relative;flex-shrink:0;cursor:pointer;transition:all .4s;box-shadow:0 16px 50px rgba(0,0,0,.4)" onmouseenter="this.style.transform='translateY(-4px)';this.style.borderColor='rgba(245,158,11,.25)'" onmouseleave="this.style.transform='none';this.style.borderColor='rgba(245,158,11,.12)'">
+    <!-- Tool 5: Damage Prevention -->
+    <div class="sctool-phone" data-idx="5" onclick="focusTool(5)" onmouseenter="focusTool(5)" style="width:200px;height:400px;border-radius:30px;background:#0d0d18;border:2.5px solid rgba(255,255,255,.06);overflow:hidden;position:relative;transition:all .6s cubic-bezier(.22,1,.36,1);transform:perspective(1200px) rotateY(-16deg) scale(.74);opacity:.35;flex-shrink:0;box-shadow:0 16px 50px rgba(0,0,0,.4)">
       <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80px;height:20px;background:#000;border-radius:0 0 14px 14px;z-index:5"></div>
-      <div style="padding:30px 14px 0"><div style="font-size:7px;font-weight:700;color:var(--am);letter-spacing:2px;margin-bottom:8px">PRO TOOL</div><div style="font-size:24px;margin-bottom:4px">🛡️</div><div style="font-size:13px;font-weight:900;margin-bottom:6px">Damage Prevent</div><div style="font-size:9px;color:var(--tx2);line-height:1.5;margin-bottom:12px">AI monitors coil temp, prevents overheating, auto-cools on danger.</div><div style="padding:10px;border-radius:10px;background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.06)"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:8px;color:var(--tx3)">Monitor</span><span style="font-size:8px;font-weight:700;color:var(--am)">Real-time</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:8px;color:var(--tx3)">Disable</span><span style="font-size:8px;font-weight:700;color:var(--am)">Cannot</span></div></div></div>
+      <div style="position:absolute;inset:3px;border-radius:27px;background:linear-gradient(180deg,#12100a,#050510);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:14px"><div style="font-size:32px;margin-bottom:4px">🛡️</div><div style="font-size:11px;font-weight:800">Damage Prevent</div><div style="font-size:8px;color:var(--tx3);text-align:center">Always-on safety</div></div>
     </div>
+  </div>
+
+  <!-- Description below carousel -->
+  <div style="max-width:600px;margin:0 auto;text-align:center">
+    <div id="tool-desc-0" class="tool-desc" style="display:none"><h3 style="font-size:20px;font-weight:800;margin-bottom:8px;color:var(--gn)">🔥 Smart Pre-Heat</h3><p style="font-size:13px;color:var(--tx2);line-height:1.7;font-weight:300;margin-bottom:12px">AI pre-warms the coil to optimal starting temperature before your first draw. Eliminates cold-start harshness. Duration: 3-5 seconds.</p><div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center"><span style="padding:4px 12px;border-radius:100px;background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.1);font-size:10px;color:var(--gn);font-weight:600">AI Managed</span><span style="padding:4px 12px;border-radius:100px;background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.1);font-size:10px;color:var(--gn);font-weight:600">Minimal Battery</span></div></div>
+    <div id="tool-desc-1" class="tool-desc" style="display:none"><h3 style="font-size:20px;font-weight:800;margin-bottom:8px;color:var(--cy)">💧 Last Drop</h3><p style="font-size:13px;color:var(--tx2);line-height:1.7;font-weight:300;margin-bottom:12px">Special heating curve extracts every remaining drop without burning. Maximizes cartridge value. +15% more extraction with zero burn risk.</p><div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center"><span style="padding:4px 12px;border-radius:100px;background:rgba(0,232,255,.06);border:1px solid rgba(0,232,255,.1);font-size:10px;color:var(--cy);font-weight:600">+15% Extraction</span><span style="padding:4px 12px;border-radius:100px;background:rgba(0,232,255,.06);border:1px solid rgba(0,232,255,.1);font-size:10px;color:var(--cy);font-weight:600">Zero Burn</span></div></div>
+    <div id="tool-desc-2" class="tool-desc"><h3 style="font-size:20px;font-weight:800;margin-bottom:8px;color:var(--gn)">🌿 Flavor Fusion</h3><p style="font-size:13px;color:var(--tx2);line-height:1.7;font-weight:300;margin-bottom:12px">Controls heat timing between tanks for the perfect taste blend. Staggered activation creates layered flavor profiles impossible with single-tank devices.</p><div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center"><span style="padding:4px 12px;border-radius:100px;background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.1);font-size:10px;color:var(--gn);font-weight:600">Staggered Timing</span><span style="padding:4px 12px;border-radius:100px;background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.1);font-size:10px;color:var(--gn);font-weight:600">2-3 Tanks</span></div></div>
+    <div id="tool-desc-3" class="tool-desc" style="display:none"><h3 style="font-size:20px;font-weight:800;margin-bottom:8px;color:var(--pu)">🧪 Extract Fusion</h3><p style="font-size:13px;color:var(--tx2);line-height:1.7;font-weight:300;margin-bottom:12px">All tanks fire simultaneously through the patent-pending blending chamber. Full-spectrum experience in one draw — THC + CBD + Terpenes merged seamlessly.</p><div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center"><span style="padding:4px 12px;border-radius:100px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.1);font-size:10px;color:var(--pu);font-weight:600">Patent-Pending</span><span style="padding:4px 12px;border-radius:100px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.1);font-size:10px;color:var(--pu);font-weight:600">Full-Spectrum</span></div></div>
+    <div id="tool-desc-4" class="tool-desc" style="display:none"><h3 style="font-size:20px;font-weight:800;margin-bottom:8px;color:var(--pk)">✈️ Jet-Lag Recovery</h3><p style="font-size:13px;color:var(--tx2);line-height:1.7;font-weight:300;margin-bottom:12px">AI adjusts delivery based on timezone shift, fatigue level, and time of day. 24-48 hour adaptive program that optimizes for recovery.</p><div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center"><span style="padding:4px 12px;border-radius:100px;background:rgba(236,72,153,.06);border:1px solid rgba(236,72,153,.1);font-size:10px;color:var(--pk);font-weight:600">Timezone Aware</span><span style="padding:4px 12px;border-radius:100px;background:rgba(236,72,153,.06);border:1px solid rgba(236,72,153,.1);font-size:10px;color:var(--pk);font-weight:600">24-48h Program</span></div></div>
+    <div id="tool-desc-5" class="tool-desc" style="display:none"><h3 style="font-size:20px;font-weight:800;margin-bottom:8px;color:var(--am)">🛡️ Damage Prevention</h3><p style="font-size:13px;color:var(--tx2);line-height:1.7;font-weight:300;margin-bottom:12px">AI monitors coil temperature in real-time, prevents overheating, auto-cools on dangerous patterns. Always on. Cannot be disabled.</p><div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center"><span style="padding:4px 12px;border-radius:100px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.1);font-size:10px;color:var(--am);font-weight:600">Real-time</span><span style="padding:4px 12px;border-radius:100px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.1);font-size:10px;color:var(--am);font-weight:600">Cannot Disable</span></div></div>
   </div>
 </div>
 </section>
+
 
 <!-- CTA -->
 <section style="padding:clamp(80px,10vw,140px) 0;text-align:center;position:relative;overflow:hidden">
@@ -4312,6 +4351,8 @@ var scProData=[
 ];
 function scSetPro(n){
   var d=scProData[n];
+  var se=document.getElementById('pm-sim-emoji');if(se)se.textContent=d.e;
+  var sm=document.getElementById('pm-sim-mode');if(sm){sm.textContent=d.n.replace(' Mode','');sm.style.color=d.c}
   document.getElementById('pm-screen-emoji').textContent=d.e;
   document.getElementById('pm-screen-name').textContent=d.n;
   document.getElementById('pm-screen-name').style.color=d.c;
@@ -4354,6 +4395,9 @@ function scMood(n){
   for(var i=0;i<4;i++){var bar=document.getElementById('mood-bar-'+i);if(bar)bar.style.width=b[i]+'%'}
   // Update glow
   var glow=document.getElementById('mood-phone-glow');if(glow)glow.style.background='radial-gradient(circle,'+d.bg+'.06),transparent 70%)';
+  // Update mood image
+  var moodImgs=['https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80','https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80','https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80','https://images.unsplash.com/photo-1455642305367-68834a1da7ab?w=600&q=80','https://images.unsplash.com/photo-1529543544282-ea57407bc2f7?w=600&q=80','https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80','https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80'];
+  var mimg=document.getElementById('mood-img');if(mimg){mimg.style.opacity=0;setTimeout(function(){mimg.src=moodImgs[n];mimg.style.opacity=1},300)}
   // Update buttons
   for(var i=0;i<7;i++){
     var btn=document.getElementById('mood-btn-'+i);
@@ -4382,6 +4426,37 @@ function scTool(n){
     if(i===n){btn.style.background=scToolData[i].bg+'.08)';btn.style.borderColor=scToolData[i].bg+'.15)';btn.style.color=scToolData[i].c;btn.style.fontWeight='700'}
     else{btn.style.background='rgba(255,255,255,.02)';btn.style.borderColor='var(--bd)';btn.style.color='var(--tx2)';btn.style.fontWeight='600'}
   }
+}
+
+// Pro Tools carousel (same pattern as homepage focusApp)
+var toolFocus=2;
+var toolLayouts=[
+  [[0,1,1,4,0],['-8',.85,.6,2,'16px'],['-12',.8,.45,1,'24px'],['-16',.74,.35,0,'32px'],['-18',.7,.25,0,'40px'],['-20',.66,.2,0,'48px']],
+  [['10',.85,.6,2,'-16px'],[0,1,1,4,0],['-8',.85,.6,2,'16px'],['-14',.78,.4,1,'28px'],['-18',.7,.3,0,'40px'],['-20',.66,.2,0,'48px']],
+  [['14',.78,.45,1,'-28px'],['8',.85,.6,2,'-16px'],[0,1,1,4,0],['-8',.85,.6,2,'16px'],['-14',.78,.4,1,'28px'],['-18',.7,.25,0,'40px']],
+  [['18',.7,.3,0,'-40px'],['12',.78,.45,1,'-24px'],['6',.85,.6,2,'-16px'],[0,1,1,4,0],['-8',.85,.6,2,'16px'],['-14',.78,.35,1,'28px']],
+  [['20',.66,.2,0,'-48px'],['16',.7,.3,0,'-36px'],['10',.78,.45,1,'-24px'],['6',.85,.6,2,'-16px'],[0,1,1,4,0],['-8',.85,.55,2,'16px']],
+  [['20',.66,.15,0,'-48px'],['18',.7,.2,0,'-40px'],['14',.74,.35,0,'-32px'],['8',.78,.45,1,'-20px'],['4',.85,.6,2,'-12px'],[0,1,1,4,0]]
+];
+function focusTool(n){
+  toolFocus=n;
+  var phones=document.querySelectorAll('.sctool-phone');
+  var layout=toolLayouts[n];
+  phones.forEach(function(ph,i){
+    var cfg=layout[i];
+    var ry=cfg[0],sc=cfg[1],op=cfg[2],zi=cfg[3],tx=cfg[4];
+    ph.style.setProperty('transform','perspective(1200px) rotateY('+ry+'deg) scale('+sc+') translateX('+tx+')','important');
+    ph.style.setProperty('opacity',op,'important');
+    ph.style.setProperty('z-index',zi,'important');
+    if(i===n){
+      ph.style.setProperty('border-color','rgba(255,255,255,.12)','important');
+      ph.style.setProperty('box-shadow','0 30px 80px rgba(0,0,0,.5),0 0 50px rgba(52,211,153,.04)','important');
+    }else{
+      ph.style.setProperty('border-color','rgba(255,255,255,.06)','important');
+      ph.style.setProperty('box-shadow','0 16px 50px rgba(0,0,0,.4)','important');
+    }
+  });
+  document.querySelectorAll('.tool-desc').forEach(function(d,i){d.style.display=i===n?'block':'none'});
 }
 </script>
 </body>
